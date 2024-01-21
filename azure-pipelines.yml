@@ -4,8 +4,9 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
-
+  tags: 
+    include:
+      - v* 
 variables:
   containerName: blogclient
   imageName: memoyu/blog-client
@@ -46,7 +47,6 @@ steps:
     repository: $(imageName)
     command: 'buildAndPush'
     Dockerfile: 'src/build/Dockerfile'
-    buildContext: $(Build.Repository.LocalPath)
     tags: 'latest'
 
 - task: SSH@0
