@@ -1,56 +1,47 @@
 @import '@/styles/base.scss';
 
-.home {
-  height: calc(100vh - #{$footerHeight + $headerHeight});
-
-  .container {
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .topPost {
+    width: 50%;
+    height: 90%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100%;
-    .topPost {
-      width: 50%;
-      height: 90%;
+    .list {
+      height: 100%;
+      width: 100%;
       display: flex;
-      align-items: center;
-      .list {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        .topForward {
-          width: auto;
-          flex-grow: 3;
-          margin: 10px;
-          padding: 15px;
-          background: $secondaryColor;
-          border-radius: 20px;
-        }
-        .topBack {
-          width: auto;
-          flex-grow: 2;
-          margin: 10px;
-          padding: 10px;
-          background: $secondaryColor;
-          border-radius: 20px;
-        }
+      flex-direction: column;
+      .topForward {
+        width: auto;
+        flex-grow: 3;
+        margin: 10px;
+        padding: 15px;
+        background: $secondaryColor;
+        border-radius: 20px;
+      }
+      .topBack {
+        width: auto;
+        flex-grow: 2;
+        margin: 10px;
+        padding: 10px;
+        background: $secondaryColor;
+        border-radius: 20px;
       }
     }
-    .show {
-      width: 50%;
-      height: 90%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .image {
-        height: 100%;
-        width: 100%;
+  }
+  .show {
+    width: 50%;
+    .image {
+      height: 100%;
+      width: 100%;
+      .img {
         border-radius: 20px;
-        margin: 10px;
-        background: $primaryColor;
-        position: relative;
-        .img {
-        }
+      }
+      .mask {
+        border-radius: 20px;
       }
     }
   }

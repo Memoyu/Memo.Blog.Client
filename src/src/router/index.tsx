@@ -5,6 +5,7 @@ import { useRoutes } from 'react-router-dom';
 const Home = lazy(() => import('@/pages/home'));
 const TimeLine = lazy(() => import('@/pages/timeline'));
 const Link = lazy(() => import('@/pages/link'));
+const Tool = lazy(() => import('@/pages/tool'));
 const About = lazy(() => import('@/pages/about'));
 const Login = lazy(() => import('@/pages/login'));
 const PostDetail = lazy(() => import('@/pages/post/detail'));
@@ -33,6 +34,10 @@ let routes: Array<Router> = [
   {
     path: '/link',
     element: <Link />
+  },
+  {
+    path: '/tool',
+    element: <Tool />
   },
   {
     path: '/about',

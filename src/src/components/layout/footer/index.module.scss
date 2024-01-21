@@ -5,10 +5,10 @@
   font-size: 14px;
   font-weight: 500;
   height: $footerHeight;
+  padding: 0px;
 
   .container {
     margin: auto;
-    padding: 10px 100px;
     max-width: $centerWidth;
     .author {
       .logo {

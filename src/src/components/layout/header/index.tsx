@@ -4,6 +4,8 @@ import { Layout } from 'antd';
 import { motion } from 'framer-motion';
 import s from './index.module.scss';
 
+const { Header } = Layout;
+
 type Item = {
   name: string;
   to: string;
@@ -13,10 +15,9 @@ const items: Array<Item> = [
   { name: '首页', to: '/' },
   { name: '时间轴', to: '/timeline' },
   { name: '友链', to: '/link' },
+  { name: '工具', to: '/tool' },
   { name: '关于', to: '/about' }
 ];
-
-const { Header } = Layout;
 
 const CustHeader: FC = () => {
   let location = useLocation();

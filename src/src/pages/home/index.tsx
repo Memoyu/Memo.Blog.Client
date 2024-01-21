@@ -29,31 +29,32 @@ const Home = () => {
     hidden: { opacity: 0, x: 100 }
   };
   return (
-    <div className={s.home}>
-      <div className={s.container}>
-        <div className={s.topPost}>
-          <motion.div className={s.list} initial="hidden" animate="visible" variants={postListVar}>
-            <motion.div className={s.topForward} variants={postListItemVar}>
-              <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: 40, fontWeight: 'bold' }}>OPEN</span>
-                  <span style={{ fontSize: 25, fontWeight: 'bold', color: 'blue' }}>*TO THE WORLD</span>
-                </div>
-                <span style={{ fontSize: 40, fontWeight: 'bold' }}>YOURSELF</span>
+    <div className={s.container}>
+      <div className={s.topPost}>
+        <motion.div className={s.list} initial="hidden" animate="visible" variants={postListVar}>
+          <motion.div className={s.topForward} variants={postListItemVar}>
+            <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: 40, fontWeight: 'bold' }}>OPEN</span>
+                <span style={{ fontSize: 25, fontWeight: 'bold', color: 'blue' }}>*TO THE WORLD</span>
               </div>
-            </motion.div>
-            <motion.div className={s.topForward} variants={postListItemVar}></motion.div>
-            <motion.div className={s.topForward} variants={postListItemVar}></motion.div>
-            <motion.div className={s.topBack} variants={postListItemVar}></motion.div>
-            <motion.div className={s.topBack} variants={postListItemVar}></motion.div>
+              <span style={{ fontSize: 40, fontWeight: 'bold' }}>YOURSELF</span>
+            </div>
           </motion.div>
-        </div>
-        <motion.div className={s.show} initial="hidden" animate="visible" variants={imgListVar}>
-          <div className={s.image}>
-            {/* <Image className={s.img} src="https://w.wallhaven.cc/full/zy/wallhaven-zyqo8o.png"></Image> */}
-          </div>
+          <motion.div className={s.topForward} variants={postListItemVar}></motion.div>
+          <motion.div className={s.topForward} variants={postListItemVar}></motion.div>
+          <motion.div className={s.topBack} variants={postListItemVar}></motion.div>
+          <motion.div className={s.topBack} variants={postListItemVar}></motion.div>
         </motion.div>
       </div>
+      <motion.div className={s.show} initial="hidden" animate="visible" variants={imgListVar}>
+        <div className={s.image}>
+          <Image
+            className={s.img}
+            preview={{ maskClassName: s.mask }}
+            src="https://w.wallhaven.cc/full/6d/wallhaven-6d7xmx.jpg"></Image>
+        </div>
+      </motion.div>
     </div>
   );
 };

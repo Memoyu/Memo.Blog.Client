@@ -15,7 +15,7 @@ const CustBackTop: FC = () => {
     // bottom: 80
   };
 
-  return <FloatButton.BackTop style={style} visibilityHeight={0} />;
+  return <FloatButton.BackTop style={style} visibilityHeight={900} />;
 };
 
 export default CustBackTop;
