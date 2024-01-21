@@ -26,15 +26,6 @@ steps:
     yarn build
   displayName: 'yarn install and build'
 
-- task: CopyFiles@2
-  displayName: 'copy file to build'
-  inputs:
-    Contents: |
-      docker/Dockerfile
-      docker/nginx.conf
-    TargetFolder: 'src/build'
-    flattenFolders: true
-
 - script: |
     cd src/build
     ls -lah
@@ -46,7 +37,8 @@ steps:
     containerRegistry: 'aliyun-docker'
     repository: $(imageName)
     command: 'buildAndPush'
-    Dockerfile: 'src/build/Dockerfile'
+    Dockerfile: 'docker/Dockerfile'
+    buildContext: $(Build.Repository.LocalPath)
     tags: 'latest'
 
 - task: SSH@0
