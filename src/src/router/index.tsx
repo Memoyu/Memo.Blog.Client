@@ -1,56 +1,30 @@
-import { lazy } from 'react';
+import { lazy, FC } from 'react';
+import { RouteObject } from 'react-router';
 import { useRoutes } from 'react-router-dom';
+import { WrapperRouteComponent, WrapperRouteWithOutLayoutComponent } from './config';
+import Layout from '@components/layout';
+import Empty from '@components/empty';
 
-// 懒加载
-const Home = lazy(() => import('@/pages/home'));
-const TimeLine = lazy(() => import('@/pages/timeline'));
-const Link = lazy(() => import('@/pages/link'));
-const Tool = lazy(() => import('@/pages/tool'));
-const About = lazy(() => import('@/pages/about'));
-const Login = lazy(() => import('@/pages/login'));
-const PostDetail = lazy(() => import('@/pages/post/detail'));
-
-interface Router {
-  name?: string;
-  path: string;
-  children?: Array<Router>;
-  element: any;
-}
-
-let routes: Array<Router> = [
-  {
-    path: '/',
-    element: <Home />,
-    children: [
-      // { path: ":id", element: <Invoice /> },
-      // { path: "/pending", element: <Pending /> },
-      // { path: "/complete", element: <Complete /> },
-    ]
-  },
-  {
-    path: '/timeline',
-    element: <TimeLine />
-  },
-  {
-    path: '/link',
-    element: <Link />
-  },
-  {
-    path: '/tool',
-    element: <Tool />
-  },
-  {
-    path: '/about',
-    element: <About />
-  },
-  {
-    path: '/login',
-    element: <Login />
-  },
-  {
-    path: '/post/detail/:id',
-    element: <PostDetail />
-  }
+const routeList: RouteObject[] = [
+    {
+        path: '/',
+        element: <WrapperRouteComponent element={<Layout />} titleId="" auth />,
+        children: [],
+    },
+    {
+        path: '*',
+        element: (
+            <WrapperRouteWithOutLayoutComponent
+                element={<Empty title="找不到咯" description="这里什么也没有~" type="404" />}
+                titleId="404"
+            />
+        ),
+    },
 ];
 
-export default routes;
+const RenderRouter: FC = () => {
+    const element = useRoutes(routeList);
+    return element;
+};
+
+export default RenderRouter;

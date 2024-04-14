@@ -1,21 +1,17 @@
-import { Layout } from 'antd';
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
-import BackTop from '@/components/layout/backTop';
-import Main from '@/components/layout/main';
+import { LocaleProvider } from '@douyinfe/semi-ui';
+import { BrowserRouter } from 'react-router-dom';
+import RenderRouter from './router';
+
 import './App.scss';
 
 function App() {
-  return (
-    <div className="app">
-      <Layout>
-        <Header />
-        <Main />
-        <Footer />
-        <BackTop />
-      </Layout>
-    </div>
-  );
+    return (
+        <LocaleProvider>
+            <BrowserRouter>
+                <RenderRouter />
+            </BrowserRouter>
+        </LocaleProvider>
+    );
 }
 
 export default App;

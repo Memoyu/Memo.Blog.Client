@@ -1,0 +1,12 @@
+.layout-page {
+    background: var(--semi-color-bg-0);
+
+    .layout-content {
+        background-color: var(--semi-color-bg-0);
+        position: relative;
+        padding: 24px;
+        > :last-child {
+            height: 100%;
+        }
+    }
+}
