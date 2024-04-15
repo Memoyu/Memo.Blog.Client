@@ -1,6 +1,7 @@
 import React from 'react';
 import type { CSSProperties } from 'react';
 import { Collapse, Col, Row, Button } from '@douyinfe/semi-ui';
+import Content from '@components/page-content';
 import './index.scss';
 
 export interface GitmojiProps {
@@ -322,7 +323,7 @@ const emojis: Array<GitmojiProps> = [
     { id: 74, code: ':whale:', emoji: '🐳', color: '#00a6ab', description: 'Docker 相关操作。' },
 ];
 
-const Tool = () => {
+const Index = () => {
     // const [messageApi, contextHolder] = message.useMessage();
 
     // const getItems: (panelStyle: CSSProperties) => CollapseProps['items'] = (panelStyle) => [
@@ -402,8 +403,10 @@ const Tool = () => {
         //         items={getItems(panelStyle)}
         //     />
         // </div>
-        <div></div>
+        <Content>
+            <div>Tool</div>
+        </Content>
     );
 };
 
-export default Tool;
+export default Index;

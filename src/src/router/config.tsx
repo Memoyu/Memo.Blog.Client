@@ -16,19 +16,20 @@ const PublicRoute = (props: PathRouteProps) => {
 };
 
 const PrivateRoute = (props: PathRouteProps) => {
-    const location = useLocation();
-    const { logged } = useTypedSelector((state) => state.userLogin);
-    const { pathname } = location;
+    // const location = useLocation();
+    // const { logged } = useTypedSelector((state) => state.userLogin);
+    // const { pathname } = location;
+    // return logged ? (
+    //     pathname === '/' ? (
+    //         <Navigate to={{ pathname: `/dashboard` }} replace />
+    //     ) : (
+    //         props.element
+    //     )
+    // ) : (
+    //     <Navigate to={{ pathname: `/login` }} replace />
+    // );
 
-    return logged ? (
-        pathname === '/' ? (
-            <Navigate to={{ pathname: `/dashboard` }} replace />
-        ) : (
-            props.element
-        )
-    ) : (
-        <Navigate to={{ pathname: `/login` }} replace />
-    );
+    return props.element;
 };
 
 const WrapperRouteComponent: FC<WrapperRouteProps> = ({ titleId, auth, ...props }) => {
