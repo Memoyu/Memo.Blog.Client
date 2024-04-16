@@ -1,10 +1,6 @@
-.page-content-container {
-    .page-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 25px;
-    }
-    .page-content {
-        margin-left: 15px;
-    }
+.blog-page-content {
+    background-color: azure;
+    display: flex;
+    align-items: center;
+    height: 100vh;
 }

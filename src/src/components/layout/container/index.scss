@@ -1,0 +1,13 @@
+.blog-container {
+    width: 90%;
+    max-width: 1280px;
+    margin: auto;
+}
+
+@media screen and (max-width: 600px) {
+    .blog-container {
+        width: auto;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}

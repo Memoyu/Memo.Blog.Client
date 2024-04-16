@@ -1,12 +1,9 @@
-.layout-page {
-    background: var(--semi-color-bg-0);
+.blog-layout {
+    position: relative;
+    background-color: antiquewhite;
 
-    .layout-content {
-        background-color: var(--semi-color-bg-0);
-        position: relative;
-        padding: 24px;
-        > :last-child {
-            height: 100%;
-        }
+    &-content {
+        min-height: 100vh;
+        overflow: hidden;
     }
 }

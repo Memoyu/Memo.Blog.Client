@@ -23,7 +23,7 @@ const Home = () => {
                 </h1>
                 <ul>
                     <li>
-                        <Link to="/git-moji">git moji</Link>
+                        <Link to="/tool">tool</Link>
                     </li>
                     <li>
                         <Link to="/article">article</Link>

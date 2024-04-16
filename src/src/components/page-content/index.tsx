@@ -12,28 +12,8 @@ interface HeaderProps {
     children: ReactNode;
 }
 
-const Index: FC<HeaderProps> = ({ icon, title, children }) => {
-    const isPresent = useIsPresent();
-    return (
-        <Layout className="page-content-container">
-            <div className="page-header">
-                {icon && React.cloneElement(icon, { size: 'extra-large', key: 'extra-large' })}
-                {title && (
-                    <Title style={{ marginLeft: 10 }} heading={2}>
-                        {title}
-                    </Title>
-                )}
-            </div>
-            <div className="page-content">{children}</div>
-            <motion.div
-                initial={{ scaleX: 1 }}
-                animate={{ scaleX: 0, transition: { duration: 0.5, ease: 'circOut' } }}
-                exit={{ scaleX: 1, transition: { duration: 0.5, ease: 'circIn' } }}
-                style={{ originX: isPresent ? 0 : 1 }}
-                className="privacy-screen"
-            />
-        </Layout>
-    );
+const Index: FC<HeaderProps> = ({ children }) => {
+    return <div className="blog-page-content">{children}</div>;
 };
 
 export default Index;

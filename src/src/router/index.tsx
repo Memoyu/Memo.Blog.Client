@@ -8,7 +8,15 @@ import Empty from '@components/empty';
 
 const Home = lazy(() => import('@src/pages/home'));
 const Article = lazy(() => import('@src/pages/article'));
+
+const Moment = lazy(() => import('@src/pages/moment'));
+
+const Friend = lazy(() => import('@src/pages/friend'));
+
+const Tool = lazy(() => import('@src/pages/tool'));
 const GitMoji = lazy(() => import('@src/pages/tool/git-moji'));
+
+const About = lazy(() => import('@src/pages/about'));
 
 const routeList: RouteObject[] = [
     {
@@ -22,6 +30,22 @@ const routeList: RouteObject[] = [
             {
                 path: 'article',
                 element: <WrapperRouteComponent element={<Article />} titleId="文章" auth />,
+            },
+            {
+                path: 'moment',
+                element: <WrapperRouteComponent element={<Moment />} titleId="动态" auth />,
+            },
+            {
+                path: 'friend',
+                element: <WrapperRouteComponent element={<Friend />} titleId="动态" auth />,
+            },
+            {
+                path: 'tool',
+                element: <WrapperRouteComponent element={<Tool />} titleId="工具" auth />,
+            },
+            {
+                path: 'about',
+                element: <WrapperRouteComponent element={<About />} titleId="关于" auth />,
             },
             {
                 path: 'git-moji',
@@ -42,8 +66,9 @@ const routeList: RouteObject[] = [
 
 const RenderRouter: FC = () => {
     const element = useRoutes(routeList);
+    if (element == null) return <></>;
     return (
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="wait">
             {React.cloneElement(element, { key: location.pathname })}
         </AnimatePresence>
     );
