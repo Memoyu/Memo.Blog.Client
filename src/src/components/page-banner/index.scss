@@ -1,0 +1,30 @@
+.page-banner-outer {
+    height: 100%;
+    min-height: 200px;
+    overflow: hidden;
+    background: #eee;
+
+    .page-banner {
+        position: relative;
+        height: 100%;
+        background: no-repeat center center #f4f1ec;
+        background-size: auto 100%;
+        background-size: cover;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../../assets/mask.png');
+            z-index: 0;
+        }
+        &.zoom-show {
+            display: block;
+            mask-repeat: no-repeat;
+            mask-position: center center;
+            animation: circle_zoom 1.2s ease-in;
+        }
+    }
+}

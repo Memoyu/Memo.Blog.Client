@@ -1,6 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { throttle } from 'lodash';
+
 import Logo from '@components/logo';
 import Container from '@components/layout/container';
 
@@ -21,11 +23,37 @@ const items: Array<Item> = [
 
 const CustHeader: FC = () => {
     let location = useLocation();
+    let [isScrolling, setIsScrolling] = useState<boolean>(false);
+
     let pathname = location.pathname || '/';
     if (pathname === '/404' || pathname === '/_not-found') pathname = '/';
-    // console.log('p', pathname);
+
+    const handleScroll = () => {
+        ajustNavigation();
+    };
+
+    // 使用节流
+    const throttledScrollHandler = throttle(handleScroll, 200);
+
+    const ajustNavigation = () => {
+        let scrollTop =
+            window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+        let isScroll = scrollTop > 50;
+        // console.log('滚动事件触发', scrollTop, isScroll);
+        setIsScrolling(isScroll);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', throttledScrollHandler);
+
+        return () => {
+            window.removeEventListener('scroll', throttledScrollHandler);
+        };
+    }, []);
+
     return (
-        <div className="header-navigation">
+        <div className={`header-navigation ${isScrolling ? 'stick' : ''}`}>
             <Container>
                 <div className="header-navigation-inner">
                     <NavLink to="/" className="header-navigation-logo">

@@ -1,12 +1,7 @@
-import Content from '@components/page-content';
 import './index.scss';
 
 const Index = () => {
-    return (
-        <Content>
-            <div>Tool</div>
-        </Content>
-    );
+    return <div>Tool</div>;
 };
 
 export default Index;

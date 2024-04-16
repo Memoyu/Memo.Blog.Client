@@ -4,8 +4,6 @@ import MarkDown from '../components/markdown';
 import Navigation from '../components/navigation';
 import Comment from '../components/comment';
 
-import Content from '@components/page-content';
-
 import { Tag, Space } from '@douyinfe/semi-ui';
 import './index.scss';
 
@@ -23,7 +21,7 @@ const PostDetail = () => {
     };
 
     return (
-        <Content>
+        
             <div className="article-header">
                 <div className="article-header-background-img">
                     <img src="https://images.unsplash.com/photo-1550613097-fe6c2c321cd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" />
@@ -51,7 +49,7 @@ const PostDetail = () => {
                 </div>
                 <Comment comments={comments} />
             </div>
-        </Content>
+       
     );
 };
 

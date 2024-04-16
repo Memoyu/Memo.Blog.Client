@@ -1,7 +1,7 @@
 import React from 'react';
 import type { CSSProperties } from 'react';
 import { Collapse, Col, Row, Button } from '@douyinfe/semi-ui';
-import Content from '@components/page-content';
+
 import './index.scss';
 
 export interface GitmojiProps {
@@ -403,9 +403,8 @@ const Index = () => {
         //         items={getItems(panelStyle)}
         //     />
         // </div>
-        <Content>
-            <div>Tool</div>
-        </Content>
+
+        <div>Tool</div>
     );
 };
 
