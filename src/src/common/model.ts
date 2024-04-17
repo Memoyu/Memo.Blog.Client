@@ -1,3 +1,9 @@
+export interface ArticleModel {
+    articleId: string;
+    title: string;
+    banner: string;
+}
+
 export interface CommentBelongModel {
     belongId: string;
     title: string;

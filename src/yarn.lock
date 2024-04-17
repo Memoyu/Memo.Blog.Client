@@ -1834,6 +1834,11 @@ react-is@^16.13.1:
   resolved "https://registry.npmmirror.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-plock@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmmirror.com/react-plock/-/react-plock-3.1.0.tgz#ba50a70d264730c7732335c9621301d26edaf1a8"
+  integrity sha512-Vk30iADOuQ85Pv3OAxTHzHmL0kYAA6SvBbv78ys3y5ObXh9nmUXmfR/E82MCgoTDildnl5TZrS+e3aCcee1xKQ==
+
 react-redux@^9.1.0:
   version "9.1.0"
   resolved "https://registry.npmmirror.com/react-redux/-/react-redux-9.1.0.tgz#46a46d4cfed4e534ce5452bb39ba18e1d98a8197"

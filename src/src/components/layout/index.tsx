@@ -13,7 +13,7 @@ const Index: React.FC = () => {
 
             <div className="blog-layout-content">
                 <motion.div
-                    initial={{ scale: 1, opacity: 0, translateY: 0 }}
+                    initial={{ scale: 1, opacity: 0, translateY: 200 }}
                     animate={{
                         opacity: [0, 0.5, 1],
                         translateY: [200, 100, 0],
@@ -23,7 +23,7 @@ const Index: React.FC = () => {
                         scale: [1, 0.88, 0.88],
                         opacity: [1, 0.5, 0],
                         transformOrigin: ['center', 'bottom'],
-                        transition: { duration: 1, ease: 'easeInOut' },
+                        transition: { duration: 0.8, ease: 'easeInOut' },
                     }}
                     //  transition={{ duration: 1, ease: 'easeInOut' }}
                 >

@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3px;
+    padding: 2px;
     border-radius: 9px;
     background: linear-gradient(90deg, #b84297, #6457c1);
     animation: gradientw 3s ease infinite;
@@ -15,11 +15,13 @@
         border-radius: 9px;
         background-color: black;
         width: 100%;
+        font-weight: 800;
+        font-size: 17px;
         small {
             margin-left: 5px;
             opacity: 0.6;
             font-size: 13px;
-            font-weight: 800;
+            font-weight: 400;
         }
     }
 }
