@@ -48,7 +48,9 @@ const Index = () => {
                 </div>
             </PageBanner>
             <Container>
-                <ArticleList />
+                <div style={{ marginTop: 30 }}>
+                    <ArticleList />
+                </div>
             </Container>
         </div>
     );

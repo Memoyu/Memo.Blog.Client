@@ -1,12 +1,17 @@
 import React, { FC, useEffect, useState, useRef } from 'react';
 import { Masonry } from 'react-plock';
 import { throttle } from 'lodash';
+import { Space, Tag, TagGroup, Toast, Typography } from '@douyinfe/semi-ui';
 
-import './index.scss';
 import { ArticlePageModel, ArticlePageRequest } from '@src/common/model';
 import { articlePage } from '@src/utils/request';
-import { Toast } from '@douyinfe/semi-ui';
+
 import { useOnMountUnsafe } from '@src/hooks/useOnMountUnsafe';
+
+import './index.scss';
+import { TagProps } from '@douyinfe/semi-ui/lib/es/tag';
+
+const { Title, Text } = Typography;
 
 interface ComProps {}
 
@@ -89,7 +94,7 @@ const Index: FC<ComProps> = ({}) => {
                 media: [520, 640, 768, 1024],
             }}
             render={(item, idx) => (
-                <div key={idx} style={{ backgroundColor: 'grey' }}>
+                <div key={idx} style={{ backgroundColor: 'rgb(var(--semi-grey-0))' }}>
                     {item.banner.length != 0 && (
                         <img
                             key={idx}
@@ -102,8 +107,34 @@ const Index: FC<ComProps> = ({}) => {
                         />
                     )}
 
-                    <div>{item.title}</div>
-                    <div>{item.description}</div>
+                    <Title style={{ textAlign: 'center', margin: '10px 0' }} heading={5}>
+                        {item.title}
+                    </Title>
+                    <div style={{ margin: 10 }}>
+                        <Text type="tertiary">{item.description}</Text>
+                    </div>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            margin: '0 15px',
+                            marginBottom: 20,
+                        }}
+                    >
+                        <TagGroup
+                            maxTagCount={3}
+                            showPopover
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                            }}
+                            tagList={item.tags.map((t) => {
+                                return { color: 'purple', children: t.name } as TagProps;
+                            })}
+                            size="large"
+                        />
+                        <Text>一个月前</Text>
+                    </div>
                 </div>
             )}
         />
