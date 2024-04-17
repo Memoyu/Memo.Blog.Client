@@ -2,14 +2,15 @@
 .blog-home {
     &-content {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center;
         position: relative;
         height: 100%;
-        color: #fff;
+        margin-left: 10%;
 
         &-bottom {
             position: absolute;
-            left: 0;
+            right: 10%;
             bottom: 30px;
             width: 100%;
             display: flex;
