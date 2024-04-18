@@ -1,1 +1,21 @@
+@import '@styles/base.scss';
+.blog-article {
+    &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        height: 100%;
+        margin-left: 10%;
 
+        &-bottom {
+            position: absolute;
+            right: 10%;
+            bottom: 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+    }
+}

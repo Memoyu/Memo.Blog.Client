@@ -25,7 +25,7 @@ const routeList: RouteObject[] = [
         element: <WrapperRouteComponent element={<Layout />} titleId="" auth />,
         children: [
             {
-                path: 'home',
+                path: '/',
                 element: <WrapperRouteComponent element={<Home />} titleId="首页" auth />,
             },
             {

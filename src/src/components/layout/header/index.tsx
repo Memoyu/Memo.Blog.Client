@@ -14,7 +14,8 @@ type Item = {
 };
 
 const items: Array<Item> = [
-    { name: '首页', to: '/home' },
+    { name: '首页', to: '/' },
+    { name: '文章', to: '/article' },
     { name: '动态', to: '/moment' },
     { name: '友链', to: '/friend' },
     { name: '工具', to: '/tool' },

@@ -17,7 +17,8 @@ const PrivateRoute = (props: PathRouteProps) => {
     const location = useLocation();
     const { pathname } = location;
 
-    return pathname === '/' ? <Navigate to={{ pathname: `/home` }} replace /> : props.element;
+    //  return pathname === '/' ? <Navigate to={{ pathname: `/home` }} replace /> :
+    return props.element;
 };
 
 const WrapperRouteComponent: FC<WrapperRouteProps> = ({ titleId, auth, ...props }) => {

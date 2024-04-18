@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { RadioGroup, Toast } from '@douyinfe/semi-ui';
-import { OptionItem, RadioChangeEvent } from '@douyinfe/semi-ui/lib/es/radio';
+import { OptionItem } from '@douyinfe/semi-ui/lib/es/radio';
 
 import { useOnMountUnsafe } from '@src/hooks/useOnMountUnsafe';
 
@@ -10,9 +10,13 @@ import { articleCategoryList } from '@src/utils/request';
 
 import './index.scss';
 
-interface ComProps {}
+interface ComProps {
+    onChange?: (categoryId: string) => void;
+}
 
-const Index: FC<ComProps> = ({}) => {
+const initCategory: OptionItem = { label: '全部', value: '0' };
+
+const Index: FC<ComProps> = ({ onChange }) => {
     const navigate = useNavigate();
     const [params] = useSearchParams();
 
@@ -29,28 +33,30 @@ const Index: FC<ComProps> = ({}) => {
                     return;
                 }
 
+                let total = 0;
                 let opts: Array<OptionItem> = res.data.map((c) => {
+                    total += c.articles;
                     return {
                         label: `${c.name} [${c.articles}]`,
                         value: c.categoryId.toString(),
                     } as OptionItem;
                 });
+                initCategory.label = `${initCategory.label} [${total}]`;
+                opts.unshift(initCategory);
                 setCategoryOpts(opts);
             })
             .finally(() => setLoading(false));
     };
 
     useOnMountUnsafe(() => {
-        var categoryId = params.getAll('category')[0];
+        var categoryId = params.getAll('category')[0] ?? initCategory.value;
         setValue(categoryId);
         getArticleCategoryList();
     });
-
-    // 触发分类选中
-    let handlerCategoryChange = (categoryId: number) => {
-        navigate('/home?category=' + categoryId);
+    let handleCategoryChange = (id: string) => {
+        navigate(id == initCategory.value ? '/article' : `/article?category=${id}`);
+        //  onChange && onChange(id);
     };
-
     return (
         // 在没有数据的情况下不占用空间
         categoryOpts.length > 0 && (
@@ -62,7 +68,7 @@ const Index: FC<ComProps> = ({}) => {
                         defaultValue={value}
                         style={{ background: 'transparent', whiteSpace: 'nowrap' }}
                         options={categoryOpts}
-                        onChange={(e) => handlerCategoryChange(e.target.value)}
+                        onChange={(e) => handleCategoryChange(e.target.value)}
                     />
                 </div>
             </div>

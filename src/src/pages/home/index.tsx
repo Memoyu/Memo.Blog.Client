@@ -4,8 +4,6 @@ import PageBanner from '@components/page-banner';
 import Summary from './components/summary';
 import CallMe from './components/call-me';
 
-import ArticleList from './components/article-list';
-
 import './index.scss';
 
 const { Title } = Typography;
@@ -39,8 +37,6 @@ const Index = () => {
                     </div>
                 </div>
             </PageBanner>
-
-            <ArticleList />
         </div>
     );
 };
