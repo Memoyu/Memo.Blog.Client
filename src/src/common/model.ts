@@ -18,10 +18,8 @@ export enum ArticleStatus {
 }
 
 export interface ArticlePageRequest extends PaginationRequest {
-    title?: string;
     categoryId?: string;
     tagIds?: Array<string>;
-    status?: ArticleStatus;
 }
 
 export interface ArticlePageModel {

@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { RadioGroup, Toast } from '@douyinfe/semi-ui';
-import { OptionItem } from '@douyinfe/semi-ui/lib/es/radio';
+import { OptionItem, RadioChangeEvent } from '@douyinfe/semi-ui/lib/es/radio';
 
 import { useOnMountUnsafe } from '@src/hooks/useOnMountUnsafe';
 
@@ -12,7 +13,10 @@ import './index.scss';
 interface ComProps {}
 
 const Index: FC<ComProps> = ({}) => {
-    const [value, setValue] = useState<number>(0);
+    const navigate = useNavigate();
+    const [params] = useSearchParams();
+
+    const [value, setValue] = useState<string>('0');
     const [loading, setLoading] = useState<boolean>(false);
     const [categoryOpts, setCategoryOpts] = useState<Array<OptionItem>>([]);
 
@@ -28,7 +32,7 @@ const Index: FC<ComProps> = ({}) => {
                 let opts: Array<OptionItem> = res.data.map((c) => {
                     return {
                         label: `${c.name} [${c.articles}]`,
-                        value: c.categoryId,
+                        value: c.categoryId.toString(),
                     } as OptionItem;
                 });
                 setCategoryOpts(opts);
@@ -37,21 +41,32 @@ const Index: FC<ComProps> = ({}) => {
     };
 
     useOnMountUnsafe(() => {
+        var categoryId = params.getAll('category')[0];
+        setValue(categoryId);
         getArticleCategoryList();
     });
 
+    // 触发分类选中
+    let handlerCategoryChange = (categoryId: number) => {
+        navigate('/home?category=' + categoryId);
+    };
+
     return (
-        <div className="article-category-list">
-            <div className="article-category-list-wrap">
-                <RadioGroup
-                    type="button"
-                    buttonSize="large"
-                    defaultValue={value}
-                    style={{ background: 'transparent', whiteSpace: 'nowrap' }}
-                    options={categoryOpts}
-                />
+        // 在没有数据的情况下不占用空间
+        categoryOpts.length > 0 && (
+            <div className="article-category-list">
+                <div className="article-category-list-wrap">
+                    <RadioGroup
+                        type="button"
+                        buttonSize="large"
+                        defaultValue={value}
+                        style={{ background: 'transparent', whiteSpace: 'nowrap' }}
+                        options={categoryOpts}
+                        onChange={(e) => handlerCategoryChange(e.target.value)}
+                    />
+                </div>
             </div>
-        </div>
+        )
     );
 };
 

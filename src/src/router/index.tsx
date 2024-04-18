@@ -8,6 +8,7 @@ import Empty from '@components/empty';
 
 const Home = lazy(() => import('@src/pages/home'));
 const Article = lazy(() => import('@src/pages/article'));
+const ArticleDetail = lazy(() => import('@src/pages/article/detail'));
 
 const Moment = lazy(() => import('@src/pages/moment'));
 
@@ -30,6 +31,12 @@ const routeList: RouteObject[] = [
             {
                 path: 'article',
                 element: <WrapperRouteComponent element={<Article />} titleId="文章" auth />,
+            },
+            {
+                path: 'article/detail/:id',
+                element: (
+                    <WrapperRouteComponent element={<ArticleDetail />} titleId="文章详情" auth />
+                ),
             },
             {
                 path: 'moment',

@@ -1,0 +1,6 @@
+.article-list-container {
+    &-category-sticky {
+        position: relative;
+        z-index: 50;
+    }
+}

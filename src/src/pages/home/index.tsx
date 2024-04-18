@@ -1,12 +1,9 @@
-import { Button, Image, Typography } from '@douyinfe/semi-ui';
-import Sticky from 'react-stickynode';
-import { useNavigate } from 'react-router-dom';
+import { Typography } from '@douyinfe/semi-ui';
 
-import Container from '@components/layout/container';
 import PageBanner from '@components/page-banner';
 import Summary from './components/summary';
 import CallMe from './components/call-me';
-import CategoryList from './components/category-list';
+
 import ArticleList from './components/article-list';
 
 import './index.scss';
@@ -14,15 +11,8 @@ import './index.scss';
 const { Title } = Typography;
 
 const Index = () => {
-    const navigate = useNavigate();
-
     return (
-        <div
-            className="blog-home"
-            onScroll={() => {
-                console.log('滚动了！！');
-            }}
-        >
+        <div className="blog-home">
             <PageBanner
                 height="100vh"
                 image="http://oss.blog.memoyu.com/articles/banner/2dba0a75-4bf9-471c-8ee8-fe957321a902.png"
@@ -50,15 +40,7 @@ const Index = () => {
                 </div>
             </PageBanner>
 
-            <Sticky enabled={true} top={58} className="blog-home-article-category-sticky">
-                <CategoryList />
-            </Sticky>
-
-            <Container>
-                <div style={{ marginTop: 20 }}>
-                    <ArticleList />
-                </div>
-            </Container>
+            <ArticleList />
         </div>
     );
 };

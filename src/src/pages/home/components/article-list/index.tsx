@@ -1,8 +1,13 @@
 import { FC, useState, useRef, CSSProperties } from 'react';
 import { Masonry } from 'react-plock';
+import Sticky from 'react-stickynode';
 import { throttle } from 'lodash';
 import { Card, Badge, TagGroup, Toast, Typography } from '@douyinfe/semi-ui';
 import { IconActivity, IconVerify } from '@douyinfe/semi-icons';
+import { useSearchParams } from 'react-router-dom';
+
+import Container from '@components/layout/container';
+import CategoryList from '../category-list';
 
 import { useOnMountUnsafe } from '@src/hooks/useOnMountUnsafe';
 
@@ -14,12 +19,15 @@ import { TagProps } from '@douyinfe/semi-ui/lib/es/tag';
 import { articlePage } from '@src/utils/request';
 
 import './index.scss';
+import { Link } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
 interface ComProps {}
 
 const Index: FC<ComProps> = ({}) => {
+    const [params] = useSearchParams();
+
     const articlesRef = useRef<Array<ArticlePageModel>>([]);
     const lastTriggerScrollTimeRef = useRef<number>(0);
     const currentPageRef = useRef<number>(1);
@@ -27,8 +35,10 @@ const Index: FC<ComProps> = ({}) => {
     const pageSize = 15;
     const [loading, setLoading] = useState<boolean>(false);
 
-    let getArticlePage = () => {
+    // 获取文章
+    let getArticlePage = (categoryId?: string) => {
         // console.log('当前总条数：', articleTotalRef.current);
+        console.log('当前分类：', categoryId);
 
         if (loading) return;
         if (articlesRef.current.length >= articleTotalRef.current) return;
@@ -36,6 +46,7 @@ const Index: FC<ComProps> = ({}) => {
         setLoading(true);
 
         let request = {
+            categoryId: categoryId,
             page: currentPageRef.current,
             size: pageSize,
         } as ArticlePageRequest;
@@ -60,10 +71,10 @@ const Index: FC<ComProps> = ({}) => {
     };
 
     useOnMountUnsafe(() => {
-        getArticlePage();
+        var categoryId = params.getAll('category')[0];
 
+        getArticlePage(categoryId);
         window.addEventListener('scroll', throttledScrollHandler);
-
         return () => {
             window.removeEventListener('scroll', throttledScrollHandler);
         };
@@ -89,6 +100,7 @@ const Index: FC<ComProps> = ({}) => {
     // 使用节流
     let throttledScrollHandler = throttle(handleScroll, 200);
 
+    // 获取文章角标
     let getArticleBadge = (item: ArticlePageModel) => {
         let sty = { fontSize: 20 } as CSSProperties;
 
@@ -102,66 +114,98 @@ const Index: FC<ComProps> = ({}) => {
     };
 
     return (
-        <Masonry
-            items={articlesRef.current}
-            config={{
-                columns: [1, 2, 3, 4],
-                gap: [24, 16, 16, 16],
-                media: [520, 640, 768, 1024],
-            }}
-            render={(item: ArticlePageModel, idx: number) => (
-                <Badge count={getArticleBadge(item)} type="danger">
-                    <Card
-                        key={idx}
-                        shadows="hover"
-                        bodyStyle={{ padding: 10, backgroundColor: 'rgb(var(--semi-grey-0))' }}
-                    >
-                        {item.banner.length != 0 && (
-                            <img
-                                key={idx}
-                                src={item.banner}
-                                loading="lazy"
-                                style={{
-                                    width: '100%',
-                                    height: 'auto',
-                                }}
-                            />
-                        )}
+        // 在没有数据的情况下不占用空间
+        articlesRef.current.length > 0 && (
+            <div className="article-list-container">
+                <Sticky enabled={true} top={58} className="article-list-container-category-sticky">
+                    <CategoryList />
+                </Sticky>
 
-                        <Title style={{ textAlign: 'center', margin: '10px 0' }} heading={5}>
-                            {item.title}
-                        </Title>
-                        <div style={{ margin: 20 }}>
-                            <Text type="tertiary">{item.description}</Text>
-                        </div>
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                margin: '0 15px',
-                                marginBottom: 10,
+                <Container>
+                    <div style={{ marginTop: 20 }}>
+                        <Masonry
+                            items={articlesRef.current}
+                            config={{
+                                columns: [1, 2, 3, 4],
+                                gap: [24, 16, 16, 16],
+                                media: [520, 640, 768, 1024],
                             }}
-                        >
-                            <TagGroup
-                                maxTagCount={2}
-                                showPopover
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                }}
-                                tagList={item.tags.map((t) => {
-                                    return { color: 'purple', children: t.name } as TagProps;
-                                })}
-                                size="large"
-                            />
-                            <Text style={{ display: 'flex', alignItems: 'center' }}>
-                                {dateDiff(new Date(item.createTime))}
-                            </Text>
-                        </div>
-                    </Card>
-                </Badge>
-            )}
-        />
+                            render={(item: ArticlePageModel, idx: number) => (
+                                <Badge
+                                    key={item.articleId}
+                                    count={getArticleBadge(item)}
+                                    type="danger"
+                                >
+                                    <Card
+                                        className="article-item-card"
+                                        shadows="hover"
+                                        style={{ cursor: 'default' }}
+                                        bodyStyle={{
+                                            padding: 10,
+                                            backgroundColor: 'rgb(var(--semi-grey-0))',
+                                        }}
+                                    >
+                                        <Link
+                                            key={item.articleId}
+                                            to={`/article/detail/${item.articleId}`}
+                                        >
+                                            {item.banner.length != 0 && (
+                                                <img
+                                                    src={item.banner}
+                                                    loading="lazy"
+                                                    style={{
+                                                        width: '100%',
+                                                        height: 'auto',
+                                                    }}
+                                                />
+                                            )}
+
+                                            <Title
+                                                style={{ textAlign: 'center', margin: '10px 0' }}
+                                                heading={5}
+                                            >
+                                                {item.title}
+                                            </Title>
+                                        </Link>
+                                        <div style={{ margin: 20 }}>
+                                            <Text type="tertiary">{item.description}</Text>
+                                        </div>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                                margin: '0 15px',
+                                                marginBottom: 10,
+                                            }}
+                                        >
+                                            <TagGroup
+                                                maxTagCount={2}
+                                                showPopover
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                                tagList={item.tags.map((t) => {
+                                                    return {
+                                                        tagKey: t.tagId,
+                                                        color: 'purple',
+                                                        children: t.name,
+                                                    } as TagProps;
+                                                })}
+                                                size="large"
+                                            />
+                                            <Text style={{ display: 'flex', alignItems: 'center' }}>
+                                                {dateDiff(new Date(item.createTime))}
+                                            </Text>
+                                        </div>
+                                    </Card>
+                                </Badge>
+                            )}
+                        />
+                    </div>
+                </Container>
+            </div>
+        )
     );
 };
 
