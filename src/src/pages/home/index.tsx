@@ -1,10 +1,12 @@
 import { Button, Image, Typography } from '@douyinfe/semi-ui';
+import Sticky from 'react-stickynode';
 import { useNavigate } from 'react-router-dom';
 
 import Container from '@components/layout/container';
 import PageBanner from '@components/page-banner';
 import Summary from './components/summary';
 import CallMe from './components/call-me';
+import CategoryList from './components/category-list';
 import ArticleList from './components/article-list';
 
 import './index.scss';
@@ -47,8 +49,13 @@ const Index = () => {
                     </div>
                 </div>
             </PageBanner>
+
+            <Sticky enabled={true} top={58} className="blog-home-article-category-sticky">
+                <CategoryList />
+            </Sticky>
+
             <Container>
-                <div style={{ marginTop: 30 }}>
+                <div style={{ marginTop: 20 }}>
                     <ArticleList />
                 </div>
             </Container>

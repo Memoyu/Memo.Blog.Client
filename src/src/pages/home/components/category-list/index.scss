@@ -1,0 +1,8 @@
+.article-category-list {
+    background: var(--semi-color-bg-0);
+    overflow-x: auto;
+    &-wrap {
+        padding: 0 10px;
+        background: var(--semi-color-fill-0);
+    }
+}

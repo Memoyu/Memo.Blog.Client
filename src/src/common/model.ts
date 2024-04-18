@@ -49,6 +49,10 @@ export interface CategoryModel {
     name: string; // 分类名称
 }
 
+export interface CategoryWithArticleCountModel extends CategoryModel {
+    articles: number;
+}
+
 //#endregion
 
 //#region 标签
