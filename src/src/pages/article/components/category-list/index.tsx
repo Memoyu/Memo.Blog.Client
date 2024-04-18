@@ -14,7 +14,7 @@ interface ComProps {
     onChange?: (categoryId: string) => void;
 }
 
-const initCategory: OptionItem = { label: '全部', value: '0' };
+const initCategory: OptionItem = { value: '0' };
 
 const Index: FC<ComProps> = ({ onChange }) => {
     const navigate = useNavigate();
@@ -41,7 +41,7 @@ const Index: FC<ComProps> = ({ onChange }) => {
                         value: c.categoryId.toString(),
                     } as OptionItem;
                 });
-                initCategory.label = `${initCategory.label} [${total}]`;
+                initCategory.label = `全部 [${total}]`;
                 opts.unshift(initCategory);
                 setCategoryOpts(opts);
             })
