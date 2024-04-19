@@ -33,7 +33,7 @@ const Index: FC<ComProps> = ({}) => {
 
     const [gitmojiVisible, setGitmojiVisible] = useState<boolean>();
     return (
-        <div>
+        <div className="com-tools">
             <List
                 grid={{
                     gutter: 12,

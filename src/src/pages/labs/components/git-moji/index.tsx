@@ -340,7 +340,10 @@ const Index: FC<ComProps> = ({ visible, onChange }) => {
         };
     }, [visible]);
 
-    let showCopyMessage = async (e: React.MouseEvent<HTMLElement, MouseEvent>, text: string) => {
+    let handlerShowCopyMessage = async (
+        e: React.MouseEvent<HTMLElement, MouseEvent>,
+        text: string
+    ) => {
         e.stopPropagation();
         if ('clipboard' in navigator) {
             await navigator.clipboard.writeText(text);
@@ -390,12 +393,11 @@ const Index: FC<ComProps> = ({ visible, onChange }) => {
                     dataSource={emojis}
                     renderItem={(item) => (
                         <List.Item>
-                            <div onClick={(e) => showCopyMessage(e, item.emoji || '')}>
+                            <div onClick={(e) => handlerShowCopyMessage(e, item.emoji || '')}>
                                 <Card
                                     shadows="hover"
                                     className="gitmoji-container-gitmoji"
                                     style={{ backgroundColor: item.color }}
-                                    // onClick={(e) => showCopyMessage(e, item.emoji || '')}
                                 >
                                     <div className="gitmoji-container-gitmoji-header">
                                         {item.emoji}
@@ -404,7 +406,9 @@ const Index: FC<ComProps> = ({ visible, onChange }) => {
                                     <div className="gitmoji-container-gitmoji-code">
                                         <Button
                                             theme="borderless"
-                                            onClick={(e) => showCopyMessage(e, item.code || '')}
+                                            onClick={(e) =>
+                                                handlerShowCopyMessage(e, item.code || '')
+                                            }
                                         >
                                             {item.code}
                                         </Button>

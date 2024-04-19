@@ -6,6 +6,7 @@ import {
     ArticlePageModel,
     ArticlePageRequest,
     CategoryWithArticleCountModel,
+    OpenSourceProjectModel,
     PaginationResult,
 } from '@src/common/model';
 
@@ -21,6 +22,14 @@ export const articleCategoryList = (name?: string) => {
     return Request.get<Array<CategoryWithArticleCountModel>>('category/list', {
         params: { name: name },
     });
+};
+
+//#endregion
+
+//#region 开源项目
+
+export const openSourceProjectList = () => {
+    return Request.get<Array<OpenSourceProjectModel>>('open-source/list');
 };
 
 //#endregion

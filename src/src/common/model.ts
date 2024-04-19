@@ -63,6 +63,17 @@ export interface TagModel {
 
 //#endregion
 
+//#region 开源项目
+
+export interface OpenSourceProjectModel {
+    projectId: string;
+    title: string;
+    description: string;
+    star: number;
+    fork: number;
+}
+
+//#endregion
 export interface CommentBelongModel {
     belongId: string;
     title: string;
