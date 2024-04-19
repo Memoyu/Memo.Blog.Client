@@ -10,11 +10,11 @@ const { Title } = Typography;
 
 const Index = () => {
     return (
-        <div className="blog-article">
+        <div className="blog-article-list">
             <PageBanner
-                height={400}
+                height={300}
                 image="http://oss.blog.memoyu.com/articles/banner/502a2248-2ee7-48eb-af67-c5b0b9a9a5f1.png"
-            ></PageBanner>
+            />
 
             {/* 文章列表，带文章分类头部 */}
             <ArticleList />

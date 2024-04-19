@@ -13,7 +13,7 @@ const Index: React.FC = () => {
 
             <div className="blog-layout-content">
                 <motion.div
-                    initial={{ scale: 1, opacity: 0, translateY: 200 }}
+                    initial={{ scale: 1, opacity: 0, translateY: 0 }}
                     animate={{
                         opacity: [0, 0.5, 1],
                         translateY: [200, 100, 0],
@@ -21,15 +21,19 @@ const Index: React.FC = () => {
                     }}
                     exit={{
                         scale: [1, 0.88, 0.88],
+                        translateY: 100,
                         opacity: [1, 0.5, 0],
                         transformOrigin: ['center', 'bottom'],
                         transition: { duration: 0.8, ease: 'easeInOut' },
                     }}
                     //  transition={{ duration: 1, ease: 'easeInOut' }}
                 >
-                    <Suspense>
-                        <Outlet />
-                    </Suspense>
+                    {/* 包这层是为了让动画执行时缩放不受页面长度的影响 */}
+                    <div style={{ height: '100vh' }}>
+                        <Suspense>
+                            <Outlet />
+                        </Suspense>
+                    </div>
                 </motion.div>
             </div>
         </div>
