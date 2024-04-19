@@ -22,7 +22,7 @@ const Index: React.FC = () => {
                     exit={{
                         scale: [1, 0.88, 0.88],
                         translateY: 100,
-                        opacity: [1, 0.5, 0],
+                        opacity: [1, 0.3, 0],
                         transformOrigin: ['center', 'bottom'],
                         transition: { duration: 0.8, ease: 'easeInOut' },
                     }}

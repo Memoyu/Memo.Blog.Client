@@ -9,7 +9,7 @@ interface ComProps {
     children?: ReactNode;
 }
 
-const Index: FC<ComProps> = ({ image, height = 200, children }) => {
+const Index: FC<ComProps> = ({ image, height = 300, children }) => {
     useEffect(() => {}, [image]);
 
     return (

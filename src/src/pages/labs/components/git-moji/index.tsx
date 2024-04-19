@@ -1,10 +1,17 @@
-import React from 'react';
-import type { CSSProperties } from 'react';
-import { Collapse, Col, Row, Button } from '@douyinfe/semi-ui';
+import React, { useEffect, useState } from 'react';
+import type { CSSProperties, FC } from 'react';
+import { List, Col, Row, Button, Modal, Toast, Typography, Card } from '@douyinfe/semi-ui';
 
 import './index.scss';
 
-export interface GitmojiProps {
+const { Text } = Typography;
+
+interface ComProps {
+    visible?: boolean;
+    onChange?: (visible: boolean) => void;
+}
+
+interface GitmojiProps {
     id: number;
     code?: string;
     emoji?: string;
@@ -323,88 +330,97 @@ const emojis: Array<GitmojiProps> = [
     { id: 74, code: ':whale:', emoji: '🐳', color: '#00a6ab', description: 'Docker 相关操作。' },
 ];
 
-const Index = () => {
-    // const [messageApi, contextHolder] = message.useMessage();
+const Index: FC<ComProps> = ({ visible, onChange }) => {
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+    useEffect(() => {
+        setModalVisible(visible ?? false);
 
-    // const getItems: (panelStyle: CSSProperties) => CollapseProps['items'] = (panelStyle) => [
-    //     {
-    //         key: '1',
-    //         label: 'Gitmoji🤔',
-    //         children: (
-    //             <Row gutter={[16, 16]}>
-    //                 {emojis.map((item) => (
-    //                     <Col key={item.id.toString()} span={6}>
-    //                         <div
-    //                             className={s.gitmoji}
-    //                             style={{ backgroundColor: item.color }}
-    //                             onClick={(e) => showCopyMessage(e, item.emoji || '')}
-    //                         >
-    //                             <div className={s.header}>{item.emoji}</div>
-    //                             <div className={s.code}>
-    //                                 <Button
-    //                                     className={s.codeBtn}
-    //                                     type="text"
-    //                                     onClick={(e) => showCopyMessage(e, item.code || '')}
-    //                                 >
-    //                                     {item.code}
-    //                                 </Button>
-    //                             </div>
-    //                             <div className={s.description}>{item.description}</div>
-    //                         </div>
-    //                     </Col>
-    //                 ))}
-    //             </Row>
-    //         ),
-    //         headerClass: s.collapseHeader,
-    //         style: panelStyle,
-    //     },
-    // ];
+        return () => {
+            setModalVisible(false);
+        };
+    }, [visible]);
 
-    // const showCopyMessage = async (e: React.MouseEvent<HTMLElement, MouseEvent>, text: string) => {
-    //     e.stopPropagation();
-    //     if ('clipboard' in navigator) {
-    //         await navigator.clipboard.writeText(text);
-    //     } else {
-    //         let copyInput = document.createElement('input');
-    //         copyInput.value = text;
-    //         copyInput.style.position = 'absolute';
-    //         copyInput.style.left = '-999999px';
-    //         document.body.appendChild(copyInput);
-    //         copyInput.select();
-    //         document.execCommand('copy');
-    //         document.body.removeChild(copyInput);
+    let showCopyMessage = async (e: React.MouseEvent<HTMLElement, MouseEvent>, text: string) => {
+        e.stopPropagation();
+        if ('clipboard' in navigator) {
+            await navigator.clipboard.writeText(text);
+        } else {
+            let copyInput = document.createElement('input');
+            copyInput.value = text;
+            copyInput.style.position = 'absolute';
+            copyInput.style.left = '-999999px';
+            document.body.appendChild(copyInput);
+            copyInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(copyInput);
 
-    //         try {
-    //             document.execCommand('copy');
-    //         } catch (error) {
-    //             console.error(error);
-    //         } finally {
-    //             copyInput.remove();
-    //         }
-    //     }
-    //     messageApi.open({
-    //         type: 'success',
-    //         content: 'gitmoji ' + text + ' 复制成功！',
-    //     });
-    // };
+            try {
+                document.execCommand('copy');
+            } catch (error) {
+                console.error(error);
+            } finally {
+                copyInput.remove();
+            }
+        }
 
-    // const panelStyle: React.CSSProperties = {
-    //     marginBottom: 24,
-    //     border: 'none',
-    // };
+        Toast.success('gitmoji ' + text + ' 复制成功！');
+    };
+
     return (
-        // <div className={s.container}>
-        //     {contextHolder}
-        //     <Collapse
-        //         bordered={false}
-        //         defaultActiveKey={['1']}
-        //         expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-        //         className={s.collapse}
-        //         items={getItems(panelStyle)}
-        //     />
-        // </div>
+        <Modal
+            title="Gitmoji"
+            visible={modalVisible}
+            onCancel={() => {
+                setModalVisible(false);
+                onChange && onChange(false);
+            }}
+            centered
+            bodyStyle={{ height: 520 }}
+            style={{ width: 1200 }}
+            footer={<></>}
+        >
+            <div className="gitmoji-container">
+                <List
+                    grid={{
+                        gutter: 2,
+                        justify: 'center',
+                    }}
+                    style={{ padding: 10 }}
+                    layout="horizontal"
+                    dataSource={emojis}
+                    renderItem={(item) => (
+                        <List.Item>
+                            <div onClick={(e) => showCopyMessage(e, item.emoji || '')}>
+                                <Card
+                                    shadows="hover"
+                                    className="gitmoji-container-gitmoji"
+                                    style={{ backgroundColor: item.color }}
+                                    // onClick={(e) => showCopyMessage(e, item.emoji || '')}
+                                >
+                                    <div className="gitmoji-container-gitmoji-header">
+                                        {item.emoji}
+                                    </div>
 
-        <div>Tool</div>
+                                    <div className="gitmoji-container-gitmoji-code">
+                                        <Button
+                                            theme="borderless"
+                                            onClick={(e) => showCopyMessage(e, item.code || '')}
+                                        >
+                                            {item.code}
+                                        </Button>
+                                    </div>
+                                    <div style={{ margin: 6, textAlign: 'center' }}>
+                                        <Text strong style={{ wordBreak: 'break-word' }}>
+                                            {item.description}
+                                        </Text>
+                                    </div>
+                                </Card>
+                            </div>
+                        </List.Item>
+                    )}
+                />
+            </div>
+        </Modal>
     );
 };
 

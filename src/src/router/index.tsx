@@ -14,8 +14,8 @@ const Moment = lazy(() => import('@src/pages/moment'));
 
 const Friend = lazy(() => import('@src/pages/friend'));
 
-const Tool = lazy(() => import('@src/pages/tool'));
-const GitMoji = lazy(() => import('@src/pages/tool/git-moji'));
+const Labs = lazy(() => import('@src/pages/labs'));
+const LabsGitMoji = lazy(() => import('@src/pages/labs/components/git-moji'));
 
 const About = lazy(() => import('@src/pages/about'));
 
@@ -44,11 +44,11 @@ const routeList: RouteObject[] = [
             },
             {
                 path: 'friend',
-                element: <WrapperRouteComponent element={<Friend />} titleId="动态" auth />,
+                element: <WrapperRouteComponent element={<Friend />} titleId="友链" auth />,
             },
             {
-                path: 'tool',
-                element: <WrapperRouteComponent element={<Tool />} titleId="工具" auth />,
+                path: 'labs',
+                element: <WrapperRouteComponent element={<Labs />} titleId="实验室" auth />,
             },
             {
                 path: 'about',
@@ -56,7 +56,9 @@ const routeList: RouteObject[] = [
             },
             {
                 path: 'git-moji',
-                element: <WrapperRouteComponent element={<GitMoji />} titleId="git-moji" auth />,
+                element: (
+                    <WrapperRouteComponent element={<LabsGitMoji />} titleId="git-moji" auth />
+                ),
             },
         ],
     },

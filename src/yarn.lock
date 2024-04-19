@@ -288,10 +288,22 @@
     memoize-one "^5.2.1"
     scroll-into-view-if-needed "^2.2.24"
 
+"@douyinfe/semi-icons-lab@^2.56.3":
+  version "2.56.3"
+  resolved "https://registry.npmmirror.com/@douyinfe/semi-icons-lab/-/semi-icons-lab-2.56.3.tgz#d8e08106c152c1450c98d5f5540b77856b57f0f3"
+  integrity sha512-/FJvdVVrDgp/6zrhgP4nBX+eF9Y/Et5D3pUEInHK2iHEtiXIFsEnOmq+cjtHVyXgeVBzvUWk7MKIBIH3mLK6fg==
+
 "@douyinfe/semi-icons@2.56.0":
   version "2.56.0"
   resolved "https://registry.npmmirror.com/@douyinfe/semi-icons/-/semi-icons-2.56.0.tgz#9db41c5a1fe9466763a03d4c772d55dca485d29d"
   integrity sha512-I2Bh0rg0HKsZCUw/71zrtYshHSlwA1iw76AWsmmtX9ILbfaItjxjqKhmvK4QOIbtqiNIgSKF/0a8DY31zypw9A==
+  dependencies:
+    classnames "^2.2.6"
+
+"@douyinfe/semi-icons@^2.56.3":
+  version "2.56.3"
+  resolved "https://registry.npmmirror.com/@douyinfe/semi-icons/-/semi-icons-2.56.3.tgz#2855e64866661bea94cd6ac7cd59beba8c8b6da6"
+  integrity sha512-6AH1q+wDO2xX62k2bzBDqYwao3Eis2h9q2t3CRQPkvwNIferx+MmBU9ZZkvR2Q2RewcQRVIi+dN9qX9TcWNsTA==
   dependencies:
     classnames "^2.2.6"
 
