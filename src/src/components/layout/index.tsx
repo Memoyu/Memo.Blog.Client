@@ -56,8 +56,8 @@ const Index: React.FC = () => {
                         transition: { type: 'spring', duration: 0.5, ease: 'easeInOut' },
                     }}
                     exit={{
-                        scale: 0.8,
-                        opacity: [1, 0.3, 0],
+                        scale: [1, 0.8, 0.8],
+                        opacity: [1, 0.4, 0],
                         transformOrigin: ['center', 'bottom'],
                         transition: { duration: 0.8, ease: 'easeInOut' },
                     }}
