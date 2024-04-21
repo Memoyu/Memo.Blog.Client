@@ -3,8 +3,10 @@
     // background-color: antiquewhite;
 
     &-content {
-        //min-height: 100vh;
-        // overflow: hidden;
-        // background-color: azure;
+        background-color: var(--semi-color-bg-0);
+        // position: relative;
+        > :last-child {
+            height: 100%;
+        }
     }
 }

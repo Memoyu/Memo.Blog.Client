@@ -13,6 +13,8 @@ type Item = {
     to: string;
 };
 
+interface ComProps {}
+
 const items: Array<Item> = [
     { name: '首页', to: '/' },
     { name: '文章', to: '/article' },
@@ -21,7 +23,7 @@ const items: Array<Item> = [
     { name: '关于', to: '/about' },
 ];
 
-const CustHeader: FC = () => {
+const Index: FC<ComProps> = () => {
     let location = useLocation();
     let [isScrolling, setIsScrolling] = useState<boolean>(false);
 
@@ -37,18 +39,24 @@ const CustHeader: FC = () => {
 
     const ajustNavigation = () => {
         let scrollTop =
-            window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            getContentEle()?.scrollTop ||
+            document.documentElement.scrollTop ||
+            document.body.scrollTop ||
+            0;
 
         let isScroll = scrollTop > 50;
         // console.log('滚动事件触发', scrollTop, isScroll);
         setIsScrolling(isScroll);
     };
 
+    const getContentEle = () => document.getElementById('blog-layout-content');
+
     useEffect(() => {
-        window.addEventListener('scroll', throttledScrollHandler);
+        let contentEle = getContentEle();
+        contentEle?.addEventListener('scroll', throttledScrollHandler);
 
         return () => {
-            window.removeEventListener('scroll', throttledScrollHandler);
+            contentEle?.removeEventListener('scroll', throttledScrollHandler);
         };
     }, []);
 
@@ -84,4 +92,4 @@ const CustHeader: FC = () => {
     );
 };
 
-export default CustHeader;
+export default Index;

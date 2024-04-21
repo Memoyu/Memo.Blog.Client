@@ -1,5 +1,4 @@
 import PageBanner from '@components/page-banner';
-
 import ArticleList from '../article/components/article-list';
 
 import './index.scss';

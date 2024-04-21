@@ -1,10 +1,10 @@
 import { FC, useState, useRef, CSSProperties, useEffect } from 'react';
 import { Masonry } from 'react-plock';
-import Sticky from 'react-stickynode';
 import { throttle } from 'lodash';
 import { Card, Badge, TagGroup, Toast, Typography } from '@douyinfe/semi-ui';
 import { IconActivity, IconVerify } from '@douyinfe/semi-icons';
 import { useSearchParams } from 'react-router-dom';
+import StickyBox from 'react-sticky-box';
 
 import Container from '@components/layout/container';
 import CategoryList from '../category-list';
@@ -139,13 +139,10 @@ const Index: FC<ComProps> = ({}) => {
     };
 
     return (
-        // 在没有数据的情况下不占用空间
-
         <div className="article-list-container">
-            <Sticky enabled={true} top={58} className="article-list-container-category-sticky">
+            <StickyBox offsetTop={58} className="article-list-container-category-sticky">
                 <CategoryList onChange={(id) => handleCategoryChange(id)} />
-            </Sticky>
-
+            </StickyBox>
             <Container>
                 <div style={{ marginTop: 20 }}>
                     <Masonry
