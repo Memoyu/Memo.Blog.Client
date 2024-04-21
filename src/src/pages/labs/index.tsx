@@ -40,6 +40,21 @@ const Index = () => {
                 <div className="blog-labs-open-source">
                     <OpenSources />
                 </div>
+                <div className="blog-labs-open-source">
+                    <OpenSources />
+                </div>
+                <div className="blog-labs-open-source">
+                    <OpenSources />
+                </div>
+                <div className="blog-labs-open-source">
+                    <OpenSources />
+                </div>
+                <div className="blog-labs-open-source">
+                    <OpenSources />
+                </div>
+                <div className="blog-labs-open-source">
+                    <OpenSources />
+                </div>
             </Container>
         </div>
     );

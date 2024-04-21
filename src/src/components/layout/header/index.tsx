@@ -8,14 +8,14 @@ import Container from '@components/layout/container';
 
 import './index.scss';
 
-type Item = {
+type NavItem = {
     name: string;
     to: string;
 };
 
 interface ComProps {}
 
-const items: Array<Item> = [
+const navs: Array<NavItem> = [
     { name: '首页', to: '/' },
     { name: '文章', to: '/article' },
     { name: '实验室', to: '/labs' },
@@ -68,7 +68,7 @@ const Index: FC<ComProps> = () => {
                         <Logo />
                     </NavLink>
                     <div className="header-navigation-list">
-                        {items.map((item, index) => (
+                        {navs.map((item, index) => (
                             <NavLink
                                 to={item.to}
                                 key={index}
