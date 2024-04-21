@@ -61,16 +61,14 @@ const Index: FC<ComProps> = ({ onChange }) => {
         // 在没有数据的情况下不占用空间
         categoryOpts.length > 0 && (
             <div className="article-category-list">
-                <div className="article-category-list-wrap">
-                    <RadioGroup
-                        type="button"
-                        buttonSize="large"
-                        defaultValue={value}
-                        style={{ background: 'transparent', whiteSpace: 'nowrap' }}
-                        options={categoryOpts}
-                        onChange={(e) => handleCategoryChange(e.target.value)}
-                    />
-                </div>
+                <RadioGroup
+                    type="button"
+                    buttonSize="large"
+                    defaultValue={value}
+                    style={{ background: 'transparent', whiteSpace: 'nowrap' }}
+                    options={categoryOpts}
+                    onChange={(e) => handleCategoryChange(e.target.value)}
+                />
             </div>
         )
     );

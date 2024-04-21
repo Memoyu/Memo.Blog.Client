@@ -377,7 +377,7 @@ const Index: FC<ComProps> = ({ visible, onChange }) => {
                 onChange && onChange(false);
             }}
             centered
-            bodyStyle={{ height: 520, overflowY: 'auto', overflowX: 'hidden' }}
+            bodyStyle={{ height: 580, overflowY: 'auto', overflowX: 'hidden' }}
             style={{ width: 1200 }}
             header={undefined}
             footer={undefined}

@@ -89,7 +89,7 @@ const Index: FC<ComProps> = ({}) => {
         <div className="com-open-source">
             <List
                 grid={{
-                    gutter: 12,
+                    gutter: 13,
                 }}
                 loading={loading}
                 layout="horizontal"
@@ -98,7 +98,7 @@ const Index: FC<ComProps> = ({}) => {
                     <List.Item>
                         <Card
                             shadows="hover"
-                            style={{ marginTop: 15, width: 250, borderRadius: 'unset' }}
+                            style={{ marginTop: 15, width: 245, borderRadius: 'unset' }}
                             bodyStyle={{ padding: 0, backgroundColor: 'rgb(var(--semi-grey-0))' }}
                         >
                             <div
@@ -240,7 +240,7 @@ const Index: FC<ComProps> = ({}) => {
                 centered
                 bodyStyle={{
                     margin: '20px 0',
-                    height: 520,
+                    height: 580,
                     overflowY: 'auto',
                     overflowX: 'hidden',
                 }}
