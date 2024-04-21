@@ -1,27 +1,22 @@
-.gitmoji-container {
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    &-gitmoji {
-        margin: 8px;
-        height: 210px;
-        width: 200px;
-        vertical-align: middle;
+.gitmoji-container-gitmoji {
+    margin: 8px;
+    height: 210px;
+    width: 200px;
+    vertical-align: middle;
 
-        &-header {
-            line-height: 80px;
-            font-size: 50px;
-            text-align: center;
-        }
+    &-header {
+        line-height: 80px;
+        font-size: 50px;
+        text-align: center;
+    }
 
-        &-code {
-            display: flex;
-            justify-content: center;
-            margin: 5px 0;
-        }
+    &-code {
+        display: flex;
+        justify-content: center;
+        margin: 5px 0;
+    }
 
-        &-description {
-            text-align: center;
-        }
+    &-description {
+        text-align: center;
     }
 }

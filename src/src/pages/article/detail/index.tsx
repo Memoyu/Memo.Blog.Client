@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import MarkDown from '../components/markdown';
+import MarkDown from '../../../components/markdown';
 import Navigation from '../components/navigation';
 import Comment from '../components/comment';
 

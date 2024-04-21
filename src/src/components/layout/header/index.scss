@@ -43,7 +43,7 @@ $navigation-height: 56px;
                 left: 18%;
                 width: 0;
                 height: 1px;
-                background: #007fff;
+                background: var(--semi-color-primary);
                 transition: 0.4s;
             }
             &:hover {
@@ -54,7 +54,7 @@ $navigation-height: 56px;
         }
 
         .active {
-            color: #007fff;
+            color: var(--semi-color-primary-hover);
         }
 
         .active:after {

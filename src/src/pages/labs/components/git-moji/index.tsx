@@ -371,59 +371,53 @@ const Index: FC<ComProps> = ({ visible, onChange }) => {
 
     return (
         <Modal
-            title="Gitmoji"
             visible={modalVisible}
             onCancel={() => {
                 setModalVisible(false);
                 onChange && onChange(false);
             }}
             centered
-            bodyStyle={{ height: 520 }}
+            bodyStyle={{ height: 520, overflowY: 'auto', overflowX: 'hidden' }}
             style={{ width: 1200 }}
-            footer={<></>}
+            header={undefined}
+            footer={undefined}
         >
-            <div className="gitmoji-container">
-                <List
-                    grid={{
-                        gutter: 2,
-                        justify: 'center',
-                    }}
-                    style={{ padding: 10 }}
-                    layout="horizontal"
-                    dataSource={emojis}
-                    renderItem={(item) => (
-                        <List.Item>
-                            <div onClick={(e) => handlerShowCopyMessage(e, item.emoji || '')}>
-                                <Card
-                                    shadows="hover"
-                                    className="gitmoji-container-gitmoji"
-                                    style={{ backgroundColor: item.color }}
-                                >
-                                    <div className="gitmoji-container-gitmoji-header">
-                                        {item.emoji}
-                                    </div>
+            <List
+                grid={{
+                    gutter: 2,
+                    justify: 'center',
+                }}
+                style={{ padding: 10 }}
+                layout="horizontal"
+                dataSource={emojis}
+                renderItem={(item) => (
+                    <List.Item>
+                        <div onClick={(e) => handlerShowCopyMessage(e, item.emoji || '')}>
+                            <Card
+                                shadows="hover"
+                                className="gitmoji-container-gitmoji"
+                                style={{ backgroundColor: item.color }}
+                            >
+                                <div className="gitmoji-container-gitmoji-header">{item.emoji}</div>
 
-                                    <div className="gitmoji-container-gitmoji-code">
-                                        <Button
-                                            theme="borderless"
-                                            onClick={(e) =>
-                                                handlerShowCopyMessage(e, item.code || '')
-                                            }
-                                        >
-                                            {item.code}
-                                        </Button>
-                                    </div>
-                                    <div style={{ margin: 6, textAlign: 'center' }}>
-                                        <Text strong style={{ wordBreak: 'break-word' }}>
-                                            {item.description}
-                                        </Text>
-                                    </div>
-                                </Card>
-                            </div>
-                        </List.Item>
-                    )}
-                />
-            </div>
+                                <div className="gitmoji-container-gitmoji-code">
+                                    <Button
+                                        theme="borderless"
+                                        onClick={(e) => handlerShowCopyMessage(e, item.code || '')}
+                                    >
+                                        {item.code}
+                                    </Button>
+                                </div>
+                                <div style={{ margin: 6, textAlign: 'center' }}>
+                                    <Text strong style={{ wordBreak: 'break-word' }}>
+                                        {item.description}
+                                    </Text>
+                                </div>
+                            </Card>
+                        </div>
+                    </List.Item>
+                )}
+            />
         </Modal>
     );
 };

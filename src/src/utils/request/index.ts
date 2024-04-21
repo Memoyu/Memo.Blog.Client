@@ -1,4 +1,10 @@
+import axios from 'axios';
 import Request from './request';
+
+export const getByUrl = (url: string, params?: any) => {
+    let instance = axios.create({ withCredentials: false });
+    return instance.get(url, { params });
+};
 
 //#region 文章管理
 
@@ -29,7 +35,7 @@ export const articleCategoryList = (name?: string) => {
 //#region 开源项目
 
 export const openSourceProjectList = () => {
-    return Request.get<Array<OpenSourceProjectModel>>('open-source/list');
+    return Request.get<Array<OpenSourceProjectModel>>('opensource/list');
 };
 
 //#endregion

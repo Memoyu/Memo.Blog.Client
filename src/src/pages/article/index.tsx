@@ -1,5 +1,3 @@
-import { Typography } from '@douyinfe/semi-ui';
-
 import PageBanner from '@components/page-banner';
 
 import ArticleList from '../article/components/article-list';

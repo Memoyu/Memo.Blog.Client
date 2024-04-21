@@ -2,7 +2,7 @@ import React, { lazy, FC } from 'react';
 import { RouteObject } from 'react-router';
 import { AnimatePresence } from 'framer-motion';
 import { useRoutes } from 'react-router-dom';
-import { WrapperRouteComponent, WrapperRouteWithOutLayoutComponent } from './config';
+import { WrapperRouteComponent, WrapperRouteWithOutLayoutComponent, initTitleTick } from './config';
 import Layout from '@components/layout';
 import Empty from '@components/empty';
 
@@ -76,6 +76,7 @@ const routeList: RouteObject[] = [
 const RenderRouter: FC = () => {
     const element = useRoutes(routeList);
     if (element == null) return <></>;
+    initTitleTick();
     return (
         <AnimatePresence mode="wait">
             {React.cloneElement(element, { key: location.pathname })}

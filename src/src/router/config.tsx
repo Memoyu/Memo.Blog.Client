@@ -9,6 +9,8 @@ export interface WrapperRouteProps extends PathRouteProps {
     auth?: boolean;
 }
 
+let globalTitle = '';
+
 const PublicRoute = (props: PathRouteProps) => {
     return props.element;
 };
@@ -24,17 +26,29 @@ const PrivateRoute = (props: PathRouteProps) => {
 const WrapperRouteComponent: FC<WrapperRouteProps> = ({ titleId, auth, ...props }) => {
     const WitchRoute = auth ? PrivateRoute : PublicRoute;
     if (titleId) {
-        document.title = titleId;
+        document.title = buildDocumentTitle(titleId);
     }
     return <WitchRoute {...props} />;
 };
 
 const WrapperRouteWithOutLayoutComponent: FC<WrapperRouteProps> = ({ titleId, ...props }) => {
     if (titleId) {
-        document.title = titleId;
+        document.title = buildDocumentTitle(titleId);
     }
 
     return <Suspense>{props.element}</Suspense>;
 };
 
-export { WrapperRouteComponent, WrapperRouteWithOutLayoutComponent };
+const buildDocumentTitle = (titleId: string) => {
+    globalTitle = titleId == '首页' ? "memoyu's blog" : titleId + ' | memoyu的个人博客';
+    return globalTitle;
+};
+
+// 会变的 title
+const initTitleTick = () => {
+    document.addEventListener('visibilitychange', function () {
+        document.title = document.hidden ? '让我看看，怎么个事！' : globalTitle;
+    });
+};
+
+export { WrapperRouteComponent, WrapperRouteWithOutLayoutComponent, initTitleTick };

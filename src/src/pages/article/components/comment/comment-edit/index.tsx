@@ -3,7 +3,7 @@ import { Tooltip, Input, Space, Button, TextArea } from '@douyinfe/semi-ui';
 import './index.scss';
 
 const CommentEdit: React.FC = () => {
-    const [avatar, setAvatar] = useState(require('@/assets/images/avatar/default.png'));
+    const [avatar, setAvatar] = useState<string>(); //(require('@/assets/images/avatar/default.png'));
     const [avatarSelectVisible, setAvatarSelectVisible] = useState(false);
     const [qq, setQq] = useState('');
     const [github, setGithub] = useState('');

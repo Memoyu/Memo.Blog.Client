@@ -69,11 +69,15 @@ export interface OpenSourceProjectModel {
     projectId: string;
     title: string;
     description: string;
+    imageUrl: string;
+    readmeUrl: string;
+    htmlUrl: string;
     star: number;
     fork: number;
 }
 
 //#endregion
+
 export interface CommentBelongModel {
     belongId: string;
     title: string;
