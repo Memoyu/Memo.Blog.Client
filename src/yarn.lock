@@ -710,13 +710,6 @@
   resolved "https://registry.npmmirror.com/@types/lodash/-/lodash-4.17.0.tgz#d774355e41f372d5350a4d0714abb48194a489c3"
   integrity sha512-t7dhREVv6dbNj0q17X12j7yDG4bD/DHYX7o5/DbDxobP0HnGPgpRz2Ej77aL7TZT3DSw13fqUTj8J4mMnqa7WA==
 
-"@types/markdown-navbar@^1.4.4":
-  version "1.4.4"
-  resolved "https://registry.npmmirror.com/@types/markdown-navbar/-/markdown-navbar-1.4.4.tgz#25cdbeac35c43aa75cb5fa86968b5f07b5dfaca9"
-  integrity sha512-rfm4YndRUkS+TIdsF01HUvFIyQTO3cTHI8QFWwtJ+RPqITc5pNMoZXvmnyYryMS8VtI4AVXdkLAD3bjyRFMf5g==
-  dependencies:
-    "@types/react" "*"
-
 "@types/node@^20.12.7":
   version "20.12.7"
   resolved "https://registry.npmmirror.com/@types/node/-/node-20.12.7.tgz#04080362fa3dd6c5822061aa3124f5c152cff384"
@@ -1081,6 +1074,11 @@ copy-text-to-clipboard@^2.1.1:
   version "2.2.0"
   resolved "https://registry.npmmirror.com/copy-text-to-clipboard/-/copy-text-to-clipboard-2.2.0.tgz#329dd6daf8c42034c763ace567418401764579ae"
   integrity sha512-WRvoIdnTs1rgPMkgA2pUOa/M4Enh2uzCwdKsOMYNAJiz/4ZvEJgmbF4OmninPmlFdAWisfeh0tH+Cpf7ni3RqQ==
+
+core-js@3:
+  version "3.37.0"
+  resolved "https://registry.npmmirror.com/core-js/-/core-js-3.37.0.tgz#d8dde58e91d156b2547c19d8a4efd5c7f6c426bb"
+  integrity sha512-fu5vHevQ8ZG4og+LXug8ulUtVxjOcEYvifJr7L5Bfq9GOztVqsKd9/59hUk2ZSbCrS3BqUr3EpaYGIYzq7g3Ug==
 
 cross-spawn@^7.0.2:
   version "7.0.3"
@@ -1638,6 +1636,15 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+markdown-navbar@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.npmmirror.com/markdown-navbar/-/markdown-navbar-1.4.3.tgz#f92e7ec5cf58b994e90188794497a1b597621b7d"
+  integrity sha512-esZQ9fHbjnOq/YnmKRrHTRhIO5+UmU3g5BS2tly7RwWrWCjOWv0Nq2A8r1GF9IBZKvrwM/rzaMgjjsQlkbh0tA==
+  dependencies:
+    core-js "3"
+    prop-types "^15.7.2"
+    react "^16.12.0"
+
 marked-highlight@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmmirror.com/marked-highlight/-/marked-highlight-2.1.1.tgz#144120e32363f042b420276a9c7b8dab748f630f"
@@ -1806,7 +1813,7 @@ prelude-ls@^1.2.1:
   resolved "https://registry.npmmirror.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prop-types@15.x, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@15.x, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmmirror.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -1904,6 +1911,15 @@ react-window@^1.8.2:
   dependencies:
     "@babel/runtime" "^7.0.0"
     memoize-one ">=3.1.1 <6"
+
+react@^16.12.0:
+  version "16.14.0"
+  resolved "https://registry.npmmirror.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
 
 react@^18.2.0:
   version "18.2.0"

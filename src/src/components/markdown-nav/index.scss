@@ -2,7 +2,7 @@
 
 $title-level-margin: 18px;
 
-.article-detail-navbar {
+.markdown-nav {
     z-index: 99;
     position: fixed;
     right: 8px;
@@ -14,11 +14,11 @@ $title-level-margin: 18px;
     transform: translate(0, 0);
     transition: transform 500ms ease;
 }
-.article-detail-navbar-hide {
+.markdown-nav-hide {
     transform: translate(calc(20px + 100%), 0);
 }
 
-.article-detail-navbar-toggle-btn {
+.markdown-nav-toggle-btn {
     position: absolute;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.6);
@@ -32,7 +32,7 @@ $title-level-margin: 18px;
     transition: color 300ms ease, background-color 300ms ease;
 }
 
-.article-detail-navbar-toggle-btn:active {
+.markdown-nav-toggle-btn:active {
     background-color: $secondaryColor;
     color: #fff;
 }

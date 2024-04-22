@@ -32,7 +32,15 @@ const Index = () => {
                     <div className="blog-home-content-bottom">
                         <div>
                             <Summary />
-                            <CallMe />
+                            <div
+                                style={{
+                                    margin: '10px 20px',
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                }}
+                            >
+                                <CallMe />
+                            </div>
                         </div>
                     </div>
                 </div>

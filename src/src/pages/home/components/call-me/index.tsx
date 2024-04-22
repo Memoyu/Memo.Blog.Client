@@ -18,17 +18,15 @@ const Index: FC<ComProps> = ({}) => {
         { to: '文章', title: 'Github', icon: <IconGithubLogo /> },
     ];
     return (
-        <div style={{ margin: '10px 20px', display: 'flex', justifyContent: 'flex-end' }}>
-            <Space>
-                {summaries.map((s) => {
-                    return (
-                        <Tooltip key={s.title} content={s.title}>
-                            <Button icon={s.icon} aria-label={s.title} />
-                        </Tooltip>
-                    );
-                })}
-            </Space>
-        </div>
+        <Space wrap>
+            {summaries.map((s) => {
+                return (
+                    <Tooltip key={s.title} content={s.title}>
+                        <Button icon={s.icon} aria-label={s.title} />
+                    </Tooltip>
+                );
+            })}
+        </Space>
     );
 };
 

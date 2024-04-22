@@ -210,7 +210,7 @@ const Index: FC<ComProps> = ({}) => {
                                                 alignItems: 'center',
                                             }}
                                         >
-                                            <Title heading={6}>{item.title}</Title>
+                                            <Text strong>{item.title}</Text>
                                         </div>
                                         <div>
                                             <Text

@@ -38,6 +38,32 @@ export interface ArticlePageModel {
     createTime: Date;
 }
 
+export interface ArticleModel {
+    articleId: string; // 文章Id
+    category: CategoryModel; // 分类
+    title: string;
+    description: string;
+    tags: Array<TagModel>;
+    content: string;
+    banner: string;
+    status: ArticleStatus;
+    wordNumber: number;
+    readingTime: number;
+    views: number;
+    likes: number;
+    isTop: boolean;
+    commentable: boolean;
+    publicable: boolean;
+    author: ArticleAuthorModel;
+    createTime: Date;
+}
+
+export interface ArticleAuthorModel {
+    userId: string;
+    nickname: string;
+    avatar: string;
+}
+
 //#endregion
 
 //#region 分类

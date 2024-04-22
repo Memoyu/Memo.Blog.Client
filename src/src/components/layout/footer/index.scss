@@ -1,32 +1,24 @@
 @import '@styles/base.scss';
 
-.blog-footer {
-    color: rgba(11, 15, 33, 0.65);
-    font-size: 14px;
-    font-weight: 500;
-    height: $footerHeight;
-    padding: 0px;
-
+.blog-footer-wrap {
+    margin-top: 20px;
     &-box {
-        margin: auto;
-        max-width: $centerWidth;
-        &-author {
-            &-logo {
-                width: 150px;
-            }
-            &-github {
-                a {
-                    text-decoration: none;
-                }
+        font-size: 14px;
+        padding: 15px 0;
+        background: #1c1f23;
+        text-align: center;
+        color: var(--semi-color-white);
+        .beian {
+            margin-top: 10px;
+            font-size: 12px;
+            img {
+                width: 18px;
+                vertical-align: text-bottom;
+                margin-right: 0.3em;
             }
         }
-        &-link {
-            &-text {
-                margin-bottom: 10px;
-                a {
-                    text-decoration: none;
-                }
-            }
+        span {
+            color: var(--semi-color-white);
         }
     }
 }

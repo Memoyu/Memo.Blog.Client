@@ -1,5 +1,6 @@
 import PageBanner from '@components/page-banner';
 import ArticleList from '../article/components/article-list';
+import Footer from '@components/layout/footer';
 
 import './index.scss';
 
@@ -10,6 +11,7 @@ const Index = () => {
 
             {/* 文章列表，带文章分类头部 */}
             <ArticleList />
+            <Footer />
         </div>
     );
 };

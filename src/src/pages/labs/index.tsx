@@ -7,6 +7,7 @@ import Container from '@components/layout/container';
 import PageBanner from '@components/page-banner';
 import Tools from './components/tools';
 import OpenSources from './components/open-source';
+import Footer from '@components/layout/footer';
 
 import './index.scss';
 
@@ -40,22 +41,9 @@ const Index = () => {
                 <div className="blog-labs-open-source">
                     <OpenSources />
                 </div>
-                <div className="blog-labs-open-source">
-                    <OpenSources />
-                </div>
-                <div className="blog-labs-open-source">
-                    <OpenSources />
-                </div>
-                <div className="blog-labs-open-source">
-                    <OpenSources />
-                </div>
-                <div className="blog-labs-open-source">
-                    <OpenSources />
-                </div>
-                <div className="blog-labs-open-source">
-                    <OpenSources />
-                </div>
             </Container>
+
+            <Footer />
         </div>
     );
 };

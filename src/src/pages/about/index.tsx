@@ -1,4 +1,6 @@
 import PageBanner from '@src/components/page-banner';
+import Footer from '@components/layout/footer';
+
 import './index.scss';
 
 const Index = () => {

@@ -6,18 +6,18 @@ import { WrapperRouteComponent, WrapperRouteWithOutLayoutComponent, initTitleTic
 import Layout from '@components/layout';
 import Empty from '@components/empty';
 
-const Home = lazy(() => import('@src/pages/home'));
-const Article = lazy(() => import('@src/pages/article'));
-const ArticleDetail = lazy(() => import('@src/pages/article/detail'));
+const Home = lazy(() => import('@pages/home'));
+const Article = lazy(() => import('@pages/article'));
+const ArticleDetail = lazy(() => import('@pages/article/detail'));
 
-const Moment = lazy(() => import('@src/pages/moment'));
+const Moment = lazy(() => import('@pages/moment'));
 
-const Friend = lazy(() => import('@src/pages/friend'));
+const Friend = lazy(() => import('@pages/friend'));
 
-const Labs = lazy(() => import('@src/pages/labs'));
-const LabsGitMoji = lazy(() => import('@src/pages/labs/components/git-moji'));
+const Labs = lazy(() => import('@pages/labs'));
+const LabsGitMoji = lazy(() => import('@pages/labs/components/git-moji'));
 
-const About = lazy(() => import('@src/pages/about'));
+const About = lazy(() => import('@pages/about'));
 
 const routeList: RouteObject[] = [
     {

@@ -13,9 +13,9 @@ const Navigation: React.FC<Props> = ({ content, setNavShow }) => {
     const [navVisible, setNavVisible] = useState(true);
 
     return (
-        <div className={navVisible ? 'article-detail-navbar' : 'article-detail-navbar-hide'}>
+        <div className={navVisible ? 'markdown-nav' : 'markdown-nav markdown-nav-hide'}>
             <div
-                className="article-detail-navbar-toggle-btn"
+                className="markdown-nav-toggle-btn"
                 onClick={() => {
                     setNavVisible(!navVisible);
                 }}
@@ -27,7 +27,7 @@ const Navigation: React.FC<Props> = ({ content, setNavShow }) => {
                 // headingTopOffset={15}
                 // ordered={false}
                 // updateHashAuto={false}
-                //onNavItemClick={() => setNavShow?.(false)}
+                // onNavItemClick={() => setNavShow?.(false)}
             />
         </div>
     );

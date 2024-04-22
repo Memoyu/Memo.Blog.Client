@@ -1,25 +1,25 @@
 import { FC, useState, useRef, CSSProperties, useEffect } from 'react';
 import { Masonry } from 'react-plock';
-import { throttle } from 'lodash';
 import { Card, Badge, TagGroup, Toast, Typography } from '@douyinfe/semi-ui';
 import { IconActivity, IconVerify } from '@douyinfe/semi-icons';
-import { useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import StickyBox from 'react-sticky-box';
+import { useIsPresent } from 'framer-motion';
 
 import Container from '@components/layout/container';
 import CategoryList from '../category-list';
 
-import { useOnMountUnsafe } from '@src/hooks/useOnMountUnsafe';
+import { dateDiff } from '@utils/date';
+import { articlePage } from '@utils/request';
 
-import { dateDiff } from '@src/utils/date';
+import { useSearchParams } from 'react-router-dom';
+import { IScrollProps, useContentScroll } from '@src/hooks/useContentScroll';
 
 import { ArticlePageModel, ArticlePageRequest } from '@src/common/model';
 import { TagProps } from '@douyinfe/semi-ui/lib/es/tag';
 
-import { articlePage } from '@src/utils/request';
-
 import './index.scss';
-import { Link } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
@@ -27,6 +27,7 @@ interface ComProps {}
 
 const Index: FC<ComProps> = ({}) => {
     const [params] = useSearchParams();
+    const isPresent = useIsPresent();
 
     const articlesRef = useRef<Array<ArticlePageModel>>([]);
     const lastTriggerScrollTimeRef = useRef<number>(0);
@@ -81,25 +82,20 @@ const Index: FC<ComProps> = ({}) => {
         categoryIdRef.current = categoryId;
 
         getArticlePage();
-        window.addEventListener('scroll', throttledScrollHandler);
+
         return () => {
             currentPageRef.current = 1;
-            window.removeEventListener('scroll', throttledScrollHandler);
         };
     }, [params]);
 
-    let getScrollTop = () => {
-        return Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-    };
+    useContentScroll((props: IScrollProps) => {
+        // console.log('触发滚动', props);
 
-    let handleScroll = () => {
         var now = new Date().getTime();
         if (
             now - lastTriggerScrollTimeRef.current > 500 &&
-            getScrollTop() + window.innerHeight + 1000 >= document.body.scrollHeight
+            props.scrollTop + window.innerHeight + 1000 >= document.body.scrollHeight
         ) {
-            // console.log('触发滚动');
-
             // 判断是否仍然继续加载文章
             if (
                 currentPageRef.current != 1 &&
@@ -112,7 +108,7 @@ const Index: FC<ComProps> = ({}) => {
 
             lastTriggerScrollTimeRef.current = now;
         }
-    };
+    });
 
     // 触发分类选中
     let handleCategoryChange = (categoryId: string) => {
@@ -121,9 +117,6 @@ const Index: FC<ComProps> = ({}) => {
         // categoryIdRef.current = categoryId;
         // getArticlePage();
     };
-
-    // 使用节流
-    let throttledScrollHandler = throttle(handleScroll, 200);
 
     // 获取文章角标
     let getArticleBadge = (item: ArticlePageModel) => {
@@ -140,9 +133,11 @@ const Index: FC<ComProps> = ({}) => {
 
     return (
         <div className="article-list-container">
-            <StickyBox offsetTop={58} className="article-list-container-category-sticky">
-                <CategoryList onChange={(id) => handleCategoryChange(id)} />
-            </StickyBox>
+            {isPresent && (
+                <StickyBox offsetTop={58} className="article-list-container-category-sticky">
+                    <CategoryList onChange={(id) => handleCategoryChange(id)} />
+                </StickyBox>
+            )}
             <Container>
                 <div style={{ marginTop: 20 }}>
                     <Masonry

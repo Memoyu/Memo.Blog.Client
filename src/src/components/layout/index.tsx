@@ -2,10 +2,10 @@ import React, { Suspense, useEffect } from 'react';
 import { motion, useIsPresent } from 'framer-motion';
 import { Outlet } from 'react-router-dom';
 import Header from './header';
-import Footer from './footer';
 
 import './index.scss';
 import { Layout } from '@douyinfe/semi-ui';
+import { BLOG_LAYOUT_CONTENT_ID } from '@src/common/constant';
 
 const { Content } = Layout;
 
@@ -13,7 +13,7 @@ const Index: React.FC = () => {
     const isPresent = useIsPresent();
 
     const contentProps = {
-        id: 'blog-layout-content',
+        id: BLOG_LAYOUT_CONTENT_ID,
     };
     const contentMotionProps = {
         id: 'blog-layout-content-motion',

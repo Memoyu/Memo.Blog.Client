@@ -4,7 +4,7 @@ import { Image } from '@douyinfe/semi-ui';
 import './index.scss';
 
 interface ComProps {
-    image: string;
+    image?: string;
     height?: number | string;
     children?: ReactNode;
 }

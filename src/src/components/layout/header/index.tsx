@@ -1,10 +1,11 @@
 import { FC, useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { throttle } from 'lodash';
 
 import Logo from '@components/logo';
 import Container from '@components/layout/container';
+
+import { IScrollProps, useContentScroll } from '@src/hooks/useContentScroll';
 
 import './index.scss';
 
@@ -30,35 +31,13 @@ const Index: FC<ComProps> = () => {
     let pathname = location.pathname || '/';
     if (pathname === '/404' || pathname === '/_not-found') pathname = '/';
 
-    const handleScroll = () => {
-        ajustNavigation();
-    };
+    useEffect(() => {}, []);
 
-    // 使用节流
-    const throttledScrollHandler = throttle(handleScroll, 200);
-
-    const ajustNavigation = () => {
-        let scrollTop =
-            getContentEle()?.scrollTop ||
-            document.documentElement.scrollTop ||
-            document.body.scrollTop ||
-            0;
-
-        let isScroll = scrollTop > 50;
-        // console.log('滚动事件触发', scrollTop, isScroll);
+    useContentScroll((props: IScrollProps) => {
+        // console.log('滚动事件触发', props);
+        let isScroll = props.scrollTop > 50;
         setIsScrolling(isScroll);
-    };
-
-    const getContentEle = () => document.getElementById('blog-layout-content');
-
-    useEffect(() => {
-        let contentEle = getContentEle();
-        contentEle?.addEventListener('scroll', throttledScrollHandler);
-
-        return () => {
-            contentEle?.removeEventListener('scroll', throttledScrollHandler);
-        };
-    }, []);
+    });
 
     return (
         <div className={`header-navigation ${isScrolling ? 'stick' : ''}`}>
