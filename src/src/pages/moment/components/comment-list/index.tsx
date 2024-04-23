@@ -3,6 +3,7 @@ import { Toast } from '@douyinfe/semi-ui';
 
 import { useData } from '@src/hooks/useData';
 
+import CommentEdit from './comment-edit';
 import CommentItem from './comment-item';
 
 import { commentPage } from '@utils/request';
@@ -63,14 +64,19 @@ const Index: FC<ComProps> = ({}) => {
     }, []);
 
     return (
-        <div className="moment-comment-list">
-            {comments?.map((comment: CommentModel) => {
-                return (
-                    <div key={comment.commentId} style={{ margin: '15px 0' }}>
-                        <CommentItem comment={comment} />
-                    </div>
-                );
-            })}
+        <div className="moment-comment-list-wrap">
+            <div className="moment-comment-edit">
+                <CommentEdit />
+            </div>
+            <div className="moment-comment-list">
+                {comments?.map((comment: CommentModel) => {
+                    return (
+                        <div key={comment.commentId} style={{ margin: '15px 0' }}>
+                            <CommentItem comment={comment} />
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };

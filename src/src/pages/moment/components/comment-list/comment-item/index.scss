@@ -9,7 +9,7 @@
             .semi-space {
                 align-items: baseline;
                 .name {
-                    font-size: 17px;
+                    font-size: 14px;
                     font-weight: 600;
                 }
             }
@@ -24,11 +24,10 @@
         }
 
         &-childs {
-            margin-top: 10px;
             padding: 10px 5px;
-            background-color: antiquewhite;
+            // background-color: rgba(var(--semi-grey-0), 0.5);
             &-box {
-                // margin: 15px;
+                margin-top: 15px;
             }
         }
     }

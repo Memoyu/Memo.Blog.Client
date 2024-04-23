@@ -47,7 +47,7 @@ const CommentItem: React.FC<Props> = ({ comment }) => {
                 {ct.childs && ct.childs.length > 0 && (
                     <div className="moment-comment-item-box-childs">
                         {ct.childs.map((c) => (
-                            <div className="moment-comment-item-box-childs-box">
+                            <div key={c.commentId} className="moment-comment-item-box-childs-box">
                                 {getCommentTemplateRender(c, false)}
                             </div>
                         ))}

@@ -1,0 +1,14 @@
+.moment-comment-edit-wrap {
+    display: flex;
+    width: 100%;
+    color: var(--semi-color-text-0);
+    &-user {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    &-box {
+        width: 100%;
+    }
+}
