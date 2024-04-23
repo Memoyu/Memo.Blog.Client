@@ -1,11 +1,13 @@
 import React, { Suspense, useEffect } from 'react';
 import { motion, useIsPresent } from 'framer-motion';
 import { Outlet } from 'react-router-dom';
+import { Layout } from '@douyinfe/semi-ui';
+
 import Header from './header';
 
-import './index.scss';
-import { Layout } from '@douyinfe/semi-ui';
 import { BLOG_LAYOUT_CONTENT_ID } from '@src/common/constant';
+
+import './index.scss';
 
 const { Content } = Layout;
 

@@ -1,0 +1,22 @@
+.moment-list {
+    &-item {
+        margin: 10px;
+        .semi-space {
+            align-items: baseline;
+
+            .name {
+                font-size: 17px;
+                font-weight: 600;
+            }
+        }
+
+        &-content {
+            position: relative;
+            margin: 10px 0;
+            padding: 15px 25px;
+            background-color: rgb(var(--semi-grey-0));
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgb(var(--semi-grey-1));
+        }
+    }
+}

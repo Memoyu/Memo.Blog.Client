@@ -1,0 +1,35 @@
+@import '@styles/base.scss';
+
+.moment-comment-item {
+    display: flex;
+    color: var(--semi-color-text-0);
+    &-box {
+        width: 100%;
+        &-info {
+            .semi-space {
+                align-items: baseline;
+                .name {
+                    font-size: 17px;
+                    font-weight: 600;
+                }
+            }
+        }
+        &-content {
+            position: relative;
+            margin-top: 5px;
+            padding: 5px 10px;
+            background-color: rgb(var(--semi-grey-0));
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgb(var(--semi-grey-1));
+        }
+
+        &-childs {
+            margin-top: 10px;
+            padding: 10px 5px;
+            background-color: antiquewhite;
+            &-box {
+                // margin: 15px;
+            }
+        }
+    }
+}

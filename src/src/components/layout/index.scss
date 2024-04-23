@@ -1,12 +1,13 @@
 .blog-layout {
     position: relative;
-    // background-color: antiquewhite;
 
     &-content {
         background-color: var(--semi-color-bg-0);
+        // background-color: antiquewhite;
         // position: relative;
         > :last-child {
-            height: 100%;
+            // background-color: var(--semi-color-bg-0);
+            height: auto;
         }
     }
 }

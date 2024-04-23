@@ -2,7 +2,7 @@ import { Typography } from '@douyinfe/semi-ui';
 
 import PageBanner from '@components/page-banner';
 import Summary from './components/summary';
-import CallMe from './components/call-me';
+import CallMe from '../../components/call-me';
 
 import './index.scss';
 

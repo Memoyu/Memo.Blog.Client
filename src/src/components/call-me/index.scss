@@ -1,0 +1,9 @@
+.call-me-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    .nav-link-icon {
+        color: var(--semi-color-primary);
+        margin: 0 5px;
+    }
+}

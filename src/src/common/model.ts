@@ -104,24 +104,64 @@ export interface OpenSourceProjectModel {
 
 //#endregion
 
-export interface CommentBelongModel {
-    belongId: string;
+//#region 动态
+
+export interface MomentPageRequest extends PaginationRequest {}
+
+export interface MomentAnnouncerModel {
+    userId: string;
+    nickname: string;
+    avatar: string;
+}
+
+export interface MomentModel {
+    momentId: string;
+    tags: Array<string>;
+    content: string;
+    likes: number;
+    showable: boolean;
+    commentable: boolean;
+    createTime: Date;
+    announcer: MomentAnnouncerModel;
+}
+
+//#endregion
+
+//#region 关于我
+
+export interface AboutModel {
     title: string;
-    link: string;
+    banner: string;
+    tags: Array<string>;
+    content: string;
+    commentable: boolean;
+}
+
+//#endregion
+
+//#region 评论
+
+export enum CommentType {
+    Article = 0,
+    Moment = 1,
+    About = 2,
+}
+
+export interface CommentPageRequest extends PaginationRequest {
+    commentType: CommentType;
+    belongId?: string;
 }
 
 export interface CommentModel {
     commentId: string;
-    belong: CommentBelongModel;
-    commentType: number;
     nickname: string;
     email: string;
     content: string;
     avatar: string;
-    avatarOriginType: number;
-    avatarOrigin: string;
-    ip: string;
     region: string;
-    showable: boolean;
     createTime: Date;
+    layer: number;
+    childs?: Array<CommentModel>;
 }
+
+//#endregion

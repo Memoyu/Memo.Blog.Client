@@ -6,9 +6,10 @@ import MarkDown from '@components/markdown';
 import MarkdownNav from '@components/markdown-nav';
 import { Tag, Space, Toast, Typography } from '@douyinfe/semi-ui';
 
+import Container from '@components/layout/container';
+import Comment from '@components/comment';
 import LabelList from './components/label-list';
 import PageBanner from '@components/page-banner';
-import Comment from '@components/comment';
 
 import { useParams } from 'react-router-dom';
 import { useData } from '@src/hooks/useData';
@@ -19,7 +20,6 @@ import { articleGet } from '@src/utils/request';
 
 import './index.scss';
 import { dateDiff } from '@src/utils/date';
-import Container from '@src/components/layout/container';
 
 const { Title, Text } = Typography;
 

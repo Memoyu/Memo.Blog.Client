@@ -8,6 +8,11 @@ import {
     CategoryWithArticleCountModel,
     OpenSourceProjectModel,
     PaginationResult,
+    AboutModel,
+    MomentPageRequest,
+    MomentModel,
+    CommentModel,
+    CommentPageRequest,
 } from '@common/model';
 
 export const getByUrl = (url: string, params?: any) => {
@@ -41,6 +46,30 @@ export const articleCategoryList = (name?: string) => {
 
 export const openSourceProjectList = () => {
     return Request.get<Array<OpenSourceProjectModel>>('opensource/list');
+};
+
+//#endregion
+
+//#region 动态
+
+export const momentPage = (request: MomentPageRequest) => {
+    return Request.get<PaginationResult<MomentModel>>('moment/page', { params: request });
+};
+
+//#endregion
+
+//#region 关于
+
+export const aboutGet = () => {
+    return Request.get<AboutModel>('about/get');
+};
+
+//#endregion
+
+//#region 评论
+
+export const commentPage = (request: CommentPageRequest) => {
+    return Request.get<PaginationResult<CommentModel>>('comment/page', { params: request });
 };
 
 //#endregion

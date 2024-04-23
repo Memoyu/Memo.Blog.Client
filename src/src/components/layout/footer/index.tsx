@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Layout, Typography } from '@douyinfe/semi-ui';
-import CallMe from '@pages/home/components/call-me';
+import CallMe from '@components/call-me';
 
 import './index.scss';
 
