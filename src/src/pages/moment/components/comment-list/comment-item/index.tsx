@@ -12,11 +12,13 @@ import { CommentModel } from '@src/common/model';
 
 type Props = {
     comment: CommentModel;
+    onReply?: (c: CommentModel) => void;
+    onQuote?: (c: CommentModel) => void;
 };
 
 const { Text } = Typography;
 
-const CommentItem: React.FC<Props> = ({ comment }) => {
+const CommentItem: React.FC<Props> = ({ comment, onReply, onQuote }) => {
     const getCommentTemplateRender = (ct: CommentModel, isTop: boolean = true) => (
         <div className="moment-comment-item">
             {/* flexShrink: 0 解决flex下头像变形问题 */}
@@ -34,10 +36,16 @@ const CommentItem: React.FC<Props> = ({ comment }) => {
                         </Space>
 
                         <Tooltip content="回复">
-                            <IconComment style={{ marginLeft: 20 }} />
+                            <IconComment
+                                style={{ marginLeft: 20 }}
+                                onClick={() => onReply && onReply(ct)}
+                            />
                         </Tooltip>
                         <Tooltip content="引用">
-                            <IconPaperclip style={{ marginLeft: 10 }} />
+                            <IconPaperclip
+                                style={{ marginLeft: 10 }}
+                                onClick={() => onQuote && onQuote(ct)}
+                            />
                         </Tooltip>
                     </div>
                 </div>

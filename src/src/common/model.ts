@@ -141,10 +141,28 @@ export interface AboutModel {
 
 //#region 评论
 
+export enum AvatarOriginType {
+    Unknown = 0,
+    Qq = 1,
+    Github = 2,
+    Upload = 3,
+}
+
 export enum CommentType {
     Article = 0,
     Moment = 1,
     About = 2,
+}
+
+export interface CommentEditRequest {
+    nickname: string;
+    content: string;
+    commentType: CommentType;
+    belongId: number;
+    email?: string;
+    avatar?: string;
+    avatarOriginType?: AvatarOriginType;
+    avatarOrigin?: string;
 }
 
 export interface CommentPageRequest extends PaginationRequest {

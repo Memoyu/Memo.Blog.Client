@@ -1,7 +1,7 @@
 import hljs from 'highlight.js';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 //import './hljs.custom.scss';
 import 'highlight.js/styles/atom-one-dark.css';
@@ -10,9 +10,10 @@ import './index.scss';
 interface Props {
     content?: string;
     className?: string;
+    style?: CSSProperties;
 }
 
-const MarkDown: React.FC<Props> = ({ content, className }) => {
+const MarkDown: React.FC<Props> = ({ content, className, style }) => {
     hljs.configure({
         classPrefix: 'hljs-',
         languages: ['C#', 'JSON', 'CSS', 'HTML', 'JavaScript', 'TypeScript', 'Markdown'],
@@ -34,6 +35,7 @@ const MarkDown: React.FC<Props> = ({ content, className }) => {
 
     return (
         <div
+            style={style}
             className={`marked ${className}`}
             dangerouslySetInnerHTML={{
                 __html: marked.parse(content || ''),

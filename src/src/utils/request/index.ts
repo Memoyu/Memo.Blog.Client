@@ -13,6 +13,7 @@ import {
     MomentModel,
     CommentModel,
     CommentPageRequest,
+    CommentEditRequest,
 } from '@common/model';
 
 export const getByUrl = (url: string, params?: any) => {
@@ -67,6 +68,10 @@ export const aboutGet = () => {
 //#endregion
 
 //#region 评论
+
+export const commentCreate = (comment: CommentEditRequest) => {
+    return Request.post<string>('comment/create', comment);
+};
 
 export const commentPage = (request: CommentPageRequest) => {
     return Request.get<PaginationResult<CommentModel>>('comment/page', { params: request });
