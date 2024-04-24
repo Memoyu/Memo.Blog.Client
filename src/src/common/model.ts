@@ -155,6 +155,8 @@ export enum CommentType {
 }
 
 export interface CommentEditRequest {
+    parentId?: string;
+    replyId?: string;
     nickname: string;
     content: string;
     commentType: CommentType;
@@ -171,6 +173,7 @@ export interface CommentPageRequest extends PaginationRequest {
 }
 
 export interface CommentModel {
+    parentId?: string;
     commentId: string;
     nickname: string;
     email: string;
@@ -178,8 +181,10 @@ export interface CommentModel {
     avatar: string;
     region: string;
     createTime: Date;
-    layer: number;
+    floor: number;
+    floorString: string;
     childs?: Array<CommentModel>;
+    reply?: CommentModel;
 }
 
 //#endregion

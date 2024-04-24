@@ -1,9 +1,8 @@
-import { FC, useEffect, useState, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { Toast } from '@douyinfe/semi-ui';
 
 import { useData } from '@src/hooks/useData';
 
-import CommentEdit from './comment-edit';
 import CommentItem from './comment-item';
 
 import { commentPage } from '@utils/request';
@@ -20,9 +19,6 @@ const Index: FC<ComProps> = ({}) => {
         useData<Array<CommentModel>>();
     const commentPageRef = useRef<number>(1);
     const commentTotalRef = useRef<number>(Infinity);
-
-    const [reply, setReply] = useState<CommentModel>();
-    const [quote, setQuote] = useState<CommentModel>();
 
     // 获取文章
     let getMomentCommentPage = () => {
@@ -66,35 +62,25 @@ const Index: FC<ComProps> = ({}) => {
         getMomentCommentPage();
     }, []);
 
-    const handleCommentReply = (comment: CommentModel) => {
-        setReply(comment);
-    };
-    const handleCommentQuote = (comment: CommentModel) => {
-        setQuote(comment);
-    };
-
     return (
         <div className="moment-comment-list-wrap">
-            <div className="moment-comment-edit">
-                <CommentEdit
-                    onCreateSuccess={() => getMomentCommentPage()}
-                    reply={reply}
-                    quote={quote}
-                />
-            </div>
-            <div className="moment-comment-list">
-                {comments?.map((comment: CommentModel) => {
-                    return (
-                        <div key={comment.commentId} style={{ margin: '15px 0' }}>
-                            <CommentItem
-                                comment={comment}
-                                onReply={handleCommentReply}
-                                onQuote={handleCommentQuote}
-                            />
-                        </div>
-                    );
-                })}
-            </div>
+            {comments?.map((comment: CommentModel) => {
+                return (
+                    <div style={{ margin: '15px 0' }}>
+                        <CommentItem
+                            key={comment.commentId}
+                            comment={comment}
+                            childrens={
+                                comment.childs &&
+                                comment.childs.length > 0 &&
+                                comment.childs?.map((cc) => (
+                                    <CommentItem key={cc.commentId} comment={cc} />
+                                ))
+                            }
+                        />
+                    </div>
+                );
+            })}
         </div>
     );
 };

@@ -58,14 +58,15 @@
 
     blockquote {
         border-radius: 2px;
-        padding: 5px 0 5px 15px !important;
-        margin: 20px 0 !important;
+        // padding: 5px 0 5px 10px !important;
+        margin: 5px 0 !important;
         border-left: 3px solid #3e9fcb;
     }
 
     blockquote p {
         font-style: italic;
         font-weight: 300;
+        padding: 5px 0 5px 10px !important;
         //color: #587b8b;
     }
 

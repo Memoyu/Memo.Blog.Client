@@ -14,20 +14,23 @@
                 }
             }
         }
+        &-reply {
+        }
+
         &-content {
             position: relative;
             margin-top: 5px;
             padding: 5px 10px;
-            background-color: rgb(var(--semi-grey-0));
-            border-radius: 4px;
-            box-shadow: 0 4px 8px rgb(var(--semi-grey-1));
         }
 
         &-childs {
             padding: 10px 5px;
-            // background-color: rgba(var(--semi-grey-0), 0.5);
+            background-color: rgb(var(--semi-grey-0));
             &-box {
-                margin-top: 15px;
+                //margin-top: 15px;
+                // background-color: rgb(var(--semi-grey-0));
+                // border: 1px solid;
+                // border-bottom: none;
             }
         }
     }

@@ -11,23 +11,30 @@ import {
     Typography,
     Popconfirm,
     Toast,
-    Banner,
 } from '@douyinfe/semi-ui';
 import MarkDown from '@components/markdown';
 
 import './index.scss';
-import { commentCreate } from '@src/utils/request';
-import { CommentModel, CommentType } from '@src/common/model';
+import { AvatarOriginType, CommentModel } from '@src/common/model';
+
+export interface CommentInputInfo {
+    nickname: string;
+    email?: string;
+    avatar?: string;
+    avatarOriginType: AvatarOriginType;
+    avatarOrigin?: string;
+    content: string;
+}
 
 interface ComProps {
-    reply?: CommentModel;
     quote?: CommentModel;
-    onCreateSuccess?: () => void;
+    rows?: number;
+    onSubmit?: (edit: CommentInputInfo) => void;
 }
 
 const { Text } = Typography;
 
-const Index: FC<ComProps> = ({ reply, quote, onCreateSuccess }) => {
+const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
     const [userInputVisible, setUserInputVisible] = useState<boolean>(false);
     const [avatar, setAvatar] = useState<string>();
     const avatarOriginTypeRef = useRef<number>(1);
@@ -36,9 +43,6 @@ const Index: FC<ComProps> = ({ reply, quote, onCreateSuccess }) => {
     const [email, setEmail] = useState<string>();
 
     const [content, setContent] = useState<string>();
-
-    const [relaReply, setRelaReply] = useState<CommentModel>();
-    const [relaQuote, setRelaQuote] = useState<CommentModel>();
 
     const getQqAvatar = (val?: string) => {
         const regQq = /[1-9][0-9]{4,11}/;
@@ -50,11 +54,25 @@ const Index: FC<ComProps> = ({ reply, quote, onCreateSuccess }) => {
         return 'git';
     };
 
+    const buildQuoteContent = () => {
+        // console.log('quote 触发');
+        if (quote) {
+            // 换行替换程引用符号
+            let quoteContent = quote.content.replace(new RegExp('\n', 'g'), '\n > ');
+            quoteContent = quoteContent + '\n\n' + content ?? '';
+            quoteContent = '> ' + quoteContent;
+            setContent(quoteContent);
+            console.log('quote', quoteContent);
+        }
+    };
+
     useEffect(() => {
-        console.log(reply);
-        setRelaReply(reply);
-        setRelaQuote(quote);
-    }, [reply, quote]);
+        buildQuoteContent();
+
+        return () => {
+            setContent('');
+        };
+    }, [quote]);
 
     // 头像来源输入变更
     const handleAvatarOriginChange = (val: string) => {
@@ -69,8 +87,6 @@ const Index: FC<ComProps> = ({ reply, quote, onCreateSuccess }) => {
                 avatar = getGithubAvatar(val);
                 break;
         }
-        // console.log(avatarOriginTypeRef.current);
-        // console.log(avatar);
 
         setAvatar(avatar);
     };
@@ -88,22 +104,15 @@ const Index: FC<ComProps> = ({ reply, quote, onCreateSuccess }) => {
             return;
         }
 
-        commentCreate({
-            nickname,
-            content,
-            commentType: CommentType.Moment,
-            belongId: 0,
-            email,
-            avatar,
-            avatarOrigin,
-            avatarOriginType: avatarOriginTypeRef.current,
-        }).then((res) => {
-            if (!res.isSuccess) {
-                Toast.error(res.message);
-                return;
-            }
-            onCreateSuccess && onCreateSuccess();
-        });
+        onSubmit &&
+            onSubmit({
+                nickname,
+                email,
+                avatar,
+                avatarOriginType: avatarOriginTypeRef.current,
+                avatarOrigin,
+                content,
+            });
     };
 
     const handleUserInputCancel = () => {
@@ -113,6 +122,7 @@ const Index: FC<ComProps> = ({ reply, quote, onCreateSuccess }) => {
         setNickname('');
         setEmail('');
     };
+
     return (
         <div className="moment-comment-edit-wrap">
             {/* flexShrink: 0 解决flex下头像变形问题 */}
@@ -161,7 +171,7 @@ const Index: FC<ComProps> = ({ reply, quote, onCreateSuccess }) => {
                         }
                     >
                         <Avatar
-                            style={{ margin: '0 20px', flexShrink: 0 }}
+                            style={{ margin: '0 15px', flexShrink: 0 }}
                             size="small"
                             src={avatar}
                             onClick={() => setUserInputVisible(true)}
@@ -174,6 +184,7 @@ const Index: FC<ComProps> = ({ reply, quote, onCreateSuccess }) => {
                 <div className="moment-comment-edit-box-content">
                     <Tabs
                         type="button"
+                        contentStyle={{ padding: '5px 0 0 0' }}
                         tabBarExtraContent={
                             <Button onClick={() => handleAddCommentClick()}> 发布</Button>
                         }
@@ -182,15 +193,16 @@ const Index: FC<ComProps> = ({ reply, quote, onCreateSuccess }) => {
                             <TextArea
                                 value={content}
                                 onChange={setContent}
-                                maxLength={1000}
+                                rows={rows}
+                                maxLength={5000}
                                 placeholder="支持markdown格式哟！"
-                                style={{ resize: 'none', height: 100 }}
+                                style={{ resize: 'none' }}
                             />
                         </TabPane>
                         <TabPane tab="预览" itemKey="2">
                             <div
                                 style={{
-                                    height: 100,
+                                    height: rows * 20 + 12, // 计算TextArea高度
                                     overflow: 'auto',
                                     backgroundColor: 'var(--semi-color-fill-0)',
                                 }}
@@ -201,15 +213,6 @@ const Index: FC<ComProps> = ({ reply, quote, onCreateSuccess }) => {
                     </Tabs>
                 </div>
             </div>
-            <Banner
-                style={{ padding: 5 }}
-                type="info"
-                description={
-                    <Text ellipsis={{ showTooltip: true }} style={{ width: 100 }}>
-                        {relaReply?.content}
-                    </Text>
-                }
-            />
         </div>
     );
 };

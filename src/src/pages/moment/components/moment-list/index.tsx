@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
 import { Avatar, Typography, Space, Timeline, Toast, Tag, TagGroup } from '@douyinfe/semi-ui';
-import { IconLikeHeart } from '@douyinfe/semi-icons';
+import { IconLikeHeart, IconComment } from '@douyinfe/semi-icons';
 
 import MarkDown from '@components/markdown';
 
@@ -20,11 +20,13 @@ interface TimelineItemData extends Data {
     moment: MomentModel;
 }
 
-interface ComProps {}
+interface ComProps {
+    onReply?: (moment: MomentModel) => void;
+}
 
 const { Text } = Typography;
 
-const Index: FC<ComProps> = ({}) => {
+const Index: FC<ComProps> = ({ onReply }) => {
     const momentPageSize = 15;
     const [moments, momentLoading, setMoments, setMomentLoading] =
         useData<Array<TimelineItemData>>();
@@ -72,6 +74,7 @@ const Index: FC<ComProps> = ({}) => {
         getMomentPage();
     }, []);
 
+    // 构建时间轴项
     const buildTimelineItem = (moment: MomentModel) => {
         let item: TimelineItemData = {
             moment: moment,
@@ -82,7 +85,23 @@ const Index: FC<ComProps> = ({}) => {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Space spacing="tight">
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <IconLikeHeart /> <Text style={{ marginLeft: 3 }}>{123}</Text>
+                            <div
+                                style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                            >
+                                <IconLikeHeart /> <Text style={{ marginLeft: 3 }}>{123}</Text>
+                            </div>
+                            <div
+                                style={{
+                                    marginLeft: 15,
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                }}
+                                onClick={() => onReply && onReply(moment)}
+                            >
+                                <IconComment />
+                                <Text style={{ marginLeft: 3 }}>{123}</Text>
+                            </div>
                         </div>
                     </Space>
                     <TagGroup
@@ -104,6 +123,7 @@ const Index: FC<ComProps> = ({}) => {
         return item;
     };
 
+    // 时间轴项渲染元素
     const timelineItemContentRender = (moment: MomentModel) => (
         <div className="moment-list-item">
             <Space spacing="tight">
