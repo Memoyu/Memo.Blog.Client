@@ -123,6 +123,7 @@ export interface MomentModel {
     commentable: boolean;
     createTime: Date;
     announcer: MomentAnnouncerModel;
+    isReply: boolean;
 }
 
 //#endregion
@@ -160,7 +161,7 @@ export interface CommentEditRequest {
     nickname: string;
     content: string;
     commentType: CommentType;
-    belongId: number;
+    belongId: string;
     email?: string;
     avatar?: string;
     avatarOriginType?: AvatarOriginType;
@@ -175,6 +176,7 @@ export interface CommentPageRequest extends PaginationRequest {
 export interface CommentModel {
     parentId?: string;
     commentId: string;
+    belongId: string;
     nickname: string;
     email: string;
     content: string;

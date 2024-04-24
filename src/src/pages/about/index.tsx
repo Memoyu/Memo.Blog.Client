@@ -14,7 +14,7 @@ import { AboutModel } from '@src/common/model';
 import './index.scss';
 
 const Index = () => {
-    const [about, loading, setAbout, setLoading] = useData<AboutModel>();
+    const [about, loading, setAbout, setLoading] = useData<AboutModel>({} as AboutModel);
 
     // 获取关于我
     let getAboutMe = async () => {

@@ -70,7 +70,7 @@ export const aboutGet = () => {
 //#region 评论
 
 export const commentCreate = (comment: CommentEditRequest) => {
-    return Request.post<string>('comment/create', comment);
+    return Request.post<CommentModel>('comment/create', comment);
 };
 
 export const commentPage = (request: CommentPageRequest) => {

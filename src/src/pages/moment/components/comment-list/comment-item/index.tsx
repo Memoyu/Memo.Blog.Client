@@ -1,27 +1,41 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { IconQuote, IconComment } from '@douyinfe/semi-icons';
-import { Avatar, Space, Tag, Tooltip, Typography } from '@douyinfe/semi-ui';
+import { Avatar, Space, Tag, Toast, Tooltip, Typography } from '@douyinfe/semi-ui';
 
-import CommentEdit, { MomentCommentReply } from '../../comment-edit';
+import CommentEdit, { CommentInputInfo } from '@components/comment-edit';
 import MarkDown from '@components/markdown';
 
 import { dateDiff } from '@utils/date';
 
+import { commentCreate } from '@src/utils/request';
+import { CommentModel, CommentType } from '@src/common/model';
+
 import './index.scss';
-import { CommentModel } from '@src/common/model';
+
+interface MomentCommentReply {
+    belongId?: string;
+    parentId?: string;
+    commentId?: string;
+    floor?: string;
+    replyTo: string;
+    content: string;
+}
 
 type Props = {
     comment: CommentModel;
     childrens?: ReactNode;
+    onReplySuccess?: (comment: CommentModel) => void;
 };
 
 const { Text } = Typography;
 
-const CommentItem: React.FC<Props> = ({ comment, childrens }) => {
+const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) => {
     const [isReply, setIsReply] = useState<boolean>(false);
     const [reply, setReply] = useState<MomentCommentReply>();
     const [quote, setQuote] = useState<CommentModel>();
+
+    useEffect(() => {}, [comment]);
 
     const handleCommentReply = (comment: CommentModel) => {
         setReply({
@@ -33,13 +47,45 @@ const CommentItem: React.FC<Props> = ({ comment, childrens }) => {
         });
     };
 
+    const handleAddCommentClick = (input: CommentInputInfo) => {
+        // 获取父评论Id
+        let parentId = reply && (reply.parentId || reply.commentId);
+        // 获取回复评论Id
+        let replyId = reply && reply.commentId;
+        commentCreate({
+            parentId,
+            replyId,
+            nickname: input.nickname,
+            content: input.content,
+            commentType: CommentType.Moment,
+            belongId: comment.belongId,
+            email: input.email,
+            avatar: input.avatar,
+            avatarOrigin: input.avatarOrigin,
+            avatarOriginType: input.avatarOriginType,
+        }).then((res) => {
+            if (!res.isSuccess || !res.data) {
+                Toast.error(res.message);
+                return;
+            }
+            setIsReply(false);
+            onReplySuccess && onReplySuccess(res.data);
+        });
+    };
+
     return (
         <div key={comment.commentId} className="moment-comment-item">
             {/* flexShrink: 0 解决flex下头像变形问题 */}
             <Avatar style={{ margin: '0 10px', flexShrink: 0 }} size="small" src={comment.avatar} />
             <div className="moment-comment-item-box">
                 <div className="moment-comment-item-box-info">
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                        }}
+                    >
                         <Space spacing="tight" style={{ display: 'flex', alignItems: 'baseline' }}>
                             <Text strong>{comment.floorString}</Text>
                             <div className="name">{comment.nickname}</div>
@@ -49,28 +95,30 @@ const CommentItem: React.FC<Props> = ({ comment, childrens }) => {
                             </Tag>
                         </Space>
 
-                        <Tooltip content="回复">
-                            <IconComment
-                                style={{ marginLeft: 20, cursor: 'pointer' }}
-                                onClick={() => {
-                                    setQuote(undefined);
-                                    handleCommentReply(comment);
-                                    setIsReply(!isReply);
-                                }}
-                            />
-                        </Tooltip>
-                        <Tooltip content="引用">
-                            <IconQuote
-                                style={{ marginLeft: 10, cursor: 'pointer' }}
-                                onClick={() => {
-                                    setQuote(comment);
-                                    handleCommentReply(comment);
-                                    if (!isReply) {
-                                        setIsReply(true);
-                                    }
-                                }}
-                            />
-                        </Tooltip>
+                        <div>
+                            <Tooltip content="回复">
+                                <IconComment
+                                    style={{ marginLeft: 20, cursor: 'pointer' }}
+                                    onClick={() => {
+                                        setQuote(undefined);
+                                        handleCommentReply(comment);
+                                        setIsReply(!isReply);
+                                    }}
+                                />
+                            </Tooltip>
+                            <Tooltip content="引用">
+                                <IconQuote
+                                    style={{ marginLeft: 10, cursor: 'pointer' }}
+                                    onClick={() => {
+                                        setQuote(comment);
+                                        handleCommentReply(comment);
+                                        if (!isReply) {
+                                            setIsReply(true);
+                                        }
+                                    }}
+                                />
+                            </Tooltip>
+                        </div>
                     </div>
                 </div>
                 <div className="moment-comment-item-box-reply">
@@ -90,11 +138,7 @@ const CommentItem: React.FC<Props> = ({ comment, childrens }) => {
                             padding: 10,
                         }}
                     >
-                        <CommentEdit
-                            // onCreateSuccess={() => getMomentCommentPage()}
-                            reply={reply}
-                            quote={quote}
-                        />
+                        <CommentEdit quote={quote} rows={4} onSubmit={handleAddCommentClick} />
                     </div>
                 )}
 

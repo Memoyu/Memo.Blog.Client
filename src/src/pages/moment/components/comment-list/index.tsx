@@ -1,6 +1,9 @@
 import { FC, useEffect, useRef } from 'react';
 import { Toast } from '@douyinfe/semi-ui';
+import { useDispatch } from 'react-redux';
+import { pushMomentComment, setMomentComments } from '@redux/slices/moment/momentCommentSlice';
 
+import { useTypedSelector } from '@src/hooks/useTypedSelector';
 import { useData } from '@src/hooks/useData';
 
 import CommentItem from './comment-item';
@@ -14,9 +17,13 @@ import './index.scss';
 interface ComProps {}
 
 const Index: FC<ComProps> = ({}) => {
+    const dispatch = useDispatch();
+    const momentComments = useTypedSelector((state) => state.momentComments);
+
     const commentPageSize = 15;
-    const [comments, commentLoading, setComments, setCommentLoading] =
-        useData<Array<CommentModel>>();
+    const [comments, commentLoading, setComments, setCommentLoading] = useData<Array<CommentModel>>(
+        []
+    );
     const commentPageRef = useRef<number>(1);
     const commentTotalRef = useRef<number>(Infinity);
 
@@ -45,15 +52,18 @@ const Index: FC<ComProps> = ({}) => {
                 commentTotalRef.current = res.data.total;
                 // console.log('当前总条数：', momentTotalRef);
 
-                let items: Array<CommentModel> = [];
+                //console.log('当前e：', comments);
+                let items: Array<CommentModel> = [...comments];
                 res.data.items.forEach((a) => {
-                    if ((comments ?? []).findIndex((ar) => a.commentId == ar?.commentId) < 0) {
+                    if (comments.findIndex((ar) => a.commentId == ar.commentId) < 0) {
+                        // console.log('22222');
                         items.push(a);
                     }
                 });
 
-                setComments(items);
+                setComments([...items]);
                 // console.log('当前：', items);
+                dispatch(setMomentComments(items));
             })
             .finally(() => setCommentLoading(false));
     };
@@ -62,25 +72,32 @@ const Index: FC<ComProps> = ({}) => {
         getMomentCommentPage();
     }, []);
 
+    const handleReplySuccess = (comment: CommentModel) => {
+        dispatch(pushMomentComment(comment));
+    };
+
     return (
         <div className="moment-comment-list-wrap">
-            {comments?.map((comment: CommentModel) => {
-                return (
-                    <div style={{ margin: '15px 0' }}>
-                        <CommentItem
-                            key={comment.commentId}
-                            comment={comment}
-                            childrens={
-                                comment.childs &&
-                                comment.childs.length > 0 &&
-                                comment.childs?.map((cc) => (
-                                    <CommentItem key={cc.commentId} comment={cc} />
-                                ))
-                            }
-                        />
-                    </div>
-                );
-            })}
+            {momentComments?.map((comment: CommentModel) => (
+                <div key={comment.commentId + 'wrap'} style={{ margin: '15px 0' }}>
+                    <CommentItem
+                        key={comment.commentId}
+                        comment={comment}
+                        childrens={
+                            comment.childs &&
+                            comment.childs.length > 0 &&
+                            comment.childs?.map((cc) => (
+                                <CommentItem
+                                    key={cc.commentId}
+                                    comment={cc}
+                                    onReplySuccess={handleReplySuccess}
+                                />
+                            ))
+                        }
+                        onReplySuccess={handleReplySuccess}
+                    />
+                </div>
+            ))}
         </div>
     );
 };

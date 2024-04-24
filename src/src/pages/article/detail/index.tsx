@@ -26,7 +26,7 @@ const { Title, Text } = Typography;
 const Index = () => {
     const params = useParams();
 
-    const [article, loading, setArticle, setLoading] = useData<ArticleModel>();
+    const [article, loading, setArticle, setLoading] = useData<ArticleModel>({} as ArticleModel);
     const [comments, setComments] = useState();
 
     // 获取文章详情

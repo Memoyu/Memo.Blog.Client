@@ -59,7 +59,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
         if (quote) {
             // 换行替换程引用符号
             let quoteContent = quote.content.replace(new RegExp('\n', 'g'), '\n > ');
-            quoteContent = quoteContent + '\n\n' + content ?? '';
+            quoteContent = quoteContent + '\n\n' + content || '';
             quoteContent = '> ' + quoteContent;
             setContent(quoteContent);
             console.log('quote', quoteContent);
@@ -91,7 +91,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
         setAvatar(avatar);
     };
 
-    const handleAddCommentClick = () => {
+    const handleSubmitInputClick = () => {
         console.log(nickname);
         if (!nickname || nickname.length < 0) {
             Toast.warning('留个名呗');
@@ -186,7 +186,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
                         type="button"
                         contentStyle={{ padding: '5px 0 0 0' }}
                         tabBarExtraContent={
-                            <Button onClick={() => handleAddCommentClick()}> 发布</Button>
+                            <Button onClick={() => handleSubmitInputClick()}> 发布</Button>
                         }
                     >
                         <TabPane tab="编辑" itemKey="1">

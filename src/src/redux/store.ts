@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-
+import { MomentCommentReducer } from './slices/moment/momentCommentSlice';
+import { MomentReducer } from './slices/moment/momentSlice';
 
 export const store = configureStore({
     reducer: {
+        momentComments: MomentCommentReducer,
+        moments: MomentReducer,
     },
 });
 
