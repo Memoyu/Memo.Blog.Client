@@ -3,8 +3,11 @@ import ArticleList from '../article/components/article-list';
 import Footer from '@components/layout/footer';
 
 import './index.scss';
+import { usePageVisit } from '@src/hooks/usePageVisit';
 
 const Index = () => {
+    usePageVisit();
+
     return (
         <div className="blog-article-list">
             <PageBanner image="http://oss.blog.memoyu.com/articles/banner/502a2248-2ee7-48eb-af67-c5b0b9a9a5f1.png" />

@@ -12,9 +12,12 @@ import { useData } from '@src/hooks/useData';
 import { AboutModel } from '@src/common/model';
 
 import './index.scss';
+import { usePageVisit } from '@src/hooks/usePageVisit';
 
 const Index = () => {
     const [about, loading, setAbout, setLoading] = useData<AboutModel>({} as AboutModel);
+
+    usePageVisit();
 
     // 获取关于我
     let getAboutMe = async () => {

@@ -10,6 +10,7 @@ import OpenSources from './components/open-source';
 import Footer from '@components/layout/footer';
 
 import './index.scss';
+import { usePageVisit } from '@src/hooks/usePageVisit';
 
 const { Title } = Typography;
 
@@ -20,6 +21,8 @@ const Index = () => {
         alignItems: 'center',
         justifyContent: 'center',
     };
+
+    usePageVisit();
 
     return (
         <div className="blog-labs">

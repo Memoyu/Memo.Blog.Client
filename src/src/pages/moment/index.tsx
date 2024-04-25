@@ -9,8 +9,11 @@ import CommentList from './components/comment-list';
 import Footer from '@components/layout/footer';
 
 import './index.scss';
+import { usePageVisit } from '@src/hooks/usePageVisit';
 
 const Index = () => {
+    usePageVisit();
+
     return (
         <div>
             <PageBanner

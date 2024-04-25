@@ -14,7 +14,7 @@ import {
     CommentModel,
     CommentPageRequest,
     CommentEditRequest,
-    GenerateVisitorRequest,
+    VisitorEditRequest,
     VisitorLogEditRequest,
 } from '@common/model';
 
@@ -24,8 +24,13 @@ export const getByUrl = (url: string, params?: any) => {
 };
 
 // 创建访客信息
-export const generateVisitor = (request: GenerateVisitorRequest) => {
-    return Request.post<string>('logger/visit/visitor-id/generate', request);
+export const visitorCreate = (request: VisitorEditRequest) => {
+    return Request.post<string>('visitor/create', request);
+};
+
+// 创建访客信息
+export const visitorUpdate = (request: VisitorEditRequest) => {
+    return Request.put<string>('visitor/update', request);
 };
 
 // 创建访客信息

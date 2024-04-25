@@ -1,5 +1,3 @@
-import { PageIdEnum } from './constant';
-
 export interface PaginationRequest {
     size: number;
     page: number;
@@ -199,9 +197,8 @@ export interface CommentModel {
 
 //#region 访客信息
 
-export interface GenerateVisitorRequest {
-    os: string;
-    browser: string;
+export interface VisitorEditRequest {
+    visitorId?: string;
     nickname?: string;
     email?: string;
     avatar?: string;
@@ -221,7 +218,6 @@ export interface VisitorModel {
 export interface VisitorLogEditRequest {
     visitorId: string;
     path: string;
-    behavior: PageIdEnum;
     visitedId?: string;
     os?: string;
     browser?: string;

@@ -5,6 +5,7 @@ import { getLocalStorage, setLocalStorage } from '@utils/storage';
 
 import { AvatarOriginType, VisitorModel } from '@src/common/model';
 import { VISITOR_INFO } from '@common/constant';
+import { visitorUpdate } from '@src/utils/request';
 
 export interface UpdateVisitorModel {
     nickname: string;
@@ -37,6 +38,8 @@ const visitorSlice = createSlice({
             state.avatarOrigin = visitor.avatarOrigin;
 
             setLocalStorage(VISITOR_INFO, JSON.stringify(state));
+
+            visitorUpdate({ ...state });
 
             return state;
         },

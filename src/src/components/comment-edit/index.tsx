@@ -42,14 +42,14 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
     const dispatch = useDispatch();
     const visitor = useTypedSelector((state) => state.visitor);
 
-    const [userInputVisible, setUserInputVisible] = useState<boolean>(false);
+    const [VisitorInputVisible, setVisitorInputVisible] = useState<boolean>(false);
     const [avatar, setAvatar] = useState<string>();
     const avatarOriginTypeRef = useRef<number>(1);
     const [avatarOrigin, setAvatarOrigin] = useState<string>();
-    const [nickname, setNickname] = useState<string>();
+    const [nickname, setNickname] = useState<string>('');
     const [email, setEmail] = useState<string>();
-
-    const [content, setContent] = useState<string>();
+    const [content, setContent] = useState<string>('');
+    const [input, setInput] = useState<CommentInputInfo>();
 
     const getQqAvatar = (val?: string) => {
         const regQq = /[1-9][0-9]{4,11}/;
@@ -75,6 +75,11 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
 
     useEffect(() => {
         buildQuoteContent();
+        setAvatar(visitor.avatar);
+        setAvatarOrigin(visitor.avatarOrigin);
+        setNickname(visitor.nickname);
+        setEmail(visitor.email);
+        avatarOriginTypeRef.current = visitor.avatarOriginType ?? AvatarOriginType.Qq;
 
         return () => {
             setContent('');
@@ -102,7 +107,6 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
         // console.log(nickname);
         if (!nickname || nickname.length < 0) {
             Toast.warning('留个名呗');
-            setUserInputVisible(true);
             return;
         }
 
@@ -110,17 +114,6 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
             Toast.warning('说点什么呗，怪尴尬的');
             return;
         }
-
-        // 更新游客信息
-        dispatch(
-            setVisitorInfo({
-                nickname,
-                email,
-                avatar,
-                avatarOriginType: avatarOriginTypeRef.current,
-                avatarOrigin,
-            })
-        );
 
         onSubmit &&
             onSubmit({
@@ -134,12 +127,24 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
             });
     };
 
-    const handleUserInputCancel = () => {
-        avatarOriginTypeRef.current = 1;
-        setAvatar('');
-        setAvatarOrigin('');
-        setNickname('');
-        setEmail('');
+    const handleVisitorInputCancel = () => {};
+
+    const handleVisitorInputConfirm = () => {
+        if (!nickname || nickname.length < 0) {
+            Toast.warning('留个名呗');
+            return;
+        }
+
+        // 更新游客信息
+        dispatch(
+            setVisitorInfo({
+                nickname,
+                email,
+                avatar,
+                avatarOriginType: avatarOriginTypeRef.current,
+                avatarOrigin,
+            })
+        );
     };
 
     return (
@@ -151,9 +156,10 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
                         icon={false}
                         title={false}
                         showCloseIcon={false}
-                        visible={userInputVisible}
-                        onVisibleChange={setUserInputVisible}
-                        onCancel={(v) => handleUserInputCancel()}
+                        visible={VisitorInputVisible}
+                        onVisibleChange={setVisitorInputVisible}
+                        onCancel={() => handleVisitorInputCancel()}
+                        onConfirm={() => handleVisitorInputConfirm()}
                         content={
                             <div>
                                 <InputGroup style={{ width: '100%', flexWrap: 'unset' }}>
@@ -193,11 +199,11 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
                             style={{ margin: '0 15px', flexShrink: 0 }}
                             size="small"
                             src={avatar}
-                            onClick={() => setUserInputVisible(true)}
+                            onClick={() => setVisitorInputVisible(true)}
                         />
                     </Popconfirm>
                     <Text style={{ marginTop: 5, maxWidth: 60, wordBreak: 'break-word' }} strong>
-                        燕过留名
+                        {nickname}
                     </Text>
                 </div>
                 <div className="moment-comment-edit-box-content">

@@ -5,7 +5,6 @@ import { useRoutes } from 'react-router-dom';
 import { WrapperRouteComponent, initTitleTick } from './config';
 import Layout from '@components/layout';
 import Empty from '@components/empty';
-import { PageIdEnum } from '@common/constant';
 
 const Home = lazy(() => import('@pages/home'));
 

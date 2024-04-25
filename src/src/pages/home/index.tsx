@@ -5,10 +5,13 @@ import Summary from './components/summary';
 import CallMe from '../../components/call-me';
 
 import './index.scss';
+import { usePageVisit } from '@src/hooks/usePageVisit';
 
 const { Title } = Typography;
 
 const Index = () => {
+    usePageVisit();
+
     return (
         <div className="blog-home">
             <PageBanner

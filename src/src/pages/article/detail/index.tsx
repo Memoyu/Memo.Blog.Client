@@ -20,6 +20,7 @@ import { articleGet } from '@src/utils/request';
 
 import './index.scss';
 import { dateDiff } from '@src/utils/date';
+import { usePageVisit } from '@src/hooks/usePageVisit';
 
 const { Title, Text } = Typography;
 
@@ -41,8 +42,11 @@ const Index = () => {
         setArticle(article);
     };
 
+    usePageVisit(params.id);
+
     useEffect(() => {
         var articleId = params.id;
+        // console.log(params);
         if (articleId) {
             getArticleDetail(articleId);
         }
@@ -69,16 +73,18 @@ const Index = () => {
                             labels={[
                                 {
                                     label: '作者',
-                                    title: article?.author.nickname,
+                                    title: article?.author?.nickname,
                                     desc: ` 本文共${article?.wordNumber ?? 0}字，阅读约需${
                                         article?.readingTime ?? 0
                                     }分钟`,
                                 },
                                 {
                                     label: '发布时间',
-                                    title: article && dateDiff(new Date(article.createTime)),
+                                    title:
+                                        article?.createTime &&
+                                        dateDiff(new Date(article.createTime)),
                                     desc:
-                                        article &&
+                                        article?.createTime &&
                                         format(new Date(article.createTime), 'yyyy-MM-dd HH:mm'),
                                 },
                             ]}
