@@ -33,7 +33,7 @@ export interface CommentInputInfo {
 interface ComProps {
     quote?: CommentModel;
     rows?: number;
-    onSubmit?: (edit: CommentInputInfo) => void;
+    onSubmit?: (edit: CommentInputInfo) => Promise<boolean>;
 }
 
 const { Text } = Typography;
@@ -123,7 +123,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
                 avatarOrigin,
                 content,
                 visitorId: visitor.visitorId,
-            });
+            }).then(() => setContent(''));
     };
 
     const handleVisitorInputCancel = () => {};

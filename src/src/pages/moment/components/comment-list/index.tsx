@@ -81,21 +81,23 @@ const Index: FC<ComProps> = ({}) => {
         dispatch(pushMomentComment(comment));
     };
 
-    const handleCommentSubmit = (input: CommentInputInfo) => {
-        commentCreate({
+    const handleCommentSubmit = async (input: CommentInputInfo) => {
+        let res = await commentCreate({
             visitorId: input.visitorId,
             content: input.content,
             commentType: CommentType.Moment,
             belongId: momentId,
-        }).then((res) => {
-            if (!res.isSuccess || !res.data) {
-                Toast.error(res.message);
-                return;
-            }
-
-            dispatch(unshiftMomentComment(res.data));
-            dispatch(increaseMomentComments({ momentId: momentId, count: 1 }));
         });
+
+        if (!res.isSuccess || !res.data) {
+            Toast.error(res.message);
+            return false;
+        }
+
+        dispatch(unshiftMomentComment(res.data));
+        dispatch(increaseMomentComments({ momentId: momentId, count: 1 }));
+
+        return true;
     };
 
     return (

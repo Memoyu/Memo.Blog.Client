@@ -47,26 +47,29 @@ const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) =>
         });
     };
 
-    const handleAddCommentClick = (input: CommentInputInfo) => {
+    const handleCommentSubmit = async (input: CommentInputInfo) => {
         // 获取父评论Id
         let parentId = reply && (reply.parentId || reply.commentId);
         // 获取回复评论Id
         let replyId = reply && reply.commentId;
-        commentCreate({
+
+        let res = await commentCreate({
             parentId,
             replyId,
             visitorId: input.visitorId,
             content: input.content,
             commentType: CommentType.Moment,
             belongId: comment.belongId,
-        }).then((res) => {
-            if (!res.isSuccess || !res.data) {
-                Toast.error(res.message);
-                return;
-            }
-            setIsReply(false);
-            onReplySuccess && onReplySuccess(res.data);
         });
+
+        if (!res.isSuccess || !res.data) {
+            Toast.error(res.message);
+            return false;
+        }
+        setIsReply(false);
+        onReplySuccess && onReplySuccess(res.data);
+
+        return true;
     };
 
     return (
@@ -138,7 +141,7 @@ const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) =>
                             padding: 10,
                         }}
                     >
-                        <CommentEdit quote={quote} rows={4} onSubmit={handleAddCommentClick} />
+                        <CommentEdit quote={quote} rows={4} onSubmit={handleCommentSubmit} />
                     </div>
                 )}
 
