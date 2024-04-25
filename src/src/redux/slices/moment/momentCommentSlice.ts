@@ -2,8 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { CommentModel } from '@src/common/model';
 
+const momentCommentMomentIdSlice = createSlice({
+    name: 'moment-commemt-list-moment-id',
+    initialState: '',
+    reducers: {
+        setMomentId: (state: string, action: PayloadAction<string>) => {
+            state = action.payload;
+            return state;
+        },
+    },
+});
+
 const momentCommentSlice = createSlice({
-    name: 'moments',
+    name: 'moment-commemt-list',
     initialState: [] as Array<CommentModel>,
     reducers: {
         setMomentComments: (
@@ -29,7 +40,10 @@ const momentCommentSlice = createSlice({
     },
 });
 
+export const { setMomentId } = momentCommentMomentIdSlice.actions;
+
 export const { setMomentComments, pushMomentComment, unshiftMomentComment } =
     momentCommentSlice.actions;
 
+export const MomentCommentMomentIdReducer = momentCommentMomentIdSlice.reducer;
 export const MomentCommentReducer = momentCommentSlice.reducer;

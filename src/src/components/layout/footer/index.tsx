@@ -27,7 +27,7 @@ const CustFooter: FC = () => {
                         <Text>桂公网安备</Text>
                     </a>
                 </div>
-                <Text>2024 © memoyu</Text>
+                {/* <Text>2024 © memoyu</Text> */}
             </div>
         </Footer>
     );

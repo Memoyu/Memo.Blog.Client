@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { MomentCommentReducer } from './slices/moment/momentCommentSlice';
+import {
+    MomentCommentMomentIdReducer,
+    MomentCommentReducer,
+} from './slices/moment/momentCommentSlice';
 import { MomentReducer } from './slices/moment/momentSlice';
 import { VisitorSliceReducer } from './slices/visitor/visitorSlice';
 
 export const store = configureStore({
     reducer: {
+        momentCommentMomentId: MomentCommentMomentIdReducer,
         momentComments: MomentCommentReducer,
         moments: MomentReducer,
         visitor: VisitorSliceReducer,

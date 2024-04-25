@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { MomentModel } from '@src/common/model';
 
 const momentSlice = createSlice({
-    name: 'moments',
+    name: 'moment-list',
     initialState: [] as Array<MomentModel>,
     reducers: {
         setMoments: (state: Array<MomentModel>, action: PayloadAction<Array<MomentModel>>) => {

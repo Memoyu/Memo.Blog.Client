@@ -87,8 +87,8 @@ const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) =>
                         }}
                     >
                         <Space spacing="tight" style={{ display: 'flex', alignItems: 'baseline' }}>
-                            <Text strong>{comment.floorString}</Text>
-                            <div className="name">{comment.visitor.nickname}</div>
+                            {/* <Text strong>{comment.floorString}</Text> */}
+                            <Text className="name">{comment.visitor.nickname}</Text>
                             <Text>{format(new Date(comment.createTime), 'yyyy-MM-dd HH:mm')}</Text>
                             <Tag size="large" color="violet">
                                 {dateDiff(new Date(comment.createTime))}

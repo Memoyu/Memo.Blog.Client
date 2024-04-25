@@ -1,15 +1,12 @@
-import React, { FC, useState } from 'react';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { unshiftMomentComment } from '@redux/slices/moment/momentCommentSlice';
-import { increaseMomentComments } from '@redux/slices/moment/momentSlice';
+import { setMomentId } from '@redux/slices/moment/momentCommentSlice';
 
 import './index.scss';
-import { Space, TagGroup, Toast, Typography } from '@douyinfe/semi-ui';
+import { Space, TagGroup, Typography } from '@douyinfe/semi-ui';
 import { IconComment, IconLikeHeart } from '@douyinfe/semi-icons';
 import { TagProps } from '@douyinfe/semi-ui/lib/es/tag';
-import { CommentType, MomentModel } from '@src/common/model';
-import CommentEdit, { CommentInputInfo } from '@src/components/comment-edit';
-import { commentCreate } from '@src/utils/request';
+import { MomentModel } from '@src/common/model';
 
 interface ComProps {
     moment: MomentModel;
@@ -20,31 +17,8 @@ const { Text } = Typography;
 const Index: FC<ComProps> = ({ moment }) => {
     const dispatch = useDispatch();
 
-    const [isReply, setIsReply] = useState<boolean>(false);
-
-    const handleAddCommentClick = (input: CommentInputInfo) => {
-        commentCreate({
-            visitorId: input.visitorId,
-            content: input.content,
-            commentType: CommentType.Moment,
-            belongId: moment.momentId,
-        }).then((res) => {
-            if (!res.isSuccess || !res.data) {
-                Toast.error(res.message);
-                return;
-            }
-            setIsReply(false);
-            dispatch(unshiftMomentComment(res.data));
-            dispatch(increaseMomentComments({ momentId: moment.momentId, count: 1 }));
-        });
-    };
     const handleReplyMomentClick = (moment: MomentModel) => {
-        if (!moment.commentable) {
-            Toast.warning('这条动态不让评论哦！');
-            return;
-        }
-
-        setIsReply(!isReply);
+        dispatch(setMomentId(moment.momentId));
     };
     return (
         <div>
@@ -60,18 +34,20 @@ const Index: FC<ComProps> = ({ moment }) => {
                         >
                             <IconLikeHeart /> <Text style={{ marginLeft: 3 }}>{moment.likes}</Text>
                         </div>
-                        <div
-                            style={{
-                                marginLeft: 15,
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                            }}
-                            onClick={() => handleReplyMomentClick(moment)}
-                        >
-                            <IconComment />
-                            <Text style={{ marginLeft: 3 }}>{moment.comments}</Text>
-                        </div>
+                        {moment.commentable && (
+                            <div
+                                style={{
+                                    marginLeft: 15,
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                }}
+                                onClick={() => handleReplyMomentClick(moment)}
+                            >
+                                <IconComment />
+                                <Text style={{ marginLeft: 3 }}>{moment.comments}</Text>
+                            </div>
+                        )}
                     </div>
                 </Space>
                 <TagGroup
@@ -87,17 +63,6 @@ const Index: FC<ComProps> = ({ moment }) => {
                     showPopover
                 />
             </div>
-            {isReply && (
-                <div
-                    style={{
-                        backgroundColor: 'rgb(var(--semi-violet-0))',
-                        marginBottom: 5,
-                        padding: 10,
-                    }}
-                >
-                    <CommentEdit rows={4} onSubmit={handleAddCommentClick} />
-                </div>
-            )}
         </div>
     );
 };

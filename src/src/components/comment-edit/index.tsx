@@ -42,14 +42,13 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
     const dispatch = useDispatch();
     const visitor = useTypedSelector((state) => state.visitor);
 
-    const [VisitorInputVisible, setVisitorInputVisible] = useState<boolean>(false);
+    const [visitorInputVisible, setVisitorInputVisible] = useState<boolean>(false);
     const [avatar, setAvatar] = useState<string>();
     const avatarOriginTypeRef = useRef<number>(1);
     const [avatarOrigin, setAvatarOrigin] = useState<string>();
     const [nickname, setNickname] = useState<string>('');
     const [email, setEmail] = useState<string>();
     const [content, setContent] = useState<string>('');
-    const [input, setInput] = useState<CommentInputInfo>();
 
     const getQqAvatar = (val?: string) => {
         const regQq = /[1-9][0-9]{4,11}/;
@@ -156,7 +155,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
                         icon={false}
                         title={false}
                         showCloseIcon={false}
-                        visible={VisitorInputVisible}
+                        visible={visitorInputVisible}
                         onVisibleChange={setVisitorInputVisible}
                         onCancel={() => handleVisitorInputCancel()}
                         onConfirm={() => handleVisitorInputConfirm()}
