@@ -13,7 +13,7 @@ import { CommentModel, CommentType } from '@src/common/model';
 
 import './index.scss';
 
-interface MomentCommentReply {
+interface CommentReply {
     belongId?: string;
     parentId?: string;
     commentId?: string;
@@ -32,7 +32,7 @@ const { Text } = Typography;
 
 const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) => {
     const [isReply, setIsReply] = useState<boolean>(false);
-    const [reply, setReply] = useState<MomentCommentReply>();
+    const [reply, setReply] = useState<CommentReply>();
     const [quote, setQuote] = useState<CommentModel>();
 
     useEffect(() => {}, [comment]);
@@ -42,7 +42,7 @@ const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) =>
             parentId: comment.parentId,
             commentId: comment.commentId,
             floor: comment.floorString,
-            replyTo: comment.nickname,
+            replyTo: comment.visitor.nickname,
             content: comment.content,
         });
     };
@@ -55,14 +55,10 @@ const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) =>
         commentCreate({
             parentId,
             replyId,
-            nickname: input.nickname,
+            visitorId: input.visitorId,
             content: input.content,
             commentType: CommentType.Moment,
             belongId: comment.belongId,
-            email: input.email,
-            avatar: input.avatar,
-            avatarOrigin: input.avatarOrigin,
-            avatarOriginType: input.avatarOriginType,
         }).then((res) => {
             if (!res.isSuccess || !res.data) {
                 Toast.error(res.message);
@@ -76,7 +72,11 @@ const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) =>
     return (
         <div key={comment.commentId} className="moment-comment-item">
             {/* flexShrink: 0 解决flex下头像变形问题 */}
-            <Avatar style={{ margin: '0 10px', flexShrink: 0 }} size="small" src={comment.avatar} />
+            <Avatar
+                style={{ margin: '0 10px', flexShrink: 0 }}
+                size="small"
+                src={comment.visitor.avatar}
+            />
             <div className="moment-comment-item-box">
                 <div className="moment-comment-item-box-info">
                     <div
@@ -88,7 +88,7 @@ const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) =>
                     >
                         <Space spacing="tight" style={{ display: 'flex', alignItems: 'baseline' }}>
                             <Text strong>{comment.floorString}</Text>
-                            <div className="name">{comment.nickname}</div>
+                            <div className="name">{comment.visitor.nickname}</div>
                             <Text>{format(new Date(comment.createTime), 'yyyy-MM-dd HH:mm')}</Text>
                             <Tag size="large" color="violet">
                                 {dateDiff(new Date(comment.createTime))}

@@ -14,11 +14,23 @@ import {
     CommentModel,
     CommentPageRequest,
     CommentEditRequest,
+    GenerateVisitorRequest,
+    VisitorLogEditRequest,
 } from '@common/model';
 
 export const getByUrl = (url: string, params?: any) => {
     let instance = axios.create({ withCredentials: false });
     return instance.get(url, { params });
+};
+
+// 创建访客信息
+export const generateVisitor = (request: GenerateVisitorRequest) => {
+    return Request.post<string>('logger/visit/visitor-id/generate', request);
+};
+
+// 创建访客信息
+export const visitLogCreate = (request: VisitorLogEditRequest) => {
+    return Request.post<string>('logger/visit/create', request);
 };
 
 //#region 文章管理

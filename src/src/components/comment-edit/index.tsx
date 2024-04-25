@@ -16,6 +16,9 @@ import MarkDown from '@components/markdown';
 
 import './index.scss';
 import { AvatarOriginType, CommentModel } from '@src/common/model';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '@src/hooks/useTypedSelector';
+import { setVisitorInfo } from '@redux/slices/visitor/visitorSlice';
 
 export interface CommentInputInfo {
     nickname: string;
@@ -24,6 +27,7 @@ export interface CommentInputInfo {
     avatarOriginType: AvatarOriginType;
     avatarOrigin?: string;
     content: string;
+    visitorId: string;
 }
 
 interface ComProps {
@@ -35,6 +39,9 @@ interface ComProps {
 const { Text } = Typography;
 
 const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
+    const dispatch = useDispatch();
+    const visitor = useTypedSelector((state) => state.visitor);
+
     const [userInputVisible, setUserInputVisible] = useState<boolean>(false);
     const [avatar, setAvatar] = useState<string>();
     const avatarOriginTypeRef = useRef<number>(1);
@@ -92,7 +99,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
     };
 
     const handleSubmitInputClick = () => {
-        console.log(nickname);
+        // console.log(nickname);
         if (!nickname || nickname.length < 0) {
             Toast.warning('留个名呗');
             setUserInputVisible(true);
@@ -104,6 +111,17 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
             return;
         }
 
+        // 更新游客信息
+        dispatch(
+            setVisitorInfo({
+                nickname,
+                email,
+                avatar,
+                avatarOriginType: avatarOriginTypeRef.current,
+                avatarOrigin,
+            })
+        );
+
         onSubmit &&
             onSubmit({
                 nickname,
@@ -112,6 +130,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
                 avatarOriginType: avatarOriginTypeRef.current,
                 avatarOrigin,
                 content,
+                visitorId: visitor.visitorId,
             });
     };
 

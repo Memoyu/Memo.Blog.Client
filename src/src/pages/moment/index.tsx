@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Col, Row } from '@douyinfe/semi-ui';
 
 import Container from '@components/layout/container';
 import PageBanner from '@components/page-banner';
@@ -8,8 +9,6 @@ import CommentList from './components/comment-list';
 import Footer from '@components/layout/footer';
 
 import './index.scss';
-import { Col, Row } from '@douyinfe/semi-ui';
-import { CommentModel, MomentModel } from '@src/common/model';
 
 const Index = () => {
     return (

@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { unshiftMomentComment } from '@redux/slices/moment/momentCommentSlice';
+import { increaseMomentComments } from '@redux/slices/moment/momentSlice';
 
 import './index.scss';
 import { Space, TagGroup, Toast, Typography } from '@douyinfe/semi-ui';
@@ -23,14 +24,10 @@ const Index: FC<ComProps> = ({ moment }) => {
 
     const handleAddCommentClick = (input: CommentInputInfo) => {
         commentCreate({
-            nickname: input.nickname,
+            visitorId: input.visitorId,
             content: input.content,
             commentType: CommentType.Moment,
             belongId: moment.momentId,
-            email: input.email,
-            avatar: input.avatar,
-            avatarOrigin: input.avatarOrigin,
-            avatarOriginType: input.avatarOriginType,
         }).then((res) => {
             if (!res.isSuccess || !res.data) {
                 Toast.error(res.message);
@@ -38,9 +35,17 @@ const Index: FC<ComProps> = ({ moment }) => {
             }
             setIsReply(false);
             dispatch(unshiftMomentComment(res.data));
+            dispatch(increaseMomentComments({ momentId: moment.momentId, count: 1 }));
         });
     };
+    const handleReplyMomentClick = (moment: MomentModel) => {
+        if (!moment.commentable) {
+            Toast.warning('这条动态不让评论哦！');
+            return;
+        }
 
+        setIsReply(!isReply);
+    };
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -53,7 +58,7 @@ const Index: FC<ComProps> = ({ moment }) => {
                                 alignItems: 'center',
                             }}
                         >
-                            <IconLikeHeart /> <Text style={{ marginLeft: 3 }}>{123}</Text>
+                            <IconLikeHeart /> <Text style={{ marginLeft: 3 }}>{moment.likes}</Text>
                         </div>
                         <div
                             style={{
@@ -62,10 +67,10 @@ const Index: FC<ComProps> = ({ moment }) => {
                                 display: 'flex',
                                 alignItems: 'center',
                             }}
-                            onClick={() => setIsReply(!isReply)}
+                            onClick={() => handleReplyMomentClick(moment)}
                         >
                             <IconComment />
-                            <Text style={{ marginLeft: 3 }}>{123}</Text>
+                            <Text style={{ marginLeft: 3 }}>{moment.comments}</Text>
                         </div>
                     </div>
                 </Space>

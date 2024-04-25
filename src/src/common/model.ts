@@ -1,3 +1,5 @@
+import { PageIdEnum } from './constant';
+
 export interface PaginationRequest {
     size: number;
     page: number;
@@ -119,6 +121,7 @@ export interface MomentModel {
     tags: Array<string>;
     content: string;
     likes: number;
+    comments: number;
     showable: boolean;
     commentable: boolean;
     createTime: Date;
@@ -158,14 +161,10 @@ export enum CommentType {
 export interface CommentEditRequest {
     parentId?: string;
     replyId?: string;
-    nickname: string;
+    visitorId: string;
     content: string;
     commentType: CommentType;
     belongId: string;
-    email?: string;
-    avatar?: string;
-    avatarOriginType?: AvatarOriginType;
-    avatarOrigin?: string;
 }
 
 export interface CommentPageRequest extends PaginationRequest {
@@ -173,20 +172,59 @@ export interface CommentPageRequest extends PaginationRequest {
     belongId?: string;
 }
 
+export interface CommentReplyModel {
+    commentId: string;
+    nickname: string;
+    content: string;
+    createTime: Date;
+    floor: number;
+    floorString: string;
+}
+
 export interface CommentModel {
     parentId?: string;
     commentId: string;
     belongId: string;
-    nickname: string;
-    email: string;
     content: string;
-    avatar: string;
     region: string;
     createTime: Date;
     floor: number;
     floorString: string;
     childs?: Array<CommentModel>;
-    reply?: CommentModel;
+    reply?: CommentReplyModel;
+    visitor: VisitorModel;
+}
+
+//#endregion
+
+//#region 访客信息
+
+export interface GenerateVisitorRequest {
+    os: string;
+    browser: string;
+    nickname?: string;
+    email?: string;
+    avatar?: string;
+    avatarOriginType?: AvatarOriginType;
+    avatarOrigin?: string;
+}
+
+export interface VisitorModel {
+    visitorId: string;
+    nickname: string;
+    email?: string;
+    avatar?: string;
+    avatarOriginType?: AvatarOriginType;
+    avatarOrigin?: string;
+}
+
+export interface VisitorLogEditRequest {
+    visitorId: string;
+    path: string;
+    behavior: PageIdEnum;
+    visitedId?: string;
+    os?: string;
+    browser?: string;
 }
 
 //#endregion
