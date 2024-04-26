@@ -1,19 +1,15 @@
 .moment-comment-edit-wrap {
-    .moment-comment-edit-box {
+    display: flex;
+    //  width: 100%;
+    color: var(--semi-color-text-0);
+    &-user {
         display: flex;
-        width: 100%;
-        color: var(--semi-color-text-0);
-        &-user {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        &-content {
-            width: 100%;
-        }
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-    .semi-banner-full .semi-banner-content-wrapper .semi-banner-content {
-        justify-content: start;
+    &-content {
+        overflow: auto;
+        width: 100%;
     }
 }

@@ -4,12 +4,13 @@
     display: flex;
     color: var(--semi-color-text-0);
     &-box {
+        overflow: auto;
         width: 100%;
         &-info {
             .semi-space {
                 align-items: baseline;
                 .name {
-                    font-size: 16px;
+                    font-size: 15px;
                     font-weight: 600;
                 }
             }

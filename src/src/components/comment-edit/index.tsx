@@ -148,94 +148,93 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
 
     return (
         <div className="moment-comment-edit-wrap">
-            {/* flexShrink: 0 解决flex下头像变形问题 */}
-            <div className="moment-comment-edit-box">
-                <div className="moment-comment-edit-box-user">
-                    <Popconfirm
-                        icon={false}
-                        title={false}
-                        showCloseIcon={false}
-                        visible={visitorInputVisible}
-                        onVisibleChange={setVisitorInputVisible}
-                        onCancel={() => handleVisitorInputCancel()}
-                        onConfirm={() => handleVisitorInputConfirm()}
-                        content={
-                            <div>
-                                <InputGroup style={{ width: '100%', flexWrap: 'unset' }}>
-                                    <Select
-                                        value={avatarOriginTypeRef.current}
-                                        onChange={(val) => {
-                                            avatarOriginTypeRef.current = val as number;
-                                            handleAvatarOriginChange(avatarOrigin ?? '');
-                                        }}
-                                    >
-                                        <Select.Option value={1}>QQ</Select.Option>
-                                        <Select.Option value={2}>GitHub</Select.Option>
-                                    </Select>
-                                    <Input
-                                        value={avatarOrigin}
-                                        onChange={handleAvatarOriginChange}
-                                        placeholder="主要用于头像，必要时与您沟通之用！"
-                                        style={{ width: '100%' }}
-                                    />
-                                </InputGroup>
+            <div className="moment-comment-edit-wrap-user">
+                <Popconfirm
+                    icon={false}
+                    title={false}
+                    showCloseIcon={false}
+                    visible={visitorInputVisible}
+                    onVisibleChange={setVisitorInputVisible}
+                    onCancel={() => handleVisitorInputCancel()}
+                    onConfirm={() => handleVisitorInputConfirm()}
+                    content={
+                        <div>
+                            <InputGroup style={{ width: '100%', flexWrap: 'unset' }}>
+                                <Select
+                                    value={avatarOriginTypeRef.current}
+                                    onChange={(val) => {
+                                        avatarOriginTypeRef.current = val as number;
+                                        handleAvatarOriginChange(avatarOrigin ?? '');
+                                    }}
+                                >
+                                    <Select.Option value={1}>QQ</Select.Option>
+                                    <Select.Option value={2}>GitHub</Select.Option>
+                                </Select>
                                 <Input
-                                    value={nickname}
-                                    onChange={setNickname}
-                                    style={{ marginTop: 10 }}
-                                    prefix="昵称"
+                                    value={avatarOrigin}
+                                    onChange={handleAvatarOriginChange}
+                                    placeholder="主要用于头像，必要时与您沟通之用！"
+                                    style={{ width: '100%' }}
                                 />
-                                <Input
-                                    value={email}
-                                    onChange={setEmail}
-                                    style={{ marginTop: 10 }}
-                                    prefix="邮箱"
-                                />
-                            </div>
-                        }
-                    >
-                        <Avatar
-                            style={{ margin: '0 15px', flexShrink: 0 }}
-                            size="small"
-                            src={avatar}
-                            onClick={() => setVisitorInputVisible(true)}
-                        />
-                    </Popconfirm>
-                    <Text style={{ marginTop: 5, maxWidth: 60, wordBreak: 'break-word' }} strong>
-                        {nickname}
-                    </Text>
-                </div>
-                <div className="moment-comment-edit-box-content">
-                    <Tabs
-                        type="button"
-                        contentStyle={{ padding: '5px 0 0 0' }}
-                        tabBarExtraContent={
-                            <Button onClick={() => handleSubmitInputClick()}> 发布</Button>
-                        }
-                    >
-                        <TabPane tab="编辑" itemKey="1">
-                            <TextArea
-                                value={content}
-                                onChange={setContent}
-                                rows={rows}
-                                maxLength={5000}
-                                placeholder="支持markdown格式哟！"
-                                style={{ resize: 'none' }}
+                            </InputGroup>
+                            <Input
+                                value={nickname}
+                                onChange={setNickname}
+                                style={{ marginTop: 10 }}
+                                prefix="昵称"
                             />
-                        </TabPane>
-                        <TabPane tab="预览" itemKey="2">
-                            <div
-                                style={{
-                                    height: rows * 20 + 12, // 计算TextArea高度
-                                    overflow: 'auto',
-                                    backgroundColor: 'var(--semi-color-fill-0)',
-                                }}
-                            >
-                                <MarkDown style={{ padding: '5px 12px' }} content={content} />
-                            </div>
-                        </TabPane>
-                    </Tabs>
-                </div>
+                            <Input
+                                value={email}
+                                onChange={setEmail}
+                                style={{ marginTop: 10 }}
+                                prefix="邮箱"
+                            />
+                        </div>
+                    }
+                >
+                    {/* flexShrink: 0 解决flex下头像变形问题 */}
+                    <Avatar
+                        style={{ margin: '0 15px', flexShrink: 0 }}
+                        size="small"
+                        src={avatar}
+                        onClick={() => setVisitorInputVisible(true)}
+                    />
+                </Popconfirm>
+                <Text style={{ marginTop: 5, maxWidth: 60, wordBreak: 'break-word' }} strong>
+                    {nickname}
+                </Text>
+            </div>
+            <div className="moment-comment-edit-wrap-content">
+                <Tabs
+                    type="button"
+                    contentStyle={{ padding: '5px 0 0 0' }}
+                    tabBarExtraContent={
+                        <Button onClick={() => handleSubmitInputClick()}> 发布</Button>
+                    }
+                >
+                    <TabPane tab="编辑" itemKey="1">
+                        <TextArea
+                            value={content}
+                            onChange={setContent}
+                            rows={rows}
+                            maxLength={5000}
+                            placeholder="支持markdown格式哟！"
+                            style={{ resize: 'none' }}
+                        />
+                    </TabPane>
+                    <TabPane tab="预览" itemKey="2">
+                        <div
+                            style={{
+                                // width: '100%',
+                                height: rows * 20 + 12, // 计算TextArea高度
+                                overflow: 'auto',
+                                backgroundColor: 'var(--semi-color-fill-0)',
+                            }}
+                        >
+                            <MarkDown style={{ padding: '5px 12px' }} content={content} />
+                        </div>
+                    </TabPane>
+                </Tabs>
             </div>
         </div>
     );

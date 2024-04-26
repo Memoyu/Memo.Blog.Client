@@ -6,9 +6,21 @@ const momentSlice = createSlice({
     name: 'moment-list',
     initialState: [] as Array<MomentModel>,
     reducers: {
-        setMoments: (state: Array<MomentModel>, action: PayloadAction<Array<MomentModel>>) => {
-            let moments = action.payload;
-            state = moments;
+        setMoments: (
+            state: Array<MomentModel>,
+            action: PayloadAction<{ moments: Array<MomentModel>; init?: boolean }>
+        ) => {
+            let moments = action.payload.moments;
+            let init = action.payload.init;
+            if (init) {
+                state = moments;
+            } else {
+                moments.forEach((m) => {
+                    if (state.findIndex((s) => s.momentId == m.momentId) < 0) {
+                        state.push(m);
+                    }
+                });
+            }
             return state;
         },
 

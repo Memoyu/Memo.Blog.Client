@@ -54,7 +54,7 @@ export function usePageVisit(visitedId?: string) {
     };
 
     let createVisitLog = (visitLog: VisitorLogEditRequest) => {
-        console.log('visitLogCreate', visitLog);
+        // console.log('visitLogCreate', visitLog);
         visitLogCreate(visitLog);
     };
 }

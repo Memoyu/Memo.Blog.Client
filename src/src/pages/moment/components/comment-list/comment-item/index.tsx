@@ -3,6 +3,8 @@ import { format } from 'date-fns';
 import { IconQuote, IconComment } from '@douyinfe/semi-icons';
 import { Avatar, Space, Tag, Toast, Tooltip, Typography } from '@douyinfe/semi-ui';
 
+import { useDispatch } from 'react-redux';
+
 import CommentEdit, { CommentInputInfo } from '@components/comment-edit';
 import MarkDown from '@components/markdown';
 
@@ -10,6 +12,8 @@ import { dateDiff } from '@utils/date';
 
 import { commentCreate } from '@src/utils/request';
 import { CommentModel, CommentType } from '@src/common/model';
+import { pushMomentComment } from '@redux/slices/moment/momentCommentSlice';
+import { increaseMomentComments } from '@redux/slices/moment/momentSlice';
 
 import './index.scss';
 
@@ -22,15 +26,16 @@ interface CommentReply {
     content: string;
 }
 
-type Props = {
+type ComProps = {
     comment: CommentModel;
     childrens?: ReactNode;
-    onReplySuccess?: (comment: CommentModel) => void;
 };
 
 const { Text } = Typography;
 
-const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) => {
+const CommentItem: React.FC<ComProps> = ({ comment, childrens }) => {
+    const dispatch = useDispatch();
+
     const [isReply, setIsReply] = useState<boolean>(false);
     const [reply, setReply] = useState<CommentReply>();
     const [quote, setQuote] = useState<CommentModel>();
@@ -67,7 +72,9 @@ const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) =>
             return false;
         }
         setIsReply(false);
-        onReplySuccess && onReplySuccess(res.data);
+
+        dispatch(pushMomentComment(res.data));
+        dispatch(increaseMomentComments({ momentId: comment.belongId, count: 1 }));
 
         return true;
     };
@@ -126,7 +133,7 @@ const CommentItem: React.FC<Props> = ({ comment, childrens, onReplySuccess }) =>
                 </div>
                 <div className="moment-comment-item-box-reply">
                     {comment.reply && (
-                        <Text type="tertiary">{`回复 ${comment.reply.floorString} ${comment.reply.nickname}`}</Text>
+                        <Text type="tertiary">{`回复 ${comment.reply.nickname}`}</Text> //${comment.reply.floorString}
                     )}
                 </div>
                 <div className="moment-comment-item-box-content">

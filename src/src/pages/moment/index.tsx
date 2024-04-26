@@ -11,6 +11,8 @@ import { usePageVisit } from '@src/hooks/usePageVisit';
 import './index.scss';
 
 const Index = () => {
+    const height = 1200;
+
     usePageVisit();
 
     return (
@@ -22,10 +24,10 @@ const Index = () => {
             <Container className="timeline-content">
                 <Row gutter={{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12, xxl: 12 }}>
                     <Col xs={24} sm={24} md={24} lg={14} xl={14}>
-                        <MomentList />
+                        <MomentList height={height} />
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={10} xl={10}>
-                        <CommentList />
+                        <CommentList height={height} />
                     </Col>
                 </Row>
             </Container>
