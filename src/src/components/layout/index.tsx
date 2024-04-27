@@ -4,8 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Layout } from '@douyinfe/semi-ui';
 
 import Header from './header';
-
-import { BLOG_LAYOUT_CONTENT_ID } from '@src/common/constant';
+import Footer from './footer';
 
 import './index.scss';
 
@@ -14,9 +13,6 @@ const { Content } = Layout;
 const Index: React.FC = () => {
     const isPresent = useIsPresent();
 
-    const contentProps = {
-        id: BLOG_LAYOUT_CONTENT_ID,
-    };
     const contentMotionProps = {
         id: 'blog-layout-content-motion',
     };
@@ -27,7 +23,8 @@ const Index: React.FC = () => {
             let motionEl = document.getElementById(contentMotionProps.id);
             if (motionEl) {
                 let top = getScrollTop();
-                // console.log('组件移除', top);
+                //  console.log('组件移除', top);
+                window.scrollTo(0, 0);
                 motionEl.style.position = 'absolute';
                 motionEl.style.top = '0px';
                 motionEl.style.left = '0px';
@@ -42,34 +39,34 @@ const Index: React.FC = () => {
     }, [isPresent]);
 
     const getScrollTop = () => {
-        return document.getElementById(contentProps.id)?.scrollTop ?? 0;
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop);
     };
 
     return (
-        <Layout className="blog-layout" hasSider>
+        <Layout className="blog-layout">
             <Header />
-            <Content className="blog-layout-content" {...contentProps}>
-                <motion.div
-                    {...contentMotionProps}
-                    initial={{ scale: 1, opacity: 0, translateY: 200 }}
-                    animate={{
-                        opacity: [0, 0.5, 1],
-                        translateY: [200, 100, 0],
-                        transition: { type: 'spring', duration: 0.5, ease: 'easeInOut' },
-                    }}
-                    exit={{
-                        scale: [1, 0.8, 0.8],
-                        opacity: [1, 0.4, 0],
-                        transformOrigin: ['center', 'bottom'],
-                        transition: { duration: 0.8, ease: 'easeInOut' },
-                    }}
-                    //  transition={{ duration: 1, ease: 'easeInOut' }}
-                >
+            <motion.div
+                {...contentMotionProps}
+                //  initial={{ opacity: 0, translateY: 200 }}
+                animate={{
+                    opacity: [0, 0, 1],
+                    translateY: [200, 200, 0],
+                    transition: { duration: 1.2, ease: 'easeInOut' },
+                }}
+                exit={{
+                    scale: [1, 0.88, 0.88],
+                    //opacity: [1, 0.8, 0],
+                    transformOrigin: ['center', 'bottom'],
+                    transition: { duration: 0.8, ease: 'easeInOut' },
+                }}
+                //  transition={{ duration: 1, ease: 'easeInOut' }}
+            >
+                <Content className="blog-layout-content">
                     <Suspense>
                         <Outlet />
                     </Suspense>
-                </motion.div>
-            </Content>
+                </Content>
+            </motion.div>
         </Layout>
     );
 };

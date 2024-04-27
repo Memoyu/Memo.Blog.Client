@@ -7,10 +7,9 @@ import Container from '@components/layout/container';
 import PageBanner from '@components/page-banner';
 import Tools from './components/tools';
 import OpenSources from './components/open-source';
-import Footer from '@components/layout/footer';
-
 import './index.scss';
 import { usePageVisit } from '@src/hooks/usePageVisit';
+import Footer from '@src/components/layout/footer';
 
 const { Title } = Typography;
 
@@ -45,7 +44,6 @@ const Index = () => {
                     <OpenSources />
                 </div>
             </Container>
-
             <Footer />
         </div>
     );

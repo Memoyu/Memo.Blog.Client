@@ -1,9 +1,9 @@
 import PageBanner from '@components/page-banner';
 import ArticleList from '../article/components/article-list';
-import Footer from '@components/layout/footer';
 
 import './index.scss';
 import { usePageVisit } from '@src/hooks/usePageVisit';
+import Footer from '@src/components/layout/footer';
 
 const Index = () => {
     usePageVisit();

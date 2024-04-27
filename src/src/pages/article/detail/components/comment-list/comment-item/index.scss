@@ -1,0 +1,38 @@
+@import '@styles/base.scss';
+
+.moment-comment-item {
+    display: flex;
+    color: var(--semi-color-text-0);
+    &-box {
+        overflow: auto;
+        width: 100%;
+        &-info {
+            .semi-space {
+                align-items: baseline;
+                .name {
+                    font-size: 15px;
+                    font-weight: 600;
+                }
+            }
+        }
+        &-reply {
+        }
+
+        &-content {
+            position: relative;
+            margin-top: 5px;
+            padding: 5px 10px;
+        }
+
+        &-childs {
+            padding: 10px 5px;
+            background-color: rgb(var(--semi-grey-0));
+            &-box {
+                //margin-top: 15px;
+                // background-color: rgb(var(--semi-grey-0));
+                // border: 1px solid;
+                // border-bottom: none;
+            }
+        }
+    }
+}

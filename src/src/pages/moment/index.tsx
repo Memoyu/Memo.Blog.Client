@@ -22,16 +22,16 @@ const Index = () => {
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             />
             <Container className="timeline-content">
-                <Row gutter={{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12, xxl: 12 }}>
+                {/* <Row gutter={{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12, xxl: 12 }}>
                     <Col xs={24} sm={24} md={24} lg={14} xl={14}>
                         <MomentList height={height} />
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={10} xl={10}>
                         <CommentList height={height} />
                     </Col>
-                </Row>
+                </Row> */}
+                <MomentList height={height} />
             </Container>
-
             <Footer />
         </div>
     );

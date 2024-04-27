@@ -17,7 +17,7 @@ const Index: FC<ComProps> = ({ labels }) => {
     return (
         <Space wrap className="label-list-wrap">
             {labels?.map((l) => (
-                <div className="label-list-wrap-item">
+                <div key={l.label} className="label-list-wrap-item">
                     <div className="label-list-wrap-item-label">{l.label}</div>
                     <div className="label-list-wrap-item-main">
                         <div className="label-list-wrap-item-main-title">{l.title}</div>

@@ -1,7 +1,7 @@
 import React, { lazy, FC } from 'react';
 import { RouteObject } from 'react-router';
 import { AnimatePresence } from 'framer-motion';
-import { useRoutes } from 'react-router-dom';
+import { useLocation, useRoutes } from 'react-router-dom';
 import { WrapperRouteComponent, initTitleTick } from './config';
 import Layout from '@components/layout';
 import Empty from '@components/empty';
@@ -61,13 +61,15 @@ const routeList: RouteObject[] = [
 
 const RenderRouter: FC = () => {
     const element = useRoutes(routeList);
-    if (element == null) return <></>;
+    const location = useLocation();
+    if (!element) return null;
+
     initTitleTick();
     return (
-        <AnimatePresence mode="wait">
-            {React.cloneElement(element, { key: location.pathname })}
-        </AnimatePresence>
+        // mode="wait"
+        <AnimatePresence>{React.cloneElement(element, { key: location.pathname })}</AnimatePresence>
     );
+    // return React.cloneElement(element!, { key: location.pathname });
 };
 
 export default RenderRouter;

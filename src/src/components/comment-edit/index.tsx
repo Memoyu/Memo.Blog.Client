@@ -15,12 +15,12 @@ import {
 import MarkDown from '@components/markdown';
 
 import './index.scss';
-import { AvatarOriginType, CommentModel } from '@src/common/model';
+import { AvatarOriginType } from '@src/common/model';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@src/hooks/useTypedSelector';
 import { setVisitorInfo } from '@redux/slices/visitor/visitorSlice';
 
-export interface CommentInputInfo {
+export interface CommentEditInput {
     nickname: string;
     email?: string;
     avatar?: string;
@@ -31,14 +31,14 @@ export interface CommentInputInfo {
 }
 
 interface ComProps {
-    quote?: CommentModel;
+    quote?: string;
     rows?: number;
-    onSubmit?: (edit: CommentInputInfo) => Promise<boolean>;
+    onSubmit?: (edit: CommentEditInput) => Promise<boolean> | boolean;
 }
 
 const { Text } = Typography;
 
-const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
+const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
     const dispatch = useDispatch();
     const visitor = useTypedSelector((state) => state.visitor);
 
@@ -64,7 +64,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
         // console.log('quote 触发');
         if (quote) {
             // 换行替换程引用符号
-            let quoteContent = quote.content.replace(new RegExp('\n', 'g'), '\n > ');
+            let quoteContent = quote.replace(new RegExp('\n', 'g'), '\n > ');
             quoteContent = quoteContent + '\n\n' + content || '';
             quoteContent = '> ' + quoteContent;
             setContent(quoteContent);
@@ -114,7 +114,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
             return;
         }
 
-        onSubmit &&
+        Promise.resolve(
             onSubmit({
                 nickname,
                 email,
@@ -123,7 +123,19 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit }) => {
                 avatarOrigin,
                 content,
                 visitorId: visitor.visitorId,
-            }).then(() => setContent(''));
+            })
+        )
+            .then((res) => {
+                if (res === false) {
+                    return;
+                }
+
+                // 清空输入
+                setContent('');
+            })
+            .catch((error) => {
+                // if user pass reject promise, no need to do anything
+            });
     };
 
     const handleVisitorInputCancel = () => {};

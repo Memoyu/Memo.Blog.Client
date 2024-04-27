@@ -7,11 +7,11 @@ import MarkdownNav from '@components/markdown-nav';
 import { Tag, Space, Toast, Typography } from '@douyinfe/semi-ui';
 
 import Container from '@components/layout/container';
-import Comment from '@components/comment';
+import CommentList from './components/comment-list';
 import LabelList from './components/label-list';
 import PageBanner from '@components/page-banner';
 
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useData } from '@src/hooks/useData';
 
 import { ArticleModel } from '@src/common/model';
@@ -28,7 +28,7 @@ const Index = () => {
     const params = useParams();
 
     const [article, loading, setArticle, setLoading] = useData<ArticleModel>({} as ArticleModel);
-    const [comments, setComments] = useState();
+    const [articleId, setArticleId] = useState<string>('');
 
     // 获取文章详情
     let getArticleDetail = async (id: string) => {
@@ -48,6 +48,7 @@ const Index = () => {
         var articleId = params.id;
         // console.log(params);
         if (articleId) {
+            setArticleId(articleId);
             getArticleDetail(articleId);
         }
     }, []);
@@ -93,17 +94,17 @@ const Index = () => {
                 </div>
             </div>
             <Container className="article-detail-content">
-                {/* <Space wrap>
-                    {article?.tags.map((item) => (
+                <MarkdownNav content={article?.content} />
+
+                <NavLink to={'/*'}>T</NavLink>
+                <MarkDown content={article?.content} />
+                <Space wrap>
+                    {article?.tags?.map((item) => (
                         <Tag key={item.tagId}>{item.name}</Tag>
                     ))}
-                </Space> */}
-
-                <MarkDown content={article?.content} />
-                <MarkdownNav content={article?.content} />
+                </Space>
+                <CommentList articleId={articleId} />
             </Container>
-            {/* TODO:完善评论系统 */}
-            {/* <Comment comments={comments} /> */}
         </div>
     );
 };

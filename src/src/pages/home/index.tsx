@@ -6,6 +6,7 @@ import CallMe from '../../components/call-me';
 
 import './index.scss';
 import { usePageVisit } from '@src/hooks/usePageVisit';
+import Footer from '@src/components/layout/footer';
 
 const { Title } = Typography;
 
@@ -48,6 +49,7 @@ const Index = () => {
                     </div>
                 </div>
             </PageBanner>
+            <Footer />
         </div>
     );
 };

@@ -158,10 +158,7 @@ const Index: FC<ComProps> = ({}) => {
                                         backgroundColor: 'rgb(var(--semi-grey-0))',
                                     }}
                                 >
-                                    <Link
-                                        key={item.articleId}
-                                        to={`/article/detail/${item.articleId}`}
-                                    >
+                                    <Link key={item.articleId} to={`detail/${item.articleId}`}>
                                         {item.banner.length != 0 && (
                                             <img
                                                 src={item.banner}

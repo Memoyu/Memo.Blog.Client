@@ -1,30 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { CommentModel, CommentPageRequest, CommentType } from '@src/common/model';
+import { CommentModel } from '@src/common/model';
 
-const initPage = {
-    belongId: undefined,
-    commentType: CommentType.Moment,
-    page: 1,
-    size: 7,
-} as CommentPageRequest;
-
-const momentCommentPageSlice = createSlice({
-    name: 'moment-commemt-list-page',
-    initialState: initPage,
+const momentCommentMomentIdSlice = createSlice({
+    name: 'moment-commemt-list-moment-id',
+    initialState: '',
     reducers: {
-        setMomentId: (state: CommentPageRequest, action: PayloadAction<string>) => {
-            state.belongId = action.payload;
-            return state;
-        },
-
-        nextPage: (state: CommentPageRequest) => {
-            state.page += 1;
-            return state;
-        },
-
-        firstPage: (state: CommentPageRequest) => {
-            state.page = initPage.page;
+        setMomentId: (state: string, action: PayloadAction<string>) => {
+            state = action.payload;
             return state;
         },
     },
@@ -75,10 +58,10 @@ const momentCommentSlice = createSlice({
     },
 });
 
-export const { setMomentId, nextPage, firstPage } = momentCommentPageSlice.actions;
+export const { setMomentId } = momentCommentMomentIdSlice.actions;
 
 export const { setMomentComments, pushMomentComment, unshiftMomentComment } =
     momentCommentSlice.actions;
 
-export const MomentCommentPageReducer = momentCommentPageSlice.reducer;
+export const MomentCommentMomentIdReducer = momentCommentMomentIdSlice.reducer;
 export const MomentCommentReducer = momentCommentSlice.reducer;

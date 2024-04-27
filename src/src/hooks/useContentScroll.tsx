@@ -1,17 +1,15 @@
 import { useEffect } from 'react';
 import { throttle } from 'lodash';
-import { BLOG_LAYOUT_CONTENT_ID } from '@src/common/constant';
 
 export interface IScrollProps {
     scrollTop: number;
 }
 
-const contentId = BLOG_LAYOUT_CONTENT_ID;
-
 export function useContentScroll(effect: (props: IScrollProps) => void) {
-    const getContentElement = () => document.getElementById(contentId);
+    const getContentElement = () => document.documentElement;
 
     const handleScroll = () => {
+        // console.log('22222', document.documentElement.scrollTop, document.body.scrollTop);
         let st = getContentElement()?.scrollTop ?? 0;
         effect({ scrollTop: st });
     };
@@ -20,10 +18,9 @@ export function useContentScroll(effect: (props: IScrollProps) => void) {
     const throttledScrollHandler = throttle(handleScroll, 200);
 
     useEffect(() => {
-        let contentElement = getContentElement();
-        contentElement?.addEventListener('scroll', throttledScrollHandler);
+        window.addEventListener('scroll', throttledScrollHandler);
         return () => {
-            contentElement?.removeEventListener('scroll', throttledScrollHandler);
+            window.removeEventListener('scroll', throttledScrollHandler);
         };
     }, []);
 }

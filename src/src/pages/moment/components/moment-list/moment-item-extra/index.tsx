@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { setMomentId, firstPage } from '@redux/slices/moment/momentCommentSlice';
+import { setMomentId } from '@redux/slices/moment/momentCommentSlice';
 
 import './index.scss';
 import { Space, TagGroup, Typography } from '@douyinfe/semi-ui';
@@ -18,7 +18,6 @@ const Index: FC<ComProps> = ({ moment }) => {
     const dispatch = useDispatch();
 
     const handleReplyMomentClick = (moment: MomentModel) => {
-        dispatch(firstPage());
         dispatch(setMomentId(moment.momentId));
     };
 

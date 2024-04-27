@@ -40,9 +40,10 @@ const Index = () => {
             <PageBanner image="http://oss.blog.memoyu.com/articles/banner/6732956b-728a-47cc-9769-defced63cda0.png" />
             <Container className="about-me-content">
                 <Space wrap style={{ display: 'flex', justifyContent: 'center' }}>
-                    {about?.tags.map((t) => {
+                    {about?.tags?.map((t) => {
                         return (
                             <Tag
+                                key={t}
                                 size="large"
                                 style={{
                                     fontSize: 14,

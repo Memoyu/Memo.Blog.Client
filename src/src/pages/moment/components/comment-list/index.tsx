@@ -5,15 +5,11 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@src/hooks/useTypedSelector';
 
-import {
-    unshiftMomentComment,
-    setMomentComments,
-    nextPage,
-} from '@redux/slices/moment/momentCommentSlice';
+import { unshiftMomentComment, setMomentComments } from '@redux/slices/moment/momentCommentSlice';
 import { increaseMomentComments } from '@redux/slices/moment/momentSlice';
 
 import CommentItem from './comment-item';
-import CommentEdit, { CommentInputInfo } from '@src/components/comment-edit';
+import CommentEdit, { CommentEditInput } from '@src/components/comment-edit';
 
 import { commentPage, commentCreate } from '@utils/request';
 
@@ -27,20 +23,25 @@ interface ComProps {
 
 const Index: FC<ComProps> = ({ height = 1000 }) => {
     const dispatch = useDispatch();
-    const momentCommentPage = useTypedSelector((state) => state.momentCommentPage);
+    const momentId = useTypedSelector((state) => state.momentCommentMomentId);
     const comments = useTypedSelector((state) => state.momentComments);
 
+    const commentPageSize = 7;
     const [commentLoading, setCommentLoading] = useState<boolean>();
-    const momentPageRef = useRef<number>(1);
+    const commentPageRef = useRef<number>(1);
     const commentTotalRef = useRef<number>(Infinity);
 
-    // 获取文章
+    // 获取动态评论
     let getMomentCommentPage = () => {
         setCommentLoading(true);
 
-        console.log('momentCommentPage', momentCommentPage);
-
-        commentPage({ ...momentCommentPage, page: momentPageRef.current })
+        let request = {
+            belongId: momentId,
+            commentType: CommentType.Moment,
+            page: commentPageRef.current,
+            size: commentPageSize,
+        } as CommentPageRequest;
+        commentPage(request)
             .then((res) => {
                 if (!res.isSuccess || !res.data) {
                     Toast.error(res.message);
@@ -51,19 +52,19 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
                 dispatch(
                     setMomentComments({
                         comments: res.data.items,
-                        init: momentPageRef.current == 1, // momentCommentPage.page == 1,
+                        init: commentPageRef.current == 1,
                     })
                 );
             })
             .finally(() => setCommentLoading(false));
     };
 
-    const handleCommentSubmit = async (input: CommentInputInfo) => {
+    const handleCommentSubmit = async (input: CommentEditInput) => {
         let res = await commentCreate({
             visitorId: input.visitorId,
             content: input.content,
             commentType: CommentType.Moment,
-            belongId: momentCommentPage.belongId!, // 能提交评论，说明一定存在momentid
+            belongId: momentId, // 能提交评论，说明一定存在momentid
         });
 
         if (!res.isSuccess || !res.data) {
@@ -72,25 +73,25 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
         }
 
         dispatch(unshiftMomentComment(res.data));
-        dispatch(increaseMomentComments({ momentId: momentCommentPage.belongId!, count: 1 }));
+        dispatch(increaseMomentComments({ momentId: momentId, count: 1 }));
 
         return true;
     };
 
     let loadMoreMomentCommentPage = () => {
         // console.log('加载更多');
-        // dispatch(nextPage());
-        momentPageRef.current += 1;
+        commentPageRef.current += 1;
         getMomentCommentPage();
     };
 
     useEffect(() => {
+        commentPageRef.current = 1;
         getMomentCommentPage();
-    }, []);
+    }, [momentId]);
 
     return (
         <div className="moment-comment-list-wrap">
-            {/* {momentCommentPage.belongId && (
+            {momentId && (
                 <div className="moment-comment-edit">
                     <div
                         style={{
@@ -99,10 +100,10 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
                             padding: 10,
                         }}
                     >
-                        <CommentEdit rows={4} onSubmit={handleCommentSubmit} />
+                        <CommentEdit rows={4} onSubmit={(e) => handleCommentSubmit(e)} />
                     </div>
                 </div>
-            )} */}
+            )}
             <div
                 className="moment-comment-list"
                 style={{ maxHeight: height, padding: 5, overflow: 'auto' }} // , overflowX: 'hidden'
