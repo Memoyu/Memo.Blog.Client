@@ -1,5 +1,5 @@
-import { CSSProperties, useState } from 'react';
-import { Button, Divider, Modal, Typography } from '@douyinfe/semi-ui';
+import { CSSProperties } from 'react';
+import { Typography } from '@douyinfe/semi-ui';
 
 import { IconConfig, IconToken } from '@douyinfe/semi-icons-lab';
 
@@ -26,7 +26,7 @@ const Index = () => {
     return (
         <div className="blog-labs">
             <PageBanner image="http://oss.blog.memoyu.com/articles/banner/c683e041-e268-44b1-9076-023ce8230d5f.png" />
-            <Container>
+            <Container style={{ marginBottom: 20 }}>
                 <div style={dividerStyle}>
                     <IconConfig style={{ marginRight: 10, fontSize: 20 }} />
                     <Title heading={5}> 常用工具</Title>

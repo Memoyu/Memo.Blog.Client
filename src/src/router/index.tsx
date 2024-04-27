@@ -1,52 +1,45 @@
-import React, { lazy, FC } from 'react';
+import React, { FC } from 'react';
 import { RouteObject } from 'react-router';
 import { AnimatePresence } from 'framer-motion';
 import { useLocation, useRoutes } from 'react-router-dom';
 import { WrapperRouteComponent, initTitleTick } from './config';
-import Layout from '@components/layout';
 import Empty from '@components/empty';
 
-const Home = lazy(() => import('@pages/home'));
+import Home from '@pages/home';
 
-const Article = lazy(() => import('@pages/article'));
-const ArticleDetail = lazy(() => import('@pages/article/detail'));
+import Article from '@pages/article';
+import ArticleDetail from '@pages/article/detail';
 
-const Labs = lazy(() => import('@pages/labs'));
+import Labs from '@pages/labs';
 
-const Moment = lazy(() => import('@pages/moment'));
+import Moment from '@pages/moment';
 
-const About = lazy(() => import('@pages/about'));
+import About from '@pages/about';
 
 const routeList: RouteObject[] = [
     {
         path: '/',
-        element: <WrapperRouteComponent element={<Layout />} title="" />,
-        children: [
-            {
-                path: '/',
-                element: <WrapperRouteComponent element={<Home />} title="首页" />,
-            },
-            {
-                path: 'article',
-                element: <WrapperRouteComponent element={<Article />} title="文章" />,
-            },
-            {
-                path: 'article/detail/:id',
-                element: <WrapperRouteComponent element={<ArticleDetail />} title="文章详情" />,
-            },
-            {
-                path: 'moment',
-                element: <WrapperRouteComponent element={<Moment />} title="动态" />,
-            },
-            {
-                path: 'labs',
-                element: <WrapperRouteComponent element={<Labs />} title="实验室" />,
-            },
-            {
-                path: 'about',
-                element: <WrapperRouteComponent element={<About />} title="关于" />,
-            },
-        ],
+        element: <WrapperRouteComponent element={<Home />} title="首页" />,
+    },
+    {
+        path: '/article/*',
+        element: <WrapperRouteComponent element={<Article />} title="文章" />,
+    },
+    {
+        path: '/article/detail/:id',
+        element: <WrapperRouteComponent element={<ArticleDetail />} title="文章详情" />,
+    },
+    {
+        path: '/moment',
+        element: <WrapperRouteComponent element={<Moment />} title="动态" />,
+    },
+    {
+        path: '/labs',
+        element: <WrapperRouteComponent element={<Labs />} title="实验室" />,
+    },
+    {
+        path: '/about',
+        element: <WrapperRouteComponent element={<About />} title="关于" />,
     },
     {
         path: '*',
@@ -63,13 +56,10 @@ const RenderRouter: FC = () => {
     const element = useRoutes(routeList);
     const location = useLocation();
     if (!element) return null;
-
     initTitleTick();
     return (
-        // mode="wait"
         <AnimatePresence>{React.cloneElement(element, { key: location.pathname })}</AnimatePresence>
     );
-    // return React.cloneElement(element!, { key: location.pathname });
 };
 
 export default RenderRouter;

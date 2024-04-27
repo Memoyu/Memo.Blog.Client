@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { List, Toast } from '@douyinfe/semi-ui';
+import { Toast } from '@douyinfe/semi-ui';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { useDispatch } from 'react-redux';

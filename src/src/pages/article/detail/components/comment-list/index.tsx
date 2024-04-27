@@ -1,5 +1,5 @@
-import { FC, useEffect, useRef, useState } from 'react';
-import { List, Toast } from '@douyinfe/semi-ui';
+import { FC, useEffect, useRef } from 'react';
+import { Toast } from '@douyinfe/semi-ui';
 
 import CommentItem from './comment-item';
 import CommentEdit, { CommentEditInput } from '@src/components/comment-edit';
@@ -17,9 +17,9 @@ interface ComProps {
 
 const Index: FC<ComProps> = ({ articleId }) => {
     const commentPageSize = 7;
-    const [comments, commentLoading, setComments, setCommentLoading] = useData<Array<CommentModel>>(
-        []
-    );
+    const [comments, _commentLoading, setComments, setCommentLoading] = useData<
+        Array<CommentModel>
+    >([]);
     const commentPageRef = useRef<number>(1);
     const commentTotalRef = useRef<number>(Infinity);
 

@@ -10,7 +10,6 @@ import { OpenSourceProjectModel } from '@src/common/model';
 import './index.scss';
 import { getByUrl, openSourceProjectList } from '@src/utils/request';
 import MarkDown from '@src/components/markdown';
-import { Link } from 'react-router-dom';
 
 interface ComProps {}
 

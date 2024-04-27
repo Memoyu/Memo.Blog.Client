@@ -1,6 +1,6 @@
 import { FC, ReactNode, useState } from 'react';
 
-import { Avatar, Card, List, Typography } from '@douyinfe/semi-ui';
+import { Card, List, Typography } from '@douyinfe/semi-ui';
 
 import Gitmoji from '../git-moji';
 
@@ -25,7 +25,7 @@ const Index: FC<ComProps> = ({}) => {
             id: 1,
             title: 'Gitmoji',
             children: <div style={{ color: 'white', fontSize: 56 }}>🤔</div>,
-            onClick: (c) => {
+            onClick: () => {
                 setGitmojiVisible(true);
             },
         },

@@ -1,9 +1,6 @@
-import { Col, Row } from '@douyinfe/semi-ui';
-
 import Container from '@components/layout/container';
 import PageBanner from '@components/page-banner';
 import MomentList from './components/moment-list';
-import CommentList from './components/comment-list';
 import Footer from '@components/layout/footer';
 
 import { usePageVisit } from '@src/hooks/usePageVisit';

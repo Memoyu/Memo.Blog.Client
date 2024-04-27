@@ -15,7 +15,7 @@ import './index.scss';
 import { usePageVisit } from '@src/hooks/usePageVisit';
 
 const Index = () => {
-    const [about, loading, setAbout, setLoading] = useData<AboutModel>({} as AboutModel);
+    const [about, _loading, setAbout, _setLoading] = useData<AboutModel>({} as AboutModel);
 
     usePageVisit();
 

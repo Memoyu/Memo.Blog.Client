@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import type { CSSProperties, FC } from 'react';
-import { List, Col, Row, Button, Modal, Toast, Typography, Card } from '@douyinfe/semi-ui';
+import type { FC } from 'react';
+import { List, Button, Modal, Toast, Typography, Card } from '@douyinfe/semi-ui';
 
 import './index.scss';
 

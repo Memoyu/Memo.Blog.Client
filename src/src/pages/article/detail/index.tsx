@@ -1,17 +1,16 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 
 import MarkDown from '@components/markdown';
 import MarkdownNav from '@components/markdown-nav';
-import { Tag, Space, Toast, Typography } from '@douyinfe/semi-ui';
+import { Toast, Typography } from '@douyinfe/semi-ui';
 
 import Container from '@components/layout/container';
 import CommentList from './components/comment-list';
 import LabelList from './components/label-list';
 import PageBanner from '@components/page-banner';
 
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useData } from '@src/hooks/useData';
 
 import { ArticleModel } from '@src/common/model';
@@ -27,7 +26,7 @@ const { Title, Text } = Typography;
 const Index = () => {
     const params = useParams();
 
-    const [article, loading, setArticle, setLoading] = useData<ArticleModel>({} as ArticleModel);
+    const [article, _loading, setArticle, _setLoading] = useData<ArticleModel>({} as ArticleModel);
     const [articleId, setArticleId] = useState<string>('');
 
     // 获取文章详情
@@ -94,15 +93,14 @@ const Index = () => {
                 </div>
             </div>
             <Container className="article-detail-content">
-                <MarkdownNav content={article?.content} />
-
-                <NavLink to={'/*'}>T</NavLink>
-                <MarkDown content={article?.content} />
-                <Space wrap>
-                    {article?.tags?.map((item) => (
+                {/* <Space wrap>
+                    {article?.tags.map((item) => (
                         <Tag key={item.tagId}>{item.name}</Tag>
                     ))}
-                </Space>
+                </Space> */}
+
+                <MarkDown content={article?.content} />
+                <MarkdownNav content={article?.content} />
                 <CommentList articleId={articleId} />
             </Container>
         </div>

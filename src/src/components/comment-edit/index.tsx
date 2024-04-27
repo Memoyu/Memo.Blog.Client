@@ -57,7 +57,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
     };
 
     const getGithubAvatar = (val?: string) => {
-        return 'git';
+        return val || '';
     };
 
     const buildQuoteContent = () => {
@@ -124,18 +124,17 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
                 content,
                 visitorId: visitor.visitorId,
             })
-        )
-            .then((res) => {
-                if (res === false) {
-                    return;
-                }
+        ).then((res) => {
+            if (res === false) {
+                return;
+            }
 
-                // 清空输入
-                setContent('');
-            })
-            .catch((error) => {
-                // if user pass reject promise, no need to do anything
-            });
+            // 清空输入
+            setContent('');
+        });
+        // .catch((error) => {
+        //     // if user pass reject promise, no need to do anything
+        // });
     };
 
     const handleVisitorInputCancel = () => {};

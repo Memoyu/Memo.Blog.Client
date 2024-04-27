@@ -27,8 +27,8 @@ export function usePageVisit(visitedId?: string) {
         let visitor = store.getState().visitor;
 
         //TODO: 获取当前设备信息
-        const userAgent = window.navigator.userAgent;
-        const platform = window.navigator.platform;
+        // const userAgent = window.navigator.userAgent;
+        // const platform = window.navigator.platform;
         // console.log('platform', platform, userAgent);
         let os = '';
         let browser = '';

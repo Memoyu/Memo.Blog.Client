@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Col, Row, Typography } from '@douyinfe/semi-ui';
 
 import './index.scss';

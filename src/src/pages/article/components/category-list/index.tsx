@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { RadioGroup, Toast } from '@douyinfe/semi-ui';
@@ -10,18 +10,16 @@ import { articleCategoryList } from '@src/utils/request';
 
 import './index.scss';
 
-interface ComProps {
-    onChange?: (categoryId: string) => void;
-}
+interface ComProps {}
 
 const initCategory: OptionItem = { value: '0' };
 
-const Index: FC<ComProps> = ({ onChange }) => {
+const Index: FC<ComProps> = ({}) => {
     const navigate = useNavigate();
     const [params] = useSearchParams();
 
     const [value, setValue] = useState<string>('0');
-    const [loading, setLoading] = useState<boolean>(false);
+    const [_loading, setLoading] = useState<boolean>(false);
     const [categoryOpts, setCategoryOpts] = useState<Array<OptionItem>>([]);
 
     // 获取文章分类

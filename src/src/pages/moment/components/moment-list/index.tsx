@@ -1,6 +1,6 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
-import { Avatar, Typography, Space, Timeline, Toast, Tag, List } from '@douyinfe/semi-ui';
+import { Avatar, Typography, Space, Timeline, Toast, Tag } from '@douyinfe/semi-ui';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import MarkDown from '@components/markdown';
@@ -15,7 +15,7 @@ import { Data } from '@douyinfe/semi-ui/lib/es/timeline';
 import { MomentModel, MomentPageRequest } from '@common/model';
 import { useTypedSelector } from '@src/hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
-import { setMoments, unshiftMoment } from '@redux/slices/moment/momentSlice';
+import { setMoments } from '@redux/slices/moment/momentSlice';
 
 import './index.scss';
 

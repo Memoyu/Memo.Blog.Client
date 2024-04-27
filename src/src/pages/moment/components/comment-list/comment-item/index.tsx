@@ -148,7 +148,11 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens }) => {
                             padding: 10,
                         }}
                     >
-                        <CommentEdit quote={quote} rows={4} onSubmit={handleCommentSubmit} />
+                        <CommentEdit
+                            quote={quote?.content}
+                            rows={4}
+                            onSubmit={handleCommentSubmit}
+                        />
                     </div>
                 )}
 

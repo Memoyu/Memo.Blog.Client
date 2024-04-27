@@ -1,14 +1,71 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { PathRouteProps } from 'react-router';
+import { motion, useIsPresent } from 'framer-motion';
 
 export interface WrapperRouteProps extends PathRouteProps {
     title: string;
+    withaAnimate?: boolean;
 }
 
 let globalTitle = '';
 
-const WitchRoute = (props: PathRouteProps) => {
+const DefaultRoute = (props: PathRouteProps) => {
     return props.element;
+};
+
+const AnimateRoute = (props: PathRouteProps) => {
+    const isPresent = useIsPresent();
+
+    const contentWrapProps = {
+        id: 'blog-layout-content-wrap',
+    };
+
+    useEffect(() => {
+        if (!isPresent) {
+            // console.log('组件移除');
+            let wrap = document.getElementById(contentWrapProps.id);
+            if (wrap) {
+                let top = getScrollTop();
+                // console.log('组件移除', top);
+                window.scrollTo(0, 0);
+                wrap.style.position = 'absolute';
+                wrap.style.top = '0px';
+                wrap.style.left = '0px';
+                wrap.style.width = '100%';
+                wrap.style.height = '100vh';
+                wrap.style.overflow = 'hidden';
+                wrap.scrollTop = top;
+            }
+        } else {
+            // console.log('组件创建');
+        }
+    }, [isPresent]);
+
+    const getScrollTop = () => {
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    };
+
+    return (
+        <div {...contentWrapProps}>
+            <motion.div
+                initial={{ opacity: 0, translateY: 0 }}
+                animate={{
+                    opacity: [0, 0, 1],
+                    translateY: [200, 200, 0],
+                    transition: { duration: 1, ease: 'easeInOut' },
+                }}
+                exit={{
+                    scale: [1, 0.88, 0.88],
+                    opacity: [1, 0.7, 0],
+                    transformOrigin: ['center', 'bottom'],
+                    transition: { duration: 0.7, ease: 'easeInOut' },
+                }}
+                //  transition={{ duration: 1, ease: 'easeInOut' }}
+            >
+                {props.element}
+            </motion.div>
+        </div>
+    );
 };
 
 const buildDocumentTitle = (titleId: string) => {
@@ -16,7 +73,9 @@ const buildDocumentTitle = (titleId: string) => {
     return globalTitle;
 };
 
-const WrapperRouteComponent: FC<WrapperRouteProps> = (props) => {
+const WrapperRouteComponent: FC<WrapperRouteProps> = ({ withaAnimate = true, ...props }) => {
+    const WitchRoute = withaAnimate ? AnimateRoute : DefaultRoute;
+    //const WitchRoute = DefaultRoute;
     let title = props.title;
     if (title) {
         document.title = buildDocumentTitle(title);

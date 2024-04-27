@@ -1,7 +1,8 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Toast } from '@douyinfe/semi-ui';
-import { store } from '@redux/store';
+
+const baseURL = import.meta.env.VITE_BASE_API;
 
 type Result<T> = {
     isSuccess: boolean; // 是否成功
@@ -15,7 +16,7 @@ export class Request {
     // axios 实例
     instance: AxiosInstance;
     // 基础配置，url和超时时间
-    baseConfig: AxiosRequestConfig = { baseURL: '/api/', timeout: 10_000 };
+    baseConfig: AxiosRequestConfig = { baseURL: baseURL + 'api/', timeout: 10_000 };
 
     constructor(config: AxiosRequestConfig) {
         // 使用axios.create创建axios实例
@@ -23,13 +24,14 @@ export class Request {
 
         this.instance.interceptors.request.use(
             function (config) {
-                const token = store.getState().userLogin?.token;
-                if (token) {
-                    config.headers.Authorization = `Bearer ${token}`; //携带权限参数
-                }
+                // const token = store.getState().userLogin?.token;
+                // if (token) {
+                //     config.headers.Authorization = `Bearer ${token}`; //携带权限参数
+                // }
                 // 在发送请求之前做些什么
                 return config;
             },
+
             function (error) {
                 // 对请求错误做些什么
                 return Promise.reject(error);

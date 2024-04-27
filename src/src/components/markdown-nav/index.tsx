@@ -6,10 +6,9 @@ import './index.scss';
 
 interface Props {
     content?: string;
-    setNavShow?: Function;
 }
 
-const Navigation: React.FC<Props> = ({ content, setNavShow }) => {
+const Navigation: React.FC<Props> = ({ content }) => {
     const [navVisible, setNavVisible] = useState(true);
 
     return (

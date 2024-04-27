@@ -2,7 +2,7 @@ import { FC, useState, useRef, CSSProperties, useEffect } from 'react';
 import { Masonry } from 'react-plock';
 import { Card, Badge, TagGroup, Toast, Typography } from '@douyinfe/semi-ui';
 import { IconActivity, IconVerify } from '@douyinfe/semi-icons';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import StickyBox from 'react-sticky-box';
 import { useIsPresent } from 'framer-motion';
@@ -110,14 +110,6 @@ const Index: FC<ComProps> = ({}) => {
         }
     });
 
-    // 触发分类选中
-    let handleCategoryChange = (categoryId: string) => {
-        //console.log('ccccc', categoryId);
-        // currentPageRef.current = 1;
-        // categoryIdRef.current = categoryId;
-        // getArticlePage();
-    };
-
     // 获取文章角标
     let getArticleBadge = (item: ArticlePageModel) => {
         let sty = { fontSize: 20 } as CSSProperties;
@@ -135,7 +127,7 @@ const Index: FC<ComProps> = ({}) => {
         <div className="article-list-container">
             {isPresent && (
                 <StickyBox offsetTop={58} className="article-list-container-category-sticky">
-                    <CategoryList onChange={(id) => handleCategoryChange(id)} />
+                    <CategoryList />
                 </StickyBox>
             )}
             <Container>
@@ -147,7 +139,7 @@ const Index: FC<ComProps> = ({}) => {
                             gap: [24, 16, 16, 16],
                             media: [520, 640, 768, 1024],
                         }}
-                        render={(item: ArticlePageModel, idx: number) => (
+                        render={(item: ArticlePageModel) => (
                             <Badge key={item.articleId} count={getArticleBadge(item)} type="danger">
                                 <Card
                                     className="article-item-card"
@@ -158,7 +150,11 @@ const Index: FC<ComProps> = ({}) => {
                                         backgroundColor: 'rgb(var(--semi-grey-0))',
                                     }}
                                 >
-                                    <Link key={item.articleId} to={`detail/${item.articleId}`}>
+                                    <NavLink
+                                        // key={item.articleId}
+                                        to={`detail/${item.articleId}`}
+                                        //to={`/detail`}
+                                    >
                                         {item.banner.length != 0 && (
                                             <img
                                                 src={item.banner}
@@ -176,7 +172,7 @@ const Index: FC<ComProps> = ({}) => {
                                         >
                                             {item.title}
                                         </Title>
-                                    </Link>
+                                    </NavLink>
                                     <div style={{ margin: 20 }}>
                                         <Text type="tertiary">{item.description}</Text>
                                     </div>
