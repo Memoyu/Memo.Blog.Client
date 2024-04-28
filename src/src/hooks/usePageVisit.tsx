@@ -18,11 +18,11 @@ export function usePageVisit(visitedId?: string) {
 
         if (!initialized.current) {
             initialized.current = true;
-            addVisitLog();
+            createVisitLog();
         }
     }, []);
 
-    const addVisitLog = () => {
+    const createVisitLog = () => {
         // 获取访客信息
         let visitor = store.getState().visitor;
 
@@ -40,20 +40,19 @@ export function usePageVisit(visitedId?: string) {
             browser,
         } as VisitorLogEditRequest;
 
+        // 再次确保visitorId是存在的，做一次兜底
         if (!visitor.visitorId) {
             visitorCreate({}).then((res) => {
                 if (!res.isSuccess || !res.data) return;
-                log.visitorId = res.data;
-                store.dispatch(initVisitorId(log.visitorId));
-                createVisitLog(log);
+                store.dispatch(initVisitorId(res.data));
+                doCreateVisitLog(log);
             });
         } else {
-            log.visitorId = visitor.visitorId;
-            createVisitLog(log);
+            doCreateVisitLog(log);
         }
     };
 
-    let createVisitLog = (visitLog: VisitorLogEditRequest) => {
+    let doCreateVisitLog = (visitLog: VisitorLogEditRequest) => {
         // console.log('visitLogCreate', visitLog);
         visitLogCreate(visitLog);
     };

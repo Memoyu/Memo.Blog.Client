@@ -59,7 +59,6 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
         let edit = {
             parentId,
             replyId,
-            visitorId: input.visitorId,
             content: input.content,
             commentType: CommentType.Article,
             belongId: comment.belongId,

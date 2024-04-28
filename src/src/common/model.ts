@@ -159,7 +159,6 @@ export enum CommentType {
 export interface CommentEditRequest {
     parentId?: string;
     replyId?: string;
-    visitorId: string;
     content: string;
     commentType: CommentType;
     belongId: string;
@@ -198,7 +197,6 @@ export interface CommentModel {
 //#region 访客信息
 
 export interface VisitorEditRequest {
-    visitorId?: string;
     nickname?: string;
     email?: string;
     avatar?: string;
@@ -216,7 +214,6 @@ export interface VisitorModel {
 }
 
 export interface VisitorLogEditRequest {
-    visitorId: string;
     path: string;
     visitedId?: string;
     os?: string;

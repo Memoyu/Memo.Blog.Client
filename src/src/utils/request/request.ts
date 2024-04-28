@@ -1,6 +1,7 @@
 import axios from 'axios';
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Toast } from '@douyinfe/semi-ui';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { store } from '@redux/store';
 
 const baseURL = import.meta.env.VITE_BASE_API;
 
@@ -24,10 +25,11 @@ export class Request {
 
         this.instance.interceptors.request.use(
             function (config) {
-                // const token = store.getState().userLogin?.token;
-                // if (token) {
-                //     config.headers.Authorization = `Bearer ${token}`; //携带权限参数
-                // }
+                const visitorId = store.getState().visitor?.visitorId;
+                if (visitorId) {
+                    config.headers['Visitor-Id'] = visitorId; //携带访客Id
+                }
+
                 // 在发送请求之前做些什么
                 return config;
             },

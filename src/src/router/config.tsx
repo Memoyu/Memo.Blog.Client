@@ -75,7 +75,7 @@ const buildDocumentTitle = (titleId: string) => {
 
 const WrapperRouteComponent: FC<WrapperRouteProps> = ({ withaAnimate = true, ...props }) => {
     const WitchRoute = withaAnimate ? AnimateRoute : DefaultRoute;
-    //const WitchRoute = DefaultRoute;
+
     let title = props.title;
     if (title) {
         document.title = buildDocumentTitle(title);

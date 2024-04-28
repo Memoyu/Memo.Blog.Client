@@ -39,7 +39,11 @@ const visitorSlice = createSlice({
 
             setLocalStorage(VISITOR_INFO, JSON.stringify(state));
 
-            visitorUpdate({ ...state });
+            visitorUpdate({ ...state }).then((res) => {
+                if (!res.isSuccess || !res.data) return;
+                state.visitorId = res.data;
+                setLocalStorage(VISITOR_INFO, JSON.stringify(state));
+            });
 
             return state;
         },

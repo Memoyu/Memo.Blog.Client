@@ -48,7 +48,6 @@ const Index: FC<ComProps> = ({ articleId }) => {
 
     const handleCommentSubmit = async (input: CommentEditInput) => {
         return await doCommentSubmit({
-            visitorId: input.visitorId,
             content: input.content,
             commentType: CommentType.Article,
             belongId: articleId, // 能提交评论，说明一定存在articleId
