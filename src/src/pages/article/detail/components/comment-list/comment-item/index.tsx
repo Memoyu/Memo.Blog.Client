@@ -73,7 +73,7 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
             <Avatar
                 style={{ margin: '0 10px', flexShrink: 0 }}
                 size="small"
-                src={comment.visitor.avatar}
+                src={comment.visitor?.avatar}
             />
             <div className="moment-comment-item-box">
                 <div className="moment-comment-item-box-info">
@@ -86,7 +86,7 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                     >
                         <Space spacing="tight" style={{ display: 'flex', alignItems: 'baseline' }}>
                             <Text strong>{comment.floorString}</Text>
-                            <Text className="name">{comment.visitor.nickname}</Text>
+                            <Text className="name">{comment.visitor?.nickname || '未知'}</Text>
                             <Text>{format(new Date(comment.createTime), 'yyyy-MM-dd HH:mm')}</Text>
                             <Tag size="large" color="violet">
                                 {dateDiff(new Date(comment.createTime))}

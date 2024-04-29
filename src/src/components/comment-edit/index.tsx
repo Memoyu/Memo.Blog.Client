@@ -212,7 +212,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
                     />
                 </Popconfirm>
                 <Text style={{ marginTop: 5, maxWidth: 60, wordBreak: 'break-word' }} strong>
-                    {nickname}
+                    {nickname && nickname.length > 0 ? nickname : '燕过留名'}
                 </Text>
             </div>
             <div className="moment-comment-edit-wrap-content">
