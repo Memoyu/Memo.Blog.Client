@@ -64,6 +64,12 @@ export interface ArticleAuthorModel {
     avatar: string;
 }
 
+export interface ArticleSummaryModel {
+    articles: number;
+    comments: number;
+    moments: number;
+}
+
 //#endregion
 
 //#region 分类

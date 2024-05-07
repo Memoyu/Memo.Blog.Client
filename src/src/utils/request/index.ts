@@ -16,6 +16,7 @@ import {
     CommentEditRequest,
     VisitorEditRequest,
     VisitorLogEditRequest,
+    ArticleSummaryModel,
 } from '@common/model';
 
 export const getByUrl = (url: string, params?: any) => {
@@ -23,22 +24,26 @@ export const getByUrl = (url: string, params?: any) => {
     return instance.get(url, { params });
 };
 
-// 创建访客信息
+// 创建访客
 export const visitorCreate = (request: VisitorEditRequest) => {
     return Request.post<string>('visitor/create', request);
 };
 
-// 创建访客信息
+// 更新访客
 export const visitorUpdate = (request: VisitorEditRequest) => {
     return Request.put<string>('visitor/update', request);
 };
 
-// 创建访客信息
+// 创建访问日志
 export const visitLogCreate = (request: VisitorLogEditRequest) => {
     return Request.post<string>('logger/visit/create', request);
 };
 
-//#region 文章管理
+//#region 文章
+
+export const articleSummary = () => {
+    return Request.get<ArticleSummaryModel>('article/summary');
+};
 
 export const articlePage = (request: ArticlePageRequest) => {
     return Request.get<PaginationResult<ArticlePageModel>>('article/page', { params: request });

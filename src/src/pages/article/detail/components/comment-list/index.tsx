@@ -1,5 +1,5 @@
-import { FC, useEffect, useRef } from 'react';
-import { Toast } from '@douyinfe/semi-ui';
+import { FC, useEffect, useRef, useState } from 'react';
+import { Pagination, Toast } from '@douyinfe/semi-ui';
 
 import CommentItem from './comment-item';
 import CommentEdit, { CommentEditInput } from '@src/components/comment-edit';
@@ -16,23 +16,26 @@ interface ComProps {
 }
 
 const Index: FC<ComProps> = ({ articleId }) => {
-    const commentPageSize = 7;
+    const commentPageSize = 4;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [commentTotal, setCommentTotal] = useState(1);
     const [comments, _commentLoading, setComments, setCommentLoading] = useData<
         Array<CommentModel>
     >([]);
-    const commentPageRef = useRef<number>(1);
-    const commentTotalRef = useRef<number>(Infinity);
 
     // 获取动态评论
-    let getArticleCommentPage = () => {
+    let getArticleCommentPage = (page: number = 1) => {
         setCommentLoading(true);
+        setCurrentPage(page);
 
         let request = {
             belongId: articleId,
             commentType: CommentType.Article,
-            page: commentPageRef.current,
+            page: page,
             size: commentPageSize,
         } as CommentPageRequest;
+
+        console.log(request);
         commentPage(request)
             .then((res) => {
                 if (!res.isSuccess || !res.data) {
@@ -40,8 +43,8 @@ const Index: FC<ComProps> = ({ articleId }) => {
                     return;
                 }
 
-                commentTotalRef.current = res.data.total;
                 setComments(res.data.items);
+                setCommentTotal(res.data.total || 0);
             })
             .finally(() => setCommentLoading(false));
     };
@@ -54,15 +57,19 @@ const Index: FC<ComProps> = ({ articleId }) => {
         });
     };
 
-    const doCommentSubmit = async (comment: CommentEditRequest) => {
+    const doCommentSubmit = async (comment: CommentEditRequest, page?: number) => {
         let res = await commentCreate(comment);
 
         if (!res.isSuccess || !res.data) {
             Toast.error(res.message);
             return false;
         }
-        getArticleCommentPage();
+        getArticleCommentPage(page);
         return true;
+    };
+
+    const handleCommentPageChange = (page: number) => {
+        getArticleCommentPage(page);
     };
 
     useEffect(() => {
@@ -83,17 +90,14 @@ const Index: FC<ComProps> = ({ articleId }) => {
                 </div>
             </div>
 
-            <div
-                className="moment-comment-list"
-                style={{ maxHeight: 1000, padding: 5, overflow: 'auto' }} // , overflowX: 'hidden'
-            >
+            <div className="moment-comment-list">
                 <div className="moment-comment-list">
                     {comments?.map((comment: CommentModel) => (
                         <div key={comment.commentId + 'wrap'} style={{ margin: '15px 0' }}>
                             <CommentItem
                                 key={comment.commentId}
                                 comment={comment}
-                                onCommentSubmit={doCommentSubmit}
+                                onCommentSubmit={(input) => doCommentSubmit(input, currentPage)}
                                 childrens={
                                     comment.childs &&
                                     comment.childs.length > 0 &&
@@ -101,7 +105,9 @@ const Index: FC<ComProps> = ({ articleId }) => {
                                         <CommentItem
                                             key={cc.commentId}
                                             comment={cc}
-                                            onCommentSubmit={doCommentSubmit}
+                                            onCommentSubmit={(input) =>
+                                                doCommentSubmit(input, currentPage)
+                                            }
                                         />
                                     ))
                                 }
@@ -109,6 +115,13 @@ const Index: FC<ComProps> = ({ articleId }) => {
                         </div>
                     ))}
                 </div>
+                <Pagination
+                    total={commentTotal}
+                    currentPage={currentPage}
+                    pageSize={commentPageSize}
+                    style={{ marginTop: 12 }}
+                    onPageChange={handleCommentPageChange}
+                ></Pagination>
             </div>
         </div>
     );

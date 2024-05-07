@@ -94,7 +94,7 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
                                     key={m.momentId}
                                     // time={format(new Date(m.createTime), 'yyyy-MM-dd HH:mm')}
                                     dot={<Avatar size="small" src={m.announcer.avatar} />}
-                                    extra={<MomentItemExtra moment={m} />}
+                                    // extra={<MomentItemExtra moment={m} />}
                                 >
                                     <div className="moment-list-item">
                                         <Space spacing="tight">

@@ -1,7 +1,9 @@
-import { FC } from 'react';
-import { Col, Row, Typography } from '@douyinfe/semi-ui';
+import { FC, useEffect, useState } from 'react';
+import { Col, Row, Toast, Typography } from '@douyinfe/semi-ui';
 
 import './index.scss';
+import { articleSummary } from '@src/utils/request';
+import { cloneDeep } from 'lodash';
 
 const { Text, Title } = Typography;
 
@@ -14,11 +16,32 @@ interface Summary {
 }
 
 const Index: FC<ComProps> = ({}) => {
-    const summaries: Array<Summary> = [
-        { name: '文章', value: 199, unit: '篇' },
-        { name: '动态', value: 133, unit: '个' },
-        { name: '友链', value: 177, unit: '个' },
+    const initSummaries: Array<Summary> = [
+        { name: '文章', value: 0, unit: '篇' },
+        { name: '评论', value: 0, unit: '条' },
+        { name: '动态', value: 0, unit: '条' },
     ];
+
+    const [summaries, setSummaries] = useState<Array<Summary>>(initSummaries);
+
+    // 获取文章汇总
+    let getArticleSummary = async () => {
+        let res = await articleSummary();
+        if (!res.isSuccess || !res.data) {
+            Toast.error(res.message);
+            return;
+        }
+
+        let clone = cloneDeep(initSummaries);
+        clone[0].value = res.data.articles;
+        clone[1].value = res.data.comments;
+        clone[2].value = res.data.moments;
+        setSummaries(clone);
+    };
+
+    useEffect(() => {
+        getArticleSummary();
+    }, []);
 
     return (
         <div style={{ width: 500, margin: '0 20px' }}>
@@ -32,7 +55,7 @@ const Index: FC<ComProps> = ({}) => {
                                         <Title heading={3}>{s.value}</Title>
                                         <Text style={{ marginLeft: 5 }}>{s.unit}</Text>
                                     </div>
-                                    <Title style={{ display: 'flex' }} heading={5} weight="medium">
+                                    <Title style={{ display: 'flex' }} heading={4} weight="bold">
                                         {s.name}
                                     </Title>
                                 </div>

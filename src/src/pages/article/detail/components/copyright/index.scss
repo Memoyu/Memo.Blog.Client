@@ -1,15 +1,11 @@
 .copyright-wrap {
-    position: relative;
-    .copyright-icon {
-        position: absolute;
-        right: 40px;
-        width: 118px;
-        height: 118px;
-        top: 50%;
-        transform: translate(0, -50%);
-    }
-    .copyright-content {
-        &-title {
-        }
+    display: flex;
+    padding: 20px 10px;
+    margin: 20px 0;
+    background-color: rgba(var(--semi-grey-1), 0.2);
+    border-radius: 10px;
+
+    &-title {
+        font-weight: bold;
     }
 }

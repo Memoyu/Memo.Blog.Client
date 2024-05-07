@@ -22,6 +22,7 @@ import './index.scss';
 import { dateDiff } from '@src/utils/date';
 import { usePageVisit } from '@src/hooks/usePageVisit';
 import Copyright from './components/copyright';
+import Footer from '@src/components/layout/footer';
 
 const { Title, Text } = Typography;
 
@@ -101,10 +102,11 @@ const Index = () => {
 
                 <TagList tags={article?.tags} />
 
-                <Copyright articleId={articleId} title={article?.title} />
+                <Copyright articleId={articleId} />
 
                 <CommentList articleId={articleId} />
             </Container>
+            <Footer />
         </div>
     );
 };

@@ -10,13 +10,7 @@ interface ComProps {
 
 const Index: FC<ComProps> = ({ tags }) => {
     return (
-        <div
-            style={{
-                padding: '0 10px',
-                backgroundColor: 'rgba(var(--semi-grey-1), 0.2)',
-                borderRadius: 10,
-            }}
-        >
+        <div className="tag-list-wrap">
             <Space
                 wrap
                 style={{
