@@ -19,6 +19,7 @@ import { AvatarOriginType } from '@src/common/model';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@src/hooks/useTypedSelector';
 import { setVisitorInfo } from '@redux/slices/visitor/visitorSlice';
+import { AvatarOriginTypeOpts } from '@src/common/select-options';
 
 export interface CommentEditInput {
     nickname: string;
@@ -97,6 +98,9 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
             case 2:
                 avatar = getGithubAvatar(val);
                 break;
+            default:
+                avatar = val;
+                break;
         }
 
         setAvatar(avatar);
@@ -145,6 +149,8 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
             return;
         }
 
+        console.log(avatarOrigin);
+
         // 更新游客信息
         dispatch(
             setVisitorInfo({
@@ -177,10 +183,8 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
                                         avatarOriginTypeRef.current = val as number;
                                         handleAvatarOriginChange(avatarOrigin ?? '');
                                     }}
-                                >
-                                    <Select.Option value={1}>QQ</Select.Option>
-                                    <Select.Option value={2}>GitHub</Select.Option>
-                                </Select>
+                                    optionList={AvatarOriginTypeOpts}
+                                />
                                 <Input
                                     value={avatarOrigin}
                                     onChange={handleAvatarOriginChange}

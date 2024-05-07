@@ -6,6 +6,7 @@ import { getLocalStorage, setLocalStorage } from '@utils/storage';
 import { AvatarOriginType, VisitorModel } from '@src/common/model';
 import { VISITOR_INFO } from '@common/constant';
 import { visitorUpdate } from '@src/utils/request';
+import { store } from '@src/redux/store';
 
 export interface UpdateVisitorModel {
     nickname: string;
@@ -41,8 +42,7 @@ const visitorSlice = createSlice({
 
             visitorUpdate({ ...state }).then((res) => {
                 if (!res.isSuccess || !res.data) return;
-                state.visitorId = res.data;
-                setLocalStorage(VISITOR_INFO, JSON.stringify(state));
+                store.dispatch(initVisitorId(res.data));
             });
 
             return state;

@@ -17,7 +17,6 @@ interface CommentReply {
     parentId?: string;
     commentId?: string;
     floor?: string;
-    replyTo: string;
     content: string;
 }
 
@@ -45,7 +44,6 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
             parentId: comment.parentId,
             commentId: comment.commentId,
             floor: comment.floorString,
-            replyTo: comment.visitor.nickname,
             content: comment.content,
         });
     };
@@ -121,7 +119,9 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                 </div>
                 <div className="moment-comment-item-box-reply">
                     {comment.reply && comment.reply.commentId != comment.parentId && (
-                        <Text type="tertiary">{`回复 ${comment.reply.floorString} ${comment.reply.nickname}`}</Text>
+                        <Text type="tertiary">{`回复 ${comment.reply.floorString} ${
+                            comment.reply?.nickname || '未知'
+                        }`}</Text>
                     )}
                 </div>
                 <div className="moment-comment-item-box-content">

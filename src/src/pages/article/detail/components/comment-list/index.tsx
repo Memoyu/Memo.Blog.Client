@@ -66,7 +66,7 @@ const Index: FC<ComProps> = ({ articleId }) => {
     };
 
     useEffect(() => {
-        getArticleCommentPage();
+        if (articleId) getArticleCommentPage();
     }, [articleId]);
 
     return (

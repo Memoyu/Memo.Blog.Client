@@ -3,11 +3,12 @@ import { format } from 'date-fns';
 
 import MarkDown from '@components/markdown';
 import MarkdownNav from '@components/markdown-nav';
-import { Toast, Typography } from '@douyinfe/semi-ui';
+import { Toast, Typography, Space, Tag } from '@douyinfe/semi-ui';
 
 import Container from '@components/layout/container';
 import CommentList from './components/comment-list';
 import LabelList from './components/label-list';
+import TagList from './components/tag-list';
 import PageBanner from '@components/page-banner';
 
 import { useParams } from 'react-router-dom';
@@ -20,6 +21,7 @@ import { articleGet } from '@src/utils/request';
 import './index.scss';
 import { dateDiff } from '@src/utils/date';
 import { usePageVisit } from '@src/hooks/usePageVisit';
+import Copyright from './components/copyright';
 
 const { Title, Text } = Typography;
 
@@ -93,14 +95,14 @@ const Index = () => {
                 </div>
             </div>
             <Container className="article-detail-content">
-                {/* <Space wrap>
-                    {article?.tags.map((item) => (
-                        <Tag key={item.tagId}>{item.name}</Tag>
-                    ))}
-                </Space> */}
+                <MarkdownNav content={article?.content} />
 
                 <MarkDown content={article?.content} />
-                <MarkdownNav content={article?.content} />
+
+                <TagList tags={article?.tags} />
+
+                <Copyright articleId={articleId} title={article?.title} />
+
                 <CommentList articleId={articleId} />
             </Container>
         </div>

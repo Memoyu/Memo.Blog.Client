@@ -25,8 +25,9 @@
         }
 
         &-childs {
-            padding: 10px 5px;
-            background-color: rgb(var(--semi-grey-0));
+            padding: 10px 15px;
+            background-color: rgba(var(--semi-grey-1), 0.2);
+            border-radius: 20px;
             &-box {
                 //margin-top: 15px;
                 // background-color: rgb(var(--semi-grey-0));
