@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 
 import MarkDown from '@components/markdown';
 import MarkdownNav from '@components/markdown-nav';
-import { Toast, Typography, Space, Tag } from '@douyinfe/semi-ui';
+import { Toast, Typography } from '@douyinfe/semi-ui';
 
 import Container from '@components/layout/container';
 import CommentList from './components/comment-list';

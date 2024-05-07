@@ -4,7 +4,7 @@ import { Avatar, Typography, Space, Timeline, Toast, Tag } from '@douyinfe/semi-
 import InfiniteScroll from 'react-infinite-scroller';
 
 import MarkDown from '@components/markdown';
-import MomentItemExtra from './moment-item-extra';
+// import MomentItemExtra from './moment-item-extra';
 
 import { useData } from '@src/hooks/useData';
 

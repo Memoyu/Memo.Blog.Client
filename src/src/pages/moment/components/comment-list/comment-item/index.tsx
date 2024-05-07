@@ -61,7 +61,6 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens }) => {
         let res = await commentCreate({
             parentId,
             replyId,
-            visitorId: input.visitorId,
             content: input.content,
             commentType: CommentType.Moment,
             belongId: comment.belongId,

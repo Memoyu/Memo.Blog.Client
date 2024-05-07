@@ -61,7 +61,6 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
 
     const handleCommentSubmit = async (input: CommentEditInput) => {
         let res = await commentCreate({
-            visitorId: input.visitorId,
             content: input.content,
             commentType: CommentType.Moment,
             belongId: momentId, // 能提交评论，说明一定存在momentid

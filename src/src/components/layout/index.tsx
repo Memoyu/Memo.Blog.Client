@@ -1,4 +1,4 @@
-import React, { ReactNode, Suspense } from 'react';
+import React, { ReactNode } from 'react';
 import { Layout } from '@douyinfe/semi-ui';
 
 import Header from './header';

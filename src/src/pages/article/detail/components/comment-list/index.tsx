@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Pagination, Toast } from '@douyinfe/semi-ui';
 
 import CommentItem from './comment-item';
