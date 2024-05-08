@@ -115,13 +115,15 @@ const Index: FC<ComProps> = ({ articleId }) => {
                         </div>
                     ))}
                 </div>
-                <Pagination
-                    total={commentTotal}
-                    currentPage={currentPage}
-                    pageSize={commentPageSize}
-                    style={{ marginTop: 12 }}
-                    onPageChange={handleCommentPageChange}
-                ></Pagination>
+                {commentTotal > 0 && (
+                    <Pagination
+                        total={commentTotal}
+                        currentPage={currentPage}
+                        pageSize={commentPageSize}
+                        style={{ marginTop: 12 }}
+                        onPageChange={handleCommentPageChange}
+                    />
+                )}
             </div>
         </div>
     );
