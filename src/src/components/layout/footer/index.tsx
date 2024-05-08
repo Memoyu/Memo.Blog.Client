@@ -27,6 +27,11 @@ const CustFooter: FC = () => {
                         <Text>桂公网安备</Text>
                     </a>
                 </div>
+                <div className="blog-admin">
+                    <a href="http://blog.admin.memoyu.com" rel="nofollow" target="_blank">
+                        <Text>{'---> BLOG管理端 <---'}</Text>
+                    </a>
+                </div>
                 {/* <Text>2024 © memoyu</Text> */}
             </div>
         </Footer>
