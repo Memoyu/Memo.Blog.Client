@@ -1,11 +1,12 @@
-.blog-container {
-    width: 90%;
-    max-width: 1280px;
+@import '@styles/base.scss';
+
+.blog-page-container {
     margin: auto;
+    min-height: calc(100vh - $footerHeight);
 }
 
 @media screen and (max-width: 600px) {
-    .blog-container {
+    .blog-page-container {
         width: auto;
         margin-right: 10px;
         margin-left: 10px;

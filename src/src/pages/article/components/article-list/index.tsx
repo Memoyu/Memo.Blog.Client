@@ -4,12 +4,6 @@ import { Card, Badge, TagGroup, Toast, Typography } from '@douyinfe/semi-ui';
 import { IconActivity, IconVerify } from '@douyinfe/semi-icons';
 import { NavLink } from 'react-router-dom';
 
-import StickyBox from 'react-sticky-box';
-import { useIsPresent } from 'framer-motion';
-
-import Container from '@components/layout/container';
-import CategoryList from '../category-list';
-
 import { dateDiff } from '@utils/date';
 import { articlePage } from '@utils/request';
 
@@ -27,7 +21,6 @@ interface ComProps {}
 
 const Index: FC<ComProps> = ({}) => {
     const [params] = useSearchParams();
-    const isPresent = useIsPresent();
 
     const articlesRef = useRef<Array<ArticlePageModel>>([]);
     const lastTriggerScrollTimeRef = useRef<number>(0);
@@ -125,91 +118,84 @@ const Index: FC<ComProps> = ({}) => {
 
     return (
         <div className="article-list-container">
-            {isPresent && (
-                <StickyBox offsetTop={58} className="article-list-container-category-sticky">
-                    <CategoryList />
-                </StickyBox>
-            )}
-            <Container>
-                <div style={{ marginTop: 20 }}>
-                    <Masonry
-                        items={articlesRef.current}
-                        config={{
-                            columns: [1, 2, 3, 4],
-                            gap: [24, 16, 16, 16],
-                            media: [520, 640, 768, 1024],
-                        }}
-                        render={(item: ArticlePageModel) => (
-                            <Badge key={item.articleId} count={getArticleBadge(item)} type="danger">
-                                <Card
-                                    className="article-item-card"
-                                    shadows="hover"
-                                    style={{ cursor: 'default' }}
-                                    bodyStyle={{
-                                        padding: 10,
-                                        backgroundColor: 'rgb(var(--semi-grey-0))',
+            <div style={{ marginTop: 20 }}>
+                <Masonry
+                    items={articlesRef.current}
+                    config={{
+                        columns: [1, 2, 3, 4],
+                        gap: [24, 16, 16, 16],
+                        media: [520, 640, 768, 1024],
+                    }}
+                    render={(item: ArticlePageModel) => (
+                        <Badge key={item.articleId} count={getArticleBadge(item)} type="danger">
+                            <Card
+                                className="article-item-card"
+                                shadows="hover"
+                                style={{ cursor: 'default' }}
+                                bodyStyle={{
+                                    padding: 10,
+                                    backgroundColor: 'rgb(var(--semi-grey-0))',
+                                }}
+                            >
+                                <NavLink
+                                    // key={item.articleId}
+                                    to={`detail/${item.articleId}`}
+                                    //to={`/detail`}
+                                >
+                                    {item.banner.length != 0 && (
+                                        <img
+                                            src={item.banner}
+                                            loading="lazy"
+                                            style={{
+                                                width: '100%',
+                                                height: 'auto',
+                                            }}
+                                        />
+                                    )}
+
+                                    <Title
+                                        style={{ textAlign: 'center', margin: '10px 0' }}
+                                        heading={5}
+                                    >
+                                        {item.title}
+                                    </Title>
+                                </NavLink>
+                                <div style={{ margin: 20 }}>
+                                    <Text type="tertiary">{item.description}</Text>
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        margin: '0 15px',
+                                        marginBottom: 10,
                                     }}
                                 >
-                                    <NavLink
-                                        // key={item.articleId}
-                                        to={`detail/${item.articleId}`}
-                                        //to={`/detail`}
-                                    >
-                                        {item.banner.length != 0 && (
-                                            <img
-                                                src={item.banner}
-                                                loading="lazy"
-                                                style={{
-                                                    width: '100%',
-                                                    height: 'auto',
-                                                }}
-                                            />
-                                        )}
-
-                                        <Title
-                                            style={{ textAlign: 'center', margin: '10px 0' }}
-                                            heading={5}
-                                        >
-                                            {item.title}
-                                        </Title>
-                                    </NavLink>
-                                    <div style={{ margin: 20 }}>
-                                        <Text type="tertiary">{item.description}</Text>
-                                    </div>
-                                    <div
+                                    <TagGroup
+                                        maxTagCount={2}
+                                        showPopover
                                         style={{
                                             display: 'flex',
-                                            justifyContent: 'space-between',
-                                            margin: '0 15px',
-                                            marginBottom: 10,
+                                            alignItems: 'center',
                                         }}
-                                    >
-                                        <TagGroup
-                                            maxTagCount={2}
-                                            showPopover
-                                            style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                            }}
-                                            tagList={item.tags.map((t) => {
-                                                return {
-                                                    tagKey: t.tagId,
-                                                    color: 'purple',
-                                                    children: t.name,
-                                                } as TagProps;
-                                            })}
-                                            size="large"
-                                        />
-                                        <Text style={{ display: 'flex', alignItems: 'center' }}>
-                                            {dateDiff(new Date(item.createTime))}
-                                        </Text>
-                                    </div>
-                                </Card>
-                            </Badge>
-                        )}
-                    />
-                </div>
-            </Container>
+                                        tagList={item.tags.map((t) => {
+                                            return {
+                                                tagKey: t.tagId,
+                                                color: 'purple',
+                                                children: t.name,
+                                            } as TagProps;
+                                        })}
+                                        size="large"
+                                    />
+                                    <Text style={{ display: 'flex', alignItems: 'center' }}>
+                                        {dateDiff(new Date(item.createTime))}
+                                    </Text>
+                                </div>
+                            </Card>
+                        </Badge>
+                    )}
+                />
+            </div>
         </div>
     );
 };

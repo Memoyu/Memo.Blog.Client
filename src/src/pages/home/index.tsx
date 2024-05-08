@@ -1,12 +1,12 @@
 import { Typography } from '@douyinfe/semi-ui';
 
+import PageContainer from '@src/components/layout/page-container';
 import PageBanner from '@components/page-banner';
 import Summary from './components/summary';
 import CallMe from '../../components/call-me';
 
 import './index.scss';
 import { usePageVisit } from '@src/hooks/usePageVisit';
-import Footer from '@src/components/layout/footer';
 
 const { Title } = Typography;
 
@@ -14,7 +14,7 @@ const Index = () => {
     usePageVisit();
 
     return (
-        <div className="blog-home">
+        <PageContainer className="blog-home">
             <PageBanner
                 height="100vh"
                 image="http://oss.blog.memoyu.com/articles/banner/2dba0a75-4bf9-471c-8ee8-fe957321a902.png"
@@ -49,8 +49,7 @@ const Index = () => {
                     </div>
                 </div>
             </PageBanner>
-            <Footer />
-        </div>
+        </PageContainer>
     );
 };
 

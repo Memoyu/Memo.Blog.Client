@@ -9,7 +9,7 @@ interface ComProps {
 
 const Index: FC<ComProps> = ({ style, className, children }) => {
     return (
-        <div style={style} className={`blog-container ${className}`}>
+        <div style={style} className={`blog-content-container ${className ?? ''}`}>
             {children}
         </div>
     );

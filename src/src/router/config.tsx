@@ -18,6 +18,8 @@ const AnimateRoute = (props: PathRouteProps) => {
 
     const contentWrapProps = {
         id: 'blog-layout-content-wrap',
+        // 测试用
+        // style: { backgroundColor: 'red' },
     };
 
     useEffect(() => {
@@ -26,7 +28,7 @@ const AnimateRoute = (props: PathRouteProps) => {
             let wrap = document.getElementById(contentWrapProps.id);
             if (wrap) {
                 let top = getScrollTop();
-                // console.log('组件移除', top);
+                // console.log('组件移除', top, wrap);
                 window.scrollTo(0, 0);
                 wrap.style.position = 'absolute';
                 wrap.style.top = '0px';
@@ -46,25 +48,24 @@ const AnimateRoute = (props: PathRouteProps) => {
     };
 
     return (
-        <div {...contentWrapProps}>
-            <motion.div
-                initial={{ opacity: 0, translateY: 0 }}
-                animate={{
-                    opacity: [0, 0, 1],
-                    translateY: [200, 200, 0],
-                    transition: { duration: 1.2, ease: 'easeInOut' },
-                }}
-                exit={{
-                    scale: [1, 0.88, 0.88],
-                    opacity: [1, 0.7, 0],
-                    transformOrigin: ['center', 'bottom'],
-                    transition: { duration: 0.7, ease: 'easeInOut' },
-                }}
-                //  transition={{ duration: 1, ease: 'easeInOut' }}
-            >
-                {props.element}
-            </motion.div>
-        </div>
+        <motion.div
+            {...contentWrapProps}
+            initial={{ opacity: 0, translateY: 0 }}
+            animate={{
+                opacity: [0, 0, 1],
+                translateY: [200, 200, 0],
+                transition: { duration: 1.2, ease: 'easeInOut' },
+            }}
+            exit={{
+                scale: [1, 0.88, 0.88],
+                opacity: [1, 0.7, 0],
+                transformOrigin: ['center', 'bottom'],
+                transition: { duration: 1, ease: 'easeInOut' },
+            }}
+            //  transition={{ duration: 1, ease: 'easeInOut' }}
+        >
+            {props.element}
+        </motion.div>
     );
 };
 

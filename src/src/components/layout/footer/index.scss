@@ -1,6 +1,8 @@
 @import '@styles/base.scss';
 
 .blog-footer-wrap {
+    height: $footerHeight;
+    overflow: hidden;
     // margin-top: 20px;
     &-box {
         font-size: 14px;

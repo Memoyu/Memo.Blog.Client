@@ -5,24 +5,25 @@ import MarkDown from '@components/markdown';
 import MarkdownNav from '@components/markdown-nav';
 import { Toast, Typography } from '@douyinfe/semi-ui';
 
-import Container from '@components/layout/container';
+import PageContainer from '@src/components/layout/page-container';
+import ContentContainer from '@src/components/layout/content-container';
 import CommentList from './components/comment-list';
 import LabelList from './components/label-list';
 import TagList from './components/tag-list';
 import PageBanner from '@components/page-banner';
+import Copyright from './components/copyright';
 
 import { useParams } from 'react-router-dom';
 import { useData } from '@src/hooks/useData';
+import { usePageVisit } from '@src/hooks/usePageVisit';
+
+import { dateDiff } from '@src/utils/date';
 
 import { ArticleModel } from '@src/common/model';
 
 import { articleGet } from '@src/utils/request';
 
 import './index.scss';
-import { dateDiff } from '@src/utils/date';
-import { usePageVisit } from '@src/hooks/usePageVisit';
-import Copyright from './components/copyright';
-import Footer from '@src/components/layout/footer';
 
 const { Title, Text } = Typography;
 
@@ -56,7 +57,7 @@ const Index = () => {
     }, []);
 
     return (
-        <div>
+        <PageContainer>
             <div className="article-detail-header">
                 <div className="article-detail-header-banner">
                     <PageBanner height={400} image={article?.banner} />
@@ -95,7 +96,7 @@ const Index = () => {
                     </div>
                 </div>
             </div>
-            <Container className="article-detail-content">
+            <ContentContainer className="article-detail-content">
                 <MarkdownNav content={article?.content} />
 
                 <MarkDown content={article?.content} />
@@ -105,9 +106,8 @@ const Index = () => {
                 <Copyright articleId={articleId} />
 
                 <CommentList articleId={articleId} />
-            </Container>
-            <Footer />
-        </div>
+            </ContentContainer>
+        </PageContainer>
     );
 };
 

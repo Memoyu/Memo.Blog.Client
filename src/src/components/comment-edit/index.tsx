@@ -69,7 +69,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
             quoteContent = quoteContent + '\n\n' + content || '';
             quoteContent = '> ' + quoteContent;
             setContent(quoteContent);
-            console.log('quote', quoteContent);
+            // console.log('quote', quoteContent);
         }
     };
 
@@ -148,9 +148,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
             Toast.warning('留个名呗');
             return;
         }
-
-        console.log(avatarOrigin);
-
+        //console.log(avatarOrigin);
         // 更新游客信息
         dispatch(
             setVisitorInfo({

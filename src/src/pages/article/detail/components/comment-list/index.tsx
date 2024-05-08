@@ -35,7 +35,7 @@ const Index: FC<ComProps> = ({ articleId }) => {
             size: commentPageSize,
         } as CommentPageRequest;
 
-        console.log(request);
+        // console.log(request);
         commentPage(request)
             .then((res) => {
                 if (!res.isSuccess || !res.data) {

@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import Logo from '@components/logo';
-import Container from '@components/layout/container';
+import ContentContainer from '@src/components/layout/content-container';
 
 import { IScrollProps, useContentScroll } from '@src/hooks/useContentScroll';
 
@@ -41,7 +41,7 @@ const Index: FC<ComProps> = () => {
 
     return (
         <div className={`header-navigation ${isScrolling ? 'stick' : ''}`}>
-            <Container>
+            <ContentContainer>
                 <div className="header-navigation-inner">
                     <NavLink to="/" className="header-navigation-logo">
                         <Logo />
@@ -66,7 +66,7 @@ const Index: FC<ComProps> = () => {
                         ))}
                     </div>
                 </div>
-            </Container>
+            </ContentContainer>
         </div>
     );
 };
