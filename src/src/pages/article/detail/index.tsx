@@ -105,7 +105,7 @@ const Index = () => {
 
                 <Copyright articleId={articleId} />
 
-                <CommentList articleId={articleId} />
+                {article.commentable && <CommentList articleId={articleId} />}
             </ContentContainer>
         </PageContainer>
     );

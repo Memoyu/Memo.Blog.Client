@@ -14,7 +14,8 @@
     }
     &-banner {
         position: absolute;
-        border-radius: 12px;
+        border-bottom-left-radius: 12px; /* 左下角 */
+        border-bottom-right-radius: 12px; /* 右下角 */
         top: 0;
         left: 0;
         width: 100%;
