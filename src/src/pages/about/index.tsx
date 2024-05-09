@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Space, Tag, Toast } from '@douyinfe/semi-ui';
+import { Space, Tag, Toast, Typography } from '@douyinfe/semi-ui';
 
 import PageContainer from '@src/components/layout/page-container';
 import ContentContainer from '@src/components/layout/content-container';
@@ -14,6 +14,8 @@ import { aboutGet } from '@src/utils/request';
 import { AboutModel } from '@src/common/model';
 
 import './index.scss';
+
+const { Title } = Typography;
 
 const Index = () => {
     const [about, _loading, setAbout, _setLoading] = useData<AboutModel>({} as AboutModel);
@@ -39,8 +41,11 @@ const Index = () => {
     return (
         <div>
             <PageContainer>
-                <PageBanner image="http://oss.blog.memoyu.com/articles/banner/6732956b-728a-47cc-9769-defced63cda0.png" />
+                <PageBanner image={about.banner} />
                 <ContentContainer className="about-me-content">
+                    <Title heading={2} style={{ marginBottom: 30, textAlign: 'center' }}>
+                        {about.title}
+                    </Title>
                     <Space wrap style={{ display: 'flex', justifyContent: 'center' }}>
                         {about?.tags?.map((t) => {
                             return (
