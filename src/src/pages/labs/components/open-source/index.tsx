@@ -88,7 +88,8 @@ const Index: FC<ComProps> = ({}) => {
         <div className="com-open-source">
             <List
                 grid={{
-                    gutter: 13,
+                    gutter: 20,
+                    justify: 'center',
                 }}
                 loading={loading}
                 layout="horizontal"

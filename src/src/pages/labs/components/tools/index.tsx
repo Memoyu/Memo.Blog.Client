@@ -37,6 +37,7 @@ const Index: FC<ComProps> = ({}) => {
             <List
                 grid={{
                     gutter: 12,
+                    justify: 'center',
                 }}
                 layout="horizontal"
                 dataSource={tools}
