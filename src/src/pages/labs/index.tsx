@@ -26,7 +26,7 @@ const Index = () => {
 
     return (
         <PageContainer className="blog-labs">
-            <PageBanner image="http://oss.blog.memoyu.com/articles/banner/c683e041-e268-44b1-9076-023ce8230d5f.png" />
+            <PageBanner image="http://oss.blog.memoyu.com/page/about/banner/fc873d0f-b4bf-414b-8458-930de1d12d5d.png" />
             <ContentContainer style={{ marginBottom: 20 }}>
                 <div style={dividerStyle}>
                     <IconConfig style={{ marginRight: 10, fontSize: 20 }} />
