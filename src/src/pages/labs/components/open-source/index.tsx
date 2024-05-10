@@ -240,7 +240,7 @@ const Index: FC<ComProps> = ({}) => {
                 centered
                 bodyStyle={{
                     margin: '20px 0',
-                    height: 580,
+                    height: 'calc(100vh - 200px)',
                     overflowY: 'auto',
                     overflowX: 'hidden',
                 }}
