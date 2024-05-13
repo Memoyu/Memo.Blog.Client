@@ -5,7 +5,7 @@
   <br>
 </h1>
 <div align="center">
- <h3>基于React开发的Blog系统管理端</h3>
+ <h3>基于React开发的Blog系统客户端</h3>
  <a href="https://react.dev/"><img src="https://img.shields.io/badge/web-react-blue"/></a>
  <a href="https://semi.design/zh-CN"><img src="https://img.shields.io/badge/ui-semi.design-blue"/></a>
  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-3963bc.svg"/></a>
@@ -18,9 +18,9 @@
 
 |  |  |
 | :------------------------------: | :-------------------------------: |
-| ![dashboard](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Admin/main/docs/images/dashboard.png) |![articles](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Admin/main/docs/images/articles.png) |
-| ![article-edit](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Admin/main/docs/images/article-edit.png) |![open-source](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Admin/main/docs/images/open-source.png) |
-| ![users](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Admin/main/docs/images/users.png) |![permissions](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Admin/main/docs/images/permissions.png) |
+| ![home](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/home.png) |![article](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/article.png) |
+| ![article-detail](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/article-detail.png) |![labs](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/labs.png) |
+| ![moment](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/moment.png) |![about](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/about.png) |
 
 **线上地址：**
 
@@ -34,13 +34,11 @@
 
 ## 功能实现
 
-- Blog系统数据统计展示；
-- 文章、分类、标签、评论管理；
-- 开源项目同步/管理；
-- 系统、访问日志管理；
-- 动态、友链、关于个人等管理；
-- 用户、访客管理；
-- 角色、权限管理；
+- 首页、Blog简单统计；
+- 文章列表及文章详情；
+- 实验室：工具、开源项目等；
+- 个人动态；
+- 关于博主；
 
 
 
@@ -49,19 +47,23 @@
 | :---------------------------------: | :----------------------------------------------------------: |
 |React|[facebook/react](https://github.com/facebook/react)|
 |UI组件|[DouyinFE/semi-design](https://github.com/DouyinFE/semi-design)|
+|状态管理|[reduxjs/react-redux](https://github.com/reduxjs/react-redux)|
+|路由管理|[remix-run/react-router](https://github.com/remix-run/react-router)|
 |图表可视化|[apache/echarts](https://github.com/apache/echarts)|
 |日期处理|[date-fns/date-fns](https://github.com/date-fns/date-fns)|
-|markdown转换|[imzbf/md-editor-rt](https://github.com/imzbf/md-editor-rt)|
+|高亮样式|[highlightjs/highlight.js](https://github.com/highlightjs/highlight.js)|
+|markdown转换|[markedjs/marked](https://github.com/markedjs/marked)|
+|markdown导航栏|[parksben/markdown-navbar](https://github.com/parksben/markdown-navbar)|
 |http请求|[axios/axios](https://github.com/axios/axios)|
-
-
+|工具库|[lodash/lodash](https://github.com/lodash/lodash)|
+|无限滚动|[danbovey/react-infinite-scroller](https://github.com/danbovey/react-infinite-scroller)|
+|瀑布流布局|[askides/react-plock](https://github.com/askides/react-plock)|
+|粘性组件|[codecks-io/react-sticky-box](https://github.com/codecks-io/react-sticky-box)|
 
 ## 参考项目
-
 - [小剧客栈](https://bh-lay.com/)
 - [飞鸟小站](https://lzxjack.top/)
 - [Naccl's Blog](https://naccl.top/)
-- [Lin CMS By .NET](https://github.com/luoyunchong/lin-cms-dotnetcore)
 
 **在此，感谢各位大佬的开源**
 
