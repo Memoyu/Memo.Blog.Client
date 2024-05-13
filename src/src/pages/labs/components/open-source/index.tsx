@@ -236,7 +236,10 @@ const Index: FC<ComProps> = ({}) => {
             <Modal
                 title={modalProject?.title}
                 visible={projectDetailVisible}
-                onCancel={() => setProjectDetailVisible(false)}
+                onCancel={() => {
+                    setProjectDetailVisible(false);
+                    setReadmeContent('');
+                }}
                 centered
                 bodyStyle={{
                     margin: '20px 0',

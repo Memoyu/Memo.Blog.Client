@@ -3,6 +3,7 @@ import { store } from '@redux/store';
 import { visitorCreate, visitLogCreate } from '@src/utils/request';
 import { VisitorLogEditRequest } from '@src/common/model';
 import { initVisitorId } from '@redux/slices/visitor/visitorSlice';
+import { getBrowser, getOs } from '@src/utils/user-agent';
 
 /**
  * 访客访问记录
@@ -30,8 +31,8 @@ export function usePageVisit(visitedId?: string) {
         // const userAgent = window.navigator.userAgent;
         // const platform = window.navigator.platform;
         // console.log('platform', platform, userAgent);
-        let os = '';
-        let browser = '';
+        let os = getOs();
+        let browser = getBrowser();
 
         let log = {
             visitedId,
