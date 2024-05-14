@@ -43,6 +43,7 @@ const Index: FC<ComProps> = ({}) => {
             size: pageSize,
         } as ArticlePageRequest;
 
+        // 获取文章列表
         articlePage(request)
             .then((res) => {
                 if (!res.isSuccess || !res.data) {
@@ -90,12 +91,10 @@ const Index: FC<ComProps> = ({}) => {
             props.scrollTop + window.innerHeight + 1000 >= document.body.scrollHeight
         ) {
             // 判断是否仍然继续加载文章
-            if (
-                currentPageRef.current != 1 &&
-                articlesRef.current.length >= articleTotalRef.current
-            )
-                return;
+            if (loading || articlesRef.current.length >= articleTotalRef.current) return;
             currentPageRef.current += 1;
+
+            // console.log('加载数据', currentPageRef.current, articlesRef.current.length);
 
             getArticlePage();
 
