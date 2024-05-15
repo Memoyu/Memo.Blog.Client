@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { LocaleProvider } from '@douyinfe/semi-ui';
 import { BrowserRouter } from 'react-router-dom';
 import RenderRouter from './router';
@@ -13,7 +13,7 @@ function App() {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 1000);
     }, []);
 
     return (

@@ -34,16 +34,16 @@ a {
     width: 100%;
     height: 100%;
     z-index: 1000000;
-    background: #f0f3f4;
-}
+    background: var(--semi-color-bg-0);
 
-.spinner {
-    width: 64px;
-    height: 64px;
-    border: 8px solid;
-    border-color: #3d5af1 transparent #3d5af1 transparent;
-    border-radius: 50%;
-    animation: spin-anim 1.2s linear infinite;
+    .spinner {
+        width: 64px;
+        height: 64px;
+        border: 8px solid;
+        border-color: var(--semi-color-primary) transparent var(--semi-color-primary) transparent;
+        border-radius: 50%;
+        animation: spin-anim 1.2s linear infinite;
+    }
 }
 
 @keyframes spin-anim {

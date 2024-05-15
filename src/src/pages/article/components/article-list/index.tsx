@@ -1,6 +1,6 @@
 import { FC, useState, useRef, CSSProperties, useEffect } from 'react';
 import { Masonry } from 'react-plock';
-import { Card, Badge, TagGroup, Toast, Typography } from '@douyinfe/semi-ui';
+import { Card, Badge, TagGroup, Toast, Typography, Button } from '@douyinfe/semi-ui';
 import { IconActivity, IconVerify } from '@douyinfe/semi-icons';
 import { NavLink } from 'react-router-dom';
 
@@ -8,7 +8,6 @@ import { dateDiff } from '@utils/date';
 import { articlePage } from '@utils/request';
 
 import { useSearchParams } from 'react-router-dom';
-import { IScrollProps, useContentScroll } from '@src/hooks/useContentScroll';
 
 import { ArticlePageModel, ArticlePageRequest } from '@src/common/model';
 import { TagProps } from '@douyinfe/semi-ui/lib/es/tag';
@@ -23,20 +22,17 @@ const Index: FC<ComProps> = ({}) => {
     const [params] = useSearchParams();
 
     const categoryIdRef = useRef<string>('');
-    const articlesLe = useRef<number>(Infinity);
-    const lastTriggerScrollTimeRef = useRef<number>(0);
+    const articlesLe = useRef<number>(0);
     const currentPageRef = useRef<number>(1);
-    const articleTotalRef = useRef<number>(0);
     const pageSize = 15;
     const [loading, setLoading] = useState<boolean>(false);
+    const [articleTotal, setArticleTotal] = useState<number>(0);
     const [articles, setArticles] = useState<Array<ArticlePageModel>>([]);
 
     // 获取文章
     let getArticlePage = (init: boolean = true) => {
-        // console.log('当前总条数：', articleTotalRef.current, articlesRef.current.length);
+        // console.log('当前总条数：', articleTotalRef.current, articlesLe.current);
         if (loading) return;
-
-        if (articleTotalRef.current >= articlesLe.current) return;
 
         setLoading(true);
         let page = currentPageRef.current;
@@ -61,22 +57,22 @@ const Index: FC<ComProps> = ({}) => {
 
                 // console.log('当前页：', page);
                 let items = res.data.items;
-                articleTotalRef.current = res.data.total;
-                // console.log('当前总条数：', res.data.total);
-                console.log('当前：init', init);
-                let news = init ? [] : [...articles];
-                items.forEach((a) => {
-                    if (news.findIndex((ar) => a.articleId == ar.articleId) < 0) {
-                        news.push(a);
-                    }
-                });
-                articlesLe.current = news.length;
-                console.log('当前：', news, articlesLe.current);
-                setArticles(news);
-                // console.log('当前：', articlesRef.current);
-                console.log('加载完成：', news, articlesLe.current);
+                setArticleTotal(res.data.total);
+                // articleTotalRef.current = res.data.total;
 
-                currentPageRef.current += 1;
+                setArticles((prev) => {
+                    // console.log('当前：init', init, prev);
+
+                    let news = init ? [] : [...prev];
+                    items.forEach((a) => {
+                        if (news.findIndex((ar) => a.articleId == ar.articleId) < 0) {
+                            news.push(a);
+                        }
+                    });
+                    articlesLe.current = news.length;
+                    // console.log('加载完成：', news, articlesLe.current);
+                    return news;
+                });
             })
             .finally(() => setLoading(false));
     };
@@ -88,26 +84,21 @@ const Index: FC<ComProps> = ({}) => {
         getArticlePage();
     }, [params]);
 
-    useContentScroll((props: IScrollProps) => {
-        console.log('触发滚动', props);
-        var now = new Date().getTime();
-        if (
-            now - lastTriggerScrollTimeRef.current > 500 &&
-            Math.max(document.documentElement.scrollTop, document.body.scrollTop) +
-                window.innerHeight +
-                1000 >=
-                document.body.scrollHeight
-        ) {
-            // console.log(
-            //     '加载数据',
-            //     currentPageRef.current,
-            //     articlesLe.current,
-            //     articleTotalRef.current
-            // );
-            getArticlePage(false);
-            lastTriggerScrollTimeRef.current = now;
-        }
-    });
+    const handlerLoadMoreClick = () => {
+        currentPageRef.current += 1;
+        getArticlePage(false);
+    };
+
+    const loadMoreRender =
+        articles.length < articleTotal ? (
+            <Button theme="borderless" onClick={handlerLoadMoreClick}>
+                加载更多
+            </Button>
+        ) : (
+            <Text style={{ color: 'var(--semi-color-primary)', fontWeight: 800 }}>
+                {articleTotal == 0 ? '空空如也！' : '已经到底咯!'}
+            </Text>
+        );
 
     // 获取文章角标
     let getArticleBadge = (item: ArticlePageModel) => {
@@ -124,7 +115,7 @@ const Index: FC<ComProps> = ({}) => {
 
     return (
         <div className="article-list-container">
-            <div style={{ marginTop: 20 }}>
+            <div style={{ margin: '20px 0' }}>
                 <Masonry
                     items={articles}
                     config={{
@@ -201,6 +192,16 @@ const Index: FC<ComProps> = ({}) => {
                         </Badge>
                     )}
                 />
+            </div>
+            <div
+                style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginBottom: 30,
+                }}
+            >
+                {loadMoreRender}
             </div>
         </div>
     );
