@@ -22,24 +22,32 @@ interface ComProps {}
 const Index: FC<ComProps> = ({}) => {
     const [params] = useSearchParams();
 
-    const articlesRef = useRef<Array<ArticlePageModel>>([]);
+    const categoryIdRef = useRef<string>('');
+    const articlesLe = useRef<number>(Infinity);
     const lastTriggerScrollTimeRef = useRef<number>(0);
     const currentPageRef = useRef<number>(1);
-    const articleTotalRef = useRef<number>(Infinity);
-    const categoryIdRef = useRef<string>('');
+    const articleTotalRef = useRef<number>(0);
     const pageSize = 15;
     const [loading, setLoading] = useState<boolean>(false);
+    const [articles, setArticles] = useState<Array<ArticlePageModel>>([]);
 
     // 获取文章
-    let getArticlePage = () => {
+    let getArticlePage = (init: boolean = true) => {
         // console.log('当前总条数：', articleTotalRef.current, articlesRef.current.length);
         if (loading) return;
 
+        if (articleTotalRef.current >= articlesLe.current) return;
+
         setLoading(true);
+        let page = currentPageRef.current;
+
+        if (init) {
+            page = 1;
+        }
 
         let request = {
             categoryId: categoryIdRef.current,
-            page: currentPageRef.current,
+            page: page,
             size: pageSize,
         } as ArticlePageRequest;
 
@@ -51,22 +59,24 @@ const Index: FC<ComProps> = ({}) => {
                     return;
                 }
 
-                // 如果总数被清空，则视为列表也需要清空
-                if (currentPageRef.current == 1) articlesRef.current = [];
-
-                // console.log('当前页：', currentPageRef.current);
+                // console.log('当前页：', page);
                 let items = res.data.items;
                 articleTotalRef.current = res.data.total;
                 // console.log('当前总条数：', res.data.total);
-
+                console.log('当前：init', init);
+                let news = init ? [] : [...articles];
                 items.forEach((a) => {
-                    if (articlesRef.current.findIndex((ar) => a.articleId == ar.articleId) < 0) {
-                        articlesRef.current.push(a);
+                    if (news.findIndex((ar) => a.articleId == ar.articleId) < 0) {
+                        news.push(a);
                     }
                 });
-
-                articlesRef.current = [...articlesRef.current];
+                articlesLe.current = news.length;
+                console.log('当前：', news, articlesLe.current);
+                setArticles(news);
                 // console.log('当前：', articlesRef.current);
+                console.log('加载完成：', news, articlesLe.current);
+
+                currentPageRef.current += 1;
             })
             .finally(() => setLoading(false));
     };
@@ -76,28 +86,25 @@ const Index: FC<ComProps> = ({}) => {
         categoryIdRef.current = categoryId;
 
         getArticlePage();
-
-        return () => {
-            currentPageRef.current = 1;
-        };
     }, [params]);
 
     useContentScroll((props: IScrollProps) => {
-        // console.log('触发滚动', props);
-
+        console.log('触发滚动', props);
         var now = new Date().getTime();
         if (
             now - lastTriggerScrollTimeRef.current > 500 &&
-            props.scrollTop + window.innerHeight + 1000 >= document.body.scrollHeight
+            Math.max(document.documentElement.scrollTop, document.body.scrollTop) +
+                window.innerHeight +
+                1000 >=
+                document.body.scrollHeight
         ) {
-            // 判断是否仍然继续加载文章
-            if (loading || articlesRef.current.length >= articleTotalRef.current) return;
-            currentPageRef.current += 1;
-
-            // console.log('加载数据', currentPageRef.current, articlesRef.current.length);
-
-            getArticlePage();
-
+            // console.log(
+            //     '加载数据',
+            //     currentPageRef.current,
+            //     articlesLe.current,
+            //     articleTotalRef.current
+            // );
+            getArticlePage(false);
             lastTriggerScrollTimeRef.current = now;
         }
     });
@@ -119,7 +126,7 @@ const Index: FC<ComProps> = ({}) => {
         <div className="article-list-container">
             <div style={{ marginTop: 20 }}>
                 <Masonry
-                    items={articlesRef.current}
+                    items={articles}
                     config={{
                         columns: [1, 2, 3, 4],
                         gap: [24, 16, 16, 16],

@@ -58,7 +58,9 @@ const RenderRouter: FC = () => {
     if (!element) return null;
     initTitleTick();
     return (
-        <AnimatePresence>{React.cloneElement(element, { key: location.pathname })}</AnimatePresence>
+        <AnimatePresence initial={false}>
+            {React.cloneElement(element, { key: location.pathname })}
+        </AnimatePresence>
     );
 };
 

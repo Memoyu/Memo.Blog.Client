@@ -50,7 +50,6 @@ const AnimateRoute = (props: PathRouteProps) => {
     return (
         <motion.div
             {...contentWrapProps}
-            initial={{ opacity: 0, translateY: 0 }}
             animate={{
                 opacity: [0, 0, 1],
                 translateY: [200, 200, 0],
