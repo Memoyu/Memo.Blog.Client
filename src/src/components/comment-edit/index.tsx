@@ -14,12 +14,13 @@ import {
 } from '@douyinfe/semi-ui';
 import MarkDown from '@components/markdown';
 
-import './index.scss';
 import { AvatarOriginType } from '@src/common/model';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@src/hooks/useTypedSelector';
 import { setVisitorInfo } from '@redux/slices/visitor/visitorSlice';
 import { AvatarOriginTypeOpts } from '@src/common/select-options';
+
+import './index.scss';
 
 export interface CommentEditInput {
     nickname: string;
@@ -75,16 +76,19 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
 
     useEffect(() => {
         buildQuoteContent();
+        return () => {
+            setContent('');
+        };
+    }, [quote]);
+
+    useEffect(() => {
+        buildQuoteContent();
         setAvatar(visitor.avatar);
         setAvatarOrigin(visitor.avatarOrigin);
         setNickname(visitor.nickname);
         setEmail(visitor.email);
         avatarOriginTypeRef.current = visitor.avatarOriginType ?? AvatarOriginType.Qq;
-
-        return () => {
-            setContent('');
-        };
-    }, [quote]);
+    }, [visitorInputVisible]);
 
     // 头像来源输入变更
     const handleAvatarOriginChange = (val: string) => {
@@ -107,7 +111,6 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
     };
 
     const handleSubmitInputClick = () => {
-        // console.log(nickname);
         if (!nickname || nickname.length < 0) {
             Toast.warning('留个名呗');
             return;
@@ -136,9 +139,6 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
             // 清空输入
             setContent('');
         });
-        // .catch((error) => {
-        //     // if user pass reject promise, no need to do anything
-        // });
     };
 
     const handleVisitorInputCancel = () => {};
@@ -214,7 +214,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
                     />
                 </Popconfirm>
                 <Text style={{ marginTop: 5, maxWidth: 60, wordBreak: 'break-word' }} strong>
-                    {nickname && nickname.length > 0 ? nickname : '燕过留名'}
+                    {nickname && nickname.length > 0 ? nickname : '以汝相称'}
                 </Text>
             </div>
             <div className="moment-comment-edit-wrap-content">

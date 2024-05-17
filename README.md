@@ -62,6 +62,7 @@
 |高亮样式|[highlightjs/highlight.js](https://github.com/highlightjs/highlight.js)|
 |markdown转换|[markedjs/marked](https://github.com/markedjs/marked)|
 |markdown导航栏|[parksben/markdown-navbar](https://github.com/parksben/markdown-navbar)|
+|动效|[framer/motion](https://github.com/framer/motion)|
 |http请求|[axios/axios](https://github.com/axios/axios)|
 |工具库|[lodash/lodash](https://github.com/lodash/lodash)|
 |无限滚动|[danbovey/react-infinite-scroller](https://github.com/danbovey/react-infinite-scroller)|

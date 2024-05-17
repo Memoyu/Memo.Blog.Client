@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 
-import MarkDown from '@components/markdown';
-import MarkdownNav from '@components/markdown-nav';
 import { Toast, Typography } from '@douyinfe/semi-ui';
 
+import MarkDown from '@components/markdown';
+import MarkdownNav from './components/navbar';
 import PageContainer from '@src/components/layout/page-container';
 import ContentContainer from '@src/components/layout/content-container';
 import CommentList from './components/comment-list';
 import LabelList from './components/label-list';
 import TagList from './components/tag-list';
-import PageBanner from '@components/page-banner';
 import Copyright from './components/copyright';
 
 import { useParams } from 'react-router-dom';
@@ -24,6 +23,7 @@ import { ArticleModel } from '@src/common/model';
 import { articleGet } from '@src/utils/request';
 
 import './index.scss';
+import StickyBox from 'react-sticky-box';
 
 const { Title, Text } = Typography;
 
@@ -58,18 +58,14 @@ const Index = () => {
 
     return (
         <PageContainer>
-            <div className="article-detail-header">
-                <div className="article-detail-header-banner">
-                    <PageBanner height={400} image={article?.banner} />
-                </div>
-                <div className="article-detail-header-content">
+            <header
+                className="article-header"
+                style={{ backgroundImage: `url(${article?.banner})` }}
+            >
+                <div className="article-header-content">
                     <div>
-                        <Title className="article-detail-header-content-title">
-                            {article?.title}
-                        </Title>
-                        <Text className="article-detail-header-content-desc">
-                            {article?.description}
-                        </Text>
+                        <Title className="article-header-content-title">{article?.title}</Title>
+                        <Text className="article-header-content-desc">{article?.description}</Text>
                     </div>
 
                     <div style={{ marginTop: 10 }}>
@@ -95,18 +91,28 @@ const Index = () => {
                         />
                     </div>
                 </div>
+            </header>
+            <div className="article-section">
+                <ContentContainer className="article-section-main">
+                    <div className="article-section-main-content">
+                        <MarkDown content={article?.content} />
+
+                        <TagList tags={article?.tags} />
+
+                        <Copyright articleId={articleId} />
+                    </div>
+
+                    <div className="article-section-main-nav">
+                        <StickyBox offsetTop={58}>
+                            <MarkdownNav content={article?.content} />
+                        </StickyBox>
+                    </div>
+                </ContentContainer>
+
+                <ContentContainer className="article-section-comment">
+                    {article.commentable && <CommentList articleId={articleId} />}
+                </ContentContainer>
             </div>
-            <ContentContainer className="article-detail-content">
-                <MarkdownNav content={article?.content} />
-
-                <MarkDown content={article?.content} />
-
-                <TagList tags={article?.tags} />
-
-                <Copyright articleId={articleId} />
-
-                {article.commentable && <CommentList articleId={articleId} />}
-            </ContentContainer>
         </PageContainer>
     );
 };

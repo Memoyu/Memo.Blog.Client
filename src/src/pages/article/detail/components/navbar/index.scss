@@ -1,0 +1,73 @@
+@import '@styles/base.scss';
+
+.markdown-navigation {
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica', 'Arial',
+        'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+    width: 100%;
+    overflow: hidden;
+
+    .title-anchor {
+        display: block;
+        color: #bbb;
+        transition: all 0.2s;
+        margin: 0.4em 0;
+        font-weight: lighter;
+        line-height: 2em;
+        padding-right: 1.8em;
+        cursor: pointer;
+    }
+
+    .title-anchor:hover,
+    .title-anchor.active {
+        background-color: #f8f8f8;
+        text-decoration: inherit;
+    }
+
+    .title-anchor.active {
+        color: var(--semi-color-primary);
+    }
+
+    .title-anchor small {
+        margin: 0 0.8em;
+    }
+
+    .title-level1 {
+        color: rgba(var(--semi-grey-7), 1);
+        font-size: 1.3em;
+        padding-left: 1em;
+        font-weight: normal;
+    }
+
+    .title-level2 {
+        color: rgba(var(--semi-grey-6), 1);
+        font-size: 1.1em;
+        padding-left: 1em;
+        font-weight: normal;
+    }
+
+    .title-level3 {
+        color: rgba(var(--semi-grey-5), 1);
+        font-size: 0.9em;
+        padding-left: 3em;
+        font-weight: normal;
+    }
+
+    .title-level4 {
+        color: rgba(var(--semi-grey-4), 1);
+        font-size: 0.85em;
+        padding-left: 5em;
+    }
+
+    .title-level5 {
+        color: rgba(var(--semi-grey-3), 1);
+        font-size: 0.85em;
+        padding-left: 7em;
+    }
+
+    .title-level6 {
+        color: rgba(var(--semi-grey-2), 1);
+        font-size: 0.85em;
+        padding-left: 9em;
+    }
+}

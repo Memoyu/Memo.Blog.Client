@@ -42,15 +42,15 @@ export function usePageVisit(visitedId?: string) {
         } as VisitorLogEditRequest;
 
         // 再次确保visitorId是存在的，做一次兜底
-        if (!visitor.visitorId) {
-            visitorCreate({}).then((res) => {
-                if (!res.isSuccess || !res.data) return;
-                store.dispatch(initVisitorId(res.data));
-                doCreateVisitLog(log);
-            });
-        } else {
-            doCreateVisitLog(log);
-        }
+        // if (!visitor.visitorId) {
+        //     visitorCreate({}).then((res) => {
+        //         if (!res.isSuccess || !res.data) return;
+        //         store.dispatch(initVisitorId(res.data));
+        //         doCreateVisitLog(log);
+        //     });
+        // } else {
+        //     doCreateVisitLog(log);
+        // }
     };
 
     let doCreateVisitLog = (visitLog: VisitorLogEditRequest) => {
