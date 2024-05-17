@@ -27,10 +27,7 @@ export function usePageVisit(visitedId?: string) {
         // 获取访客信息
         let visitor = store.getState().visitor;
 
-        //TODO: 获取当前设备信息
-        // const userAgent = window.navigator.userAgent;
-        // const platform = window.navigator.platform;
-        // console.log('platform', platform, userAgent);
+        // 获取当前设备信息
         let os = getOs();
         let browser = getBrowser();
 
@@ -42,15 +39,15 @@ export function usePageVisit(visitedId?: string) {
         } as VisitorLogEditRequest;
 
         // 再次确保visitorId是存在的，做一次兜底
-        // if (!visitor.visitorId) {
-        //     visitorCreate({}).then((res) => {
-        //         if (!res.isSuccess || !res.data) return;
-        //         store.dispatch(initVisitorId(res.data));
-        //         doCreateVisitLog(log);
-        //     });
-        // } else {
-        //     doCreateVisitLog(log);
-        // }
+        if (!visitor.visitorId) {
+            visitorCreate({}).then((res) => {
+                if (!res.isSuccess || !res.data) return;
+                store.dispatch(initVisitorId(res.data));
+                doCreateVisitLog(log);
+            });
+        } else {
+            doCreateVisitLog(log);
+        }
     };
 
     let doCreateVisitLog = (visitLog: VisitorLogEditRequest) => {
