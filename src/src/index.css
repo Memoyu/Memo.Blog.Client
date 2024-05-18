@@ -1,5 +1,6 @@
 :root {
     --scrollbar: 5px;
+    --footer-height: 130px;
 }
 
 ::-webkit-scrollbar {

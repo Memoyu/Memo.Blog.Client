@@ -1,4 +1,6 @@
-@import '@styles/base.scss';
+.markdown-navigation-title {
+    text-align: center;
+}
 
 .markdown-navigation {
     font-size: 14px;
@@ -9,7 +11,7 @@
 
     .title-anchor {
         display: block;
-        color: #bbb;
+        color: var(--semi-color-text-0);
         transition: all 0.2s;
         margin: 0.4em 0;
         font-weight: lighter;
@@ -20,7 +22,7 @@
 
     .title-anchor:hover,
     .title-anchor.active {
-        background-color: #f8f8f8;
+        background-color: var(--semi-color-tertiary-light-active);
         text-decoration: inherit;
     }
 

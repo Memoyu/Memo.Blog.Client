@@ -10,6 +10,7 @@
         background: no-repeat center center #f4f1ec;
         background-size: auto 100%;
         background-size: cover;
+        filter: var(--image-brightness);
         &:before {
             content: '';
             position: absolute;

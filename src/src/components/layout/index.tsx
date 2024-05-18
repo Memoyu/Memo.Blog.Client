@@ -21,7 +21,7 @@ const Index: React.FC<LayoutProps> = ({ children }) => {
         width: 30,
         borderRadius: '100%',
         backgroundColor: 'var(--semi-color-primary)',
-        color: '#fff',
+        color: 'var(--semi-color-text-0)',
         right: 50,
         bottom: 40,
     };

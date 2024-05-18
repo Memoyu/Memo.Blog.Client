@@ -12,7 +12,7 @@ const { Title } = Typography;
 const Index: React.FC<Props> = ({ content }) => {
     return (
         <div>
-            <Title heading={4} style={{ textAlign: 'center' }}>
+            <Title heading={4} className="markdown-navigation-title">
                 目录
             </Title>
             <MarkdownNavbar source={content || ''} />

@@ -1,8 +1,6 @@
-@import '@styles/base.scss';
-
 .blog-page-container {
     margin: auto;
-    min-height: calc(100vh - $footerHeight);
+    min-height: calc(100vh - var(--footer-height));
 }
 
 @media screen and (max-width: 600px) {

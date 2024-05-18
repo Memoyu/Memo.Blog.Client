@@ -36,7 +36,7 @@ const MarkDown: React.FC<Props> = ({ content, className, style }) => {
     return (
         <div
             style={style}
-            className={`marked ${className || ''}`}
+            className={`comment-marked ${className || ''}`}
             dangerouslySetInnerHTML={{
                 __html: marked.parse(content || ''),
             }}

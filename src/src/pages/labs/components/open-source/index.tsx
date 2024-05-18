@@ -124,6 +124,7 @@ const Index: FC<ComProps> = ({}) => {
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
+                                        filter: 'var(--image-brightness)',
                                     }}
                                     animate={
                                         item.projectId == hoverProject?.projectId

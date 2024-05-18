@@ -1,3 +1,5 @@
 const VISITOR_INFO: string = 'visitor-info';
 
-export { VISITOR_INFO };
+const THEME_MODE: string = 'theme-mode';
+
+export { VISITOR_INFO, THEME_MODE };

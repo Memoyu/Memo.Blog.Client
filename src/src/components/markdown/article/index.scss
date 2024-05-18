@@ -1,8 +1,7 @@
-@import '@styles/base.scss';
-
-.marked {
+.article-marked {
     word-break: break-all;
     font-size: 1rem;
+    color: var(--semi-color-text-0);
 
     h2,
     h3,
@@ -10,7 +9,6 @@
     h5 {
         margin-top: 0;
         margin-bottom: 15px;
-        color: $textColor;
         font-weight: 700;
     }
     h5 {
@@ -34,7 +32,7 @@
     }
 
     strong {
-        color: $hoverColor;
+        color: var(--semi-color-text-0);
     }
 
     p code {
@@ -60,7 +58,7 @@
         border-radius: 2px;
         // padding: 5px 0 5px 10px !important;
         margin: 5px 0 !important;
-        border-left: 3px solid #3e9fcb;
+        border-left: 3px solid var(--semi-color-primary);
     }
 
     blockquote p {
@@ -72,8 +70,6 @@
 
     table {
         margin: 20px auto;
-        //border: 2px solid rgb(120, 120, 120);
-        // background-color: $themeColor1;
         border-spacing: 0; /*去掉单元格间隙*/
         text-align: center;
     }
@@ -95,7 +91,7 @@
         font-weight: 700;
         text-decoration: underline !important;
         margin: 0 4px;
-        color: $hoverColor;
+        color: var(--semi-color-link);
     }
     a:hover {
         color: red;
@@ -147,7 +143,6 @@
 //       padding: 6rem 20rem;
 //       font-size: 16rem;
 //       border-radius: 10rem;
-//       border: 2rem $hoverColor dashed;
 //     }
 
 //     table {

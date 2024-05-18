@@ -7,14 +7,26 @@ body,
     width: 100% !important;
     height: 100vh;
     margin: 0;
-    color: rgba(0, 0, 0, 0.65) !important;
-    --semi-color-primary: rgba(var(--semi-violet-4), 1);
-    --semi-color-primary-hover: rgba(var(--semi-violet-3), 1);
+
+    --semi-color-primary: rgba(var(--semi-violet-4), 1) !important;
+    --semi-color-primary-hover: rgba(var(--semi-violet-3), 1) !important;
     --semi-color-primary-light-default: rgba(var(--semi-violet-0), 1);
     .flex-between {
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    --image-brightness: brightness(1); // div背景图明亮度
+    img {
+        filter: var(--image-brightness);
+    }
+}
+
+body[theme-mode='dark'] #root > * {
+    --image-brightness: brightness(0.8);
+    img {
+        filter: var(--image-brightness);
     }
 }
 

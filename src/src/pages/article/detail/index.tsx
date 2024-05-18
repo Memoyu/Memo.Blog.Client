@@ -54,7 +54,7 @@ const Index = () => {
 
     useEffect(() => {
         var articleId = params.id;
-        console.log(params);
+        // console.log(params);
         if (articleId) {
             setArticleId(articleId);
             getArticleDetail(articleId);
