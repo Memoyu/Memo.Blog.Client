@@ -10,7 +10,7 @@
  <a href="https://semi.design/zh-CN"><img src="https://img.shields.io/badge/ui-semi.design-blue"/></a>
  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-3963bc.svg"/></a>
  <a href="https://github.com/Memoyu"><img src="https://img.shields.io/badge/developer-memoyu-blue"/></a>
- <img src="https://raw.githubusercontent.com/Memoyu/Memo.Blog/main/docs/images/client-ld.png"/>
+ <img src="https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/client-ld.png"/>
 </div>
 
 
