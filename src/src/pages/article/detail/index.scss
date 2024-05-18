@@ -10,9 +10,9 @@
         width: 100%;
         height: 100%;
         z-index: 0;
-        backdrop-filter: blur(8px);
-        background-image: linear-gradient(0deg, var(--semi-color-bg-0), rgba(0, 0, 0, 0.4) 300px),
-            linear-gradient(0deg, var(--semi-color-bg-0), transparent 100px);
+        backdrop-filter: blur(5px);
+        background-image: linear-gradient(0deg, var(--semi-color-bg-0), rgba(0, 0, 0, 0.1) 700px),
+            linear-gradient(0deg, var(--semi-color-bg-0), transparent 500px);
     }
 
     &-main {

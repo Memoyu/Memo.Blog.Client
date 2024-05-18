@@ -7,8 +7,9 @@ import CallMe from '../../components/call-me';
 
 import './index.scss';
 import { usePageVisit } from '@src/hooks/usePageVisit';
+import { Link } from 'react-router-dom';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const Index = () => {
     usePageVisit();
@@ -17,34 +18,37 @@ const Index = () => {
         <PageContainer className="blog-home">
             <PageBanner
                 height="100vh"
-                image="http://oss.blog.memoyu.com/articles/banner/2dba0a75-4bf9-471c-8ee8-fe957321a902.png"
+                image="http://oss.blog.memoyu.com/articles/banner/-9999077311f.png"
             >
                 <div className="blog-home-content">
                     <Title heading={2}>你好！</Title>
                     <div style={{ display: 'flex', marginTop: 10 }}>
-                        <Title weight="light" heading={3}>
-                            我是
-                        </Title>
-                        <Title heading={3} style={{ marginLeft: 10 }}>
+                        <Text style={{ fontSize: '2em', fontWeight: 200 }}>我是</Text>
+                        <Text strong style={{ marginLeft: 10, fontSize: '2em' }}>
                             Memoyu
-                        </Title>
+                        </Text>
                     </div>
 
-                    <Title style={{ marginTop: 10 }} heading={3}>
+                    <Title style={{ marginTop: 40 }} heading={2}>
                         欢迎来到我的博客。
                     </Title>
-                    <div className="blog-home-content-bottom">
-                        <div>
-                            <Summary />
-                            <div
-                                style={{
-                                    margin: '10px 20px',
-                                    display: 'flex',
-                                    justifyContent: 'flex-end',
-                                }}
-                            >
-                                <CallMe />
-                            </div>
+                </div>
+                <div className="blog-home-bottom">
+                    <Link target="_blank" to={'https://wallhaven.cc/'}>
+                        <Text strong type="secondary">
+                            pic by @wallhaven
+                        </Text>
+                    </Link>
+                    <div>
+                        <Summary />
+                        <div
+                            style={{
+                                margin: '10px 20px',
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                            }}
+                        >
+                            <CallMe />
                         </div>
                     </div>
                 </div>
