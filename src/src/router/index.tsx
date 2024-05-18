@@ -45,7 +45,7 @@ const routeList: RouteObject[] = [
         path: '*',
         element: (
             <WrapperRouteComponent
-                element={<Empty title="找不到咯" description="这里什么也没有~" type="404" />}
+                element={<Empty title="找不到咯" description="这里什么也没有~" />}
                 title="404"
             />
         ),

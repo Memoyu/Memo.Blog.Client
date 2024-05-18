@@ -61,7 +61,7 @@ const Index = () => {
         }
     }, [params]);
 
-    return article ? (
+    return article && !loading ? (
         <PageContainer>
             <header
                 className="article-header"
