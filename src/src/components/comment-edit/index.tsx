@@ -12,7 +12,7 @@ import {
     Popconfirm,
     Toast,
 } from '@douyinfe/semi-ui';
-import MarkDown from '@components/markdown';
+import MarkDown from '@components/markdown/comment';
 
 import { AvatarOriginType } from '@src/common/model';
 import { useDispatch } from 'react-redux';

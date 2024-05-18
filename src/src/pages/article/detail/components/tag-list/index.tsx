@@ -11,6 +11,7 @@ interface ComProps {
 const Index: FC<ComProps> = ({ tags }) => {
     return (
         <div className="tag-list-wrap">
+            <div style={{ fontWeight: 'bold', width: 60 }}>标签：</div>
             <Space
                 wrap
                 style={{
@@ -22,7 +23,6 @@ const Index: FC<ComProps> = ({ tags }) => {
                     <Tag
                         key={item.tagId}
                         style={{
-                            fontSize: 16,
                             fontWeight: 'bold',
                             padding: '14px 14px',
                             color: 'var(--semi-color-primary)',

@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { Avatar, Typography, Space, Timeline, Toast, Tag } from '@douyinfe/semi-ui';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import MarkDown from '@components/markdown';
+import MarkDown from '@components/markdown/comment';
 // import MomentItemExtra from './moment-item-extra';
 
 import { useData } from '@src/hooks/useData';

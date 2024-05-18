@@ -77,20 +77,12 @@ const Index: FC<ComProps> = ({ articleId }) => {
     }, [articleId]);
 
     return (
-        <div className="moment-comment-list-wrap">
-            <div className="moment-comment-edit">
-                <div
-                    style={{
-                        backgroundColor: 'rgb(var(--semi-violet-0))',
-                        margin: '5px 0',
-                        padding: 10,
-                    }}
-                >
-                    <CommentEdit rows={6} onSubmit={handleCommentSubmit} />
-                </div>
+        <div className="comments-wrap">
+            <div className="ccomments-wrap-edit">
+                <CommentEdit rows={6} onSubmit={handleCommentSubmit} />
             </div>
 
-            <div className="moment-comment-list">
+            <div className="comments-wrap-list">
                 <div className="moment-comment-list">
                     {comments?.map((comment: CommentModel) => (
                         <div key={comment.commentId + 'wrap'} style={{ margin: '15px 0' }}>

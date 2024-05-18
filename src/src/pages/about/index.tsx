@@ -4,7 +4,7 @@ import { Space, Tag, Toast, Typography } from '@douyinfe/semi-ui';
 import PageContainer from '@src/components/layout/page-container';
 import ContentContainer from '@src/components/layout/content-container';
 import PageBanner from '@src/components/page-banner';
-import MarkDown from '@components/markdown';
+import MarkDown from '@components/markdown/article';
 
 import { usePageVisit } from '@src/hooks/usePageVisit';
 import { useData } from '@src/hooks/useData';

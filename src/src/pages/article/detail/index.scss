@@ -17,26 +17,33 @@
             linear-gradient(0deg, var(--semi-color-bg-0), transparent 100px);
     }
 
-    &-content {
-        position: relative;
-        min-height: 200px;
-        padding: 140px 70px 360px;
+    &-main {
+        &-content {
+            position: relative;
+            min-height: 200px;
+            padding: 140px 0 360px;
 
-        &-title {
-            color: rgba(var(--semi-white), 1);
-            padding-bottom: 1rem;
-        }
-        &-desc {
-            color: rgba(var(--semi-white), 1);
+            &-title {
+                color: rgba(var(--semi-white), 1);
+                padding-bottom: 1rem;
+            }
+            &-desc {
+                color: rgba(var(--semi-white), 1);
+            }
         }
     }
 }
 .article-section {
     position: relative;
+    z-index: 1;
+
+    &-conyainer {
+        margin-top: -360px;
+        margin-bottom: -85px;
+    }
 
     &-main {
-        margin-top: -360px;
-        margin-bottom: 30px;
+        min-height: 500px;
         padding: 20px;
         border-radius: 20px;
         background-color: rgb(var(--semi-grey-0));
@@ -46,14 +53,37 @@
             width: 400px;
             flex-shrink: 1;
             flex-grow: 1;
-            padding: 0em 3em 0em 0em;
+            padding: 2em 3em 0em 0em;
         }
 
         &-nav {
             width: 280px;
             border-radius: 5px;
-            // border: 1px solid #eee;
-            // box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
         }
+    }
+
+    &-footer {
+        padding-top: 20px;
+    }
+}
+
+.article-comment {
+    position: relative;
+    background: rgb(var(--semi-violet-0));
+    padding-top: 150px;
+    padding-bottom: 50px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: -240px;
+        border-right: calc(100vw - var(--scrollbar)) solid transparent;
+        border-bottom: 240px solid rgb(var(--semi-violet-0));
+    }
+
+    &-main {
+        padding: 15px;
+        border-radius: 20px;
+        background-color: var(--semi-color-bg-0);
     }
 }

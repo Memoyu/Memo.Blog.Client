@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
-import { Layout } from '@douyinfe/semi-ui';
+import { BackTop, Layout } from '@douyinfe/semi-ui';
 
 import Header from './header';
 
 import './index.scss';
+import { IconArrowUp } from '@douyinfe/semi-icons';
 
 const { Content } = Layout;
 
@@ -12,6 +13,19 @@ interface LayoutProps {
 }
 
 const Index: React.FC<LayoutProps> = ({ children }) => {
+    const style = {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 30,
+        width: 30,
+        borderRadius: '100%',
+        backgroundColor: 'var(--semi-color-primary)',
+        color: '#fff',
+        right: 50,
+        bottom: 40,
+    };
+
     return (
         <Layout className="blog-layout">
             <Header />
@@ -21,6 +35,9 @@ const Index: React.FC<LayoutProps> = ({ children }) => {
                 </Suspense> */}
                 {children}
             </Content>
+            <BackTop style={style}>
+                <IconArrowUp />
+            </BackTop>
         </Layout>
     );
 };

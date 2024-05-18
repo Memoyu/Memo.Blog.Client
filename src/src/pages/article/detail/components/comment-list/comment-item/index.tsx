@@ -4,7 +4,7 @@ import { IconQuote, IconComment } from '@douyinfe/semi-icons';
 import { Avatar, Space, Tag, Tooltip, Typography } from '@douyinfe/semi-ui';
 
 import CommentEdit, { CommentEditInput } from '@components/comment-edit';
-import MarkDown from '@components/markdown';
+import MarkDown from '@components/markdown/comment';
 
 import { dateDiff } from '@utils/date';
 
@@ -91,10 +91,10 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                             </Tag>
                         </Space>
 
-                        <div>
+                        <div style={{ marginRight: 15 }}>
                             <Tooltip content="回复">
                                 <IconComment
-                                    style={{ marginLeft: 20, cursor: 'pointer' }}
+                                    style={{ cursor: 'pointer' }}
                                     onClick={() => {
                                         setQuote(undefined);
                                         handleCommentReply(comment);
@@ -104,7 +104,7 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                             </Tooltip>
                             <Tooltip content="引用">
                                 <IconQuote
-                                    style={{ marginLeft: 10, cursor: 'pointer' }}
+                                    style={{ marginLeft: 20, cursor: 'pointer' }}
                                     onClick={() => {
                                         setQuote(comment);
                                         handleCommentReply(comment);
@@ -119,9 +119,11 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                 </div>
                 <div className="moment-comment-item-box-reply">
                     {comment.reply && comment.reply.commentId != comment.parentId && (
-                        <Text type="tertiary">{`回复 ${comment.reply.floorString} ${
-                            comment.reply?.nickname || '未知'
-                        }`}</Text>
+                        <Text type="tertiary">
+                            {`回复 ${comment.reply.floorString} ${
+                                comment.reply?.nickname || '未知'
+                            }`}
+                        </Text>
                     )}
                 </div>
                 <div className="moment-comment-item-box-content">

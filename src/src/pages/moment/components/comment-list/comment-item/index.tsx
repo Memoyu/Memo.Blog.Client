@@ -6,7 +6,7 @@ import { Avatar, Space, Tag, Toast, Tooltip, Typography } from '@douyinfe/semi-u
 import { useDispatch } from 'react-redux';
 
 import CommentEdit, { CommentEditInput } from '@components/comment-edit';
-import MarkDown from '@components/markdown';
+import MarkDown from '@components/markdown/comment';
 
 import { dateDiff } from '@utils/date';
 
