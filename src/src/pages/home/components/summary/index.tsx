@@ -44,27 +44,31 @@ const Index: FC<ComProps> = ({}) => {
     }, []);
 
     return (
-        <div style={{ width: 500, margin: '0 20px' }}>
-            <Row gutter={8}>
-                {summaries.map((s) => {
-                    return (
-                        <Col key={s.name} span={24 / summaries.length}>
-                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                <div>
-                                    <div style={{ display: 'flex', alignItems: 'end' }}>
-                                        <Title heading={3}>{s.value}</Title>
-                                        <Text style={{ marginLeft: 5 }}>{s.unit}</Text>
-                                    </div>
-                                    <Title style={{ display: 'flex' }} heading={4} weight="bold">
-                                        {s.name}
-                                    </Title>
+        <Row gutter={8}>
+            {summaries.map((s) => {
+                return (
+                    <Col key={s.name} span={24 / summaries.length}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                marginLeft: 30,
+                            }}
+                        >
+                            <div>
+                                <div style={{ display: 'flex', alignItems: 'end' }}>
+                                    <Title heading={3}>{s.value}</Title>
+                                    <Text style={{ marginLeft: 5 }}>{s.unit}</Text>
                                 </div>
+                                <Title style={{ display: 'flex' }} heading={4} weight="bold">
+                                    {s.name}
+                                </Title>
                             </div>
-                        </Col>
-                    );
-                })}
-            </Row>
-        </div>
+                        </div>
+                    </Col>
+                );
+            })}
+        </Row>
     );
 };
 

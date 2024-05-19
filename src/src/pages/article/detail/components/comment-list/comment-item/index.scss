@@ -1,3 +1,5 @@
+@import '@assets/styles/variable.scss';
+
 .moment-comment-item {
     display: flex;
     color: var(--semi-color-text-0);
@@ -5,11 +7,33 @@
         overflow: auto;
         width: 100%;
         &-info {
-            .semi-space {
-                align-items: baseline;
-                .name {
+            .comment-info {
+                display: flex;
+                align-items: center;
+
+                &-user {
                     font-size: 15px;
                     font-weight: 600;
+                    &-name {
+                        margin-left: 10px;
+                    }
+                }
+
+                &-date {
+                    margin-left: 20px;
+                    &-diff {
+                        margin-left: 10px;
+                    }
+                }
+            }
+
+            .comment-func {
+                margin-right: 15px;
+                &-quote {
+                    margin-left: 20px;
+                }
+                span {
+                    cursor: pointer;
                 }
             }
         }
@@ -31,6 +55,28 @@
                 // background-color: rgb(var(--semi-grey-0));
                 // border: 1px solid;
                 // border-bottom: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .moment-comment-item {
+        &-box {
+            &-info {
+                .comment-info {
+                    display: inline;
+                    &-date {
+                        margin-left: 0;
+                    }
+                }
+
+                .comment-func {
+                    margin-right: 0;
+                    &-quote {
+                        margin-left: 10px;
+                    }
+                }
             }
         }
     }

@@ -78,14 +78,6 @@
         padding: 6px 14px;
         border: 1px solid rgb(120, 120, 120);
     }
-    table th img,
-    table td img {
-        max-width: 100%;
-    }
-
-    li img {
-        max-width: 100%;
-    }
 
     a {
         font-weight: 700;
@@ -99,6 +91,10 @@
 
     hr {
         margin: 20px 0;
+    }
+
+    img {
+        max-width: 100%;
     }
 }
 

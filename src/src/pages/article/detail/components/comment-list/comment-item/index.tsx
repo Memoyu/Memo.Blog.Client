@@ -69,7 +69,7 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
         <div key={comment.commentId} className="moment-comment-item">
             {/* flexShrink: 0 解决flex下头像变形问题 */}
             <Avatar
-                style={{ margin: '0 10px', flexShrink: 0 }}
+                style={{ margin: '0px 10px 0px 0px', flexShrink: 0 }}
                 size="small"
                 src={comment.visitor?.avatar}
             />
@@ -82,19 +82,25 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                             justifyContent: 'space-between',
                         }}
                     >
-                        <Space spacing="tight" style={{ display: 'flex', alignItems: 'baseline' }}>
-                            <Text strong>{comment.floorString}</Text>
-                            <Text className="name">{comment.visitor?.nickname || '未知'}</Text>
-                            <Text>{format(new Date(comment.createTime), 'yyyy-MM-dd HH:mm')}</Text>
-                            <Tag size="large" color="violet">
-                                {dateDiff(new Date(comment.createTime))}
-                            </Tag>
-                        </Space>
-
-                        <div style={{ marginRight: 15 }}>
+                        <div className="comment-info">
+                            <div className="comment-info-user">
+                                <Text strong>{comment.floorString}</Text>
+                                <Text className="comment-info-user-name">
+                                    {comment.visitor?.nickname || '未知'}
+                                </Text>
+                            </div>
+                            <div className="comment-info-date">
+                                <Text>
+                                    {format(new Date(comment.createTime), 'yyyy-MM-dd HH:mm')}
+                                </Text>
+                                <Tag size="large" color="violet" className="comment-info-date-diff">
+                                    {dateDiff(new Date(comment.createTime))}
+                                </Tag>
+                            </div>
+                        </div>
+                        <div className="comment-func">
                             <Tooltip content="回复">
                                 <IconComment
-                                    style={{ cursor: 'pointer' }}
                                     onClick={() => {
                                         setQuote(undefined);
                                         handleCommentReply(comment);
@@ -104,7 +110,7 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                             </Tooltip>
                             <Tooltip content="引用">
                                 <IconQuote
-                                    style={{ marginLeft: 20, cursor: 'pointer' }}
+                                    className="comment-func-quote"
                                     onClick={() => {
                                         setQuote(comment);
                                         handleCommentReply(comment);

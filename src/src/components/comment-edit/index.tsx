@@ -173,7 +173,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
                     onCancel={() => handleVisitorInputCancel()}
                     onConfirm={() => handleVisitorInputConfirm()}
                     content={
-                        <div>
+                        <div style={{ width: '300px' }}>
                             <InputGroup style={{ width: '100%', flexWrap: 'unset' }}>
                                 <Select
                                     value={avatarOriginTypeRef.current}
@@ -207,14 +207,14 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
                 >
                     {/* flexShrink: 0 解决flex下头像变形问题 */}
                     <Avatar
-                        style={{ margin: '0 15px', flexShrink: 0 }}
+                        style={{ flexShrink: 0 }}
                         size="small"
                         src={avatar}
                         onClick={() => setVisitorInputVisible(true)}
                     />
                 </Popconfirm>
                 <Text style={{ marginTop: 5, maxWidth: 60, wordBreak: 'break-word' }} strong>
-                    {nickname && nickname.length > 0 ? nickname : '以汝相称'}
+                    {nickname && nickname.length > 0 ? nickname : '汝'}
                 </Text>
             </div>
             <div className="moment-comment-edit-wrap-content">

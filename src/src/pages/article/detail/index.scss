@@ -1,3 +1,5 @@
+@import '@assets/styles/variable.scss';
+
 .article-header {
     position: relative;
     background: no-repeat center;
@@ -19,7 +21,7 @@
         &-content {
             position: relative;
             min-height: 200px;
-            padding: 140px 0 360px;
+            padding: 140px 20px 360px;
 
             &-title {
                 color: rgba(var(--semi-white), 1);
@@ -36,7 +38,7 @@
     z-index: 1;
 
     &-conyainer {
-        margin-top: -360px;
+        margin-top: -300px;
         margin-bottom: -85px;
     }
 
@@ -48,10 +50,9 @@
         display: flex;
 
         &-content {
-            width: 400px;
             flex-shrink: 1;
             flex-grow: 1;
-            padding: 2em 3em 0em 0em;
+            // padding: 2em 3em 0em 0em;
         }
 
         &-nav {
@@ -83,5 +84,36 @@
         padding: 15px;
         border-radius: 20px;
         background-color: var(--semi-color-bg-0);
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .article-section {
+        position: relative;
+        z-index: 1;
+
+        &-main {
+            &-content {
+                width: 100%;
+            }
+
+            &-nav {
+                display: none;
+            }
+        }
+
+        &-footer {
+            padding-top: 20px;
+        }
+    }
+
+    .article-comment {
+        &:before {
+            border-right: 100vw solid transparent;
+        }
+
+        &-main {
+            padding: 15px 8px;
+        }
     }
 }

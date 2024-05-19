@@ -1,3 +1,5 @@
+@import '@assets/styles/variable.scss';
+
 .blog-home {
     &-content {
         display: flex;
@@ -18,5 +20,30 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: end;
+
+        &-summary {
+            width: 40%;
+        }
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .blog-home {
+        &-content {
+            padding-top: $navigation-height + 10;
+            justify-content: start;
+        }
+        &-bottom {
+            padding: 0 20px;
+            right: 0;
+            left: 0;
+            bottom: 6%;
+            flex-direction: column-reverse;
+            justify-content: flex-start;
+
+            &-summary {
+                width: 100%;
+            }
+        }
     }
 }

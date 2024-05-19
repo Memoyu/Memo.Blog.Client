@@ -1,6 +1,15 @@
+@import '@assets/styles/variable.scss';
+
 .article-list-container {
+    padding: 0;
     &-category-sticky {
         position: relative;
         z-index: 50;
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .article-list-container {
+        padding: 10px;
     }
 }

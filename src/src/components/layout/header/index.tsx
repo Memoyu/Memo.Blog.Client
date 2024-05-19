@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import { Button } from '@douyinfe/semi-ui';
-import { IconMoon, IconSun } from '@douyinfe/semi-icons';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Button, Dropdown } from '@douyinfe/semi-ui';
+import { IconMenu, IconMoon, IconSun } from '@douyinfe/semi-icons';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import Logo from '@components/logo';
@@ -33,8 +33,9 @@ const navs: Array<NavItem> = [
 const body = document.body;
 
 const Index: FC<ComProps> = () => {
-    let location = useLocation();
-    let [isScrolling, setIsScrolling] = useState<boolean>(false);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [isScrolling, setIsScrolling] = useState<boolean>(false);
     const [isLight, setIsLight] = useState<boolean>(false);
     const [mode, setMode] = useState<string>(getLocalStorage(THEME_MODE) || 'light');
 
@@ -60,6 +61,10 @@ const Index: FC<ComProps> = () => {
         setLocalStorage(THEME_MODE, mode);
     };
 
+    const handleDropdownItemClick = (item: NavItem) => {
+        navigate(item.to);
+    };
+
     useEffect(() => {
         setThemeMode(mode);
     }, []);
@@ -71,33 +76,57 @@ const Index: FC<ComProps> = () => {
     });
 
     return (
-        <div className={`header-navigation ${isScrolling ? 'stick' : ''}`}>
+        <div className={`blog-header ${isScrolling ? 'stick' : ''}`}>
             <ContentContainer>
-                <div className="header-navigation-inner">
-                    <NavLink to="/" className="header-navigation-logo">
+                <div className="blog-header-wrap">
+                    <NavLink to="/" className="blog-header-logo">
                         <Logo />
                     </NavLink>
-                    <div className="header-navigation-list">
-                        {navs.map((item, index) => (
-                            <NavLink
-                                to={item.to}
-                                key={index}
-                                className="header-navigation-list-item"
+                    <div className="blog-header-nav">
+                        <div className="nav-list-wrap">
+                            {navs.map((item, index) => (
+                                <NavLink to={item.to} key={index} className="blog-header-navs-item">
+                                    {item.name}
+                                    {item.to === pathname && (
+                                        <motion.div
+                                            className="blog-header-navs-item-active"
+                                            layoutId="bar"
+                                            aria-hidden={true}
+                                            transition={{
+                                                type: 'spring',
+                                                stiffness: 350,
+                                                damping: 30,
+                                            }}
+                                        />
+                                    )}
+                                </NavLink>
+                            ))}
+                        </div>
+                        <div className="nav-dropdown-wrap">
+                            <Dropdown
+                                trigger="click"
+                                autoAdjustOverflow={false}
+                                clickToHide
+                                render={
+                                    <Dropdown.Menu className="nav-dropdown-menu-wrap">
+                                        {navs.map((item, index) => (
+                                            <Dropdown.Item
+                                                type="primary"
+                                                key={index}
+                                                active={item.to === pathname}
+                                                onClick={() => handleDropdownItemClick(item)}
+                                            >
+                                                {item.name}
+                                            </Dropdown.Item>
+                                        ))}
+                                    </Dropdown.Menu>
+                                }
                             >
-                                {item.name}
-                                {item.to === pathname && (
-                                    <motion.div
-                                        className="blog-header-nav-active"
-                                        layoutId="bar"
-                                        aria-hidden={true}
-                                        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                                    />
-                                )}
-                            </NavLink>
-                        ))}
+                                <Button theme="borderless" icon={<IconMenu />}></Button>
+                            </Dropdown>
+                        </div>
                         <Button
-                            size="small"
-                            style={{ borderRadius: '50%', marginLeft: 15 }}
+                            className="blog-header-theme"
                             theme="borderless"
                             icon={isLight ? <IconMoon /> : <IconSun />}
                             onClick={switchMode}

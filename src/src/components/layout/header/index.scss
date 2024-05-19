@@ -1,6 +1,6 @@
-$navigation-height: 56px;
+@import '@assets/styles/variable.scss';
 
-.header-navigation {
+.blog-header {
     position: fixed;
     width: 100%;
     height: $navigation-height;
@@ -9,7 +9,7 @@ $navigation-height: 56px;
     padding-top: 20px;
     z-index: 99;
     transition: 0.6s ease-in-out;
-    &-inner {
+    &-wrap {
         position: relative;
         display: flex;
         align-items: center;
@@ -17,52 +17,107 @@ $navigation-height: 56px;
         height: $navigation-height;
         margin: 0 -10px;
         background: var(--semi-color-bg-0);
-    }
-    &-logo {
-        padding: 0 18px;
-    }
 
-    &-list {
-        padding-right: 15px;
-        a {
-            position: relative;
-            display: inline-block;
-            width: 80px;
-            line-height: $navigation-height;
-            text-align: center;
-            font-size: 14px;
-            font-weight: bold;
-            color: var(--semi-color-text-0);
-            text-decoration: none;
-            transition: 0.2s;
-            &:after {
-                content: '';
-                position: absolute;
-                bottom: 15px;
-                left: 18%;
-                width: 0;
-                height: 1px;
-                background: var(--semi-color-primary);
-                transition: 0.4s;
-            }
-            &:hover {
-                &:after {
-                    width: 30%;
+        .blog-header-logo {
+            padding: 0 18px;
+        }
+
+        .blog-header-nav {
+            display: flex;
+            align-items: center;
+            .nav-list-wrap {
+                a {
+                    position: relative;
+                    display: inline-block;
+                    width: 80px;
+                    line-height: $navigation-height;
+                    text-align: center;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: var(--semi-color-text-0);
+                    text-decoration: none;
+                    transition: 0.2s;
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        bottom: 15px;
+                        left: 18%;
+                        height: 1px;
+                        background: var(--semi-color-primary);
+                        transition: 0.4s;
+                    }
+                    &:hover {
+                        &:after {
+                            width: 30%;
+                        }
+                    }
+                }
+
+                .active {
+                    color: var(--semi-color-primary-hover);
+                }
+
+                .active:after {
+                    width: 64%;
                 }
             }
+
+            .nav-dropdown-wrap {
+                display: none;
+            }
         }
 
-        .active {
-            color: var(--semi-color-primary-hover);
-        }
-
-        .active:after {
-            width: 64%;
+        .blog-header-theme {
+            margin: 0 15px;
         }
     }
+
     &.stick {
         padding-top: 0;
         background: var(--semi-color-bg-0);
         box-shadow: 0 0 2px rgba(0, 0, 0, 0.063), 0 0 10px rgba(0, 0, 0, 0.125);
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .blog-header {
+        padding-top: 0;
+        &-wrap {
+            .blog-header-nav {
+                .nav-list-wrap {
+                    display: none;
+                }
+                .nav-dropdown-wrap {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .nav-dropdown-menu-wrap {
+        .semi-dropdown-item {
+            position: relative;
+            color: var(--semi-color-text-0);
+            font-weight: 600;
+            padding: 14px 40px;
+
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: 9px;
+                left: 18%;
+                width: 0;
+                height: 2px;
+                background: var(--semi-color-primary);
+                transition: 0.4s;
+            }
+        }
+        .semi-dropdown-item-active {
+            color: var(--semi-color-primary);
+            font-weight: 800;
+            &:after {
+                width: 64%;
+            }
+        }
     }
 }

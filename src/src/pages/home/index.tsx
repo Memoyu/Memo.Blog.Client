@@ -39,7 +39,7 @@ const Index = () => {
                             pic by @wallhaven
                         </Text>
                     </Link>
-                    <div>
+                    <div className="blog-home-bottom-summary">
                         <Summary />
                         <div
                             style={{

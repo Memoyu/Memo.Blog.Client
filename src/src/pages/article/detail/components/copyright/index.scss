@@ -1,3 +1,5 @@
+@import '@assets/styles/variable.scss';
+
 .copyright-wrap {
     display: flex;
     // padding: 20px 10px;
@@ -8,5 +10,11 @@
 
     &-title {
         font-weight: bold;
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .copyright-wrap {
+        display: block;
     }
 }

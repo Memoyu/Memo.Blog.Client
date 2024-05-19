@@ -19,6 +19,8 @@ export default defineConfig({
     },
     plugins: [react()],
     server: {
+        host: '0.0.0.0',
+        port: 11012,
         proxy: {
             '/api': {
                 target: 'http://localhost:11010',
