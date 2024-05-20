@@ -18,7 +18,7 @@ const Index = () => {
                 image="http://oss.blog.memoyu.com/articles/bdbb6831-bccb-4139-96c7-b85395038d5e.png"
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             />
-            <ContentContainer className="timeline-content">
+            <ContentContainer className="moment-section">
                 {/* <Row gutter={{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12, xxl: 12 }}>
                     <Col xs={24} sm={24} md={24} lg={14} xl={14}>
                         <MomentList height={height} />

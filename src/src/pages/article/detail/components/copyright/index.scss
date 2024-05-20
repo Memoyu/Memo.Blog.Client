@@ -11,6 +11,11 @@
     &-title {
         font-weight: bold;
     }
+
+    &-link {
+        //width: 100px;
+        word-break: 'break-word';
+    }
 }
 
 @media screen and (max-width: $max-mobile-width) {

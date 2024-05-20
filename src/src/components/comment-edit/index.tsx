@@ -207,7 +207,7 @@ const Index: FC<ComProps> = ({ quote, rows = 4, onSubmit = () => false }) => {
                 >
                     {/* flexShrink: 0 解决flex下头像变形问题 */}
                     <Avatar
-                        style={{ flexShrink: 0 }}
+                        className="moment-comment-edit-wrap-user-avatar"
                         size="small"
                         src={avatar}
                         onClick={() => setVisitorInputVisible(true)}

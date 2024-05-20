@@ -1,3 +1,5 @@
+@import '@assets/styles/variable.scss';
+
 .moment-comment-edit-wrap {
     display: flex;
     //  width: 100%;
@@ -8,10 +10,25 @@
         justify-content: center;
         align-items: center;
         margin: 0px 10px 0px 0px;
+
+        &-avatar {
+            flex-shrink: 0;
+            margin: 0 30px;
+        }
     }
     &-content {
         overflow: auto;
         width: 100%;
         margin-right: 15px;
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .moment-comment-edit-wrap {
+        &-user {
+            &-avatar {
+                margin: 0 15px;
+            }
+        }
     }
 }

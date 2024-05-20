@@ -78,7 +78,7 @@ const Index: FC<ComProps> = ({ articleId }) => {
 
     return (
         <div className="comments-wrap">
-            <div className="ccomments-wrap-edit">
+            <div className="comments-wrap-edit">
                 <CommentEdit rows={6} onSubmit={handleCommentSubmit} />
             </div>
 

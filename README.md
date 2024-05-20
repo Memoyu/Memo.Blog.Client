@@ -17,6 +17,8 @@
 ## 简介
 本项目为自用Blog系统的管理端，基于[React18](https://react.dev/) + [semi.design](https://semi.design/zh-CN)实现；
 
+响应式布局，适配移动端展示；
+
 |  |  |
 | :------------------------------: | :-------------------------------: |
 | ![home](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/home.png) |![article](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/article.png) |

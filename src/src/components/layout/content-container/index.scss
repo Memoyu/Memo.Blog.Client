@@ -1,10 +1,12 @@
+@import '@assets/styles/variable.scss';
+
 .blog-content-container {
     //width: 90%;
     max-width: 1180px;
     margin: auto;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $pad-portrait-width) {
     .blog-content-container {
         width: auto;
         margin-right: 10px;

@@ -50,9 +50,10 @@
         display: flex;
 
         &-content {
+            width: 400px;
             flex-shrink: 1;
             flex-grow: 1;
-            // padding: 2em 3em 0em 0em;
+            padding: 0em 3em 0em 0em;
         }
 
         &-nav {
@@ -87,7 +88,7 @@
     }
 }
 
-@media screen and (max-width: $max-mobile-width) {
+@media screen and (max-width: $pad-portrait-width) {
     .article-section {
         position: relative;
         z-index: 1;
@@ -95,6 +96,7 @@
         &-main {
             &-content {
                 width: 100%;
+                padding: 0;
             }
 
             &-nav {
@@ -109,7 +111,7 @@
 
     .article-comment {
         &:before {
-            border-right: 100vw solid transparent;
+            // border-right: 100vw solid transparent;
         }
 
         &-main {
