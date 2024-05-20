@@ -1,2 +1,16 @@
+@import '@assets/styles/variable.scss';
+
 .com-open-source {
+    .project-item-card {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .com-open-source {
+        .project-item-card {
+            margin-top: 25px;
+        }
+    }
 }

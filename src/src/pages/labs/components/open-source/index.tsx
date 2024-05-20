@@ -88,7 +88,13 @@ const Index: FC<ComProps> = ({}) => {
         <div className="com-open-source">
             <List
                 grid={{
-                    gutter: 20,
+                    gutter: 10,
+                    xs: 24,
+                    sm: 24,
+                    md: 7,
+                    lg: 5,
+                    xl: 5,
+                    xxl: 5,
                     justify: 'center',
                 }}
                 loading={loading}
@@ -98,7 +104,7 @@ const Index: FC<ComProps> = ({}) => {
                     <List.Item>
                         <Card
                             shadows="hover"
-                            style={{ marginTop: 15, width: 245, borderRadius: 'unset' }}
+                            className="project-item-card"
                             bodyStyle={{ padding: 0, backgroundColor: 'rgb(var(--semi-grey-0))' }}
                         >
                             <div
