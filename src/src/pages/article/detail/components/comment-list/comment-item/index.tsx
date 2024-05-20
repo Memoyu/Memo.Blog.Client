@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { IconQuote, IconComment } from '@douyinfe/semi-icons';
-import { Avatar, Space, Tag, Tooltip, Typography } from '@douyinfe/semi-ui';
+import { Avatar, Tag, Tooltip, Typography } from '@douyinfe/semi-ui';
 
 import CommentEdit, { CommentEditInput } from '@components/comment-edit';
 import MarkDown from '@components/markdown/comment';
