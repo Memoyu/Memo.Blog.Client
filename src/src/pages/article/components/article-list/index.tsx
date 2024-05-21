@@ -104,12 +104,13 @@ const Index: FC<ComProps> = ({}) => {
     let getArticleBadge = (item: ArticlePageModel) => {
         let sty = { fontSize: 20 } as CSSProperties;
 
-        let now = new Date().getTime();
         if (item.isTop) {
             return <IconVerify style={{ ...sty, color: 'var(--semi-color-primary)' }} />;
         }
+
+        let now = new Date().getTime();
         if ((now - new Date(item.createTime).getTime()) / (1000 * 60 * 60 * 24) < 90) {
-            return <IconActivity style={{ ...sty }} />;
+            return <IconActivity style={{ ...sty, color: 'var(--semi-color-text-0)' }} />;
         }
     };
 
@@ -121,7 +122,7 @@ const Index: FC<ComProps> = ({}) => {
                     config={{
                         columns: [1, 2, 3, 4],
                         gap: [24, 16, 16, 16],
-                        media: [520, 640, 768, 1024],
+                        media: [600, 870, 1024, 1200],
                     }}
                     render={(item: ArticlePageModel) => (
                         <Badge key={item.articleId} count={getArticleBadge(item)} type="danger">
