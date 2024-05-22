@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { Button, Collapsible, Empty, Toast, Typography } from '@douyinfe/semi-ui';
+import { Button, Empty, Toast, Typography } from '@douyinfe/semi-ui';
 import { IllustrationNoResult } from '@douyinfe/semi-illustrations';
 import { IconLikeHeart, IconComment } from '@douyinfe/semi-icons';
 
