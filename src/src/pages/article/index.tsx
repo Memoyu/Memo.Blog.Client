@@ -19,7 +19,7 @@ const Index = () => {
         <PageContainer className="blog-article-list">
             <PageBanner image="http://oss.blog.memoyu.com/articles/banner/502a2248-2ee7-48eb-af67-c5b0b9a9a5f1.png" />
             {isPresent && (
-                <StickyBox offsetTop={58} className="article-list-container-category-sticky">
+                <StickyBox offsetTop={58} className="article-list-category-sticky">
                     <CategoryList />
                 </StickyBox>
             )}

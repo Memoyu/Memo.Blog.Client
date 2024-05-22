@@ -32,6 +32,7 @@ export interface ArticlePageModel {
     banner: string;
     views: number;
     likes: number;
+    comments: number;
     isTop: boolean;
     commentable: boolean;
     publicable: boolean;
@@ -51,9 +52,11 @@ export interface ArticleModel {
     readingTime: number;
     views: number;
     likes: number;
+    comments: number;
     isTop: boolean;
     commentable: boolean;
     publicable: boolean;
+    isLike: boolean;
     author: ArticleAuthorModel;
     createTime: Date;
 }

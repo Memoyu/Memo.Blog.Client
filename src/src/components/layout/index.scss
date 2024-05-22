@@ -1,13 +1,31 @@
+@import '@assets/styles/variable.scss';
+
 .blog-layout {
     position: relative;
 
     &-content {
         background-color: var(--semi-color-bg-0);
-        // background-color: antiquewhite;
-        // position: relative;
-        > :last-child {
-            // background-color: var(--semi-color-bg-0);
-            //height: auto;
+    }
+
+    &-backtop {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        width: 30px;
+        border-radius: 100%;
+        background-color: var(--semi-color-primary);
+        color: var(--semi-color-text-0);
+        right: 50px;
+        bottom: 40px;
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .blog-layout {
+        &-backtop {
+            right: 20px;
+            bottom: 15px;
         }
     }
 }

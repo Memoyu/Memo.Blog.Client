@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { Empty, Toast, Typography } from '@douyinfe/semi-ui';
+import { Button, Collapsible, Empty, Toast, Typography } from '@douyinfe/semi-ui';
 import { IllustrationNoResult } from '@douyinfe/semi-illustrations';
+import { IconLikeHeart, IconComment } from '@douyinfe/semi-icons';
 
 import MarkDown from '@components/markdown/article';
 import MarkdownNav from './components/navbar';
@@ -19,7 +20,7 @@ import { dateDiff } from '@src/utils/date';
 
 import { ArticleModel } from '@src/common/model';
 
-import { articleGet } from '@src/utils/request';
+import { articleGet, articleLike } from '@src/utils/request';
 
 import './index.scss';
 import StickyBox from 'react-sticky-box';
@@ -32,9 +33,11 @@ const Index = () => {
     const [article, setArticle] = useState<ArticleModel>();
     const [loading, setLoading] = useState<boolean>();
     const [articleId, setArticleId] = useState<string>('');
+    const [isLike, setIsLike] = useState<boolean>();
+    const [likes, setLikes] = useState<number>(0);
 
     // 获取文章详情
-    let getArticleDetail = async (id: string) => {
+    const getArticleDetail = (id: string) => {
         setLoading(true);
 
         articleGet(id)
@@ -46,8 +49,23 @@ const Index = () => {
 
                 let article = res.data;
                 setArticle(article);
+                setIsLike(article.isLike);
+                setLikes(article.likes);
             })
             .finally(() => setLoading(false));
+    };
+
+    const handleArticleLikeClick = (id: string) => {
+        if (article?.isLike) return;
+
+        articleLike(id).then((res) => {
+            if (!res.isSuccess) {
+                Toast.error(res.message);
+                return;
+            }
+            setIsLike(true);
+            setLikes((old) => old + 1);
+        });
     };
 
     usePageVisit(params.id);
@@ -108,6 +126,7 @@ const Index = () => {
                     )}
                 </ContentContainer>
             </header>
+
             <div className="article-section">
                 <ContentContainer className="article-section-conyainer">
                     <div className="article-section-main">
@@ -128,8 +147,31 @@ const Index = () => {
                     </div>
                 </ContentContainer>
             </div>
-            <div className="article-comment">
-                <ContentContainer className="article-comment-main">
+
+            <div className="article-bottom">
+                <div className="article-bottom-like">
+                    <Button type="primary" theme="solid" icon={<IconComment />} onClick={() => {}}>
+                        {article.comments}
+                    </Button>
+                    <Button
+                        type="primary"
+                        theme="solid"
+                        icon={
+                            <IconLikeHeart
+                                style={{
+                                    color: isLike
+                                        ? 'rgba(var(--semi-red-6), 1)'
+                                        : 'rgba(var(--semi-white), 1)',
+                                }}
+                            />
+                        }
+                        onClick={() => handleArticleLikeClick(article.articleId)}
+                    >
+                        {likes}
+                    </Button>
+                </div>
+
+                <ContentContainer className="article-bottom-comment">
                     {article && article?.commentable && <CommentList articleId={articleId} />}
                 </ContentContainer>
             </div>

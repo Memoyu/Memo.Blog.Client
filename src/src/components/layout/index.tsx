@@ -13,29 +13,11 @@ interface LayoutProps {
 }
 
 const Index: React.FC<LayoutProps> = ({ children }) => {
-    const style = {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 30,
-        width: 30,
-        borderRadius: '100%',
-        backgroundColor: 'var(--semi-color-primary)',
-        color: 'var(--semi-color-text-0)',
-        right: 50,
-        bottom: 40,
-    };
-
     return (
         <Layout className="blog-layout">
             <Header />
-            <Content className="blog-layout-content">
-                {/* <Suspense>
-                    <Outlet />
-                </Suspense> */}
-                {children}
-            </Content>
-            <BackTop style={style}>
+            <Content className="blog-layout-content">{children}</Content>
+            <BackTop className="blog-layout-backtop">
                 <IconArrowUp />
             </BackTop>
         </Layout>

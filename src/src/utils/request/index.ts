@@ -53,6 +53,10 @@ export const articleGet = (id: string) => {
     return Request.get<ArticleModel>('article/get', { params: { articleId: id } });
 };
 
+export const articleLike = (id: string) => {
+    return Request.post('article/like', { articleId: id });
+};
+
 //#endregion
 
 //#region 文章分类

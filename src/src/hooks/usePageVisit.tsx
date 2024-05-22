@@ -4,6 +4,7 @@ import { visitorCreate, visitLogCreate } from '@src/utils/request';
 import { VisitorLogEditRequest } from '@src/common/model';
 import { initVisitorId } from '@redux/slices/visitor/visitorSlice';
 import { getBrowser, getOs } from '@src/utils/user-agent';
+import { Toast } from '@douyinfe/semi-ui';
 
 /**
  * 访客访问记录
@@ -41,7 +42,13 @@ export function usePageVisit(visitedId?: string) {
         // 再次确保visitorId是存在的，做一次兜底
         if (!visitor.visitorId) {
             visitorCreate({}).then((res) => {
-                if (!res.isSuccess || !res.data) return;
+                if (!res.isSuccess || !res.data) {
+                    // 开发阶段可开启
+                    if (process.env.NODE_ENV === 'production') {
+                        Toast.error(res.message);
+                    }
+                    return;
+                }
                 store.dispatch(initVisitorId(res.data));
                 doCreateVisitLog(log);
             });

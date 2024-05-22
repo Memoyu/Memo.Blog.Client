@@ -2,9 +2,36 @@
 
 .article-list-container {
     padding: 0;
-    &-category-sticky {
-        position: relative;
-        z-index: 50;
+    .article-item-card {
+        &-header {
+        }
+        &-desc {
+            margin-top: 20px;
+        }
+        &-tags {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        &-footer {
+            margin: 10px 15px 0 15px;
+            display: flex;
+            justify-content: space-between;
+
+            &-like {
+                display: flex;
+                align-items: center;
+            }
+            .like-item {
+                margin-right: 15px;
+                display: flex;
+                align-items: center;
+
+                span {
+                    font-size: 14px;
+                }
+            }
+        }
     }
 }
 

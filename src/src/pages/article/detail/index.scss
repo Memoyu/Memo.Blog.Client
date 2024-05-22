@@ -67,10 +67,10 @@
     }
 }
 
-.article-comment {
+.article-bottom {
     position: relative;
     background: rgb(var(--semi-violet-0));
-    padding-top: 150px;
+    padding-top: 100px;
     padding-bottom: 50px;
 
     &:before {
@@ -81,7 +81,17 @@
         border-bottom: 240px solid rgb(var(--semi-violet-0));
     }
 
-    &-main {
+    &-like {
+        display: flex;
+        justify-content: start;
+        margin-bottom: 20px;
+        padding: 0 20px;
+        button {
+            margin-right: 15px;
+        }
+    }
+
+    &-comment {
         padding: 15px;
         border-radius: 20px;
         background-color: var(--semi-color-bg-0);
@@ -109,12 +119,16 @@
         }
     }
 
-    .article-comment {
+    .article-bottom {
         &:before {
             // border-right: 100vw solid transparent;
         }
 
-        &-main {
+        &-like {
+            justify-content: center;
+        }
+
+        &-comment {
             padding: 15px 8px;
         }
     }

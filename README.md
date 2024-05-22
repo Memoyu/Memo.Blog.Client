@@ -68,6 +68,7 @@
 |动效|[framer/motion](https://github.com/framer/motion)|
 |http请求|[axios/axios](https://github.com/axios/axios)|
 |工具库|[lodash/lodash](https://github.com/lodash/lodash)|
+|userAgent解析|[faisalman/ua-parser-js](https://github.com/faisalman/ua-parser-js)|
 |无限滚动|[danbovey/react-infinite-scroller](https://github.com/danbovey/react-infinite-scroller)|
 |瀑布流布局|[askides/react-plock](https://github.com/askides/react-plock)|
 |粘性组件|[codecks-io/react-sticky-box](https://github.com/codecks-io/react-sticky-box)|

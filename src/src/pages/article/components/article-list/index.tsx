@@ -1,7 +1,13 @@
 import { FC, useState, useRef, CSSProperties, useEffect } from 'react';
 import { Masonry } from 'react-plock';
 import { Card, Badge, TagGroup, Toast, Typography, Button } from '@douyinfe/semi-ui';
-import { IconActivity, IconVerify } from '@douyinfe/semi-icons';
+import {
+    IconActivity,
+    IconEyeOpened,
+    IconComment,
+    IconLikeHeart,
+    IconVerify,
+} from '@douyinfe/semi-icons';
 import { NavLink } from 'react-router-dom';
 
 import { dateDiff } from '@utils/date';
@@ -24,7 +30,7 @@ const Index: FC<ComProps> = ({}) => {
     const categoryIdRef = useRef<string>('');
     const articlesLe = useRef<number>(0);
     const currentPageRef = useRef<number>(1);
-    const pageSize = 15;
+    const pageSize = 20;
     const [loading, setLoading] = useState<boolean>(false);
     const [articleTotal, setArticleTotal] = useState<number>(0);
     const [articles, setArticles] = useState<Array<ArticlePageModel>>([]);
@@ -136,9 +142,8 @@ const Index: FC<ComProps> = ({}) => {
                                 }}
                             >
                                 <NavLink
-                                    // key={item.articleId}
+                                    className="article-item-card-header"
                                     to={`detail/${item.articleId}`}
-                                    //to={`/detail`}
                                 >
                                     {item.banner.length != 0 && (
                                         <img
@@ -158,19 +163,12 @@ const Index: FC<ComProps> = ({}) => {
                                         {item.title}
                                     </Title>
                                 </NavLink>
-                                <div style={{ margin: 20 }}>
+                                <div className="article-item-card-desc">
                                     <Text type="tertiary">{item.description}</Text>
                                 </div>
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        margin: '0 15px',
-                                        marginBottom: 10,
-                                    }}
-                                >
+                                <div className="article-item-card-tags">
                                     <TagGroup
-                                        maxTagCount={2}
+                                        maxTagCount={3}
                                         showPopover
                                         style={{
                                             display: 'flex',
@@ -185,6 +183,28 @@ const Index: FC<ComProps> = ({}) => {
                                         })}
                                         size="large"
                                     />
+                                </div>
+                                <div className="article-item-card-footer">
+                                    <div className="article-item-card-footer-like">
+                                        <div className="like-item">
+                                            <IconEyeOpened />
+                                            <Text style={{ marginLeft: 3 }}>{item.views}</Text>
+                                        </div>
+
+                                        <div className="like-item">
+                                            <IconLikeHeart />
+                                            <Text style={{ marginLeft: 3 }}>{item.likes}</Text>
+                                        </div>
+
+                                        {item.commentable && (
+                                            <div className="like-item">
+                                                <IconComment />
+                                                <Text style={{ marginLeft: 3 }}>
+                                                    {item.comments}
+                                                </Text>
+                                            </div>
+                                        )}
+                                    </div>
                                     <Text style={{ display: 'flex', alignItems: 'center' }}>
                                         {dateDiff(new Date(item.createTime))}
                                     </Text>
