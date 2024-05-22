@@ -1,3 +1,5 @@
+@import '@assets/styles/variable.scss';
+
 .call-me-wrap {
     display: flex;
     justify-content: center;
@@ -5,5 +7,17 @@
     .nav-link-icon {
         color: var(--semi-color-primary);
         margin: 0 5px;
+    }
+
+    &-site-qrcode {
+        display: inline;
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .call-me-wrap {
+        &-site-qrcode {
+            display: none;
+        }
     }
 }

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { Button, Empty, Toast, Typography } from '@douyinfe/semi-ui';
+import { Empty, Toast, Typography } from '@douyinfe/semi-ui';
 import { IllustrationNoResult } from '@douyinfe/semi-illustrations';
-import { IconLikeHeart, IconComment } from '@douyinfe/semi-icons';
 
 import MarkDown from '@components/markdown/article';
 import MarkdownNav from './components/navbar';
@@ -10,7 +9,6 @@ import PageContainer from '@src/components/layout/page-container';
 import ContentContainer from '@src/components/layout/content-container';
 import CommentList from './components/comment-list';
 import LabelList from './components/label-list';
-import TagList from './components/tag-list';
 import Copyright from './components/copyright';
 
 import { useParams } from 'react-router-dom';
@@ -20,7 +18,7 @@ import { dateDiff } from '@src/utils/date';
 
 import { ArticleModel } from '@src/common/model';
 
-import { articleGet, articleLike } from '@src/utils/request';
+import { articleGet } from '@src/utils/request';
 
 import './index.scss';
 import StickyBox from 'react-sticky-box';
@@ -33,8 +31,6 @@ const Index = () => {
     const [article, setArticle] = useState<ArticleModel>();
     const [loading, setLoading] = useState<boolean>();
     const [articleId, setArticleId] = useState<string>('');
-    const [isLike, setIsLike] = useState<boolean>();
-    const [likes, setLikes] = useState<number>(0);
 
     // 获取文章详情
     const getArticleDetail = (id: string) => {
@@ -49,23 +45,8 @@ const Index = () => {
 
                 let article = res.data;
                 setArticle(article);
-                setIsLike(article.isLike);
-                setLikes(article.likes);
             })
             .finally(() => setLoading(false));
-    };
-
-    const handleArticleLikeClick = (id: string) => {
-        if (article?.isLike) return;
-
-        articleLike(id).then((res) => {
-            if (!res.isSuccess) {
-                Toast.error(res.message);
-                return;
-            }
-            setIsLike(true);
-            setLikes((old) => old + 1);
-        });
     };
 
     usePageVisit(params.id);
@@ -127,53 +108,30 @@ const Index = () => {
                 </ContentContainer>
             </header>
 
-            <div className="article-section">
-                <ContentContainer className="article-section-conyainer">
-                    <div className="article-section-main">
-                        <div className="article-section-main-content">
-                            <MarkDown content={article?.content} />
-                        </div>
-
-                        <div className="article-section-main-nav">
-                            <StickyBox offsetTop={58}>
-                                <MarkdownNav content={article?.content} />
-                            </StickyBox>
-                        </div>
+            <ContentContainer className="article-section">
+                <div className="article-section-main">
+                    <div className="article-section-main-content">
+                        <MarkDown content={article?.content} />
                     </div>
-                    <div className="article-section-footer">
-                        <TagList tags={article?.tags} />
 
-                        <Copyright articleId={articleId} />
+                    <div className="article-section-main-nav">
+                        <StickyBox offsetTop={58}>
+                            <MarkdownNav content={article?.content} />
+                        </StickyBox>
                     </div>
-                </ContentContainer>
-            </div>
+                </div>
+
+                <div className="article-section-bottom">
+                    <Copyright article={article} />
+                </div>
+            </ContentContainer>
 
             <div className="article-bottom">
-                <ContentContainer className="article-bottom-like">
-                    <Button type="primary" theme="solid" icon={<IconComment />} onClick={() => {}}>
-                        {article.comments}
-                    </Button>
-                    <Button
-                        type="primary"
-                        theme="solid"
-                        icon={
-                            <IconLikeHeart
-                                style={{
-                                    color: isLike
-                                        ? 'rgba(var(--semi-red-6), 1)'
-                                        : 'rgba(var(--semi-white), 1)',
-                                }}
-                            />
-                        }
-                        onClick={() => handleArticleLikeClick(article.articleId)}
-                    >
-                        {likes}
-                    </Button>
-                </ContentContainer>
-
-                <ContentContainer className="article-bottom-comment">
-                    {article && article?.commentable && <CommentList articleId={articleId} />}
-                </ContentContainer>
+                {article && article?.commentable && (
+                    <ContentContainer className="article-bottom-comment">
+                        <CommentList articleId={articleId} />
+                    </ContentContainer>
+                )}
             </div>
         </PageContainer>
     ) : (

@@ -1,28 +1,143 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { Button, Space, Tag, Toast, Tooltip, Typography } from '@douyinfe/semi-ui';
+import { IconLikeHeart, IconComment, IconPhoneStroke } from '@douyinfe/semi-icons';
+import { QRCodeCanvas } from 'qrcode.react';
 
+import { articleLike } from '@src/utils/request';
+
+import { ArticleModel } from '@src/common/model';
+
+import logo from '@assets/images/logo.png';
 import './index.scss';
-import { Toast, Typography } from '@douyinfe/semi-ui';
 
 interface ComProps {
-    articleId?: string;
+    article: ArticleModel;
 }
 
 const { Paragraph } = Typography;
 
-const Index: FC<ComProps> = ({ articleId }) => {
+const Index: FC<ComProps> = ({ article }) => {
+    const [isLike, setIsLike] = useState<boolean>();
+    const [likes, setLikes] = useState<number>(0);
+    const [shareUrl, setShareUrl] = useState<string>('');
+
+    const handleArticleLikeClick = (id: string) => {
+        if (article?.isLike) return;
+
+        articleLike(id).then((res) => {
+            if (!res.isSuccess) {
+                Toast.error(res.message);
+                return;
+            }
+            setIsLike(true);
+            setLikes((old) => old + 1);
+        });
+    };
+
+    useEffect(() => {
+        setIsLike(article.isLike);
+        setLikes(article.likes);
+        if (process.env.NODE_ENV === 'production') {
+            setShareUrl(`http://www.memoyu.com/article/detail/${article.articleId}`);
+        } else {
+            setShareUrl(`http://192.168.3.86:11012/article/detail/${article.articleId}`);
+        }
+    }, [article]);
+
     return (
-        <div className="copyright-wrap">
-            <div className="copyright-wrap-title">转载请注明来源：</div>
-            <Paragraph
-                className="copyright-wrap-link"
-                ellipsis={{ pos: 'middle' }}
-                copyable={{
-                    successTip: false,
-                    onCopy: () => {
-                        Toast.success('复制成功！');
-                    },
-                }}
-            >{`http://www.memoyu.com/article/detail/${articleId}`}</Paragraph>
+        <div>
+            {/* 标签列表 */}
+            <div className="tag-list-wrap">
+                <div style={{ fontWeight: 'bold', width: 60 }}>标签：</div>
+                <Space
+                    wrap
+                    style={{
+                        width: '100%',
+                        padding: '13px 0',
+                    }}
+                >
+                    {article.tags?.map((item) => (
+                        <Tag
+                            key={item.tagId}
+                            style={{
+                                fontWeight: 'bold',
+                                padding: '14px 14px',
+                                color: 'var(--semi-color-primary)',
+                            }}
+                        >
+                            {item.name}
+                        </Tag>
+                    ))}
+                </Space>
+            </div>
+
+            {/* 转载注明 */}
+            <div className="copyright-wrap">
+                <div className="copyright-wrap-title">转载请注明来源：</div>
+                <Paragraph
+                    className="copyright-wrap-link"
+                    ellipsis={{ pos: 'middle' }}
+                    copyable={{
+                        successTip: false,
+                        onCopy: () => {
+                            Toast.success('复制成功！');
+                        },
+                    }}
+                >
+                    {shareUrl}
+                </Paragraph>
+            </div>
+
+            {/* 文章操作 */}
+            <div className="like-wrap">
+                {/* 评论 */}
+                <Button type="primary" theme="solid" icon={<IconComment />}>
+                    {article.comments}
+                </Button>
+
+                {/* 点赞 */}
+                <Button
+                    type="primary"
+                    theme="solid"
+                    icon={
+                        <IconLikeHeart
+                            style={{
+                                color: isLike
+                                    ? 'rgba(var(--semi-red-6), 1)'
+                                    : 'rgba(var(--semi-white), 1)',
+                            }}
+                        />
+                    }
+                    onClick={() => handleArticleLikeClick(article.articleId)}
+                >
+                    {likes}
+                </Button>
+
+                {/* 文章二维码 */}
+                <div className="site-qrcode">
+                    <Tooltip
+                        content={
+                            <div>
+                                <QRCodeCanvas
+                                    id="qrCode"
+                                    value={shareUrl}
+                                    size={128}
+                                    imageSettings={{
+                                        excavate: true,
+                                        x: undefined,
+                                        y: undefined,
+                                        src: '/src/assets/images/logo.png',
+                                        width: 30,
+                                        height: 30,
+                                    }}
+                                />
+                            </div>
+                        }
+                    >
+                        <Button type="primary" theme="solid" icon={<IconPhoneStroke />} />
+                    </Tooltip>
+                </div>
+            </div>
         </div>
     );
 };

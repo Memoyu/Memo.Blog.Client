@@ -41,15 +41,6 @@ const Index = () => {
                     </Link>
                     <div className="blog-home-bottom-summary">
                         <Summary />
-                        <div
-                            style={{
-                                margin: '10px 20px',
-                                display: 'flex',
-                                justifyContent: 'flex-end',
-                            }}
-                        >
-                            <CallMe />
-                        </div>
                     </div>
                 </div>
             </PageBanner>

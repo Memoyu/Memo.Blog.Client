@@ -1,25 +1,51 @@
 @import '@assets/styles/variable.scss';
 
+.tag-list-wrap {
+    font-size: 14px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    color: var(--semi-color-text-3);
+}
+
 .copyright-wrap {
     display: flex;
-    // padding: 20px 10px;
-    //background-color: rgba(var(--semi-grey-1), 0.2);
     border-radius: 10px;
     font-size: 14px;
     color: var(--semi-color-text-3);
+    margin: 10px 0;
 
     &-title {
         font-weight: bold;
     }
 
     &-link {
-        //width: 100px;
         word-break: 'break-word';
+    }
+}
+
+.like-wrap {
+    display: flex;
+    justify-content: start;
+
+    button {
+        margin-right: 15px;
+    }
+
+    .site-qrcode {
+        display: inline;
     }
 }
 
 @media screen and (max-width: $max-mobile-width) {
     .copyright-wrap {
         display: block;
+    }
+
+    .like-wrap {
+        justify-content: center;
+        .site-qrcode {
+            display: none;
+        }
     }
 }
