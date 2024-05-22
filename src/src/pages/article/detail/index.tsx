@@ -149,7 +149,7 @@ const Index = () => {
             </div>
 
             <div className="article-bottom">
-                <div className="article-bottom-like">
+                <ContentContainer className="article-bottom-like">
                     <Button type="primary" theme="solid" icon={<IconComment />} onClick={() => {}}>
                         {article.comments}
                     </Button>
@@ -169,7 +169,7 @@ const Index = () => {
                     >
                         {likes}
                     </Button>
-                </div>
+                </ContentContainer>
 
                 <ContentContainer className="article-bottom-comment">
                     {article && article?.commentable && <CommentList articleId={articleId} />}

@@ -13,10 +13,12 @@
         display: block;
         color: var(--semi-color-text-0);
         transition: all 0.2s;
-        margin: 0.4em 0;
+        // margin: 0.4em 0;
         font-weight: lighter;
-        line-height: 2em;
-        padding-right: 1.8em;
+        //line-height: 2em;
+        //padding-right: 1.8em;
+        margin: 5px 0;
+        padding: 5px 0;
         cursor: pointer;
         border-radius: 5px;
     }
