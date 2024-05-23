@@ -1,5 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import { Pagination, Toast } from '@douyinfe/semi-ui';
+import { useDispatch } from 'react-redux';
+
+import { increaseArticleCommentTotal } from '@redux/slices/article/detailSlice';
 
 import CommentItem from './comment-item';
 import CommentEdit, { CommentEditInput } from '@src/components/comment-edit';
@@ -16,6 +19,8 @@ interface ComProps {
 }
 
 const Index: FC<ComProps> = ({ articleId }) => {
+    const dispatch = useDispatch();
+
     const commentPageSize = 4;
     const [currentPage, setCurrentPage] = useState(1);
     const [commentTotal, setCommentTotal] = useState(1);
@@ -64,6 +69,8 @@ const Index: FC<ComProps> = ({ articleId }) => {
             Toast.error(res.message);
             return false;
         }
+
+        dispatch(increaseArticleCommentTotal(1));
         getArticleCommentPage(page);
         return true;
     };

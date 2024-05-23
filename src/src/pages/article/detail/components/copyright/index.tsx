@@ -2,24 +2,33 @@ import { FC, useEffect, useState } from 'react';
 import { Button, Space, Tag, Toast, Tooltip, Typography } from '@douyinfe/semi-ui';
 import { IconLikeHeart, IconComment, IconPhoneStroke } from '@douyinfe/semi-icons';
 import { QRCodeCanvas } from 'qrcode.react';
+import { useDispatch } from 'react-redux';
+
+import { useTypedSelector } from '@src/hooks/useTypedSelector';
+
+import { setArticleCommentTotal } from '@redux/slices/article/detailSlice';
 
 import { articleLike } from '@src/utils/request';
 
 import { ArticleModel } from '@src/common/model';
 
-import logo from '@assets/images/logo.png';
 import './index.scss';
 
 interface ComProps {
     article: ArticleModel;
 }
 
+const webSite = import.meta.env.VITE_WEB_SITE;
+
 const { Paragraph } = Typography;
 
 const Index: FC<ComProps> = ({ article }) => {
+    const dispatch = useDispatch();
+
     const [isLike, setIsLike] = useState<boolean>();
     const [likes, setLikes] = useState<number>(0);
     const [shareUrl, setShareUrl] = useState<string>('');
+    const comments = useTypedSelector((state) => state.articleDetailCommentTotal);
 
     const handleArticleLikeClick = (id: string) => {
         if (article?.isLike) return;
@@ -37,11 +46,8 @@ const Index: FC<ComProps> = ({ article }) => {
     useEffect(() => {
         setIsLike(article.isLike);
         setLikes(article.likes);
-        if (process.env.NODE_ENV === 'production') {
-            setShareUrl(`http://www.memoyu.com/article/detail/${article.articleId}`);
-        } else {
-            setShareUrl(`http://192.168.3.86:11012/article/detail/${article.articleId}`);
-        }
+        setShareUrl(`${webSite}article/detail/${article.articleId}`);
+        dispatch(setArticleCommentTotal(article.comments));
     }, [article]);
 
     return (
@@ -92,7 +98,7 @@ const Index: FC<ComProps> = ({ article }) => {
             <div className="like-wrap">
                 {/* 评论 */}
                 <Button type="primary" theme="solid" icon={<IconComment />}>
-                    {article.comments}
+                    {comments}
                 </Button>
 
                 {/* 点赞 */}

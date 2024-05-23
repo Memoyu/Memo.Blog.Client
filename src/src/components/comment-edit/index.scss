@@ -1,33 +1,87 @@
 @import '@assets/styles/variable.scss';
 
-.moment-comment-edit-wrap {
-    display: flex;
-    //  width: 100%;
+.comment-edit {
+    overflow: auto;
+    width: 100%;
     color: var(--semi-color-text-0);
-    &-user {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 0px 10px 0px 0px;
 
-        &-avatar {
-            flex-shrink: 0;
-            margin: 0 30px;
+    &-func {
+        display: flex;
+        &-rg {
+        }
+
+        &-user {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            cursor: pointer;
+
+            &-avatar {
+                flex-shrink: 0;
+                margin-right: 10px;
+            }
+
+            &-name {
+                width: 100%;
+            }
+            .is-reply {
+                width: 100%;
+            }
+        }
+
+        .semi-radio-addon-buttonRadio {
+            font-size: 14px;
+            padding: 6px 24px;
+            line-height: 20px;
         }
     }
-    &-content {
-        overflow: auto;
-        width: 100%;
-        margin-right: 15px;
+
+    &-input {
+        margin-top: 10px;
+        height: 170px;
+
+        .input-user-info {
+            width: 30%;
+
+            .avatar-origin-rg {
+                width: 100%;
+                flex-wrap: nowrap;
+            }
+        }
     }
 }
 
 @media screen and (max-width: $max-mobile-width) {
-    .moment-comment-edit-wrap {
-        &-user {
-            &-avatar {
-                margin: 0 15px;
+    .comment-edit {
+        &-func {
+            &-rg {
+            }
+
+            &-user {
+                margin-left: 5px;
+                &-avatar {
+                    margin-right: 5px;
+                }
+
+                &-name {
+                    width: 110px;
+                }
+                .is-reply {
+                    width: 60px;
+                }
+            }
+
+            .semi-radio-addon-buttonRadio {
+                font-size: 12px;
+                padding: 4px 16px;
+                line-height: 16px;
+            }
+        }
+
+        &-input {
+            margin-top: 5px;
+            .input-user-info {
+                width: 100%;
             }
         }
     }

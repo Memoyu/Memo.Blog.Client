@@ -5,9 +5,11 @@ import {
 } from './slices/moment/momentCommentSlice';
 import { MomentReducer } from './slices/moment/momentSlice';
 import { VisitorSliceReducer } from './slices/visitor/visitorSlice';
+import { articleDetailCommentTotalReducer } from './slices/article/detailSlice';
 
 export const store = configureStore({
     reducer: {
+        articleDetailCommentTotal: articleDetailCommentTotalReducer,
         momentCommentMomentId: MomentCommentMomentIdReducer,
         momentComments: MomentCommentReducer,
         moments: MomentReducer,

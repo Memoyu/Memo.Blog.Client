@@ -385,9 +385,15 @@ const Index: FC<ComProps> = ({ visible, onChange }) => {
             <List
                 grid={{
                     gutter: 2,
+                    xs: 12,
+                    sm: 12,
+                    md: 7,
+                    lg: 5,
+                    xl: 5,
+                    xxl: 5,
                     justify: 'center',
                 }}
-                style={{ padding: 10 }}
+                // style={{ padding: 10 }}
                 layout="horizontal"
                 dataSource={emojis}
                 renderItem={(item) => (

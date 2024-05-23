@@ -66,64 +66,63 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
     };
 
     return (
-        <div key={comment.commentId} className="moment-comment-item">
-            {/* flexShrink: 0 解决flex下头像变形问题 */}
-            <Avatar
-                style={{ margin: '0px 10px 0px 0px', flexShrink: 0 }}
-                size="small"
-                src={comment.visitor?.avatar}
-            />
-            <div className="moment-comment-item-box">
-                <div className="moment-comment-item-box-info">
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                        }}
-                    >
-                        <div className="comment-info">
-                            <div className="comment-info-user">
+        <div key={comment.commentId} className="article-comment-item">
+            <div className="article-comment-item-info">
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    <div className="comment-user">
+                        <Avatar
+                            style={{ margin: '0px 10px 0px 0px', flexShrink: 0 }}
+                            size="small"
+                            src={comment.visitor?.avatar}
+                        />
+                        <div className="comment-user-info">
+                            <div className="comment-user-info-name">
                                 <Text strong>{comment.floorString}</Text>
-                                <Text className="comment-info-user-name">
-                                    {comment.visitor?.nickname || '未知'}
-                                </Text>
+                                <Text className="text">{comment.visitor?.nickname || '未知'}</Text>
                             </div>
-                            <div className="comment-info-date">
+                            <div className="comment-user-info-date">
                                 <Text>
                                     {format(new Date(comment.createTime), 'yyyy-MM-dd HH:mm')}
                                 </Text>
-                                <Tag size="large" color="violet" className="comment-info-date-diff">
+                                <Tag size="large" color="violet" className="diff">
                                     {dateDiff(new Date(comment.createTime))}
                                 </Tag>
                             </div>
                         </div>
-                        <div className="comment-func">
-                            <Tooltip content="回复">
-                                <IconComment
-                                    onClick={() => {
-                                        setQuote(undefined);
-                                        handleCommentReply(comment);
-                                        setIsReply(!isReply);
-                                    }}
-                                />
-                            </Tooltip>
-                            <Tooltip content="引用">
-                                <IconQuote
-                                    className="comment-func-quote"
-                                    onClick={() => {
-                                        setQuote(comment);
-                                        handleCommentReply(comment);
-                                        if (!isReply) {
-                                            setIsReply(true);
-                                        }
-                                    }}
-                                />
-                            </Tooltip>
-                        </div>
+                    </div>
+                    <div className="comment-func">
+                        <Tooltip content="回复">
+                            <IconComment
+                                onClick={() => {
+                                    setQuote(undefined);
+                                    handleCommentReply(comment);
+                                    setIsReply(!isReply);
+                                }}
+                            />
+                        </Tooltip>
+                        <Tooltip content="引用">
+                            <IconQuote
+                                className="comment-func-quote"
+                                onClick={() => {
+                                    setQuote(comment);
+                                    handleCommentReply(comment);
+                                    if (!isReply) {
+                                        setIsReply(true);
+                                    }
+                                }}
+                            />
+                        </Tooltip>
                     </div>
                 </div>
-                <div className="moment-comment-item-box-reply">
+            </div>
+            <div className="article-comment-item-block">
+                <div className="article-comment-item-block-reply">
                     {comment.reply && comment.reply.commentId != comment.parentId && (
                         <Text type="tertiary">
                             {`回复 ${comment.reply.floorString} ${
@@ -132,7 +131,7 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                         </Text>
                     )}
                 </div>
-                <div className="moment-comment-item-box-content">
+                <div className="article-comment-item-block-content">
                     <MarkDown content={comment.content} />
                 </div>
 
@@ -145,6 +144,7 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                         }}
                     >
                         <CommentEdit
+                            isReply={true}
                             quote={quote?.content}
                             rows={4}
                             onSubmit={handleCommentSubmit}
@@ -152,7 +152,7 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                     </div>
                 )}
 
-                {childrens && <div className="moment-comment-item-box-childs">{childrens}</div>}
+                {childrens && <div className="article-comment-item-block-childs">{childrens}</div>}
             </div>
         </div>
     );
