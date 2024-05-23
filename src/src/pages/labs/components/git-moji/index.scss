@@ -1,12 +1,13 @@
 .gitmoji-container-gitmoji {
-    margin: 8px;
-    height: 180px;
+    margin: 8px 0;
+    //height: 180px;
     width: 100%;
-    max-width: 150px;
+    height: 100%;
+    // max-width: 150px;
     vertical-align: middle;
 
     &-header {
-        line-height: 80px;
+        line-height: 50px;
         font-size: 50px;
         text-align: center;
     }
@@ -20,4 +21,8 @@
     &-description {
         text-align: center;
     }
+}
+
+.semi-modal-content {
+    padding: 0px;
 }

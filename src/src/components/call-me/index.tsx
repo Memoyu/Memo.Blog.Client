@@ -2,11 +2,14 @@ import { FC, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Space, Tooltip, Image } from '@douyinfe/semi-ui';
 import { IconGithubLogo, IconPhoneStroke, IconComment, IconMail } from '@douyinfe/semi-icons';
+import { QRCodeCanvas } from 'qrcode.react';
 
 import WechatQrcode from '@assets/images/wechat-qrcode.jpg';
 import SiteQrcode from '@assets/images/site-qrcode.png';
 
 import './index.scss';
+
+const webSite = import.meta.env.VITE_WEB_SITE;
 
 interface CallMe {
     to?: string;
@@ -19,7 +22,21 @@ interface ComProps {}
 const Index: FC<ComProps> = ({}) => {
     const summaries: Array<CallMe> = [
         {
-            title: <Image width={96} height={96} src={SiteQrcode} />,
+            title: (
+                <QRCodeCanvas
+                    id="site-qrcode"
+                    value={webSite}
+                    size={128}
+                    imageSettings={{
+                        excavate: false,
+                        x: undefined,
+                        y: undefined,
+                        src: '/src/assets/images/logo.png',
+                        width: 30,
+                        height: 30,
+                    }}
+                />
+            ),
             icon: <IconPhoneStroke />,
             className: 'call-me-wrap-site-qrcode',
         },

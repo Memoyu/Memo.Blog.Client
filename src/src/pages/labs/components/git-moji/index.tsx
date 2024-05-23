@@ -377,14 +377,19 @@ const Index: FC<ComProps> = ({ visible, onChange }) => {
                 onChange && onChange(false);
             }}
             centered
-            bodyStyle={{ height: 'calc(100vh - 200px)', overflowY: 'auto', overflowX: 'hidden' }}
+            bodyStyle={{
+                height: 'calc(100vh - 200px)',
+                overflowY: 'auto',
+                overflowX: 'hidden',
+                padding: 5,
+            }}
             style={{ width: 1200 }}
             header={undefined}
             footer={undefined}
         >
             <List
                 grid={{
-                    gutter: 2,
+                    gutter: 12,
                     xs: 12,
                     sm: 12,
                     md: 7,
@@ -393,16 +398,19 @@ const Index: FC<ComProps> = ({ visible, onChange }) => {
                     xxl: 5,
                     justify: 'center',
                 }}
-                // style={{ padding: 10 }}
                 layout="horizontal"
                 dataSource={emojis}
                 renderItem={(item) => (
                     <List.Item>
-                        <div onClick={(e) => handlerShowCopyMessage(e, item.emoji || '')}>
+                        <div
+                            style={{ width: '100%', height: '100%' }}
+                            onClick={(e) => handlerShowCopyMessage(e, item.emoji || '')}
+                        >
                             <Card
                                 shadows="hover"
                                 className="gitmoji-container-gitmoji"
                                 style={{ backgroundColor: item.color }}
+                                bodyStyle={{ padding: 10 }}
                             >
                                 <div className="gitmoji-container-gitmoji-header">{item.emoji}</div>
 
@@ -411,10 +419,21 @@ const Index: FC<ComProps> = ({ visible, onChange }) => {
                                         theme="borderless"
                                         onClick={(e) => handlerShowCopyMessage(e, item.code || '')}
                                     >
-                                        {item.code}
+                                        <Text ellipsis={true} style={{ width: 130 }}>
+                                            {item.code}
+                                        </Text>
                                     </Button>
                                 </div>
-                                <div style={{ margin: 6, textAlign: 'center' }}>
+                                <div
+                                    style={{
+                                        height: 40,
+                                        margin: 6,
+                                        textAlign: 'center',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }}
+                                >
                                     <Text strong style={{ wordBreak: 'break-word' }}>
                                         {item.description}
                                     </Text>
