@@ -2,14 +2,11 @@ import { FC, useEffect, useRef, useState } from 'react';
 import {
     Avatar,
     TextArea,
-    Tabs,
-    TabPane,
     Input,
     InputGroup,
     Select,
     Button,
     Typography,
-    Popconfirm,
     Toast,
     RadioGroup,
     Radio,
@@ -51,7 +48,6 @@ const Index: FC<ComProps> = ({ isReply = false, quote, rows = 4, onSubmit = () =
 
     const [selectedFunc, setSelectedFunc] = useState<Funcs>('edit');
 
-    const [visitorInputVisible, setVisitorInputVisible] = useState<boolean>(false);
     const [avatar, setAvatar] = useState<string>();
     const avatarOriginTypeRef = useRef<number>(1);
     const [avatarOrigin, setAvatarOrigin] = useState<string>();
@@ -175,7 +171,7 @@ const Index: FC<ComProps> = ({ isReply = false, quote, rows = 4, onSubmit = () =
         setNickname(visitor.nickname);
         setEmail(visitor.email);
         avatarOriginTypeRef.current = visitor.avatarOriginType ?? AvatarOriginType.Qq;
-    }, [visitorInputVisible]);
+    }, []);
 
     // 头像来源输入变更
     const handleAvatarOriginChange = (val: string) => {

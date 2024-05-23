@@ -1,13 +1,13 @@
 import { Typography } from '@douyinfe/semi-ui';
+import { Link } from 'react-router-dom';
 
 import PageContainer from '@src/components/layout/page-container';
 import PageBanner from '@components/page-banner';
 import Summary from './components/summary';
-import CallMe from '../../components/call-me';
+
+import { usePageVisit } from '@src/hooks/usePageVisit';
 
 import './index.scss';
-import { usePageVisit } from '@src/hooks/usePageVisit';
-import { Link } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 

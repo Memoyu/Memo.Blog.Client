@@ -5,7 +5,6 @@ import { IconGithubLogo, IconPhoneStroke, IconComment, IconMail } from '@douyinf
 import { QRCodeCanvas } from 'qrcode.react';
 
 import WechatQrcode from '@assets/images/wechat-qrcode.jpg';
-import SiteQrcode from '@assets/images/site-qrcode.png';
 
 import './index.scss';
 
