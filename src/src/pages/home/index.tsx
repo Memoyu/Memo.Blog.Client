@@ -34,7 +34,11 @@ const Index = () => {
                     </Title>
                 </div>
                 <div className="blog-home-bottom">
-                    <Link target="_blank" to={'https://wallhaven.cc/'}>
+                    <Link
+                        target="_blank"
+                        to={'https://wallhaven.cc/'}
+                        className="blog-home-bottom-pic-link"
+                    >
                         <Text strong type="secondary">
                             pic by @wallhaven
                         </Text>

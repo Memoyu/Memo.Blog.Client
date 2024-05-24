@@ -20,6 +20,9 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: end;
+        &-pic-link {
+            margin-top: 0;
+        }
 
         &-summary {
             width: 40%;
@@ -40,6 +43,10 @@
             bottom: 6%;
             flex-direction: column-reverse;
             justify-content: flex-start;
+
+            &-pic-link {
+                margin-top: 10px;
+            }
 
             &-summary {
                 width: 100%;
