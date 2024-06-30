@@ -31,7 +31,7 @@ const Index: FC<ComProps> = ({ article }) => {
     const comments = useTypedSelector((state) => state.articleDetailCommentTotal);
 
     const handleArticleLikeClick = (id: string) => {
-        if (article?.isLike) return;
+        if (isLike) return;
 
         articleLike(id).then((res) => {
             if (!res.isSuccess) {

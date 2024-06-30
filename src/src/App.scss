@@ -10,7 +10,7 @@ body,
 
     --semi-color-primary: rgba(var(--semi-violet-4), 1) !important;
     --semi-color-primary-hover: rgba(var(--semi-violet-3), 1) !important;
-    --semi-color-primary-light-default: rgba(var(--semi-violet-0), 1);
+    --semi-color-primary-light-default: rgba(var(--semi-violet-0), 1) !important;
     .flex-between {
         display: flex;
         justify-content: space-between;
