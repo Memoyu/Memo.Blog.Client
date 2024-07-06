@@ -19,6 +19,7 @@ interface CallMe {
 interface ComProps {}
 
 const Index: FC<ComProps> = ({}) => {
+    const qrcodeSize = 96;
     const summaries: Array<CallMe> = [
         {
             title: (
@@ -34,12 +35,16 @@ const Index: FC<ComProps> = ({}) => {
                         width: 30,
                         height: 30,
                     }}
+                    style={{ width: qrcodeSize, height: qrcodeSize }}
                 />
             ),
             icon: <IconPhoneStroke />,
             className: 'call-me-wrap-site-qrcode',
         },
-        { title: <Image width={96} height={96} src={WechatQrcode} />, icon: <IconComment /> },
+        {
+            title: <Image width={qrcodeSize} height={qrcodeSize} src={WechatQrcode} />,
+            icon: <IconComment />,
+        },
         { to: 'mailto:mmy6076@outlook.com', title: 'Email', icon: <IconMail /> },
         { to: 'https://github.com/Memoyu', title: 'Github', icon: <IconGithubLogo /> },
     ];

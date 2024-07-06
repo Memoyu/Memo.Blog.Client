@@ -133,6 +133,7 @@ const Index: FC<ComProps> = ({ article }) => {
                                         width: 30,
                                         height: 30,
                                     }}
+                                    style={{ width: 96, height: 96 }}
                                 />
                             </div>
                         }
