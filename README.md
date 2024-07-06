@@ -58,7 +58,7 @@
 | :---------------------------------: | :----------------------------------------------------------: |
 |React|[facebook/react](https://github.com/facebook/react)|
 |UI组件|[DouyinFE/semi-design](https://github.com/DouyinFE/semi-design)|
-|状态管理|[reduxjs/react-redux](https://github.com/reduxjs/react-redux)|
+|状态管理|[pmndrs/zustand](https://github.com/pmndrs/zustand)|
 |路由管理|[remix-run/react-router](https://github.com/remix-run/react-router)|
 |图表可视化|[apache/echarts](https://github.com/apache/echarts)|
 |日期处理|[date-fns/date-fns](https://github.com/date-fns/date-fns)|
