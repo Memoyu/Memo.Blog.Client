@@ -2,18 +2,13 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { Toast } from '@douyinfe/semi-ui';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '@src/hooks/useTypedSelector';
+// import { useMoment } from '@src/stores';
 
-import { unshiftMomentComment, setMomentComments } from '@redux/slices/moment/momentCommentSlice';
-import { increaseMomentComments } from '@redux/slices/moment/momentSlice';
-
-import CommentItem from './comment-item';
 import CommentEdit, { CommentEditInput } from '@src/components/comment-edit';
 
 import { commentPage, commentCreate } from '@utils/request';
 
-import { CommentModel, CommentPageRequest, CommentType } from '@common/model';
+import { CommentPageRequest, CommentType } from '@common/model';
 
 import './index.scss';
 
@@ -22,12 +17,10 @@ interface ComProps {
 }
 
 const Index: FC<ComProps> = ({ height = 1000 }) => {
-    const dispatch = useDispatch();
-    const momentId = useTypedSelector((state) => state.momentCommentMomentId);
-    const comments = useTypedSelector((state) => state.momentComments);
+    // const incrementComments = useMoment((state) => state.incrementComments);
 
     const commentPageSize = 7;
-    const [commentLoading, setCommentLoading] = useState<boolean>();
+    const [_commentLoading, setCommentLoading] = useState<boolean>();
     const commentPageRef = useRef<number>(1);
     const commentTotalRef = useRef<number>(Infinity);
 
@@ -36,7 +29,7 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
         setCommentLoading(true);
 
         let request = {
-            belongId: momentId,
+            // belongId: momentId,
             commentType: CommentType.Moment,
             page: commentPageRef.current,
             size: commentPageSize,
@@ -49,12 +42,12 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
                 }
 
                 commentTotalRef.current = res.data.total;
-                dispatch(
-                    setMomentComments({
-                        comments: res.data.items,
-                        init: commentPageRef.current == 1,
-                    })
-                );
+                // dispatch(
+                //     setMomentComments({
+                //         comments: res.data.items,
+                //         init: commentPageRef.current == 1,
+                //     })
+                // );
             })
             .finally(() => setCommentLoading(false));
     };
@@ -63,7 +56,7 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
         let res = await commentCreate({
             content: input.content,
             commentType: CommentType.Moment,
-            belongId: momentId, // 能提交评论，说明一定存在momentid
+            belongId: '', //  能提交评论，说明一定存在momentid
         });
 
         if (!res.isSuccess || !res.data) {
@@ -71,8 +64,8 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
             return false;
         }
 
-        dispatch(unshiftMomentComment(res.data));
-        dispatch(increaseMomentComments({ momentId: momentId, count: 1 }));
+        // dispatch(unshiftMomentComment(res.data));
+        // incrementComments(momentId, 1);
 
         return true;
     };
@@ -86,11 +79,11 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
     useEffect(() => {
         commentPageRef.current = 1;
         getMomentCommentPage();
-    }, [momentId]);
+    });
 
     return (
         <div className="moment-comment-list-wrap">
-            {momentId && (
+            {
                 <div className="moment-comment-edit">
                     <div
                         style={{
@@ -102,7 +95,7 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
                         <CommentEdit rows={4} onSubmit={(e) => handleCommentSubmit(e)} />
                     </div>
                 </div>
-            )}
+            }
             <div
                 className="moment-comment-list"
                 style={{ maxHeight: height, padding: 5, overflow: 'auto' }} // , overflowX: 'hidden'
@@ -112,11 +105,11 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
                     pageStart={0}
                     threshold={20}
                     loadMore={loadMoreMomentCommentPage}
-                    hasMore={!commentLoading && comments.length < commentTotalRef.current}
+                    // hasMore={!commentLoading && comments.length < commentTotalRef.current}
                     useWindow={false}
                 >
                     <div className="moment-comment-list">
-                        {comments?.map((comment: CommentModel) => (
+                        {/* {comments?.map((comment: CommentModel) => (
                             <div key={comment.commentId + 'wrap'} style={{ margin: '15px 0' }}>
                                 <CommentItem
                                     key={comment.commentId}
@@ -130,7 +123,7 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
                                     }
                                 />
                             </div>
-                        ))}
+                        ))} */}
                     </div>
                 </InfiniteScroll>
             </div>

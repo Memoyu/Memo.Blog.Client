@@ -13,13 +13,13 @@ import {
 } from '@douyinfe/semi-ui';
 import MarkDown from '@components/markdown/comment';
 
+import { useVisitor } from '@src/stores';
+
 import { AvatarOriginType } from '@src/common/model';
-import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '@src/hooks/useTypedSelector';
-import { setVisitorInfo } from '@redux/slices/visitor/visitorSlice';
 import { AvatarOriginTypeOpts } from '@src/common/select-options';
 
 import './index.scss';
+import { shallow } from 'zustand/shallow';
 
 export interface CommentEditInput {
     nickname: string;
@@ -43,15 +43,15 @@ type Funcs = 'edit' | 'preview' | 'publish' | 'user';
 const { Text } = Typography;
 
 const Index: FC<ComProps> = ({ isReply = false, quote, rows = 4, onSubmit = () => false }) => {
-    const dispatch = useDispatch();
-    const visitor = useTypedSelector((state) => state.visitor);
+    const visitor = useVisitor((state) => state, shallow);
+    const setVisitor = useVisitor((state) => state.setVisitor);
 
     const [selectedFunc, setSelectedFunc] = useState<Funcs>('edit');
 
     const [avatar, setAvatar] = useState<string>();
     const avatarOriginTypeRef = useRef<number>(1);
     const [avatarOrigin, setAvatarOrigin] = useState<string>();
-    const [nickname, setNickname] = useState<string>('');
+    const [nickname, setNickname] = useState<string>();
     const [email, setEmail] = useState<string>();
     const [content, setContent] = useState<string>('');
 
@@ -212,7 +212,7 @@ const Index: FC<ComProps> = ({ isReply = false, quote, rows = 4, onSubmit = () =
                 avatarOriginType: avatarOriginTypeRef.current,
                 avatarOrigin,
                 content,
-                visitorId: visitor.visitorId,
+                visitorId: visitor.visitorId!,
             })
         ).then((res) => {
             if (res === false) {
@@ -231,15 +231,13 @@ const Index: FC<ComProps> = ({ isReply = false, quote, rows = 4, onSubmit = () =
         }
         //console.log(avatarOrigin);
         // 更新游客信息
-        dispatch(
-            setVisitorInfo({
-                nickname,
-                email,
-                avatar,
-                avatarOriginType: avatarOriginTypeRef.current,
-                avatarOrigin,
-            })
-        );
+        setVisitor({
+            nickname,
+            email,
+            avatar,
+            avatarOriginType: avatarOriginTypeRef.current,
+            avatarOrigin,
+        });
 
         setSelectedFunc('edit');
     };

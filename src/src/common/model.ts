@@ -205,6 +205,14 @@ export interface CommentModel {
 
 //#region 访客信息
 
+export interface SetVisitorStateModel {
+    nickname: string;
+    email?: string;
+    avatar?: string;
+    avatarOriginType?: AvatarOriginType;
+    avatarOrigin?: string;
+}
+
 export interface VisitorEditRequest {
     nickname?: string;
     email?: string;

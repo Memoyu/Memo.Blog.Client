@@ -1,10 +1,8 @@
 import { useRef, useEffect } from 'react';
-import { store } from '@redux/store';
-import { visitorCreate, visitLogCreate } from '@src/utils/request';
+import { visitLogCreate } from '@src/utils/request';
 import { VisitorLogEditRequest } from '@src/common/model';
-import { initVisitorId } from '@redux/slices/visitor/visitorSlice';
 import { getBrowser, getOs } from '@src/utils/user-agent';
-import { Toast } from '@douyinfe/semi-ui';
+import { useVisitor } from '@src/stores';
 
 /**
  * 访客访问记录
@@ -13,6 +11,8 @@ import { Toast } from '@douyinfe/semi-ui';
 export function usePageVisit(visitedId?: string) {
     const pathRef = useRef('');
     const initialized = useRef(false);
+    const visitorId = useVisitor((state) => state.visitorId);
+    const initVisitor = useVisitor((state) => state.initVisitor);
 
     useEffect(() => {
         // 设置当前页面地址
@@ -25,9 +25,6 @@ export function usePageVisit(visitedId?: string) {
     }, []);
 
     const createVisitLog = () => {
-        // 获取访客信息
-        let visitor = store.getState().visitor;
-
         // 获取当前设备信息
         let os = getOs();
         let browser = getBrowser();
@@ -40,25 +37,13 @@ export function usePageVisit(visitedId?: string) {
         } as VisitorLogEditRequest;
 
         // 再次确保visitorId是存在的，做一次兜底
-        if (!visitor.visitorId) {
-            visitorCreate({}).then((res) => {
-                if (!res.isSuccess || !res.data) {
-                    // 开发阶段可开启
-                    if (process.env.NODE_ENV === 'production') {
-                        Toast.error(res.message);
-                    }
-                    return;
-                }
-                store.dispatch(initVisitorId(res.data));
-                doCreateVisitLog(log);
+        if (!visitorId) {
+            initVisitor().then((res) => {
+                // 创建访客成功，就记录访问日志
+                if (res) visitLogCreate(log);
             });
         } else {
-            doCreateVisitLog(log);
+            visitLogCreate(log);
         }
-    };
-
-    let doCreateVisitLog = (visitLog: VisitorLogEditRequest) => {
-        // console.log('visitLogCreate', visitLog);
-        visitLogCreate(visitLog);
     };
 }

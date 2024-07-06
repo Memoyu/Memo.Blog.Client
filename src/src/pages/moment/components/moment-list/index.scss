@@ -16,7 +16,8 @@
             padding: 15px 25px;
             background-color: rgb(var(--semi-grey-0));
             border-radius: 4px;
-            box-shadow: 0 4px 8px rgb(var(--semi-grey-1));
+
+            box-shadow: var(--semi-shadow-elevated);
         }
     }
 }

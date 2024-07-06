@@ -1,7 +1,4 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
-import { setMomentId } from '@redux/slices/moment/momentCommentSlice';
-
 import './index.scss';
 import { Space, TagGroup, Typography } from '@douyinfe/semi-ui';
 import { IconComment, IconLikeHeart } from '@douyinfe/semi-icons';
@@ -15,11 +12,7 @@ interface ComProps {
 const { Text } = Typography;
 
 const Index: FC<ComProps> = ({ moment }) => {
-    const dispatch = useDispatch();
-
-    const handleReplyMomentClick = (moment: MomentModel) => {
-        dispatch(setMomentId(moment.momentId));
-    };
+    const handleReplyMomentClick = (_moment: MomentModel) => {};
 
     return (
         <div>

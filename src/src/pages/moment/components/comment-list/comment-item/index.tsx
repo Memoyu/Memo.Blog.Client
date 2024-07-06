@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { IconQuote, IconComment } from '@douyinfe/semi-icons';
 import { Avatar, Space, Tag, Toast, Tooltip, Typography } from '@douyinfe/semi-ui';
 
-import { useDispatch } from 'react-redux';
+import { useMoment } from '@src/stores';
 
 import CommentEdit, { CommentEditInput } from '@components/comment-edit';
 import MarkDown from '@components/markdown/comment';
@@ -12,8 +12,6 @@ import { dateDiff } from '@utils/date';
 
 import { commentCreate } from '@src/utils/request';
 import { CommentModel, CommentType } from '@src/common/model';
-import { pushMomentComment } from '@redux/slices/moment/momentCommentSlice';
-import { increaseMomentComments } from '@redux/slices/moment/momentSlice';
 
 import './index.scss';
 
@@ -34,7 +32,7 @@ type ComProps = {
 const { Text } = Typography;
 
 const CommentItem: React.FC<ComProps> = ({ comment, childrens }) => {
-    const dispatch = useDispatch();
+    const incrementComments = useMoment((state) => state.incrementComments);
 
     const [isReply, setIsReply] = useState<boolean>(false);
     const [reply, setReply] = useState<CommentReply>();
@@ -72,8 +70,8 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens }) => {
         }
         setIsReply(false);
 
-        dispatch(pushMomentComment(res.data));
-        dispatch(increaseMomentComments({ momentId: comment.belongId, count: 1 }));
+        // dispatch(pushMomentComment(res.data));
+        incrementComments(comment.belongId, 1);
 
         return true;
     };

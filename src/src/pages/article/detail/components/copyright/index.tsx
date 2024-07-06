@@ -2,11 +2,8 @@ import { FC, useEffect, useState } from 'react';
 import { Button, Space, Tag, Toast, Tooltip, Typography } from '@douyinfe/semi-ui';
 import { IconLikeHeart, IconComment, IconPhoneStroke } from '@douyinfe/semi-icons';
 import { QRCodeCanvas } from 'qrcode.react';
-import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '@src/hooks/useTypedSelector';
-
-import { setArticleCommentTotal } from '@redux/slices/article/detailSlice';
+import { useArticleDetail } from '@src/stores';
 
 import { articleLike } from '@src/utils/request';
 
@@ -23,12 +20,12 @@ const webSite = import.meta.env.VITE_WEB_SITE;
 const { Paragraph } = Typography;
 
 const Index: FC<ComProps> = ({ article }) => {
-    const dispatch = useDispatch();
+    const comments = useArticleDetail((state) => state.commentTotal);
+    const setCommentTotal = useArticleDetail((state) => state.setCommentTotal);
 
     const [isLike, setIsLike] = useState<boolean>();
     const [likes, setLikes] = useState<number>(0);
     const [shareUrl, setShareUrl] = useState<string>('');
-    const comments = useTypedSelector((state) => state.articleDetailCommentTotal);
 
     const handleArticleLikeClick = (id: string) => {
         if (isLike) return;
@@ -47,7 +44,7 @@ const Index: FC<ComProps> = ({ article }) => {
         setIsLike(article.isLike);
         setLikes(article.likes);
         setShareUrl(`${webSite}article/detail/${article.articleId}`);
-        dispatch(setArticleCommentTotal(article.comments));
+        setCommentTotal(article.comments);
     }, [article]);
 
     return (

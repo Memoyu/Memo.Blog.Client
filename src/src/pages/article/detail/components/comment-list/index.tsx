@@ -1,8 +1,5 @@
 import { FC, useEffect, useState } from 'react';
 import { Pagination, Toast } from '@douyinfe/semi-ui';
-import { useDispatch } from 'react-redux';
-
-import { increaseArticleCommentTotal } from '@redux/slices/article/detailSlice';
 
 import CommentItem from './comment-item';
 import CommentEdit, { CommentEditInput } from '@src/components/comment-edit';
@@ -12,6 +9,8 @@ import { commentPage, commentCreate } from '@utils/request';
 import { CommentEditRequest, CommentModel, CommentPageRequest, CommentType } from '@common/model';
 
 import './index.scss';
+
+import { useArticleDetail } from '@src/stores';
 import { useData } from '@src/hooks/useData';
 
 interface ComProps {
@@ -19,7 +18,7 @@ interface ComProps {
 }
 
 const Index: FC<ComProps> = ({ articleId }) => {
-    const dispatch = useDispatch();
+    const incrementCommentTotal = useArticleDetail((state) => state.incrementCommentTotal);
 
     const commentPageSize = 4;
     const [currentPage, setCurrentPage] = useState(1);
@@ -70,7 +69,7 @@ const Index: FC<ComProps> = ({ articleId }) => {
             return false;
         }
 
-        dispatch(increaseArticleCommentTotal(1));
+        incrementCommentTotal(1);
         getArticleCommentPage(page);
         return true;
     };

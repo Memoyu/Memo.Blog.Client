@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Toast } from '@douyinfe/semi-ui';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { store } from '@redux/store';
+import { useVisitor } from '@src/stores';
 
 const baseURL = import.meta.env.VITE_BASE_API;
 
@@ -25,7 +25,7 @@ export class Request {
 
         this.instance.interceptors.request.use(
             function (config) {
-                const visitorId = store.getState().visitor?.visitorId;
+                const visitorId = useVisitor.getState().visitorId;
                 if (visitorId) {
                     config.headers['Visitor-Id'] = visitorId; //携带访客Id
                 }

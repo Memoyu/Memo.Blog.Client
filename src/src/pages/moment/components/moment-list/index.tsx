@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
-import { Avatar, Typography, Space, Timeline, Toast, Tag } from '@douyinfe/semi-ui';
+import { Avatar, Typography, Space, Timeline, Tag } from '@douyinfe/semi-ui';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import MarkDown from '@components/markdown/comment';
@@ -9,13 +9,10 @@ import MarkDown from '@components/markdown/comment';
 import { useData } from '@src/hooks/useData';
 
 import { dateDiff } from '@utils/date';
-import { momentPage } from '@utils/request';
 
 import { Data } from '@douyinfe/semi-ui/lib/es/timeline';
 import { MomentModel, MomentPageRequest } from '@common/model';
-import { useTypedSelector } from '@src/hooks/useTypedSelector';
-import { useDispatch } from 'react-redux';
-import { setMoments } from '@redux/slices/moment/momentSlice';
+import { useMoment } from '@src/stores';
 
 import './index.scss';
 
@@ -29,10 +26,9 @@ interface ComProps {
 
 const { Text } = Typography;
 
-const Index: FC<ComProps> = ({ height = 1000 }) => {
-    const dispatch = useDispatch();
-
-    const moments = useTypedSelector((state) => state.moments);
+const Index: FC<ComProps> = () => {
+    const moments = useMoment((state) => state.moments);
+    const getMoments = useMoment((state) => state.getMoments);
 
     const momentPageSize = 7;
     const [_moments, momentLoading, _setMoments, setMomentLoading] = useData<
@@ -51,17 +47,9 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
             size: momentPageSize,
         } as MomentPageRequest;
 
-        momentPage(request)
+        getMoments(request, momentPageRef.current == 1)
             .then((res) => {
-                if (!res.isSuccess || !res.data) {
-                    Toast.error(res.message);
-                    return;
-                }
-
-                momentTotalRef.current = res.data.total;
-                // 如果总数被清空，则视为列表也需要清空
-                dispatch(setMoments({ moments: res.data.items, init: momentPageRef.current == 1 }));
-                // console.log('当前：', items);
+                if (res) momentTotalRef.current = res;
             })
             .finally(() => setMomentLoading(false));
     };
@@ -78,14 +66,14 @@ const Index: FC<ComProps> = ({ height = 1000 }) => {
 
     return (
         <div className="moment-list">
-            <div style={{ maxHeight: height, padding: 5, overflow: 'auto', overflowX: 'hidden' }}>
+            <div>
                 <InfiniteScroll
                     initialLoad={false}
                     pageStart={0}
                     threshold={20}
                     loadMore={loadMoreMomentPage}
                     hasMore={!momentLoading && moments.length < momentTotalRef.current}
-                    useWindow={false}
+                    // useWindow={false}
                 >
                     <Timeline mode="left">
                         {moments.map((m) => {
