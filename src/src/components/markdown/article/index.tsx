@@ -1,46 +1,57 @@
-import hljs from 'highlight.js';
-import { Marked } from 'marked';
-import { markedHighlight } from 'marked-highlight';
-import React, { CSSProperties } from 'react';
-
-//import './hljs.custom.scss';
-import 'highlight.js/styles/atom-one-dark.css';
-import './index.scss';
+import { MdPreview } from 'md-editor-rt';
+import React, { CSSProperties, useEffect, useState } from 'react';
+import { shallow } from 'zustand/shallow';
+import useTheme from '@src/stores/useTheme';
+import 'md-editor-rt/lib/style.css';
+import { debounce } from '@src/utils/md';
 
 interface Props {
+    articleId?: string;
     content?: string;
     className?: string;
     style?: CSSProperties;
 }
 
-const MarkDown: React.FC<Props> = ({ content, className, style }) => {
-    hljs.configure({
-        classPrefix: 'hljs-',
-        languages: ['C#', 'JSON', 'CSS', 'HTML', 'JavaScript', 'TypeScript', 'Markdown'],
-    });
+const onHtmlChanged = debounce(() => {
+    const { hash } = location;
 
-    const marked = new Marked(
-        markedHighlight({
-            langPrefix: 'hljs language-',
-            highlight(code, lang) {
-                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-                return hljs.highlight(code, { language }).value;
-            },
-        })
-    );
-    marked.setOptions({
-        gfm: true, // 默认为true。 允许 Git Hub标准的markdown.
-        breaks: true, // 默认为false。 允许回车换行。该选项要求 gfm 为true。 注释
-    });
+    if (/^#/.test(hash)) {
+        const headingId = decodeURIComponent(hash.replace('#', ''));
+
+        if (headingId) {
+            const targetHeadDom = document.getElementById(headingId);
+
+            if (targetHeadDom) {
+                const scrollLength = (targetHeadDom as HTMLHeadElement).offsetTop + 385;
+
+                window.scrollTo({
+                    top: scrollLength,
+                    behavior: 'smooth',
+                });
+            }
+        }
+    }
+});
+
+const MarkDown: React.FC<Props> = ({ articleId, content, className, style }) => {
+    const theme = useTheme((state) => state.theme, shallow);
+    const [mdContent, setMdContent] = useState<string>('');
+
+    useEffect(() => {
+        setMdContent(content ?? '');
+    }, [content]);
 
     return (
-        <div
-            style={style}
-            className={`article-marked ${className || ''}`}
-            dangerouslySetInnerHTML={{
-                __html: marked.parse(content || ''),
-            }}
-        />
+        <div style={style} className={`article-marked ${className || ''}`}>
+            <MdPreview
+                editorId={`article-detail-id-${articleId}`}
+                theme={theme}
+                modelValue={mdContent}
+                previewTheme="github"
+                codeTheme="vs"
+                onHtmlChanged={onHtmlChanged}
+            />
+        </div>
     );
 };
 

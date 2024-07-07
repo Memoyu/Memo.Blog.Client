@@ -23,6 +23,9 @@ body,
     }
 
     --blog-header-bg: var(--semi-white);
+    .md-editor {
+        --md-bk-color: var(--semi-grey-0) !important;
+    }
 }
 
 body[theme-mode='dark'] #root > * {

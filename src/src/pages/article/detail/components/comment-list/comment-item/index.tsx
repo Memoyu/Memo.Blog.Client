@@ -132,7 +132,7 @@ const CommentItem: React.FC<ComProps> = ({ comment, childrens, onCommentSubmit }
                     )}
                 </div>
                 <div className="article-comment-item-block-content">
-                    <MarkDown content={comment.content} />
+                    <MarkDown commentId={comment.commentId} content={comment.content} />
                 </div>
 
                 {isReply && (

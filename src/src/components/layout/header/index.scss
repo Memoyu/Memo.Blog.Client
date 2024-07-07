@@ -1,5 +1,7 @@
 @import '@assets/styles/variable.scss';
 
+$blog-header-bg-color: rgba(var(--blog-header-bg), 0.4);
+
 .blog-header {
     position: fixed;
     width: 100%;
@@ -19,7 +21,7 @@
         margin: 0 -10px;
         //background: var(--semi-color-bg-0);
         backdrop-filter: blur(3px);
-        background: rgba(var(--blog-header-bg), 0.4);
+        background: $blog-header-bg-color;
         transition: 1.4s 0.3s;
         &:hover {
             background: var(--semi-color-bg-0);
@@ -96,6 +98,10 @@
     .blog-header {
         padding-top: 0;
         &-wrap {
+            &:hover {
+                background: $blog-header-bg-color;
+            }
+
             .blog-header-nav {
                 .nav-list-wrap {
                     display: none;

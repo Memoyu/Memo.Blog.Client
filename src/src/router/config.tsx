@@ -51,16 +51,16 @@ const AnimateRoute = (props: PathRouteProps) => {
         <motion.div
             {...contentWrapProps}
             animate={{
-                opacity: [0, 0, 1],
+                opacity: [0, 0.8, 1],
                 y: 0,
                 translateY: [200, 200, 0],
-                transition: { duration: 1.2, ease: 'easeInOut' },
+                transition: { duration: 1, ease: 'easeInOut' },
             }}
             exit={{
                 scale: [1, 0.88, 0.88],
                 opacity: [1, 0.7, 0],
                 transformOrigin: ['center', 'bottom'],
-                transition: { duration: 1, ease: 'easeInOut' },
+                transition: { duration: 0.9, ease: 'easeInOut' },
             }}
             style={{ minHeight: '100vh' }}
             //  transition={{ duration: 1, ease: 'easeInOut' }}

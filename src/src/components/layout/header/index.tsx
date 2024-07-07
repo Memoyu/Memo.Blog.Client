@@ -9,9 +9,8 @@ import ContentContainer from '@src/components/layout/content-container';
 
 import { IScrollProps, useContentScroll } from '@src/hooks/useContentScroll';
 
-import { getLocalStorage, setLocalStorage } from '@src/utils/storage';
-
-import { THEME_MODE } from '@common/constant';
+import { shallow } from 'zustand/shallow';
+import useTheme, { ThemeMode } from '@src/stores/useTheme';
 
 import './index.scss';
 
@@ -30,35 +29,27 @@ const navs: Array<NavItem> = [
     { name: '关于', to: '/about' },
 ];
 
-const body = document.body;
-
 const Index: FC<ComProps> = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [isScrolling, setIsScrolling] = useState<boolean>(false);
     const [isLight, setIsLight] = useState<boolean>(false);
-    const [mode, setMode] = useState<string>(getLocalStorage(THEME_MODE) || 'light');
+    const theme = useTheme((state) => state.theme, shallow);
+    const setTheme = useTheme((state) => state.setTheme);
 
     let pathname = location.pathname || '/';
     if (pathname === '/404' || pathname === '/_not-found') pathname = '/';
 
     // 切换主题
     const switchMode = () => {
-        let theme = mode == 'light' ? 'dark' : 'light';
-        setThemeMode(theme);
+        let mode: ThemeMode = theme == 'light' ? 'dark' : 'light';
+        setThemeMode(mode);
     };
 
     // 设置主题mode
-    const setThemeMode = (mode: string) => {
-        if (mode == 'light') {
-            body.removeAttribute(THEME_MODE);
-        } else {
-            body.setAttribute(THEME_MODE, mode);
-        }
-
+    const setThemeMode = (mode: ThemeMode) => {
+        setTheme(mode);
         setIsLight(mode == 'light');
-        setMode(mode);
-        setLocalStorage(THEME_MODE, mode);
     };
 
     const handleDropdownItemClick = (item: NavItem) => {
@@ -66,7 +57,7 @@ const Index: FC<ComProps> = () => {
     };
 
     useEffect(() => {
-        setThemeMode(mode);
+        setThemeMode(theme);
     }, []);
 
     useContentScroll((props: IScrollProps) => {

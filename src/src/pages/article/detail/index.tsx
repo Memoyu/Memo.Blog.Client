@@ -4,9 +4,9 @@ import { Empty, Toast, Typography } from '@douyinfe/semi-ui';
 import { IllustrationNoResult } from '@douyinfe/semi-illustrations';
 
 import MarkDown from '@components/markdown/article';
-import MarkdownNav from './components/navbar';
-import PageContainer from '@src/components/layout/page-container';
-import ContentContainer from '@src/components/layout/content-container';
+import MarkdownCatalog from '@components/markdown/md-catalog';
+import PageContainer from '@components/layout/page-container';
+import ContentContainer from '@components/layout/content-container';
 import CommentList from './components/comment-list';
 import LabelList from './components/label-list';
 import Copyright from './components/copyright';
@@ -111,12 +111,12 @@ const Index = () => {
             <ContentContainer className="article-section">
                 <div className="article-section-main">
                     <div className="article-section-main-content">
-                        <MarkDown content={article?.content} />
+                        <MarkDown articleId={article?.articleId} content={article?.content} />
                     </div>
 
                     <div className="article-section-main-nav">
                         <StickyBox offsetTop={58}>
-                            <MarkdownNav content={article?.content} />
+                            <MarkdownCatalog articleId={article?.articleId} />
                         </StickyBox>
                     </div>
                 </div>

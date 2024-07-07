@@ -41,7 +41,7 @@
 
     &-main {
         min-height: 500px;
-        padding: 20px;
+        padding: 40px;
         border-radius: 20px;
         background-color: rgb(var(--semi-grey-0));
         display: flex;
@@ -91,6 +91,7 @@
         z-index: 1;
 
         &-main {
+            padding: 0px;
             &-content {
                 width: 100%;
                 padding: 0;
@@ -98,6 +99,9 @@
 
             &-nav {
                 display: none;
+            }
+            .md-editor-preview-wrapper {
+                padding: 14px 7px;
             }
         }
         &-bottom {
