@@ -62,9 +62,7 @@
 |路由管理|[remix-run/react-router](https://github.com/remix-run/react-router)|
 |图表可视化|[apache/echarts](https://github.com/apache/echarts)|
 |日期处理|[date-fns/date-fns](https://github.com/date-fns/date-fns)|
-|高亮样式|[highlightjs/highlight.js](https://github.com/highlightjs/highlight.js)|
-|markdown转换|[markedjs/marked](https://github.com/markedjs/marked)|
-|markdown导航栏|[parksben/markdown-navbar](https://github.com/parksben/markdown-navbar)|
+|markdown渲染|[imzbf/md-editor-rt](https://github.com/imzbf/md-editor-rt)|
 |动效|[framer/motion](https://github.com/framer/motion)|
 |http请求|[axios/axios](https://github.com/axios/axios)|
 |工具库|[lodash/lodash](https://github.com/lodash/lodash)|
