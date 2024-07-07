@@ -21,6 +21,8 @@ body,
     img {
         filter: var(--image-brightness);
     }
+
+    --blog-header-bg: var(--semi-white);
 }
 
 body[theme-mode='dark'] #root > * {
@@ -28,6 +30,8 @@ body[theme-mode='dark'] #root > * {
     img {
         filter: var(--image-brightness);
     }
+
+    --blog-header-bg: 22, 22, 26;
 }
 
 a {
