@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { BackTop, Layout } from '@douyinfe/semi-ui';
 
 import Header from './header';
+import Search from './search';
 
 import './index.scss';
 import { IconArrowUp } from '@douyinfe/semi-icons';
@@ -15,6 +16,7 @@ interface LayoutProps {
 const Index: React.FC<LayoutProps> = ({ children }) => {
     return (
         <Layout className="blog-layout">
+            <Search />
             <Header />
             <Content className="blog-layout-content">{children}</Content>
             <BackTop className="blog-layout-backtop">

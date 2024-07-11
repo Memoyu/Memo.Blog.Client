@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Button, Dropdown } from '@douyinfe/semi-ui';
-import { IconMenu, IconMoon, IconSun } from '@douyinfe/semi-icons';
+import { IconMenu, IconMoon, IconSun, IconSearch } from '@douyinfe/semi-icons';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -11,6 +11,7 @@ import { IScrollProps, useContentScroll } from '@src/hooks/useContentScroll';
 
 import { shallow } from 'zustand/shallow';
 import useTheme, { ThemeMode } from '@src/stores/useTheme';
+import { useSearch } from '@src/stores';
 
 import './index.scss';
 
@@ -36,6 +37,7 @@ const Index: FC<ComProps> = () => {
     const [isLight, setIsLight] = useState<boolean>(false);
     const theme = useTheme((state) => state.theme, shallow);
     const setTheme = useTheme((state) => state.setTheme);
+    const setSearchModalShow = useSearch((state) => state.setShow);
 
     let pathname = location.pathname || '/';
     if (pathname === '/404' || pathname === '/_not-found') pathname = '/';
@@ -44,6 +46,11 @@ const Index: FC<ComProps> = () => {
     const switchMode = () => {
         let mode: ThemeMode = theme == 'light' ? 'dark' : 'light';
         setThemeMode(mode);
+    };
+
+    // 搜索文章
+    const searchArticle = () => {
+        setSearchModalShow(true);
     };
 
     // 设置主题mode
@@ -70,11 +77,11 @@ const Index: FC<ComProps> = () => {
         <div className={`blog-header ${isScrolling ? 'stick' : ''}`}>
             <ContentContainer>
                 <div className="blog-header-wrap">
-                    <NavLink to="/" className="blog-header-logo">
+                    <NavLink to="/" className="header-logo">
                         <Logo />
                     </NavLink>
-                    <div className="blog-header-nav">
-                        <div className="nav-list-wrap">
+                    <div className="header-nav">
+                        <div className="header-nav-list">
                             {navs.map((item, index) => (
                                 <NavLink to={item.to} key={index} className="blog-header-navs-item">
                                     {item.name}
@@ -93,7 +100,7 @@ const Index: FC<ComProps> = () => {
                                 </NavLink>
                             ))}
                         </div>
-                        <div className="nav-dropdown-wrap">
+                        <div className="header-nav-dropdown">
                             <Dropdown
                                 trigger="click"
                                 autoAdjustOverflow={false}
@@ -116,12 +123,20 @@ const Index: FC<ComProps> = () => {
                                 <Button theme="borderless" icon={<IconMenu />}></Button>
                             </Dropdown>
                         </div>
-                        <Button
-                            className="blog-header-theme"
-                            theme="borderless"
-                            icon={isLight ? <IconMoon /> : <IconSun />}
-                            onClick={switchMode}
-                        />
+                        <div className="nav-tools">
+                            <Button
+                                className="header-tool"
+                                theme="borderless"
+                                icon={isLight ? <IconMoon /> : <IconSun />}
+                                onClick={switchMode}
+                            />
+                            <Button
+                                className="header-tool"
+                                theme="borderless"
+                                icon={<IconSearch />}
+                                onClick={searchArticle}
+                            />
+                        </div>
                     </div>
                 </div>
             </ContentContainer>

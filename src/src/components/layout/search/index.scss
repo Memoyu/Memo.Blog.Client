@@ -1,0 +1,10 @@
+.global-search-modal {
+    margin: 20px;
+    .search-wrap {
+        margin: 17px 0;
+        &-records {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

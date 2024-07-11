@@ -238,3 +238,12 @@ export interface VisitorLogEditRequest {
 }
 
 //#endregion
+
+//#region Store
+
+export interface SearchRecordModel {
+    word: string;
+    date: Date;
+}
+
+//#endregion
