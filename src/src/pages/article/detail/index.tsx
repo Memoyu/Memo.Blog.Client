@@ -78,7 +78,7 @@ const Index = () => {
                                 </Text>
                             </div>
 
-                            <div style={{ marginTop: 10 }}>
+                            <div className="article-header-main-content-labs">
                                 <LabelList
                                     labels={[
                                         {

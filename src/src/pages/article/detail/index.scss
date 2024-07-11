@@ -24,11 +24,13 @@
             padding: 140px 20px 360px;
 
             &-title {
-                color: rgba(var(--semi-white), 1);
                 padding-bottom: 1rem;
             }
             &-desc {
-                color: rgba(var(--semi-white), 1);
+                white-space: pre-wrap;
+            }
+            &-labs {
+                margin-top: 35px;
             }
         }
     }
@@ -86,6 +88,15 @@
 }
 
 @media screen and (max-width: $pad-portrait-width) {
+    .article-header {
+        &-main {
+            &-content {
+                &-labs {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
     .article-section {
         position: relative;
         z-index: 1;

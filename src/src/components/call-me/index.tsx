@@ -32,8 +32,8 @@ const Index: FC<ComProps> = ({}) => {
                         x: undefined,
                         y: undefined,
                         src: '/src/assets/images/logo.png',
-                        width: 30,
-                        height: 30,
+                        width: 20,
+                        height: 20,
                     }}
                     style={{ width: qrcodeSize, height: qrcodeSize }}
                 />
