@@ -1,6 +1,5 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 import { persist } from 'zustand/middleware';
-import { SearchRecordModel } from '@src/common/model';
 
 interface SearchState {
     show: boolean;
@@ -16,7 +15,24 @@ const useSearchStore = createWithEqualityFn<SearchState>()(
             setShow: (isShow: boolean) => {
                 set({
                     show: isShow,
-                    records: ['3333', '6666', 'rrrrr', 'rrrrr', 'rrrrr', 'rrrrr', 'rrrrr'],
+                    records: [
+                        '3333',
+                        '6666',
+                        'rrrrr',
+                        'rrrrr',
+                        'rrrrr',
+                        'rrrrr',
+                        'rrrrr',
+                        '3333',
+                        '6666',
+                        'rrrrr',
+                        'rrrrr',
+                        'rrrrr',
+                        'rrrrr',
+                        'rrrrr',
+                        'rrrrr',
+                        'rrrrr33',
+                    ],
                 });
             },
         }),

@@ -239,6 +239,16 @@ export interface VisitorLogEditRequest {
 
 //#endregion
 
+//#region Search
+
+export interface SearchResultModel {
+    link: string;
+    title: string;
+    content: string;
+}
+
+//#endregion
+
 //#region Store
 
 export interface SearchRecordModel {
