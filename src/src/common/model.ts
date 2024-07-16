@@ -241,10 +241,23 @@ export interface VisitorLogEditRequest {
 
 //#region Search
 
-export interface SearchResultModel {
-    link: string;
+export interface ArticleSearchPageRequest extends PaginationRequest {
+    keyWord?: string;
+}
+
+export interface ArticleSearchPaginationResult extends PaginationResult<ArticleSearchPageModel> {
+    keyWordSegs?: Array<string>;
+}
+
+export interface ArticleSearchPageModel {
+    articleId: string; // 文章Id
+    category: string; // 分类
     title: string;
+    description: string;
+    tags: string;
     content: string;
+    link: string;
+    createTime: Date;
 }
 
 //#endregion

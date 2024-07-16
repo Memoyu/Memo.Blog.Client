@@ -15,10 +15,10 @@ import { IllustrationNoResult, IllustrationNoResultDark } from '@douyinfe/semi-i
 import { useSearch } from '@src/stores';
 import { shallow } from 'zustand/shallow';
 
-import { SearchResultModel } from '@src/common/model';
+import { ArticleSearchPageModel } from '@src/common/model';
 
 import './index.scss';
-import { useOnMountUnsafe } from '@src/hooks/useOnMountUnsafe';
+import { articleSearchPage } from '@src/utils/request';
 
 const { Text, Paragraph } = Typography;
 
@@ -27,15 +27,26 @@ const Index: FC = () => {
     const records = useSearch((state) => state.records, shallow);
     const setShow = useSearch((state) => state.setShow);
 
-    const [searchWord, setSearchWord] = useState<string>('');
-    const [searchResult, setSearchResult] = useState<Array<SearchResultModel>>([]);
+    const [keyWord, setKeyWord] = useState<string>('');
+    const [keyWordSegs, setKeyWordSegs] = useState<Array<string>>();
+    const [searchResult, setSearchResult] = useState<Array<ArticleSearchPageModel>>([]);
 
     const [searchLoading, setSearchLoading] = useState<boolean>(false);
     const searchNoMoreRef = useRef<boolean>(true);
+    const pageSize = 15;
     const searchResultPageRef = useRef<number>(1);
 
     const getSearchResultPage = () => {
-        setSearchResult([{ link: '', title: '222222', content: '33333' }]);
+        articleSearchPage({
+            keyWord: keyWord,
+            page: searchResultPageRef.current,
+            size: pageSize,
+        }).then((res) => {
+            if (!res.isSuccess || !res.data) return;
+            console.log(res);
+            setKeyWordSegs(res.data.keyWordSegs);
+            setSearchResult(res.data.items);
+        });
     };
 
     // useOnMountUnsafe(() => {
@@ -43,9 +54,8 @@ const Index: FC = () => {
     // });
 
     useEffect(() => {
-        getSearchResultPage();
         return () => {
-            setSearchWord('');
+            setKeyWord('');
             setSearchResult([]);
         };
     }, [show]);
@@ -74,9 +84,14 @@ const Index: FC = () => {
             centered
         >
             <div className="global-search-modal-content">
-                <Input showClear placeholder="搜索文章" onChange={setSearchWord}></Input>
+                <Input
+                    showClear
+                    placeholder="搜索文章"
+                    onChange={setKeyWord}
+                    onEnterPress={() => getSearchResultPage()}
+                ></Input>
                 <div className="search-records">
-                    {searchWord.trim().length < 1 && (
+                    {keyWord.trim().length < 1 && (
                         <>
                             <div className="search-records-title">
                                 搜索历史
@@ -114,7 +129,7 @@ const Index: FC = () => {
                 </div>
 
                 <div className="search-result">
-                    {searchWord.trim().length > 0 && (
+                    {keyWord.trim().length > 0 && (
                         <List
                             loading={searchLoading}
                             loadMore={loadMoreRender}
@@ -127,12 +142,12 @@ const Index: FC = () => {
                                         <div>
                                             <Text
                                                 strong
-                                                link={
-                                                    item.link.length > 1 && {
-                                                        href: item.link,
-                                                        target: '_blank',
-                                                    }
-                                                }
+                                                // link={
+                                                //     item.link.length > 1 && {
+                                                //         href: item.link,
+                                                //         target: '_blank',
+                                                //     }
+                                                // }
                                             >
                                                 {item.title}
                                             </Text>
@@ -146,7 +161,7 @@ const Index: FC = () => {
                                                 <Highlight
                                                     className={'search-result-highlight'}
                                                     sourceString={item.content}
-                                                    searchWords={[searchWord]}
+                                                    searchWords={keyWordSegs}
                                                 />
                                             </Paragraph>
                                         </div>

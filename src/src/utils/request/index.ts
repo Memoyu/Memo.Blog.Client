@@ -17,6 +17,8 @@ import {
     VisitorEditRequest,
     VisitorLogEditRequest,
     ArticleSummaryModel,
+    ArticleSearchPaginationResult,
+    ArticleSearchPageRequest,
 } from '@common/model';
 
 export const getByUrl = (url: string, params?: any) => {
@@ -43,6 +45,12 @@ export const visitLogCreate = (request: VisitorLogEditRequest) => {
 
 export const articleSummary = () => {
     return Request.get<ArticleSummaryModel>('article/summary');
+};
+
+export const articleSearchPage = (request: ArticleSearchPageRequest) => {
+    return Request.get<ArticleSearchPaginationResult>('article/page/search', {
+        params: request,
+    });
 };
 
 export const articlePage = (request: ArticlePageRequest) => {
