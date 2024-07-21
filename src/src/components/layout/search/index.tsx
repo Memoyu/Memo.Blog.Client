@@ -15,12 +15,13 @@ import { IllustrationNoResult, IllustrationNoResultDark } from '@douyinfe/semi-i
 import { useSearch } from '@src/stores';
 import { shallow } from 'zustand/shallow';
 
+import { articleSearchPage } from '@src/utils/request';
+
 import { ArticleSearchPageModel } from '@src/common/model';
 
 import './index.scss';
-import { articleSearchPage } from '@src/utils/request';
 
-const { Text, Paragraph } = Typography;
+const { Text, Title, Paragraph } = Typography;
 
 const Index: FC = () => {
     const show = useSearch((state) => state.show, shallow);
@@ -66,6 +67,7 @@ const Index: FC = () => {
                 <Button onClick={() => getSearchResultPage()}>显示更多</Button>
             </div>
         ) : null;
+
     const emptyRender = (
         <Empty
             image={<IllustrationNoResult />}
@@ -73,6 +75,15 @@ const Index: FC = () => {
             description={'空空如也！'}
         />
     );
+
+    const highlightStyle = {
+        borderRadius: 6,
+        padding: '0 5px ',
+        margin: '0 3px ',
+        backgroundColor: 'rgba(var(--semi-teal-5), 1)',
+        color: 'rgba(var(--semi-white), 1)',
+    };
+
     return (
         <Modal
             className="global-search-modal"
@@ -140,8 +151,8 @@ const Index: FC = () => {
                                     style={{ padding: 5 }}
                                     main={
                                         <div>
-                                            <Text
-                                                strong
+                                            <Title
+                                                heading={6}
                                                 // link={
                                                 //     item.link.length > 1 && {
                                                 //         href: item.link,
@@ -149,19 +160,25 @@ const Index: FC = () => {
                                                 //     }
                                                 // }
                                             >
-                                                {item.title}
-                                            </Text>
+                                                <Highlight
+                                                    className={'search-result-highlight'}
+                                                    sourceString={item.title}
+                                                    searchWords={keyWordSegs}
+                                                    highlightStyle={highlightStyle}
+                                                />
+                                            </Title>
 
                                             <Paragraph
                                                 ellipsis={{
                                                     rows: 3,
                                                 }}
-                                                style={{ width: 280, marginLeft: 10 }}
+                                                style={{ width: 380 }}
                                             >
                                                 <Highlight
                                                     className={'search-result-highlight'}
                                                     sourceString={item.content}
                                                     searchWords={keyWordSegs}
+                                                    highlightStyle={highlightStyle}
                                                 />
                                             </Paragraph>
                                         </div>
