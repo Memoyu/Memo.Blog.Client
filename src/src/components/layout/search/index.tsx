@@ -26,7 +26,7 @@ const { Text, Title, Paragraph } = Typography;
 const Index: FC = () => {
     const show = useSearch((state) => state.show, shallow);
     const records = useSearch((state) => state.records, shallow);
-    const setShow = useSearch((state) => state.setShow);
+    const { setShow, addRecord, removeRecord, clearRecord } = useSearch((state) => state);
 
     const [keyWord, setKeyWord] = useState<string>('');
     const [keyWordSegs, setKeyWordSegs] = useState<Array<string>>();
@@ -37,7 +37,11 @@ const Index: FC = () => {
     const pageSize = 15;
     const searchResultPageRef = useRef<number>(1);
 
-    const getSearchResultPage = () => {
+    const getSearchResultPage = (keyWord: string) => {
+        if (keyWord.trim().length < 1) return;
+
+        addRecord(keyWord);
+
         articleSearchPage({
             keyWord: keyWord,
             page: searchResultPageRef.current,
@@ -50,10 +54,6 @@ const Index: FC = () => {
         });
     };
 
-    // useOnMountUnsafe(() => {
-    //     getSearchResultPage();
-    // });
-
     useEffect(() => {
         return () => {
             setKeyWord('');
@@ -64,7 +64,7 @@ const Index: FC = () => {
     const loadMoreRender =
         !searchLoading && !searchNoMoreRef.current ? (
             <div className="search-result-load-more">
-                <Button onClick={() => getSearchResultPage()}>显示更多</Button>
+                <Button onClick={() => getSearchResultPage(keyWord)}>显示更多</Button>
             </div>
         ) : null;
 
@@ -97,9 +97,10 @@ const Index: FC = () => {
             <div className="global-search-modal-content">
                 <Input
                     showClear
-                    placeholder="搜索文章"
+                    placeholder="搜索文章、评论"
+                    value={keyWord}
                     onChange={setKeyWord}
-                    onEnterPress={() => getSearchResultPage()}
+                    onEnterPress={() => getSearchResultPage(keyWord)}
                 ></Input>
                 <div className="search-records">
                     {keyWord.trim().length < 1 && (
@@ -109,7 +110,7 @@ const Index: FC = () => {
                                 <Button
                                     className="header-tool"
                                     theme="borderless"
-                                    onClick={() => {}}
+                                    onClick={() => clearRecord()}
                                 >
                                     清空
                                 </Button>
@@ -123,11 +124,10 @@ const Index: FC = () => {
                                             color="purple"
                                             size="large"
                                             closable
-                                            onClose={() => {
-                                                console.log('清除标签');
-                                            }}
+                                            onClose={() => removeRecord(r)}
                                             onClick={() => {
-                                                console.log('点击标签');
+                                                setKeyWord(r);
+                                                getSearchResultPage(r);
                                             }}
                                         >
                                             {r}
