@@ -1,23 +1,29 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 import { persist } from 'zustand/middleware';
 
-interface SearchState {
+interface SearchModalState {
     show: boolean;
-    records: Array<string>;
     setShow: (isShow: boolean) => void;
+}
+
+interface SearchState {
+    records: Array<string>;
     addRecord: (keyWord: string) => void;
     removeRecord: (keyWord: string) => void;
     clearRecord: () => void;
 }
 
+const useSearchModalStore = createWithEqualityFn<SearchModalState>()((set) => ({
+    show: false,
+    setShow: (isShow: boolean) => {
+        set({ show: isShow });
+    },
+}));
+
 const useSearchStore = createWithEqualityFn<SearchState>()(
     persist(
         (set, get) => ({
-            show: false,
             records: [],
-            setShow: (isShow: boolean) => {
-                set({ show: isShow });
-            },
             addRecord: (keyWord: string) => {
                 let records = get().records;
 
@@ -52,4 +58,4 @@ const useSearchStore = createWithEqualityFn<SearchState>()(
     )
 );
 
-export default useSearchStore;
+export { useSearchStore, useSearchModalStore };

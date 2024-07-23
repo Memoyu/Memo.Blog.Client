@@ -11,7 +11,7 @@ import { IScrollProps, useContentScroll } from '@src/hooks/useContentScroll';
 
 import { shallow } from 'zustand/shallow';
 import useTheme, { ThemeMode } from '@src/stores/useTheme';
-import { useSearch } from '@src/stores';
+import { useSearchModal } from '@src/stores';
 
 import './index.scss';
 
@@ -37,7 +37,7 @@ const Index: FC<ComProps> = () => {
     const [isLight, setIsLight] = useState<boolean>(false);
     const theme = useTheme((state) => state.theme, shallow);
     const setTheme = useTheme((state) => state.setTheme);
-    const setSearchModalShow = useSearch((state) => state.setShow);
+    const setSearchModalShow = useSearchModal((state) => state.setShow);
 
     let pathname = location.pathname || '/';
     if (pathname === '/404' || pathname === '/_not-found') pathname = '/';

@@ -256,7 +256,6 @@ export interface ArticleSearchPageModel {
     description: string;
     tags: string;
     content: string;
-    link: string;
     createTime: Date;
 }
 

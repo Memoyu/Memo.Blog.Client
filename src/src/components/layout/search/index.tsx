@@ -12,7 +12,7 @@ import {
 } from '@douyinfe/semi-ui';
 import { IllustrationNoResult, IllustrationNoResultDark } from '@douyinfe/semi-illustrations';
 
-import { useSearch } from '@src/stores';
+import { useSearch, useSearchModal } from '@src/stores';
 import { shallow } from 'zustand/shallow';
 
 import { articleSearchPage } from '@src/utils/request';
@@ -20,13 +20,15 @@ import { articleSearchPage } from '@src/utils/request';
 import { ArticleSearchPageModel } from '@src/common/model';
 
 import './index.scss';
+import { ARTICLE_DETAIL_URL } from '@src/common/constant';
 
 const { Text, Title, Paragraph } = Typography;
 
 const Index: FC = () => {
-    const show = useSearch((state) => state.show, shallow);
+    const show = useSearchModal((state) => state.show, shallow);
+    const { setShow } = useSearchModal((state) => state);
     const records = useSearch((state) => state.records, shallow);
-    const { setShow, addRecord, removeRecord, clearRecord } = useSearch((state) => state);
+    const { addRecord, removeRecord, clearRecord } = useSearch((state) => state);
 
     const [keyWord, setKeyWord] = useState<string>('');
     const [keyWordSegs, setKeyWordSegs] = useState<Array<string>>();
@@ -153,12 +155,10 @@ const Index: FC = () => {
                                         <div>
                                             <Title
                                                 heading={6}
-                                                // link={
-                                                //     item.link.length > 1 && {
-                                                //         href: item.link,
-                                                //         target: '_blank',
-                                                //     }
-                                                // }
+                                                link={{
+                                                    href: ARTICLE_DETAIL_URL + item.articleId,
+                                                    target: '_blank',
+                                                }}
                                             >
                                                 <Highlight
                                                     className={'search-result-highlight'}
