@@ -4,7 +4,7 @@ import { Avatar, Typography, Space, Timeline, Tag } from '@douyinfe/semi-ui';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import MarkDown from '@components/markdown/comment';
-// import MomentItemExtra from './moment-item-extra';
+import MomentItemExtra from './moment-item-extra';
 
 import { useData } from '@src/hooks/useData';
 
@@ -82,7 +82,7 @@ const Index: FC<ComProps> = () => {
                                     key={m.momentId}
                                     // time={format(new Date(m.createTime), 'yyyy-MM-dd HH:mm')}
                                     dot={<Avatar size="small" src={m.announcer.avatar} />}
-                                    // extra={<MomentItemExtra moment={m} />}
+                                    extra={<MomentItemExtra moment={m} />}
                                 >
                                     <div className="moment-list-item">
                                         <Space spacing="tight">

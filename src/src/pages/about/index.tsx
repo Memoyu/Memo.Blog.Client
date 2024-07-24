@@ -14,6 +14,7 @@ import { aboutGet } from '@src/utils/request';
 import { AboutModel } from '@src/common/model';
 
 import './index.scss';
+import Friends from './components/friends';
 
 const { Title } = Typography;
 
@@ -64,6 +65,9 @@ const Index = () => {
                         })}
                     </Space>
                     <MarkDown content={about?.content} />
+                </ContentContainer>
+                <ContentContainer className="friends-content">
+                    <Friends />
                 </ContentContainer>
             </PageContainer>
         </div>
