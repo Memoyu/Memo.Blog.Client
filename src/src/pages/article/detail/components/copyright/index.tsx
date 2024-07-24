@@ -48,7 +48,7 @@ const Index: FC<ComProps> = ({ article }) => {
     }, [article]);
 
     return (
-        <div>
+        <div className="article-copyright">
             {/* 分类 */}
             <div className="category-wrap">
                 <div style={{ fontWeight: 'bold', width: 60 }}>分类：</div>
