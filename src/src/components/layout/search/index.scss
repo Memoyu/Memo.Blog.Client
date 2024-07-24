@@ -22,7 +22,7 @@
         }
     }
     .search-result {
-        height: 300pxs;
+        height: 400px;
 
         &-load-more {
             text-align: center;
@@ -46,5 +46,8 @@
         }
     }
     .global-search-modal-content {
+        .search-result {
+            height: 300px;
+        }
     }
 }

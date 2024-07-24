@@ -3,9 +3,9 @@ body,
 #root,
 #root > * {
     // 处理modal弹出时界面闪烁问题
-    overflow: unset !important;
-    width: 100% !important;
-    height: 100vh;
+    // overflow: unset !important;
+    // width: 100% !important;
+    // height: 100vh;
     margin: 0;
 
     --semi-color-primary: rgba(var(--semi-violet-4), 1) !important;

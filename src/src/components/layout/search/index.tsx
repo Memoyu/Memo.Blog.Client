@@ -80,8 +80,8 @@ const Index: FC = () => {
 
     const highlightStyle = {
         borderRadius: 6,
-        padding: '0 5px ',
-        margin: '0 3px ',
+        padding: '0 3px ',
+        // margin: '0 3px ',
         backgroundColor: 'rgba(var(--semi-teal-5), 1)',
         color: 'rgba(var(--semi-white), 1)',
     };
@@ -95,6 +95,7 @@ const Index: FC = () => {
             visible={show}
             onCancel={() => setShow(false)}
             centered
+            preventScroll={false}
         >
             <div className="global-search-modal-content">
                 <Input
@@ -170,9 +171,8 @@ const Index: FC = () => {
 
                                             <Paragraph
                                                 ellipsis={{
-                                                    rows: 3,
+                                                    rows: 2,
                                                 }}
-                                                style={{ width: 380 }}
                                             >
                                                 <Highlight
                                                     className={'search-result-highlight'}
