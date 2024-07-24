@@ -22,7 +22,7 @@ import { ArticleSearchPageModel } from '@src/common/model';
 import './index.scss';
 import { ARTICLE_DETAIL_URL } from '@src/common/constant';
 
-const { Text, Title, Paragraph } = Typography;
+const { Title, Paragraph } = Typography;
 
 const Index: FC = () => {
     const show = useSearchModal((state) => state.show, shallow);
@@ -42,26 +42,29 @@ const Index: FC = () => {
     const getSearchResultPage = (keyWord: string) => {
         if (keyWord.trim().length < 1) return;
 
+        setSearchLoading(true);
         addRecord(keyWord);
 
         articleSearchPage({
             keyWord: keyWord,
             page: searchResultPageRef.current,
             size: pageSize,
-        }).then((res) => {
-            if (!res.isSuccess || !res.data || !res.data?.items) return;
+        })
+            .then((res) => {
+                if (!res.isSuccess || !res.data || !res.data?.items) return;
 
-            setKeyWordSegs(res.data.keyWordSegs);
-            setSearchResult((old) => {
-                let items =
-                    searchResultPageRef.current == 1
-                        ? res.data!.items
-                        : [...(old ?? []), ...res.data!.items];
+                setKeyWordSegs(res.data.keyWordSegs);
+                setSearchResult((old) => {
+                    let items =
+                        searchResultPageRef.current == 1
+                            ? res.data!.items
+                            : [...(old ?? []), ...res.data!.items];
 
-                searchNoMoreRef.current = items.length >= res.data!.total;
-                return items;
-            });
-        });
+                    searchNoMoreRef.current = items.length >= res.data!.total;
+                    return items;
+                });
+            })
+            .finally(() => setSearchLoading(false));
     };
 
     useEffect(() => {
