@@ -17,7 +17,7 @@ interface ComProps {
 
 const webSite = import.meta.env.VITE_WEB_SITE;
 
-const { Paragraph } = Typography;
+const { Text, Paragraph } = Typography;
 
 const Index: FC<ComProps> = ({ article }) => {
     const comments = useArticleDetail((state) => state.commentTotal);
@@ -49,6 +49,14 @@ const Index: FC<ComProps> = ({ article }) => {
 
     return (
         <div>
+            {/* 分类 */}
+            <div className="category-wrap">
+                <div style={{ fontWeight: 'bold', width: 60 }}>分类：</div>
+                <Text strong style={{ color: 'var(--semi-color-primary)' }}>
+                    {article.category.name}
+                </Text>
+            </div>
+
             {/* 标签列表 */}
             <div className="tag-list-wrap">
                 <div style={{ fontWeight: 'bold', width: 60 }}>标签：</div>
@@ -129,7 +137,7 @@ const Index: FC<ComProps> = ({ article }) => {
                                         excavate: true,
                                         x: undefined,
                                         y: undefined,
-                                        src: '/src/assets/images/logo.png',
+                                        src: 'http://oss.blog.memoyu.com/account/avatar/fbca90ce-9197-4a00-8836-eaafef3e0fe2.png',
                                         width: 30,
                                         height: 30,
                                     }}

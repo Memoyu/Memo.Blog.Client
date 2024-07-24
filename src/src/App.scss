@@ -2,7 +2,7 @@ html,
 body,
 #root,
 #root > * {
-    // 处理modal弹出时界面闪烁问题
+    // 处理modal弹出时界面闪烁问题,加了之后弹窗显示后底层仍然可以滚动
     // overflow: unset !important;
     // width: 100% !important;
     // height: 100vh;

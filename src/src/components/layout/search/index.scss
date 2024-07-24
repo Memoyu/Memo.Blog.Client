@@ -22,19 +22,24 @@
         }
     }
     .search-result {
+        overflow-y: auto;
         height: 400px;
+
+        &-item {
+            margin-bottom: 15px;
+
+            &-highlight {
+                border-radius: 6px;
+                margin: 0 4px;
+                padding: 0 4px;
+                background-color: rgba(var(--semi-teal-5), 1);
+                color: rgba(var(--semi-white), 1);
+            }
+        }
 
         &-load-more {
             text-align: center;
             margin-top: 12;
-        }
-
-        &-highlight {
-            border-radius: 6px;
-            margin: 0 4px;
-            padding: 0 4px;
-            background-color: rgba(var(--semi-teal-5), 1);
-            color: rgba(var(--semi-white), 1);
         }
     }
 }

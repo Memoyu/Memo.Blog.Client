@@ -36,7 +36,7 @@ const Index: FC = () => {
 
     const [searchLoading, setSearchLoading] = useState<boolean>(false);
     const searchNoMoreRef = useRef<boolean>(true);
-    const pageSize = 15;
+    const pageSize = 3;
     const searchResultPageRef = useRef<number>(1);
 
     const getSearchResultPage = (keyWord: string) => {
@@ -49,10 +49,18 @@ const Index: FC = () => {
             page: searchResultPageRef.current,
             size: pageSize,
         }).then((res) => {
-            if (!res.isSuccess || !res.data) return;
-            console.log(res);
+            if (!res.isSuccess || !res.data || !res.data?.items) return;
+
             setKeyWordSegs(res.data.keyWordSegs);
-            setSearchResult(res.data.items);
+            setSearchResult((old) => {
+                let items =
+                    searchResultPageRef.current == 1
+                        ? res.data!.items
+                        : [...(old ?? []), ...res.data!.items];
+
+                searchNoMoreRef.current = items.length >= res.data!.total;
+                return items;
+            });
         });
     };
 
@@ -60,13 +68,25 @@ const Index: FC = () => {
         return () => {
             setKeyWord('');
             setSearchResult([]);
+            searchResultPageRef.current = 1;
+            searchNoMoreRef.current = true;
         };
     }, [show]);
+
+    const handleInputEnterPress = () => {
+        searchResultPageRef.current = 1;
+        getSearchResultPage(keyWord);
+    };
+
+    const handleLoadMoreClick = () => {
+        searchResultPageRef.current += 1;
+        getSearchResultPage(keyWord);
+    };
 
     const loadMoreRender =
         !searchLoading && !searchNoMoreRef.current ? (
             <div className="search-result-load-more">
-                <Button onClick={() => getSearchResultPage(keyWord)}>显示更多</Button>
+                <Button onClick={handleLoadMoreClick}>显示更多</Button>
             </div>
         ) : null;
 
@@ -80,10 +100,9 @@ const Index: FC = () => {
 
     const highlightStyle = {
         borderRadius: 6,
-        padding: '0 3px ',
+        // padding: '0 3px ',
         // margin: '0 3px ',
-        backgroundColor: 'rgba(var(--semi-teal-5), 1)',
-        color: 'rgba(var(--semi-white), 1)',
+        backgroundColor: 'var(--semi-color-primary-light-default)',
     };
 
     return (
@@ -103,7 +122,7 @@ const Index: FC = () => {
                     placeholder="搜索文章、评论"
                     value={keyWord}
                     onChange={setKeyWord}
-                    onEnterPress={() => getSearchResultPage(keyWord)}
+                    onEnterPress={handleInputEnterPress}
                 ></Input>
                 <div className="search-records">
                     {keyWord.trim().length < 1 && (
@@ -153,16 +172,17 @@ const Index: FC = () => {
                                 <List.Item
                                     style={{ padding: 5 }}
                                     main={
-                                        <div>
+                                        <div className="search-result-item">
                                             <Title
                                                 heading={6}
                                                 link={{
                                                     href: ARTICLE_DETAIL_URL + item.articleId,
                                                     target: '_blank',
                                                 }}
+                                                style={{ marginBottom: 7 }}
                                             >
                                                 <Highlight
-                                                    className={'search-result-highlight'}
+                                                    className={'search-result-item-highlight'}
                                                     sourceString={item.title}
                                                     searchWords={keyWordSegs}
                                                     highlightStyle={highlightStyle}
@@ -173,9 +193,10 @@ const Index: FC = () => {
                                                 ellipsis={{
                                                     rows: 2,
                                                 }}
+                                                style={{ width: 300 }}
                                             >
                                                 <Highlight
-                                                    className={'search-result-highlight'}
+                                                    className={'search-result-item-highlight'}
                                                     sourceString={item.content}
                                                     searchWords={keyWordSegs}
                                                     highlightStyle={highlightStyle}
