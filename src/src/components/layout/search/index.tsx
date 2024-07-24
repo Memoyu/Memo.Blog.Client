@@ -36,7 +36,7 @@ const Index: FC = () => {
 
     const [searchLoading, setSearchLoading] = useState<boolean>(false);
     const searchNoMoreRef = useRef<boolean>(true);
-    const pageSize = 3;
+    const pageSize = 10;
     const searchResultPageRef = useRef<number>(1);
 
     const getSearchResultPage = (keyWord: string) => {
