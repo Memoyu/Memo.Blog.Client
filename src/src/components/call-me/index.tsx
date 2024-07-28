@@ -31,9 +31,9 @@ const Index: FC<ComProps> = ({}) => {
                         excavate: false,
                         x: undefined,
                         y: undefined,
-                        src: '/src/assets/images/logo.png',
-                        width: 20,
-                        height: 20,
+                        src: 'http://oss.blog.memoyu.com/account/avatar/fbca90ce-9197-4a00-8836-eaafef3e0fe2.png',
+                        width: 30,
+                        height: 30,
                     }}
                     style={{ width: qrcodeSize, height: qrcodeSize }}
                 />
