@@ -14,6 +14,7 @@ import { aboutGet } from '@src/utils/request';
 import { AboutModel } from '@src/common/model';
 
 import './index.scss';
+import Friends from './components/friends';
 
 const { Title } = Typography;
 
@@ -39,10 +40,10 @@ const Index = () => {
     }, []);
 
     return (
-        <div>
-            <PageContainer>
-                <PageBanner image={about.banner} />
-                <ContentContainer className="about-me-content">
+        <PageContainer>
+            <PageBanner image={about.banner} />
+            <ContentContainer className="about-me-wrap">
+                <div className="about-me-content">
                     <Title heading={2} style={{ marginBottom: 30, textAlign: 'center' }}>
                         {about.title}
                     </Title>
@@ -64,9 +65,13 @@ const Index = () => {
                         })}
                     </Space>
                     <MarkDown content={about?.content} />
-                </ContentContainer>
-            </PageContainer>
-        </div>
+                </div>
+                <div className="friend-content">
+                    <Title heading={4}>友情链接</Title>
+                    <Friends />
+                </div>
+            </ContentContainer>
+        </PageContainer>
     );
 };
 

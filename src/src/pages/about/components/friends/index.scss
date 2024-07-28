@@ -1,0 +1,30 @@
+@import '@assets/styles/variable.scss';
+
+.friend-list {
+    &-item {
+        display: flex;
+        align-items: center;
+
+        //position: relative;
+        width: 300px;
+        height: 60px;
+
+        &-content {
+            margin: 5px 10px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .friend-list {
+        &-item {
+            width: 100%;
+            &-content {
+            }
+        }
+    }
+}

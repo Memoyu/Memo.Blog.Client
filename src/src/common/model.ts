@@ -151,6 +151,18 @@ export interface AboutModel {
 
 //#endregion
 
+//#region 友链
+
+export interface FriendModel {
+    friendId: string;
+    nickname: string;
+    description: string;
+    site: string;
+    avatar: string;
+}
+
+//#endregion
+
 //#region 评论
 
 export enum AvatarOriginType {

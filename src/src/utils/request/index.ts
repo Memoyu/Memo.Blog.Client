@@ -19,6 +19,7 @@ import {
     ArticleSummaryModel,
     ArticleSearchPaginationResult,
     ArticleSearchPageRequest,
+    FriendModel,
 } from '@common/model';
 
 export const getByUrl = (url: string, params?: any) => {
@@ -97,6 +98,14 @@ export const momentPage = (request: MomentPageRequest) => {
 
 export const aboutGet = () => {
     return Request.get<AboutModel>('about/get');
+};
+
+//#endregion
+
+//#region 友链
+
+export const friendList = () => {
+    return Request.get<Array<FriendModel>>('friend/list');
 };
 
 //#endregion
