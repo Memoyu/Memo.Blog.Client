@@ -91,12 +91,12 @@ const Index = () => {
                                         {
                                             label: '发布时间',
                                             title:
-                                                article?.createTime &&
-                                                dateDiff(new Date(article.createTime)),
+                                                article?.publishTime &&
+                                                dateDiff(new Date(article.publishTime)),
                                             desc:
-                                                article?.createTime &&
+                                                article?.publishTime &&
                                                 format(
-                                                    new Date(article.createTime),
+                                                    new Date(article.publishTime),
                                                     'yyyy-MM-dd HH:mm'
                                                 ),
                                         },

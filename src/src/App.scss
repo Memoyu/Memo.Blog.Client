@@ -23,6 +23,7 @@ body,
     }
 
     --blog-header-bg: var(--semi-white);
+
     .md-editor {
         --md-bk-color: var(--semi-grey-0) !important;
     }
@@ -30,9 +31,6 @@ body,
 
 body[theme-mode='dark'] #root > * {
     --image-brightness: brightness(0.8);
-    img {
-        filter: var(--image-brightness);
-    }
 
     --blog-header-bg: 22, 22, 26;
 }

@@ -16,10 +16,9 @@ import { articlePage } from '@utils/request';
 import { useSearchParams } from 'react-router-dom';
 
 import { ArticlePageModel, ArticlePageRequest } from '@src/common/model';
-import { TagProps } from '@douyinfe/semi-ui/lib/es/tag';
+import { TagProps } from '@douyinfe/semi-ui/lib/es/';
 
 import './index.scss';
-
 const { Title, Text } = Typography;
 
 interface ComProps {}
@@ -108,15 +107,20 @@ const Index: FC<ComProps> = ({}) => {
 
     // 获取文章角标
     let getArticleBadge = (item: ArticlePageModel) => {
-        let sty = { fontSize: 20 } as CSSProperties;
+        let sty = { fontSize: 23 } as CSSProperties;
 
+        // 置顶
         if (item.isTop) {
             return <IconVerify style={{ ...sty, color: 'var(--semi-color-primary)' }} />;
         }
 
+        // 发布时间为两个月内的，归为最近文章
         let now = new Date().getTime();
-        if ((now - new Date(item.createTime).getTime()) / (1000 * 60 * 60 * 24) < 90) {
-            return <IconActivity style={{ ...sty, color: 'var(--semi-color-text-0)' }} />;
+        if (
+            item.publishTime &&
+            (now - new Date(item.publishTime).getTime()) / (1000 * 60 * 60 * 24) < 60
+        ) {
+            return <IconActivity style={{ ...sty, color: 'var(--semi-color-primary)' }} />;
         }
     };
 
@@ -131,7 +135,12 @@ const Index: FC<ComProps> = ({}) => {
                         media: [600, 870, 1024, 1200],
                     }}
                     render={(item: ArticlePageModel) => (
-                        <Badge key={item.articleId} count={getArticleBadge(item)} type="danger">
+                        <Badge
+                            key={item.articleId}
+                            countStyle={{ transform: 'translate(20%, -20%)' }}
+                            count={getArticleBadge(item)}
+                            type="danger"
+                        >
                             <Card
                                 className="article-item-card"
                                 shadows="hover"
@@ -206,7 +215,7 @@ const Index: FC<ComProps> = ({}) => {
                                         )}
                                     </div>
                                     <Text style={{ display: 'flex', alignItems: 'center' }}>
-                                        {dateDiff(new Date(item.createTime))}
+                                        {item.publishTime && dateDiff(new Date(item.publishTime))}
                                     </Text>
                                 </div>
                             </Card>

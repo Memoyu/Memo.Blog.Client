@@ -36,7 +36,7 @@ export interface ArticlePageModel {
     isTop: boolean;
     commentable: boolean;
     publicable: boolean;
-    createTime: Date;
+    publishTime?: Date;
 }
 
 export interface ArticleModel {
@@ -58,7 +58,8 @@ export interface ArticleModel {
     publicable: boolean;
     isLike: boolean;
     author: ArticleAuthorModel;
-    createTime: Date;
+    // createTime: Date;
+    publishTime?: Date;
 }
 
 export interface ArticleAuthorModel {
