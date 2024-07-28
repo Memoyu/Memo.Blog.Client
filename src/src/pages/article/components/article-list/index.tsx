@@ -16,7 +16,7 @@ import { articlePage } from '@utils/request';
 import { useSearchParams } from 'react-router-dom';
 
 import { ArticlePageModel, ArticlePageRequest } from '@src/common/model';
-import { TagProps } from '@douyinfe/semi-ui/lib/es/';
+import { TagProps } from '@douyinfe/semi-ui/lib/es/tag';
 
 import './index.scss';
 const { Title, Text } = Typography;
