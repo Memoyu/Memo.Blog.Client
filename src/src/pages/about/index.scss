@@ -1,6 +1,23 @@
-.about-me-content {
+@import '@assets/styles/variable.scss';
+
+.about-me-wrap {
     margin-top: 30px;
+    display: flex;
+
+    .about-me-content {
+    }
+
+    .friend-content {
+        margin-top: 0;
+    }
 }
 
-.friends-content {
+@media screen and (max-width: $max-mobile-width) {
+    .about-me-wrap {
+        flex-direction: column;
+
+        .friend-content {
+            margin-top: 20px;
+        }
+    }
 }

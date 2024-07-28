@@ -40,10 +40,10 @@ const Index = () => {
     }, []);
 
     return (
-        <div>
-            <PageContainer>
-                <PageBanner image={about.banner} />
-                <ContentContainer className="about-me-content">
+        <PageContainer>
+            <PageBanner image={about.banner} />
+            <ContentContainer className="about-me-wrap">
+                <div className="about-me-content">
                     <Title heading={2} style={{ marginBottom: 30, textAlign: 'center' }}>
                         {about.title}
                     </Title>
@@ -65,12 +65,13 @@ const Index = () => {
                         })}
                     </Space>
                     <MarkDown content={about?.content} />
-                </ContentContainer>
-                <ContentContainer className="friends-content">
+                </div>
+                <div className="friend-content">
+                    <Title heading={4}>友情链接</Title>
                     <Friends />
-                </ContentContainer>
-            </PageContainer>
-        </div>
+                </div>
+            </ContentContainer>
+        </PageContainer>
     );
 };
 

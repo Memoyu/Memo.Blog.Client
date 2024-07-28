@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Avatar, AvatarGroup, Card, Popover, Toast, Typography } from '@douyinfe/semi-ui';
+import { Avatar, List, Toast, Typography } from '@douyinfe/semi-ui';
 
 import { useData } from '@src/hooks/useData';
 
@@ -7,13 +7,12 @@ import { friendList } from '@src/utils/request';
 
 import './index.scss';
 import { FriendModel } from '@src/common/model';
+import { motion } from 'framer-motion';
 
-const { Text } = Typography;
-const { Meta } = Card;
+const { Text, Paragraph } = Typography;
 
 const Index: FC = () => {
-    const [showDesc, setShowDesc] = useState(false);
-    const [avatarActive, setAvatarActive] = useState<FriendModel>();
+    const [friendActive, setFiendActive] = useState<FriendModel>();
 
     const [friends, _loading, setFriends, _setLoading] = useData<Array<FriendModel>>([]);
 
@@ -32,37 +31,99 @@ const Index: FC = () => {
     useEffect(() => {
         getFriends();
     }, []);
-    const handleFriendAvatarClick = (index: number) => {
-        let f = friends[index];
-
-        setAvatarActive(f);
+    const handleFriendClick = (item: FriendModel) => {
+        window.open(item.site, '_blank');
     };
+
+    const avatarMotion = {
+        open: {
+            width: 0,
+            height: 0,
+            scale: 0,
+        },
+        closed: {
+            scale: 1,
+        },
+    };
+
+    const backgroundMotion = {
+        open: {
+            clipPath: `circle(320px at 310px 50px)`,
+        },
+        closed: {
+            clipPath: `circle(0px at 310px 30px)`,
+        },
+    };
+
+    const transition = { duration: 0.5, ease: 'easeInOut' };
+
     return (
         friends &&
         friends.length > 0 && (
-            <div className="friend-list">
-                <Text strong className="friend-list-title">
-                    友链：
-                </Text>
-                <AvatarGroup>
-                    {friends.map((f, index) => {
-                        return (
-                            <Avatar
-                                style={{
-                                    display: avatarActive?.friendId == f.friendId ? '' : 'none',
-                                    backgroundColor: 'var(--semi-color-primary)',
-                                }}
-                                src={f.avatar}
-                                alt={f.nickname}
-                                onClick={() => handleFriendAvatarClick(index)}
-                            >
-                                {f.avatar && f.avatar.length > 1 ? '' : f.nickname.substring(0, 1)}
-                            </Avatar>
-                        );
-                    })}
-                </AvatarGroup>
-                <div style={{ display: showDesc ? '' : 'none' }}>这是描述</div>
-            </div>
+            <List
+                split={false}
+                dataSource={friends}
+                renderItem={(item) => (
+                    <List.Item
+                        style={{
+                            position: 'relative',
+                            padding: 0,
+                            margin: '15px 0',
+                            borderRadius: 10,
+                            backgroundColor: ' rgb(var(--semi-grey-0))',
+                            overflow: 'hidden',
+                        }}
+                        onMouseEnter={() => setFiendActive(item)}
+                        onMouseLeave={() => setFiendActive(undefined)}
+                        onClick={() => handleFriendClick(item)}
+                        main={
+                            <div className="friend-list-item">
+                                <div className="friend-list-item-content">
+                                    <motion.div
+                                        variants={avatarMotion}
+                                        animate={
+                                            item.friendId == friendActive?.friendId
+                                                ? 'open'
+                                                : 'closed'
+                                        }
+                                        transition={transition}
+                                    >
+                                        <Avatar
+                                            size="default"
+                                            style={{
+                                                margin: 4,
+                                                backgroundColor: 'rgba(var(--semi-violet-0))',
+                                            }}
+                                            src={item.avatar}
+                                        />
+                                    </motion.div>
+                                    <motion.div>
+                                        <Text strong>{item.nickname}</Text>
+                                        <Paragraph ellipsis={{ rows: 2 }}>
+                                            {item.description}
+                                        </Paragraph>
+                                    </motion.div>
+                                </div>
+                                <motion.div
+                                    variants={backgroundMotion}
+                                    animate={
+                                        item.friendId == friendActive?.friendId ? 'open' : 'closed'
+                                    }
+                                    style={{
+                                        position: 'absolute',
+                                        width: '100%',
+                                        height: '100%',
+                                        top: 0,
+                                        zIndex: 0,
+                                        backgroundColor: 'var(--semi-color-primary)',
+                                    }}
+                                    transition={transition}
+                                ></motion.div>
+                            </div>
+                        }
+                    />
+                )}
+            />
         )
     );
 };
