@@ -3,7 +3,7 @@ import { Avatar, List, Toast, Typography } from '@douyinfe/semi-ui';
 
 import { useData } from '@src/hooks/useData';
 
-import { friendList } from '@src/utils/request';
+import { friendList, friendView } from '@src/utils/request';
 
 import './index.scss';
 import { FriendModel } from '@src/common/model';
@@ -31,8 +31,17 @@ const Index: FC = () => {
     useEffect(() => {
         getFriends();
     }, []);
+
     const handleFriendClick = (item: FriendModel) => {
         window.open(item.site, '_blank');
+        friendView(item.friendId)
+            .then((res) => {
+                if (res.isSuccess && res.data) return;
+                console.log('记录友链访问记录失败：' + res.message);
+            })
+            .catch((error) => {
+                console.log('记录友链访问记录异常', error);
+            });
     };
 
     const avatarMotion = {

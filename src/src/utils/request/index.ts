@@ -108,6 +108,11 @@ export const friendList = () => {
     return Request.get<Array<FriendModel>>('friend/list');
 };
 
+// 友链访问
+export const friendView = (friendId: string) => {
+    return Request.post<string>('friend/view', { friendId });
+};
+
 //#endregion
 
 //#region 评论
