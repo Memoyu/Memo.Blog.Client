@@ -92,6 +92,10 @@ export const momentPage = (request: MomentPageRequest) => {
     return Request.get<PaginationResult<MomentModel>>('moment/page', { params: request });
 };
 
+export const momentLike = (id: string) => {
+    return Request.post('moment/like', { momentId: id });
+};
+
 //#endregion
 
 //#region 关于

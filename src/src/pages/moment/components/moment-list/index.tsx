@@ -15,6 +15,7 @@ import { MomentModel, MomentPageRequest } from '@common/model';
 import { useMoment } from '@src/stores';
 
 import './index.scss';
+import { shallow } from 'zustand/shallow';
 
 interface TimelineItemData extends Data {
     moment: MomentModel;
@@ -27,7 +28,7 @@ interface ComProps {
 const { Text } = Typography;
 
 const Index: FC<ComProps> = () => {
-    const moments = useMoment((state) => state.moments);
+    const moments = useMoment((state) => state.moments, shallow);
     const getMoments = useMoment((state) => state.getMoments);
 
     const momentPageSize = 7;

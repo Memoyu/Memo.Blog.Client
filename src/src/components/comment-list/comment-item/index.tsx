@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import { IconQuote, IconComment } from '@douyinfe/semi-icons';
 import { Avatar, Tag, Tooltip, Typography } from '@douyinfe/semi-ui';
@@ -11,6 +11,8 @@ import { dateDiff } from '@utils/date';
 import { CommentEditRequest, CommentModel, CommentType } from '@src/common/model';
 
 import './index.scss';
+
+const commentEditEleId = 'comment-edit-';
 
 interface CommentReply {
     belongId?: string;
@@ -33,12 +35,42 @@ const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCo
     const [isReply, setIsReply] = useState<boolean>(false);
     const [reply, setReply] = useState<CommentReply>();
     const [quote, setQuote] = useState<CommentModel>();
+    const commentEditRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         return () => {
             setIsReply(false);
         };
     }, [comment]);
+
+    useEffect(() => {
+        if (!isReply) return;
+        scrollToEdit();
+    }, [isReply, quote]);
+
+    // 滚动到输入框
+    const scrollToEdit = () => {
+        // 获取元素
+        let editEle = commentEditRef?.current;
+        // console.log('编辑元素', eleId, editEle, commentEditRef);
+        // 滚动到输入框位置
+        console.log('gao', editEle?.offsetTop, editEle?.clientHeight);
+        window.scrollTo({
+            top: editEle ? editEle.offsetTop + editEle.clientHeight : 0,
+            behavior: 'smooth',
+        });
+    };
+
+    const getOffsetTop = (element: any) => {
+        let actualTop = element.offsetTop;
+        let current = element.offsetParent;
+        while (current !== null) {
+            actualTop += current.offsetTop;
+
+            current = current.offsetParent;
+        }
+        return actualTop;
+    };
 
     const handleCommentReply = (comment: CommentModel) => {
         setReply({
@@ -47,6 +79,8 @@ const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCo
             floor: comment.floorString,
             content: comment.content,
         });
+
+        // setTimeout(() => {}, 100);
     };
 
     const handleCommentSubmit = (input: CommentEditInput) => {
@@ -101,9 +135,9 @@ const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCo
                         <Tooltip content="回复">
                             <IconComment
                                 onClick={() => {
+                                    setIsReply(!isReply);
                                     setQuote(undefined);
                                     handleCommentReply(comment);
-                                    setIsReply(!isReply);
                                 }}
                             />
                         </Tooltip>
@@ -111,11 +145,12 @@ const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCo
                             <IconQuote
                                 className="comment-func-quote"
                                 onClick={() => {
-                                    setQuote(comment);
-                                    handleCommentReply(comment);
                                     if (!isReply) {
                                         setIsReply(true);
                                     }
+                                    scrollToEdit();
+                                    setQuote(comment);
+                                    handleCommentReply(comment);
                                 }}
                             />
                         </Tooltip>
@@ -138,6 +173,7 @@ const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCo
 
                 {isReply && (
                     <div
+                        ref={commentEditRef}
                         style={{
                             backgroundColor: 'rgb(var(--semi-violet-0))',
                             marginBottom: 5,

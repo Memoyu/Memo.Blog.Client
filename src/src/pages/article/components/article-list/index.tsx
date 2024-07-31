@@ -201,7 +201,13 @@ const Index: FC<ComProps> = ({}) => {
                                         </div>
 
                                         <div className="like-item">
-                                            <IconLikeHeart />
+                                            <IconLikeHeart
+                                                style={{
+                                                    color: item.isLike
+                                                        ? 'rgba(var(--semi-red-6), 1)'
+                                                        : '',
+                                                }}
+                                            />
                                             <Text style={{ marginLeft: 3 }}>{item.likes}</Text>
                                         </div>
 

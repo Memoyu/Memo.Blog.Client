@@ -36,6 +36,7 @@ export interface ArticlePageModel {
     isTop: boolean;
     commentable: boolean;
     publicable: boolean;
+    isLike: boolean;
     publishTime?: Date;
 }
 
@@ -130,11 +131,10 @@ export interface MomentModel {
     content: string;
     likes: number;
     comments: number;
-    showable: boolean;
-    commentable: boolean;
+    commentable: boolean; // 是否开放评论
     createTime: Date;
-    announcer: MomentAnnouncerModel;
-    isReply: boolean;
+    announcer: MomentAnnouncerModel; // 发布者
+    isLike: boolean; // 是否已点过赞
 }
 
 //#endregion
