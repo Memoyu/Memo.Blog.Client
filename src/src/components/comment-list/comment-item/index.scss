@@ -1,0 +1,88 @@
+@import '@assets/styles/variable.scss';
+
+.comment-item-wrap {
+    color: var(--semi-color-text-0);
+
+    overflow: auto;
+    width: 100%;
+    &-info {
+        .comment-user {
+            display: flex;
+            align-items: center;
+
+            &-info {
+                display: flex;
+                align-items: center;
+                font-size: 15px;
+                font-weight: 600;
+                .text {
+                    margin-left: 10px;
+                }
+
+                &-date {
+                    display: flex;
+                    align-items: center;
+                    margin-left: 20px;
+
+                    .diff {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+
+        .comment-func {
+            margin-right: 15px;
+            &-quote {
+                margin-left: 20px;
+            }
+            span {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &-block {
+        margin-left: 20px;
+        &-reply {
+        }
+
+        &-content {
+            position: relative;
+        }
+
+        &-childs {
+            padding: 10px 15px;
+            background-color: rgba(var(--semi-grey-1), 0.2);
+            border-radius: 20px;
+            &-box {
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .comment-item-wrap {
+        &-info {
+            .comment-user {
+                &-info {
+                    display: inline;
+                    &-date {
+                        margin-left: 0;
+                    }
+                }
+            }
+
+            .comment-func {
+                margin-right: 0;
+                &-quote {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        &-block {
+            margin-left: 0px;
+        }
+    }
+}

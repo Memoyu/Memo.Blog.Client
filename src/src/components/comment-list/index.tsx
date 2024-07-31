@@ -4,7 +4,6 @@ import { Pagination, Toast } from '@douyinfe/semi-ui';
 import CommentItem from './comment-item';
 import CommentEdit, { CommentEditInput } from '@src/components/comment-edit';
 
-import { useArticleComment } from '@src/stores';
 import { useData } from '@src/hooks/useData';
 
 import { commentPage, commentCreate } from '@utils/request';
@@ -14,27 +13,28 @@ import { CommentEditRequest, CommentModel, CommentPageRequest, CommentType } fro
 import './index.scss';
 
 interface ComProps {
-    articleId: string;
+    belongId: string;
+    commentType: CommentType;
+    pageSize?: number;
+    incrementTotal: (num: number) => void;
 }
 
-const Index: FC<ComProps> = ({ articleId }) => {
-    const incrementCommentTotal = useArticleComment((state) => state.incrementCommentTotal);
-
-    const commentPageSize = 4;
+const Index: FC<ComProps> = ({ belongId, commentType, pageSize = 4, incrementTotal }) => {
+    const commentPageSize = pageSize;
     const [currentPage, setCurrentPage] = useState(1);
     const [commentTotal, setCommentTotal] = useState(1);
     const [comments, _commentLoading, setComments, setCommentLoading] = useData<
         Array<CommentModel>
     >([]);
 
-    // 获取文章评论
-    let getArticleCommentPage = (page: number = 1) => {
+    // 获取评论分页
+    let getCommentPage = (page: number = 1) => {
         setCommentLoading(true);
         setCurrentPage(page);
 
         let request = {
-            belongId: articleId,
-            commentType: CommentType.Article,
+            belongId: belongId,
+            commentType: commentType,
             page: page,
             size: commentPageSize,
         } as CommentPageRequest;
@@ -57,8 +57,8 @@ const Index: FC<ComProps> = ({ articleId }) => {
     const handleCommentSubmit = async (input: CommentEditInput) => {
         return await doCommentSubmit({
             content: input.content,
-            commentType: CommentType.Article,
-            belongId: articleId, // 能提交评论，说明一定存在articleId
+            commentType: commentType,
+            belongId: belongId, // 能提交评论，说明一定存在articleId
         });
     };
 
@@ -71,32 +71,33 @@ const Index: FC<ComProps> = ({ articleId }) => {
             return false;
         }
 
-        incrementCommentTotal(1);
-        getArticleCommentPage(page);
+        incrementTotal(1);
+        getCommentPage(page);
         return true;
     };
 
     // 触发评论分页变更
     const handleCommentPageChange = (page: number) => {
-        getArticleCommentPage(page);
+        getCommentPage(page);
     };
 
     useEffect(() => {
-        if (articleId) getArticleCommentPage();
-    }, [articleId]);
+        if (belongId) getCommentPage();
+    }, [belongId]);
 
     return (
-        <div className="article-comments">
-            <div className="article-comments-edit">
+        <div className="comment-wrap">
+            <div className="comment-wrap-edit">
                 <CommentEdit rows={6} onSubmit={handleCommentSubmit} />
             </div>
 
-            <div className="article-comments-list">
+            <div className="comment-wrap-list">
                 <div className="comment-list">
                     {comments?.map((comment: CommentModel) => (
                         <div key={comment.commentId + 'wrap'} style={{ margin: '15px 0' }}>
                             <CommentItem
                                 key={comment.commentId}
+                                commentType={commentType}
                                 comment={comment}
                                 onCommentSubmit={(input) => doCommentSubmit(input, currentPage)}
                                 childrens={
@@ -105,6 +106,7 @@ const Index: FC<ComProps> = ({ articleId }) => {
                                     comment.childs?.map((cc) => (
                                         <CommentItem
                                             key={cc.commentId}
+                                            commentType={commentType}
                                             comment={cc}
                                             onCommentSubmit={(input) =>
                                                 doCommentSubmit(input, currentPage)

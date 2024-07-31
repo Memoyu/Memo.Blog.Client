@@ -1,0 +1,27 @@
+@import '@assets/styles/variable.scss';
+
+.moment-item-extra {
+    &-top {
+        display: flex;
+        justify-content: space-between;
+    }
+    &-comment {
+        margin-top: 15px;
+        border-radius: 10px;
+        background-color: rgba(var(--semi-violet-0), 0.4);
+        padding: 15px;
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .moment-item-extra {
+        &-top {
+            flex-direction: column-reverse;
+        }
+
+        &-comment {
+            padding: 5px;
+        }
+    }
+}

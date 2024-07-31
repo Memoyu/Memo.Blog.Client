@@ -1,9 +1,13 @@
-import { FC } from 'react';
-import './index.scss';
+import { FC, useEffect, useState } from 'react';
 import { Space, TagGroup, Typography } from '@douyinfe/semi-ui';
 import { IconComment, IconLikeHeart } from '@douyinfe/semi-icons';
+
+import CommentList from '@src/components/comment-list';
+
 import { TagProps } from '@douyinfe/semi-ui/lib/es/tag';
-import { MomentModel } from '@src/common/model';
+import { CommentType, MomentModel } from '@src/common/model';
+
+import './index.scss';
 
 interface ComProps {
     moment: MomentModel;
@@ -12,11 +16,26 @@ interface ComProps {
 const { Text } = Typography;
 
 const Index: FC<ComProps> = ({ moment }) => {
-    const handleReplyMomentClick = (_moment: MomentModel) => {};
+    const [comments, setComments] = useState(0);
+    const [showComment, setShowComment] = useState(false);
+
+    useEffect(() => {
+        setComments(moment.comments);
+    }, [moment]);
+
+    // 展开评论
+    const handleExpandCommentClick = (_moment: MomentModel) => {
+        setShowComment((old) => !old);
+    };
+
+    // 增加评论数
+    const incrementCommentTotal = (num: number) => {
+        setComments((old) => old + num);
+    };
 
     return (
-        <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className="moment-item-extra">
+            <div className="moment-item-extra-top">
                 <Space spacing="tight">
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <div
@@ -36,16 +55,16 @@ const Index: FC<ComProps> = ({ moment }) => {
                                     display: 'flex',
                                     alignItems: 'center',
                                 }}
-                                onClick={() => handleReplyMomentClick(moment)}
+                                onClick={() => handleExpandCommentClick(moment)}
                             >
                                 <IconComment />
-                                <Text style={{ marginLeft: 3 }}>{moment.comments}</Text>
+                                <Text style={{ marginLeft: 3 }}>{comments}</Text>
                             </div>
                         )}
                     </div>
                 </Space>
                 <TagGroup
-                    maxTagCount={4}
+                    maxTagCount={3}
                     tagList={moment.tags.map((t, idx) => {
                         return {
                             tagKey: idx,
@@ -57,6 +76,15 @@ const Index: FC<ComProps> = ({ moment }) => {
                     showPopover
                 />
             </div>
+            {showComment && (
+                <div className="moment-item-extra-comment">
+                    <CommentList
+                        belongId={moment.momentId}
+                        commentType={CommentType.Moment}
+                        incrementTotal={incrementCommentTotal}
+                    />
+                </div>
+            )}
         </div>
     );
 };

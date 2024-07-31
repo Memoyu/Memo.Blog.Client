@@ -1,13 +1,13 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-interface ArticleDetailState {
+interface ArticleCommentState {
     commentTotal: number;
     setCommentTotal: (total: number) => void; // 设置评论数
     incrementCommentTotal: (num: number) => void; // 增加评论数
 }
 
-const useArticleDetail = createWithEqualityFn<ArticleDetailState>()(
+const useArticleComment = createWithEqualityFn<ArticleCommentState>()(
     subscribeWithSelector((set, get) => ({
         commentTotal: 0,
         setCommentTotal: (total: number) => {
@@ -19,4 +19,4 @@ const useArticleDetail = createWithEqualityFn<ArticleDetailState>()(
     }))
 );
 
-export default useArticleDetail;
+export default useArticleComment;

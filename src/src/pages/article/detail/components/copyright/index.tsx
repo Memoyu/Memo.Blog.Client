@@ -3,7 +3,7 @@ import { Button, Space, Tag, Toast, Tooltip, Typography } from '@douyinfe/semi-u
 import { IconLikeHeart, IconComment, IconPhoneStroke } from '@douyinfe/semi-icons';
 import { QRCodeCanvas } from 'qrcode.react';
 
-import { useArticleDetail } from '@src/stores';
+import { useArticleComment } from '@src/stores';
 
 import { articleLike } from '@src/utils/request';
 
@@ -20,8 +20,8 @@ const webSite = import.meta.env.VITE_WEB_SITE;
 const { Text, Paragraph } = Typography;
 
 const Index: FC<ComProps> = ({ article }) => {
-    const comments = useArticleDetail((state) => state.commentTotal);
-    const setCommentTotal = useArticleDetail((state) => state.setCommentTotal);
+    const comments = useArticleComment((state) => state.commentTotal);
+    const setCommentTotal = useArticleComment((state) => state.setCommentTotal);
 
     const [isLike, setIsLike] = useState<boolean>();
     const [likes, setLikes] = useState<number>(0);
