@@ -34,7 +34,7 @@ export interface CommentEditInput {
 interface ComProps {
     isReply?: boolean;
     quote?: string;
-    rows?: number;
+    clearQuote?: () => void; // 主要用于清空引用文本，多次点击引用
     onSubmit?: (edit: CommentEditInput) => Promise<boolean> | boolean;
 }
 
@@ -42,7 +42,7 @@ type Funcs = 'edit' | 'preview' | 'publish' | 'user';
 
 const { Text } = Typography;
 
-const Index: FC<ComProps> = ({ isReply = false, quote, rows = 4, onSubmit = () => false }) => {
+const Index: FC<ComProps> = ({ isReply = false, quote, clearQuote, onSubmit = () => false }) => {
     const visitor = useVisitor((state) => state, shallow);
     const setVisitor = useVisitor((state) => state.setVisitor);
 
@@ -66,8 +66,9 @@ const Index: FC<ComProps> = ({ isReply = false, quote, rows = 4, onSubmit = () =
     };
 
     const buildQuoteContent = () => {
-        // console.log('quote 触发');
+        // console.log('quote 触发', quote);
         if (quote) {
+            // console.log('拼接', quote);
             // 换行替换程引用符号
             let quoteContent = quote.replace(new RegExp('\n', 'g'), '\n > ');
             quoteContent = quoteContent + '\n\n' + content || '';
@@ -75,20 +76,23 @@ const Index: FC<ComProps> = ({ isReply = false, quote, rows = 4, onSubmit = () =
             setContent(quoteContent);
             // console.log('quote', quoteContent);
         }
+        clearQuote && clearQuote();
     };
 
     const getInputRender = () => {
         if (selectedFunc == 'edit') {
             return (
-                <TextArea
-                    value={content}
-                    onChange={setContent}
-                    rows={rows}
-                    showClear
-                    maxLength={5000}
-                    placeholder="支持markdown格式哟！"
-                    style={{ height: '100%', resize: 'none' }}
-                />
+                <div style={{ height: '100%', overflow: 'auto' }}>
+                    <TextArea
+                        value={content}
+                        onChange={setContent}
+                        rows={8}
+                        showClear
+                        maxLength={5000}
+                        placeholder="支持markdown格式哟！"
+                        autosize
+                    />
+                </div>
             );
         } else if (selectedFunc == 'preview') {
             return (
@@ -100,7 +104,7 @@ const Index: FC<ComProps> = ({ isReply = false, quote, rows = 4, onSubmit = () =
                         backgroundColor: 'var(--semi-color-fill-0)',
                     }}
                 >
-                    <MarkDown style={{ padding: '5px 12px' }} content={content} />
+                    <MarkDown content={content} />
                 </div>
             );
         } else if (selectedFunc == 'user') {
@@ -159,9 +163,6 @@ const Index: FC<ComProps> = ({ isReply = false, quote, rows = 4, onSubmit = () =
 
     useEffect(() => {
         buildQuoteContent();
-        return () => {
-            setContent('');
-        };
     }, [quote]);
 
     useEffect(() => {

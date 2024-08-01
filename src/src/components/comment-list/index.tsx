@@ -88,7 +88,7 @@ const Index: FC<ComProps> = ({ belongId, commentType, pageSize = 4, incrementTot
     return (
         <div className="comment-wrap">
             <div className="comment-wrap-edit">
-                <CommentEdit rows={6} onSubmit={handleCommentSubmit} />
+                <CommentEdit onSubmit={handleCommentSubmit} />
             </div>
 
             <div className="comment-wrap-list">

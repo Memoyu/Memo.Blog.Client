@@ -4,6 +4,9 @@
     &-top {
         display: flex;
         justify-content: space-between;
+        &-op {
+            margin-top: 0;
+        }
     }
     &-comment {
         margin-top: 15px;
@@ -18,6 +21,9 @@
     .moment-item-extra {
         &-top {
             flex-direction: column-reverse;
+            &-op {
+                margin-top: 10px;
+            }
         }
 
         &-comment {

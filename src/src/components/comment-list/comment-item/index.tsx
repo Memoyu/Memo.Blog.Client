@@ -12,8 +12,6 @@ import { CommentEditRequest, CommentModel, CommentType } from '@src/common/model
 
 import './index.scss';
 
-const commentEditEleId = 'comment-edit-';
-
 interface CommentReply {
     belongId?: string;
     parentId?: string;
@@ -34,53 +32,50 @@ const { Text } = Typography;
 const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCommentSubmit }) => {
     const [isReply, setIsReply] = useState<boolean>(false);
     const [reply, setReply] = useState<CommentReply>();
-    const [quote, setQuote] = useState<CommentModel>();
+    const [quoteContent, setQuoteContent] = useState<string>();
     const commentEditRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        return () => {
-            setIsReply(false);
-        };
-    }, [comment]);
 
     useEffect(() => {
         if (!isReply) return;
         scrollToEdit();
-    }, [isReply, quote]);
+
+        return () => {
+            setIsReply(false);
+        };
+    }, [isReply]);
 
     // 滚动到输入框
     const scrollToEdit = () => {
         // 获取元素
         let editEle = commentEditRef?.current;
-        // console.log('编辑元素', eleId, editEle, commentEditRef);
         // 滚动到输入框位置
-        console.log('gao', editEle?.offsetTop, editEle?.clientHeight);
-        window.scrollTo({
-            top: editEle ? editEle.offsetTop + editEle.clientHeight : 0,
-            behavior: 'smooth',
+        editEle?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    };
+
+    const handleReplyCommentClick = (comment: CommentModel) => {
+        setIsReply((old) => !old);
+
+        setQuoteContent('');
+        setCommentReply(comment);
+    };
+
+    const handleQuoteCommentClick = (comment: CommentModel) => {
+        setIsReply((old) => {
+            if (old) scrollToEdit();
+            return true;
         });
+
+        setQuoteContent(comment.content);
+        setCommentReply(comment);
     };
 
-    const getOffsetTop = (element: any) => {
-        let actualTop = element.offsetTop;
-        let current = element.offsetParent;
-        while (current !== null) {
-            actualTop += current.offsetTop;
-
-            current = current.offsetParent;
-        }
-        return actualTop;
-    };
-
-    const handleCommentReply = (comment: CommentModel) => {
+    const setCommentReply = (comment: CommentModel) => {
         setReply({
             parentId: comment.parentId,
             commentId: comment.commentId,
             floor: comment.floorString,
             content: comment.content,
         });
-
-        // setTimeout(() => {}, 100);
     };
 
     const handleCommentSubmit = (input: CommentEditInput) => {
@@ -133,25 +128,12 @@ const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCo
                     </div>
                     <div className="comment-func">
                         <Tooltip content="回复">
-                            <IconComment
-                                onClick={() => {
-                                    setIsReply(!isReply);
-                                    setQuote(undefined);
-                                    handleCommentReply(comment);
-                                }}
-                            />
+                            <IconComment onClick={() => handleReplyCommentClick(comment)} />
                         </Tooltip>
                         <Tooltip content="引用">
                             <IconQuote
                                 className="comment-func-quote"
-                                onClick={() => {
-                                    if (!isReply) {
-                                        setIsReply(true);
-                                    }
-                                    scrollToEdit();
-                                    setQuote(comment);
-                                    handleCommentReply(comment);
-                                }}
+                                onClick={() => handleQuoteCommentClick(comment)}
                             />
                         </Tooltip>
                     </div>
@@ -176,14 +158,13 @@ const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCo
                         ref={commentEditRef}
                         style={{
                             backgroundColor: 'rgb(var(--semi-violet-0))',
-                            marginBottom: 5,
-                            padding: 10,
+                            padding: 5,
                         }}
                     >
                         <CommentEdit
                             isReply={true}
-                            quote={quote?.content}
-                            rows={4}
+                            quote={quoteContent}
+                            clearQuote={() => setQuoteContent(undefined)}
                             onSubmit={handleCommentSubmit}
                         />
                     </div>

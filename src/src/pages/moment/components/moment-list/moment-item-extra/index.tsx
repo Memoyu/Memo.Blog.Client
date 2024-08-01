@@ -62,38 +62,36 @@ const Index: FC<ComProps> = ({ moment }) => {
     return (
         <div className="moment-item-extra">
             <div className="moment-item-extra-top">
-                <Space spacing="tight">
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Space spacing="medium" className="moment-item-extra-top-op">
+                    <div
+                        style={{
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                        onClick={() => handleLikeClick(moment)}
+                    >
+                        <IconLikeHeart
+                            style={{
+                                color: moment.isLike ? 'rgba(var(--semi-red-6), 1)' : '',
+                            }}
+                        />
+                        <Text style={{ marginLeft: 3 }}>{likes}</Text>
+                    </div>
+                    {moment.commentable && (
                         <div
                             style={{
+                                // marginLeft: 15,
                                 cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
                             }}
-                            onClick={() => handleLikeClick(moment)}
+                            onClick={() => handleExpandCommentClick()}
                         >
-                            <IconLikeHeart
-                                style={{
-                                    color: moment.isLike ? 'rgba(var(--semi-red-6), 1)' : '',
-                                }}
-                            />
-                            <Text style={{ marginLeft: 3 }}>{likes}</Text>
+                            <IconComment />
+                            <Text style={{ marginLeft: 3 }}>{comments}</Text>
                         </div>
-                        {moment.commentable && (
-                            <div
-                                style={{
-                                    marginLeft: 15,
-                                    cursor: 'pointer',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                }}
-                                onClick={() => handleExpandCommentClick()}
-                            >
-                                <IconComment />
-                                <Text style={{ marginLeft: 3 }}>{comments}</Text>
-                            </div>
-                        )}
-                    </div>
+                    )}
                 </Space>
                 <TagGroup
                     maxTagCount={3}
