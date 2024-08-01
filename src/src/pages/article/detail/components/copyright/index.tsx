@@ -8,6 +8,7 @@ import { useArticleComment } from '@src/stores';
 import { articleLike } from '@src/utils/request';
 
 import { ArticleModel } from '@src/common/model';
+import { LOGO_URL } from '@src/common/constant';
 
 import './index.scss';
 
@@ -137,7 +138,7 @@ const Index: FC<ComProps> = ({ article }) => {
                                         excavate: true,
                                         x: undefined,
                                         y: undefined,
-                                        src: 'http://oss.blog.memoyu.com/account/avatar/fbca90ce-9197-4a00-8836-eaafef3e0fe2.png',
+                                        src: LOGO_URL,
                                         width: 30,
                                         height: 30,
                                     }}

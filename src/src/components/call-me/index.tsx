@@ -5,10 +5,9 @@ import { IconGithubLogo, IconPhoneStroke, IconComment, IconMail } from '@douyinf
 import { QRCodeCanvas } from 'qrcode.react';
 
 import WechatQrcode from '@assets/images/wechat-qrcode.jpg';
+import { LOGO_URL } from '@src/common/constant';
 
 import './index.scss';
-
-const webSite = import.meta.env.VITE_WEB_SITE;
 
 interface CallMe {
     to?: string;
@@ -25,13 +24,13 @@ const Index: FC<ComProps> = ({}) => {
             title: (
                 <QRCodeCanvas
                     id="site-qrcode"
-                    value={webSite}
+                    value={window.location.href}
                     size={128}
                     imageSettings={{
                         excavate: false,
                         x: undefined,
                         y: undefined,
-                        src: 'http://oss.blog.memoyu.com/account/avatar/fbca90ce-9197-4a00-8836-eaafef3e0fe2.png',
+                        src: LOGO_URL,
                         width: 30,
                         height: 30,
                     }}

@@ -216,9 +216,7 @@ const Index: FC<ComProps> = ({ isReply = false, quote, clearQuote, onSubmit = ()
                 visitorId: visitor.visitorId!,
             })
         ).then((res) => {
-            if (res === false) {
-                return;
-            }
+            if (res === false) return;
 
             // 清空输入
             setContent('');

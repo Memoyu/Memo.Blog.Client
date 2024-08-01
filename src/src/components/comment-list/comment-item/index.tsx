@@ -78,7 +78,7 @@ const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCo
         });
     };
 
-    const handleCommentSubmit = (input: CommentEditInput) => {
+    const handleCommentSubmit = async (input: CommentEditInput) => {
         // 获取父评论Id
         let parentId = reply && (reply.parentId || reply.commentId);
         // 获取回复评论Id
@@ -92,7 +92,10 @@ const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCo
             belongId: comment.belongId,
         };
 
-        return onCommentSubmit(edit);
+        var done = await onCommentSubmit(edit);
+        if (done) setIsReply(false);
+
+        return done;
     };
 
     return (
