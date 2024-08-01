@@ -13,13 +13,13 @@
         border-radius: 10px;
         background-color: rgba(var(--semi-violet-0), 0.4);
         padding: 15px;
-        margin-right: 10px;
     }
 }
 
 @media screen and (max-width: $max-mobile-width) {
     .moment-item-extra {
         &-top {
+            margin-top: 10px;
             flex-direction: column-reverse;
             &-op {
                 margin-top: 10px;

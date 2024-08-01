@@ -1,4 +1,7 @@
+@import '@assets/styles/variable.scss';
+
 .moment-list {
+    padding: 10px;
     &-item {
         margin: 10px;
         .semi-space {
@@ -12,12 +15,29 @@
 
         &-content {
             position: relative;
-            margin: 10px 0;
-            padding: 15px 25px;
+            margin: 15px 0;
+            padding: 5px;
             background-color: rgb(var(--semi-grey-0));
             border-radius: 4px;
-
             box-shadow: var(--semi-shadow-elevated);
+            .md-editor-preview-wrapper {
+                padding: 10px 7px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .moment-list {
+        padding: 20px 0 10px 10px;
+        &-item {
+            margin: 0px;
+            &-content {
+                margin: 5px 0;
+            }
+        }
+        .semi-timeline {
+            padding: 0;
         }
     }
 }

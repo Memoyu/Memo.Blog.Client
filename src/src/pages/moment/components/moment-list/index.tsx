@@ -67,44 +67,42 @@ const Index: FC<ComProps> = () => {
 
     return (
         <div className="moment-list">
-            <div>
-                <InfiniteScroll
-                    initialLoad={false}
-                    pageStart={0}
-                    threshold={20}
-                    loadMore={loadMoreMomentPage}
-                    hasMore={!momentLoading && moments.length < momentTotalRef.current}
-                    // useWindow={false}
-                >
-                    <Timeline mode="left">
-                        {moments.map((m) => {
-                            return (
-                                <Timeline.Item
-                                    key={m.momentId}
-                                    // time={format(new Date(m.createTime), 'yyyy-MM-dd HH:mm')}
-                                    dot={<Avatar size="small" src={m.announcer.avatar} />}
-                                    extra={<MomentItemExtra moment={m} />}
-                                >
-                                    <div className="moment-list-item">
-                                        <Space spacing="tight">
-                                            <div className="name">{m.announcer.nickname}</div>
-                                            <Text>
-                                                {format(new Date(m.createTime), 'yyyy-MM-dd HH:mm')}
-                                            </Text>
-                                            <Tag size="large" color="violet">
-                                                {dateDiff(new Date(m.createTime))}
-                                            </Tag>
-                                        </Space>
-                                        <div className="moment-list-item-content">
-                                            <MarkDown content={m.content} />
-                                        </div>
+            <InfiniteScroll
+                initialLoad={false}
+                pageStart={0}
+                threshold={20}
+                loadMore={loadMoreMomentPage}
+                hasMore={!momentLoading && moments.length < momentTotalRef.current}
+                // useWindow={false}
+            >
+                <Timeline mode="left">
+                    {moments.map((m) => {
+                        return (
+                            <Timeline.Item
+                                key={m.momentId}
+                                // time={format(new Date(m.createTime), 'yyyy-MM-dd HH:mm')}
+                                dot={<Avatar size="small" src={m.announcer.avatar} />}
+                                extra={<MomentItemExtra moment={m} />}
+                            >
+                                <div className="moment-list-item">
+                                    <Space spacing="tight">
+                                        <div className="name">{m.announcer.nickname}</div>
+                                        <Text>
+                                            {format(new Date(m.createTime), 'yyyy-MM-dd HH:mm')}
+                                        </Text>
+                                        <Tag size="large" color="violet">
+                                            {dateDiff(new Date(m.createTime))}
+                                        </Tag>
+                                    </Space>
+                                    <div className="moment-list-item-content">
+                                        <MarkDown content={m.content} />
                                     </div>
-                                </Timeline.Item>
-                            );
-                        })}
-                    </Timeline>
-                </InfiniteScroll>
-            </div>
+                                </div>
+                            </Timeline.Item>
+                        );
+                    })}
+                </Timeline>
+            </InfiniteScroll>
         </div>
     );
 };
