@@ -4,6 +4,7 @@ import CallMe from '@components/call-me';
 
 import './index.scss';
 
+const adminSite = import.meta.env.VITE_ADMIN_SITE;
 const { Footer } = Layout;
 const { Text } = Typography;
 
@@ -28,7 +29,7 @@ const CustFooter: FC = () => {
                     </a>
                 </div>
                 <div className="blog-admin">
-                    <a href="http://blog.admin.memoyu.com" rel="nofollow" target="_blank">
+                    <a href={adminSite} rel="nofollow" target="_blank">
                         <Text>{'---> BLOG管理端 <---'}</Text>
                     </a>
                 </div>

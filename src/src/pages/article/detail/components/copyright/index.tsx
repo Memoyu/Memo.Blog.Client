@@ -16,7 +16,7 @@ interface ComProps {
     article: ArticleModel;
 }
 
-const webSite = import.meta.env.VITE_WEB_SITE;
+const webSite = import.meta.env.VITE_CLIENT_SITE;
 
 const { Text, Paragraph } = Typography;
 
