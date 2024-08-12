@@ -28,9 +28,9 @@ const useUserStore = createWithEqualityFn<ConfigState>()(
                 } catch {}
 
                 let style = get().style;
-                body.style.setProperty(`--semi-color-primary`, style.primaryColor);
-                body.style.setProperty(`--semi-color-secondary`, style.secondaryColor);
-                body.style.setProperty(`--semi-color-tertiary`, style.tertiaryColor);
+                // body.style.setProperty(`--semi-color-primary`, style.primaryColor);
+                // body.style.setProperty(`--semi-color-secondary`, style.secondaryColor);
+                // body.style.setProperty(`--semi-color-tertiary`, style.tertiaryColor);
             },
         }),
         {
