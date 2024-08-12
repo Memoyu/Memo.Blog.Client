@@ -16,7 +16,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--semi-color-primary-hover);
+    background-color: var(--semi-color-secondary);
 }
 
 ::-webkit-scrollbar-track {

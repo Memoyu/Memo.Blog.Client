@@ -5,15 +5,21 @@ import RenderRouter from './router';
 import Layout from '@components/layout';
 
 import './App.scss';
+import { useConfig } from './stores';
 
 function App() {
     const [loading, setLoading] = useState(true);
+    const initConfig = useConfig((state) => state.init);
 
     useEffect(() => {
         setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
+        initConfig()
+            .then((res) => {})
+            .finally(() =>
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000)
+            );
     }, []);
 
     return (

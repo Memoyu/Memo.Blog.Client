@@ -63,7 +63,7 @@ $blog-header-bg-color: rgba(var(--blog-header-bg), 0.4);
 
                 .active {
                     font-weight: bold;
-                    color: var(--semi-color-primary-hover);
+                    color: var(--semi-color-secondary);
                     &:after {
                         width: 64%;
                     }
@@ -90,7 +90,9 @@ $blog-header-bg-color: rgba(var(--blog-header-bg), 0.4);
     &.stick {
         padding-top: 0;
         background: var(--semi-color-bg-0);
-        box-shadow: 0 0 2px rgba(0, 0, 0, 0.063), 0 0 10px rgba(0, 0, 0, 0.125);
+        box-shadow:
+            0 0 2px rgba(0, 0, 0, 0.063),
+            0 0 10px rgba(0, 0, 0, 0.125);
     }
 }
 

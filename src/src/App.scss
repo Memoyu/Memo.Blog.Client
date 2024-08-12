@@ -8,9 +8,6 @@ body,
     // height: 100vh;
     margin: 0;
 
-    --semi-color-primary: rgba(var(--semi-violet-3), 1) !important;
-    --semi-color-primary-hover: rgba(var(--semi-violet-2), 1) !important;
-    --semi-color-primary-light-default: rgba(var(--semi-violet-0), 1) !important;
     .flex-between {
         display: flex;
         justify-content: space-between;
@@ -27,6 +24,12 @@ body,
     .md-editor {
         --md-bk-color: var(--semi-grey-0) !important;
     }
+}
+
+body {
+    --semi-color-primary: rgba(var(--semi-violet-3), 1);
+    --semi-color-secondary: rgba(var(--semi-violet-2), 1);
+    --semi-color-tertiary: rgba(var(--semi-violet-0), 1);
 }
 
 body[theme-mode='dark'] #root > * {

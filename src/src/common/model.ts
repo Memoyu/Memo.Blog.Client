@@ -9,6 +9,20 @@ export interface PaginationResult<T> {
     total: number;
 }
 
+//#region 配置
+
+export interface ConfigModel {
+    style: StyleConfigModel;
+}
+
+export interface StyleConfigModel {
+    primaryColor: string;
+    secondaryColor: string;
+    tertiaryColor: string;
+}
+
+//#endregion
+
 //#region 文章
 
 export enum ArticleStatus {

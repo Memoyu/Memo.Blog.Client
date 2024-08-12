@@ -20,12 +20,21 @@ import {
     ArticleSearchPaginationResult,
     ArticleSearchPageRequest,
     FriendModel,
+    ConfigModel,
 } from '@common/model';
 
 export const getByUrl = (url: string, params?: any) => {
     let instance = axios.create({ withCredentials: false });
     return instance.get(url, { params });
 };
+
+// 配置
+
+export const configGet = () => {
+    return Request.post<ConfigModel>('config/get');
+};
+
+//#endregion
 
 // 创建访客
 export const visitorCreate = (request: VisitorEditRequest) => {

@@ -105,7 +105,7 @@ const Index: FC = () => {
         borderRadius: 6,
         // padding: '0 3px ',
         // margin: '0 3px ',
-        backgroundColor: 'var(--semi-color-primary-light-default)',
+        backgroundColor: 'var(--semi-color-tertiary)',
     };
 
     return (
@@ -145,6 +145,7 @@ const Index: FC = () => {
                                 {records.map((r) => {
                                     return (
                                         <Tag
+                                            key={r}
                                             tagKey={r}
                                             color="purple"
                                             size="large"
