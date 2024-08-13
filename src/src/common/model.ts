@@ -12,13 +12,41 @@ export interface PaginationResult<T> {
 //#region 配置
 
 export interface ConfigModel {
+    banner: BannerConfigModel;
     style: StyleConfigModel;
+}
+
+export interface BannerConfigModel {
+    home: string;
+    article: string;
+    lab: string;
+    moment: string;
+    about: string;
 }
 
 export interface StyleConfigModel {
     primaryColor: string;
+    primaryHover: string;
+    primaryActive: string;
+    primaryDisabled: string;
+    primaryLightDefault: string;
+    primaryLightHover: string;
+    primaryLightActive: string;
+
     secondaryColor: string;
+    secondaryHover: string;
+    secondaryActive: string;
+    secondaryDisabled: string;
+    secondaryLightDefault: string;
+    secondaryLightHover: string;
+    secondaryLightActive: string;
+
     tertiaryColor: string;
+    tertiaryHover: string;
+    tertiaryActive: string;
+    tertiaryLightDefault: string;
+    tertiaryLightHover: string;
+    tertiaryLightActive: string;
 }
 
 //#endregion

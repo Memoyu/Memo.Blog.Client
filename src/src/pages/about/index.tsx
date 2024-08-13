@@ -6,15 +6,17 @@ import ContentContainer from '@src/components/layout/content-container';
 import PageBanner from '@src/components/page-banner';
 import MarkDown from '@components/markdown/article';
 
+import Friends from './components/friends';
+
 import { usePageVisit } from '@src/hooks/usePageVisit';
 import { useData } from '@src/hooks/useData';
+import { useConfig } from '@src/stores';
 
 import { aboutGet } from '@src/utils/request';
 
 import { AboutModel } from '@src/common/model';
 
 import './index.scss';
-import Friends from './components/friends';
 
 const { Title } = Typography;
 
@@ -22,6 +24,7 @@ const Index = () => {
     const [about, _loading, setAbout, _setLoading] = useData<AboutModel>({} as AboutModel);
 
     usePageVisit();
+    const bannerUrl = useConfig((state) => state.banner.about);
 
     // 获取关于我
     let getAboutMe = async () => {
@@ -41,7 +44,7 @@ const Index = () => {
 
     return (
         <PageContainer>
-            <PageBanner image={about.banner} />
+            <PageBanner image={bannerUrl} />
             <ContentContainer className="about-me-wrap">
                 <div className="about-me-content">
                     <Title heading={2} style={{ marginBottom: 30, textAlign: 'center' }}>

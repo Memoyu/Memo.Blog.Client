@@ -7,6 +7,7 @@ import CategoryList from './components/category-list';
 
 import { usePageVisit } from '@src/hooks/usePageVisit';
 import { useIsPresent } from 'framer-motion';
+import { useConfig } from '@src/stores';
 
 import './index.scss';
 
@@ -14,10 +15,11 @@ const Index = () => {
     const isPresent = useIsPresent();
 
     usePageVisit();
+    const bannerUrl = useConfig((state) => state.banner.article);
 
     return (
         <PageContainer className="blog-article-list">
-            <PageBanner image="http://oss.blog.memoyu.com/articles/banner/502a2248-2ee7-48eb-af67-c5b0b9a9a5f1.png" />
+            <PageBanner image={bannerUrl} />
             {isPresent && (
                 <StickyBox offsetTop={58} className="article-list-category-sticky">
                     <CategoryList />

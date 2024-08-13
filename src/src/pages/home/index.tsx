@@ -6,6 +6,7 @@ import PageBanner from '@components/page-banner';
 import Summary from './components/summary';
 
 import { usePageVisit } from '@src/hooks/usePageVisit';
+import { useConfig } from '@src/stores';
 
 import './index.scss';
 
@@ -13,13 +14,11 @@ const { Title, Text } = Typography;
 
 const Index = () => {
     usePageVisit();
+    const bannerUrl = useConfig((state) => state.banner.home);
 
     return (
         <PageContainer className="blog-home">
-            <PageBanner
-                height="100vh"
-                image="http://oss.blog.memoyu.com/articles/banner/-9999077311f.png"
-            >
+            <PageBanner height="100vh" image={bannerUrl}>
                 <div className="blog-home-content">
                     <Title heading={2}>你好！</Title>
                     <div style={{ display: 'flex', marginTop: 10 }}>

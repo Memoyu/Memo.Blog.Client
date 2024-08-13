@@ -9,6 +9,7 @@ import Tools from './components/tools';
 import OpenSources from './components/open-source';
 
 import { usePageVisit } from '@src/hooks/usePageVisit';
+import { useConfig } from '@src/stores';
 
 import './index.scss';
 
@@ -23,10 +24,11 @@ const Index = () => {
     };
 
     usePageVisit();
+    const bannerUrl = useConfig((state) => state.banner.lab);
 
     return (
         <PageContainer className="blog-labs">
-            <PageBanner image="http://oss.blog.memoyu.com/page/about/banner/fc873d0f-b4bf-414b-8458-930de1d12d5d.png" />
+            <PageBanner image={bannerUrl} />
             <ContentContainer style={{ marginBottom: 20 }}>
                 <div style={dividerStyle}>
                     <IconConfig style={{ marginRight: 10, fontSize: 20 }} />
