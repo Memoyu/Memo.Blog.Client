@@ -13,7 +13,7 @@ export interface PaginationResult<T> {
 
 export interface ConfigModel {
     banner: BannerConfigModel;
-    style: StyleConfigModel;
+    color: ColorConfigModel;
 }
 
 export interface BannerConfigModel {
@@ -24,7 +24,13 @@ export interface BannerConfigModel {
     about: string;
 }
 
-export interface StyleConfigModel {
+export interface ColorConfigModel {
+    primary: Array<string>;
+    secondary: Array<string>;
+    tertiary: Array<string>;
+}
+
+export interface ColorVariableModel {
     primaryColor: string;
     primaryHover: string;
     primaryActive: string;

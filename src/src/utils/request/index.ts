@@ -31,7 +31,7 @@ export const getByUrl = (url: string, params?: any) => {
 // 配置
 
 export const configGet = () => {
-    return Request.post<ConfigModel>('config/get');
+    return Request.get<ConfigModel>('config/get');
 };
 
 //#endregion
