@@ -52,19 +52,21 @@ const useUserStore = createWithEqualityFn<ConfigState>()(
                 } catch {}
 
                 // 配置属性
-                let style = get().color;
-
+                let colorConfig = get().color;
+                console.log(colorConfig);
                 const setColorVariables = (level: string, colors: string[], indexs: number[]) => {
                     variables.forEach((v, i) => {
                         let index = indexs[i];
                         if (index < 0) return;
                         let suffix = v == 'default' ? '' : `-${v}`;
-                        body.style.setProperty(`--semi-color-${level}${suffix}`, colors[index]);
+                        let color = colors[index];
+                        color = color.startsWith('#') ? color : `rgba(var(--semi-${color}), 1)`;
+                        body.style.setProperty(`--semi-color-${level}${suffix}`, color);
                     });
                 };
-                setColorVariables('primary', style.primary, primaryColorIndexs);
-                setColorVariables('secondary', style.secondary, secondaryColorIndexs);
-                setColorVariables('tertiary', style.tertiary, tertiaryColorIndexs);
+                setColorVariables('primary', colorConfig.primary, primaryColorIndexs);
+                setColorVariables('secondary', colorConfig.secondary, secondaryColorIndexs);
+                setColorVariables('tertiary', colorConfig.tertiary, tertiaryColorIndexs);
             },
         }),
         {

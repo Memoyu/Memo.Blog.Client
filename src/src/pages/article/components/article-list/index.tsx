@@ -185,8 +185,12 @@ const Index: FC<ComProps> = ({}) => {
                                         }}
                                         tagList={item.tags.map((t) => {
                                             return {
+                                                style: {
+                                                    color: 'var(--semi-color-primary)',
+                                                    backgroundColor:
+                                                        'var(--semi-color-secondary-light-default)',
+                                                },
                                                 tagKey: t.tagId,
-                                                color: 'purple',
                                                 children: t.name,
                                             } as TagProps;
                                         })}

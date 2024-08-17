@@ -98,7 +98,10 @@ const Index: FC<ComProps> = ({ moment }) => {
                     tagList={moment.tags.map((t, idx) => {
                         return {
                             tagKey: idx,
-                            color: 'purple',
+                            style: {
+                                color: 'var(--semi-color-primary)',
+                                backgroundColor: 'var(--semi-color-secondary-light-default)',
+                            },
                             children: t,
                         } as TagProps;
                     })}

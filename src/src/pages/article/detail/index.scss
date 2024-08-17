@@ -69,7 +69,7 @@
 
 .article-bottom {
     position: relative;
-    background: rgb(var(--semi-violet-0));
+    background: var(--semi-color-secondary);
     padding-top: 100px;
     padding-bottom: 50px;
 
@@ -78,7 +78,7 @@
         position: absolute;
         top: -240px;
         border-right: calc(100vw - var(--scrollbar)) solid transparent;
-        border-bottom: 240px solid rgb(var(--semi-violet-0));
+        border-bottom: 240px solid var(--semi-color-secondary);
     }
 
     &-comment {

@@ -90,7 +90,14 @@ const Index: FC<ComProps> = () => {
                                         <Text>
                                             {format(new Date(m.createTime), 'yyyy-MM-dd HH:mm')}
                                         </Text>
-                                        <Tag size="large" color="violet">
+                                        <Tag
+                                            size="large"
+                                            style={{
+                                                fontWeight: 'bold',
+                                                backgroundColor:
+                                                    'var(--semi-color-primary-light-default)',
+                                            }}
+                                        >
                                             {dateDiff(new Date(m.createTime))}
                                         </Tag>
                                     </Space>

@@ -7,7 +7,7 @@
     .page-banner {
         position: relative;
         height: 100%;
-        background: no-repeat center center #f4f1ec;
+        background: no-repeat center center var(--semi-color-primary-light-default);
         background-size: auto 100%;
         background-size: cover;
         filter: var(--image-brightness);

@@ -54,7 +54,7 @@ body {
 body[theme-mode='dark'] #root > * {
     --image-brightness: brightness(0.8);
 
-    --blog-header-bg: 22, 22, 26;
+    --blog-header-bg: var(--semi-grey-0);
 }
 
 a {
@@ -79,8 +79,7 @@ a {
         width: 64px;
         height: 64px;
         border: 8px solid;
-        border-color: rgba(var(--semi-violet-5), 1) transparent rgba(var(--semi-violet-5), 1)
-            transparent;
+        border-color: var(--semi-color-primary) transparent var(--semi-color-primary) transparent;
         border-radius: 50%;
         animation: spin-anim 1.2s linear infinite;
     }

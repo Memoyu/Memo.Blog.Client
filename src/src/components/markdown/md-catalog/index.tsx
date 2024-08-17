@@ -23,11 +23,12 @@ const Index: React.FC<Props> = ({ articleId }) => {
 
     return (
         <div>
-            <Title heading={4} className="markdown-navigation-title">
+            <Title heading={4} className="md-catalog-title">
                 目录
             </Title>
             <MdCatalog
                 editorId={`article-detail-id-${articleId}`}
+                className="md-catalog-links"
                 theme={theme}
                 offsetTop={57}
                 scrollElementOffsetTop={57}

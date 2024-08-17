@@ -123,7 +123,14 @@ const CommentItem: React.FC<ComProps> = ({ commentType, comment, childrens, onCo
                                 <Text>
                                     {format(new Date(comment.createTime), 'yyyy-MM-dd HH:mm')}
                                 </Text>
-                                <Tag size="large" color="violet" className="diff">
+                                <Tag
+                                    size="large"
+                                    style={{
+                                        backgroundColor:
+                                            'var(--semi-color-secondary-light-default)',
+                                    }}
+                                    className="diff"
+                                >
                                     {dateDiff(new Date(comment.createTime))}
                                 </Tag>
                             </div>

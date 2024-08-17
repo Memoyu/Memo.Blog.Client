@@ -101,7 +101,8 @@ const Index: FC = () => {
                                             size="default"
                                             style={{
                                                 margin: 4,
-                                                backgroundColor: 'rgba(var(--semi-violet-0))',
+                                                backgroundColor:
+                                                    'var(--semi-color-primary-light-default)',
                                             }}
                                             src={item.avatar}
                                         />
@@ -124,7 +125,7 @@ const Index: FC = () => {
                                         height: '100%',
                                         top: 0,
                                         zIndex: 0,
-                                        backgroundColor: 'var(--semi-color-primary)',
+                                        backgroundColor: 'var(--semi-color-primary-light-hover)',
                                     }}
                                     transition={transition}
                                 ></motion.div>
