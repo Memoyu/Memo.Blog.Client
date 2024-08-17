@@ -14,7 +14,7 @@ function App() {
     useEffect(() => {
         setLoading(true);
         initConfig()
-            .then((res) => {})
+            .then(() => {})
             .finally(() =>
                 setTimeout(() => {
                     setLoading(false);
