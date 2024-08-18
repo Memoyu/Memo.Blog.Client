@@ -44,31 +44,28 @@ const Index: FC<ComProps> = ({}) => {
     }, []);
 
     return (
-        <Row gutter={8}>
-            {summaries.map((s) => {
-                return (
-                    <Col key={s.name} span={24 / summaries.length}>
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'flex-end',
-                                marginLeft: 30,
-                            }}
-                        >
-                            <div>
+        <div className="home-summary">
+            <Row gutter={8}>
+                {summaries.map((s) => {
+                    return (
+                        <Col key={s.name} span={24 / summaries.length}>
+                            <div className="home-summary-item">
                                 <div style={{ display: 'flex', alignItems: 'end' }}>
-                                    <Title heading={3}>{s.value}</Title>
-                                    <Text style={{ marginLeft: 5 }}>{s.unit}</Text>
+                                    <Title heading={3} weight="bold">
+                                        {s.value}
+                                    </Title>
+                                    <Text style={{ marginLeft: 8 }}>{s.unit}</Text>
                                 </div>
-                                <Title style={{ display: 'flex' }} heading={4} weight="bold">
+
+                                <Title style={{ display: 'flex' }} heading={3} weight="bold">
                                     {s.name}
                                 </Title>
                             </div>
-                        </div>
-                    </Col>
-                );
-            })}
-        </Row>
+                        </Col>
+                    );
+                })}
+            </Row>
+        </div>
     );
 };
 
