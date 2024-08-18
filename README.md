@@ -1,14 +1,12 @@
 <div align="center"  style="margin-bottom: 40px">
- <img src="https://raw.githubusercontent.com/Memoyu/Memoyu/main/logo.png" alt="memoyu" width="128" />
+ <img src="https://raw.githubusercontent.com/Memoyu/Memo.Blog/main/docs/images/logo.png" alt="memo blog" />
 </div>
-<h1 align="center">Memoyu's Blog</h1>
 <div align="center">
  <h3>基于React开发的Blog系统客户端</h3>
  <a href="https://react.dev/"><img src="https://img.shields.io/badge/web-react-blue"/></a>
  <a href="https://semi.design/zh-CN"><img src="https://img.shields.io/badge/ui-semi.design-blue"/></a>
  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-3963bc.svg"/></a>
  <a href="https://github.com/Memoyu"><img src="https://img.shields.io/badge/developer-memoyu-blue"/></a>
- <img src="https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/client-ld.png"/>
 </div>
 
 
@@ -17,11 +15,7 @@
 
 响应式布局，适配移动端展示；
 
-|  |  |
-| :------------------------------: | :-------------------------------: |
-| ![home](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/home.png) |![article](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/article.png) |
-| ![article-detail](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/article-detail.png) |![labs](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/labs.png) |
-| ![moment](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/moment.png) |![about](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/about.png) |
+![预览](https://raw.githubusercontent.com/Memoyu/Memo.Blog.Client/main/docs/images/client-ld.png)
 
 **线上地址：**
 
@@ -46,7 +40,6 @@
 
 
 ## 功能实现
-
 - 首页、Blog简单统计；
 - 文章列表及文章详情；
 - 实验室：工具、开源项目等；
@@ -76,7 +69,6 @@
 
 
 ## 参考项目
-
 - [小剧客栈](https://bh-lay.com/)
 - [飞鸟小站](https://lzxjack.top/)
 - [Naccl's Blog](https://naccl.top/)
@@ -85,6 +77,10 @@
 
 
 
-## 开源协议
+## 感谢授权
+🙏🏻 感谢JetBrains对本项目授予的开发工具开源许可 [JetBrains Open Source  Support](https://www.jetbrains.com/community/opensource/#support)
 
+
+
+## 开源协议
 MIT License. See [License here](./LICENSE) for details.
