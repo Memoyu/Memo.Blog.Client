@@ -60,7 +60,7 @@ const useUserStore = createWithEqualityFn<ConfigState>()(
                         if (index < 0) return;
                         let suffix = v == 'default' ? '' : `-${v}`;
                         let color = colors[index];
-                        color = color.startsWith('#') ? color : `rgba(var(--semi-${color}), 1)`;
+                        color = color?.startsWith('#') ? color : `rgba(var(--semi-${color}), 1)`;
                         body.style.setProperty(`--semi-color-${level}${suffix}`, color);
                     });
                 };
