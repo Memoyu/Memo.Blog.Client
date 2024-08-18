@@ -71,7 +71,7 @@ const AnimateRoute = (props: PathRouteProps) => {
 };
 
 const buildDocumentTitle = (titleId: string) => {
-    globalTitle = titleId == '首页' ? "memoyu's blog" : titleId + ' | memoyu的个人博客';
+    globalTitle = titleId == '首页' ? 'memo blog' : titleId + ' | memoyu的个人博客';
     return globalTitle;
 };
 

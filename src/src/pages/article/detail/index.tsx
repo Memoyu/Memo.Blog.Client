@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { Empty, Toast, Typography } from '@douyinfe/semi-ui';
-import { IllustrationNoResult } from '@douyinfe/semi-illustrations';
+import { IllustrationNoResult, IllustrationConstruction } from '@douyinfe/semi-illustrations';
 import StickyBox from 'react-sticky-box';
 
 import MarkDown from '@components/markdown/article';
@@ -62,7 +62,7 @@ const Index = () => {
         }
     }, [params]);
 
-    return article && !loading ? (
+    return article ? (
         <PageContainer>
             <header
                 className="article-header"
@@ -143,10 +143,16 @@ const Index = () => {
     ) : (
         <PageContainer style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Empty
-                image={<IllustrationNoResult style={{ width: 150, height: 150 }} />}
-                title="文章走失了！"
+                image={
+                    loading ? (
+                        <IllustrationConstruction style={{ width: 150, height: 150 }} />
+                    ) : (
+                        <IllustrationNoResult style={{ width: 150, height: 150 }} />
+                    )
+                }
+                title={loading ? '加载中......' : '文章走失了！'}
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-            ></Empty>
+            />
         </PageContainer>
     );
 };
