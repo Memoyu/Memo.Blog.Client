@@ -1,9 +1,13 @@
+@import '@assets/styles/variable.scss';
+
 .home-summary {
     position: relative;
-    padding: 8px;
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
 
     &-item {
-        margin-left: 30px;
+        margin: 0 40px;
     }
     &:after {
         content: '';
@@ -16,5 +20,13 @@
         right: 0;
         bottom: 0;
         z-index: -1;
+    }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+    .home-summary {
+        &-item {
+            margin: 0 15px;
+        }
     }
 }

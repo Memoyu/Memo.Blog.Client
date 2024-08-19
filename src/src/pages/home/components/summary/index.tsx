@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Col, Row, Toast, Typography } from '@douyinfe/semi-ui';
+import { Col, Row, Space, Toast, Typography } from '@douyinfe/semi-ui';
 
 import './index.scss';
 import { articleSummary } from '@src/utils/request';
@@ -45,7 +45,7 @@ const Index: FC<ComProps> = ({}) => {
 
     return (
         <div className="home-summary">
-            <Row gutter={8}>
+            {/* <Row gutter={8}>
                 {summaries.map((s) => {
                     return (
                         <Col key={s.name} span={24 / summaries.length}>
@@ -64,7 +64,25 @@ const Index: FC<ComProps> = ({}) => {
                         </Col>
                     );
                 })}
-            </Row>
+            </Row> */}
+            <Space spacing="loose" align="center">
+                {summaries.map((s) => {
+                    return (
+                        <div className="home-summary-item">
+                            <div style={{ display: 'flex', alignItems: 'end' }}>
+                                <Title heading={3} weight="bold">
+                                    {s.value}
+                                </Title>
+                                <Text style={{ marginLeft: 8 }}>{s.unit}</Text>
+                            </div>
+
+                            <Title style={{ display: 'flex' }} heading={3} weight="bold">
+                                {s.name}
+                            </Title>
+                        </div>
+                    );
+                })}
+            </Space>
         </div>
     );
 };
