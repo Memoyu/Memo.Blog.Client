@@ -14,11 +14,11 @@ const { Title, Text } = Typography;
 
 const Index = () => {
     usePageVisit();
-    const bannerUrl = useConfig((state) => state.banner.home);
+    const homeBanner = useConfig((state) => state.banner.home);
 
     return (
         <PageContainer className="blog-home">
-            <PageBanner height="100vh" image={bannerUrl}>
+            <PageBanner height="100vh" banner={homeBanner} showOrigin={false}>
                 <div className="blog-home-content">
                     <Title heading={2}>你好！</Title>
                     <div style={{ display: 'flex', marginTop: 10 }}>
@@ -35,11 +35,11 @@ const Index = () => {
                 <div className="blog-home-bottom">
                     <Link
                         target="_blank"
-                        to={'https://wallhaven.cc/'}
+                        to={homeBanner.originUrl ? homeBanner.originUrl : ''}
                         className="blog-home-bottom-pic-link"
                     >
                         <Text strong type="secondary">
-                            pic by @wallhaven
+                            {homeBanner.title}
                         </Text>
                     </Link>
                     <div className="blog-home-bottom-summary">

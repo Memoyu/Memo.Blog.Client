@@ -29,12 +29,11 @@ const useUserStore = createWithEqualityFn<ConfigState>()(
     persist(
         (set, get) => ({
             banner: {
-                home: 'http://oss.blog.memoyu.com/articles/banner/-9999077311f.png',
-                article:
-                    'http://oss.blog.memoyu.com/articles/banner/502a2248-2ee7-48eb-af67-c5b0b9a9a5f1.png',
-                lab: 'http://oss.blog.memoyu.com/page/about/banner/fc873d0f-b4bf-414b-8458-930de1d12d5d.png',
-                moment: 'http://oss.blog.memoyu.com/articles/bdbb6831-bccb-4139-96c7-b85395038d5e.png',
-                about: 'http://oss.blog.memoyu.com/page/about/banner/-9999efc36e5.jpg',
+                home: {},
+                article: {},
+                lab: {},
+                moment: {},
+                about: {},
             },
             color: {
                 //生成默认颜色

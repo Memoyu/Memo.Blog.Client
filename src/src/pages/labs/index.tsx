@@ -24,11 +24,11 @@ const Index = () => {
     };
 
     usePageVisit();
-    const bannerUrl = useConfig((state) => state.banner.lab);
+    const labBanner = useConfig((state) => state.banner.lab);
 
     return (
         <PageContainer className="blog-labs">
-            <PageBanner image={bannerUrl} />
+            <PageBanner banner={labBanner} />
             <ContentContainer style={{ marginBottom: 20 }}>
                 <div style={dividerStyle}>
                     <IconConfig style={{ marginRight: 10, fontSize: 20 }} />

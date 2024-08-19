@@ -17,11 +17,17 @@ export interface ConfigModel {
 }
 
 export interface BannerConfigModel {
-    home: string;
-    article: string;
-    lab: string;
-    moment: string;
-    about: string;
+    home: BannerInfoModel;
+    article: BannerInfoModel;
+    lab: BannerInfoModel;
+    moment: BannerInfoModel;
+    about: BannerInfoModel;
+}
+
+export interface BannerInfoModel {
+    url?: string;
+    title?: string;
+    originUrl?: string;
 }
 
 export interface ColorConfigModel {

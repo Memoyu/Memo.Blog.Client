@@ -24,7 +24,7 @@ const Index = () => {
     const [about, _loading, setAbout, _setLoading] = useData<AboutModel>({} as AboutModel);
 
     usePageVisit();
-    const bannerUrl = useConfig((state) => state.banner.about);
+    const aboutBanner = useConfig((state) => state.banner.about);
 
     // 获取关于我
     let getAboutMe = async () => {
@@ -44,7 +44,7 @@ const Index = () => {
 
     return (
         <PageContainer>
-            <PageBanner image={bannerUrl} />
+            <PageBanner banner={aboutBanner} />
             <ContentContainer className="about-me-wrap">
                 <div className="about-me-content">
                     <Title heading={2} style={{ marginBottom: 30, textAlign: 'center' }}>

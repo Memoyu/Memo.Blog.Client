@@ -15,11 +15,11 @@ const Index = () => {
     const isPresent = useIsPresent();
 
     usePageVisit();
-    const bannerUrl = useConfig((state) => state.banner.article);
+    const articleBanner = useConfig((state) => state.banner.article);
 
     return (
         <PageContainer className="blog-article-list">
-            <PageBanner image={bannerUrl} />
+            <PageBanner banner={articleBanner} />
             {isPresent && (
                 <StickyBox offsetTop={58} className="article-list-category-sticky">
                     <CategoryList />

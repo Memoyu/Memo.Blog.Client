@@ -12,12 +12,12 @@ const Index = () => {
     const height = 1200;
 
     usePageVisit();
-    const bannerUrl = useConfig((state) => state.banner.moment);
+    const momentBanner = useConfig((state) => state.banner.moment);
 
     return (
         <PageContainer>
             <PageBanner
-                image={bannerUrl}
+                banner={momentBanner}
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             />
             <ContentContainer className="moment-section">
