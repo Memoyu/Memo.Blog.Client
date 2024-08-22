@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Col, Row, Space, Toast, Typography } from '@douyinfe/semi-ui';
+import { Space, Toast, Typography } from '@douyinfe/semi-ui';
 
 import './index.scss';
 import { articleSummary } from '@src/utils/request';
