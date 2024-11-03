@@ -89,7 +89,7 @@ const WrapperRouteComponent: FC<WrapperRouteProps> = ({ withaAnimate = true, ...
 // 会变的 title
 const initTitleTick = () => {
     document.addEventListener('visibilitychange', function () {
-        document.title = document.hidden ? '让我看看，怎么个事！' : globalTitle;
+        document.title = document.hidden ? 'memoyu开发学习网' : globalTitle; // '让我看看，怎么个事！' : globalTitle;
     });
 };
 
