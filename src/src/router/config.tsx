@@ -71,7 +71,7 @@ const AnimateRoute = (props: PathRouteProps) => {
 };
 
 const buildDocumentTitle = (titleId: string) => {
-    globalTitle = titleId == '首页' ? 'memo blog' : titleId + ' | memoyu的个人博客';
+    globalTitle = '默语栈' + (titleId == '首页' ? '' : ' - ' + titleId);
     return globalTitle;
 };
 
@@ -89,7 +89,7 @@ const WrapperRouteComponent: FC<WrapperRouteProps> = ({ withaAnimate = true, ...
 // 会变的 title
 const initTitleTick = () => {
     document.addEventListener('visibilitychange', function () {
-        document.title = '默语栈-' + document.hidden ? '让我看看，怎么个事！' : globalTitle;
+        document.title = document.hidden ? '默语栈  🤪🤪' : globalTitle;
     });
 };
 
