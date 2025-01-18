@@ -52,7 +52,7 @@ const useUserStore = createWithEqualityFn<ConfigState>()(
 
                 // 配置属性
                 let colorConfig = get().color;
-                console.log(colorConfig);
+                // console.log(colorConfig);
                 const setColorVariables = (level: string, colors: string[], indexs: number[]) => {
                     variables.forEach((v, i) => {
                         let index = indexs[i];
