@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Button, Dropdown } from '@douyinfe/semi-ui';
 import { IconMenu, IconMoon, IconSun, IconSearch } from '@douyinfe/semi-icons';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { color, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import Logo from '@components/logo';
 import ContentContainer from '@src/components/layout/content-container';
