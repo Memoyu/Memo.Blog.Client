@@ -1,17 +1,12 @@
 @import '@assets/styles/variable.scss';
 
-$blog-header-bg-color-hover: rgba(var(--blog-header-bg), 1);
-$blog-header-bg-color: rgba(var(--blog-header-bg), 0.4);
-
 .blog-header {
     position: fixed;
     width: 100%;
     height: $navigation-height;
     top: 0;
     left: 0;
-    padding-top: 20px;
     z-index: 999;
-    transition: 0.6s ease-in-out;
 
     &-wrap {
         position: relative;
@@ -20,12 +15,6 @@ $blog-header-bg-color: rgba(var(--blog-header-bg), 0.4);
         justify-content: space-between;
         height: $navigation-height;
         padding: 0 20px;
-        backdrop-filter: blur(3px);
-        background: $blog-header-bg-color;
-        transition: 0.8s 0.3s;
-        &:hover {
-            background: $blog-header-bg-color-hover;
-        }
 
         .header-logo {
         }
@@ -87,24 +76,13 @@ $blog-header-bg-color: rgba(var(--blog-header-bg), 0.4);
             }
         }
     }
-
-    &.stick {
-        padding-top: 0;
-        background: $blog-header-bg-color-hover;
-        box-shadow:
-            0 0 2px rgba(0, 0, 0, 0.063),
-            0 0 10px rgba(0, 0, 0, 0.125);
-    }
 }
 
 @media screen and (max-width: $max-mobile-width) {
     .blog-header {
-        padding-top: 0;
+        transform: none !important;
         &-wrap {
             margin: 0 -10px; // 主要是解决container增加了margin-left\right 10px
-            &:hover {
-                background: $blog-header-bg-color;
-            }
 
             .header-nav {
                 &-list {

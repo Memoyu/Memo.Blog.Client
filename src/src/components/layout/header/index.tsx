@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Button, Dropdown } from '@douyinfe/semi-ui';
 import { IconMenu, IconMoon, IconSun, IconSearch } from '@douyinfe/semi-icons';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { color, motion } from 'framer-motion';
 
 import Logo from '@components/logo';
 import ContentContainer from '@src/components/layout/content-container';
@@ -73,10 +73,33 @@ const Index: FC<ComProps> = () => {
         setIsScrolling(isScroll);
     });
 
+    const headerMotion = {
+        top: {
+            y: 20,
+            backgroundColor: 'none',
+            boxShadow: 'none',
+        },
+        bottom: {
+            y: 0,
+            backgroundColor: 'rgba(var(--blog-header-bg), 1)',
+            boxShadow: '0 0 2px rgba(0, 0, 0, 0.063), 0 0 10px rgba(0, 0, 0, 0.125)',
+        },
+    };
+
     return (
-        <div className={`blog-header ${isScrolling ? 'stick' : ''}`}>
+        <motion.div
+            className="blog-header"
+            variants={headerMotion}
+            animate={isScrolling ? 'bottom' : 'top'}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+        >
             <ContentContainer>
-                <div className="blog-header-wrap">
+                <motion.div
+                    className="blog-header-wrap"
+                    initial={{ backgroundColor: 'rgba(var(--blog-header-bg), 0.4)' }}
+                    whileHover={{ backgroundColor: 'rgb(var(--blog-header-bg), 1)' }}
+                    transition={{ duration: 0.6, ease: 'easeInOut' }}
+                >
                     <NavLink to="/" className="header-logo">
                         <Logo />
                     </NavLink>
@@ -138,9 +161,9 @@ const Index: FC<ComProps> = () => {
                             />
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </ContentContainer>
-        </div>
+        </motion.div>
     );
 };
 
