@@ -47,7 +47,7 @@ const MarkDown: React.FC<Props> = ({ articleId, content, className, style }) => 
                 editorId={`article-detail-id-${articleId}`}
                 theme={theme}
                 modelValue={mdContent}
-                previewTheme="github"
+                previewTheme="smart-blue"
                 codeTheme="vs"
                 onHtmlChanged={onHtmlChanged}
             />

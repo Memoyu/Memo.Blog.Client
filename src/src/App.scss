@@ -21,8 +21,14 @@ body,
 
     --blog-header-bg: var(--semi-white);
 
+    --md-grig-bg: linear-gradient(90deg, rgba(60, 10, 30, 0.04) 3%, rgba(0, 0, 0, 0) 3%),
+        linear-gradient(360deg, rgba(60, 10, 30, 0.04) 3%, rgba(0, 0, 0, 0) 3%);
+
     .md-editor {
         --md-bk-color: var(--semi-grey-0) !important;
+        .smart-blue-theme {
+            background-image: none !important;
+        }
     }
 }
 
@@ -55,6 +61,9 @@ body[theme-mode='dark'] #root > * {
     --image-brightness: brightness(0.8);
 
     --blog-header-bg: var(--semi-grey-0);
+
+    --md-grig-bg: linear-gradient(90deg, rgba(207, 207, 207, 0.04) 3%, rgba(255, 255, 255, 0) 3%),
+        linear-gradient(360deg, rgba(207, 207, 207, 0.04) 3%, rgba(255, 255, 255, 0) 3%);
 }
 
 a {

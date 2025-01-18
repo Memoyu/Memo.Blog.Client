@@ -49,7 +49,7 @@ const Index: FC<ComProps> = ({ isReply = false, quote, clearQuote, onSubmit = ()
     const [selectedFunc, setSelectedFunc] = useState<Funcs>('edit');
 
     const [avatar, setAvatar] = useState<string>();
-    const avatarOriginTypeRef = useRef<number>(1);
+    const [avatarOriginType, setAvatarOriginType] = useState<number>(1);
     const [avatarOrigin, setAvatarOrigin] = useState<string>();
     const [nickname, setNickname] = useState<string>();
     const [email, setEmail] = useState<string>();
@@ -112,17 +112,14 @@ const Index: FC<ComProps> = ({ isReply = false, quote, clearQuote, onSubmit = ()
                 <div className="input-user-info">
                     <InputGroup className="avatar-origin-rg">
                         <Select
-                            value={avatarOriginTypeRef.current}
-                            onChange={(val) => {
-                                avatarOriginTypeRef.current = val as number;
-                                handleAvatarOriginChange(avatarOrigin ?? '');
-                            }}
+                            value={avatarOriginType}
+                            onChange={(val) => handleAvatarOriginChange(val, avatarOrigin ?? '')}
                             optionList={AvatarOriginTypeOpts}
                             style={{ width: 80 }}
                         />
                         <Input
                             value={avatarOrigin}
-                            onChange={handleAvatarOriginChange}
+                            onChange={(val) => handleAvatarOriginChange(avatarOriginType, val)}
                             placeholder="主要用于头像，必要时与您沟通之用！"
                         />
                     </InputGroup>
@@ -171,15 +168,16 @@ const Index: FC<ComProps> = ({ isReply = false, quote, clearQuote, onSubmit = ()
         setAvatarOrigin(visitor.avatarOrigin);
         setNickname(visitor.nickname);
         setEmail(visitor.email);
-        avatarOriginTypeRef.current = visitor.avatarOriginType ?? AvatarOriginType.Qq;
+        setAvatarOriginType(visitor.avatarOriginType ?? AvatarOriginType.Qq);
     }, []);
 
     // 头像来源输入变更
-    const handleAvatarOriginChange = (val: string) => {
+    const handleAvatarOriginChange = (type: any, val: string) => {
         setAvatarOrigin(val);
+        setAvatarOriginType(type);
 
         let avatar = '';
-        switch (avatarOriginTypeRef.current) {
+        switch (avatarOriginType) {
             case 1:
                 avatar = getQqAvatar(val);
                 break;
@@ -210,7 +208,7 @@ const Index: FC<ComProps> = ({ isReply = false, quote, clearQuote, onSubmit = ()
                 nickname,
                 email,
                 avatar,
-                avatarOriginType: avatarOriginTypeRef.current,
+                avatarOriginType: avatarOriginType,
                 avatarOrigin,
                 content,
                 visitorId: visitor.visitorId!,
@@ -234,7 +232,7 @@ const Index: FC<ComProps> = ({ isReply = false, quote, clearQuote, onSubmit = ()
             nickname,
             email,
             avatar,
-            avatarOriginType: avatarOriginTypeRef.current,
+            avatarOriginType: avatarOriginType,
             avatarOrigin,
         });
 

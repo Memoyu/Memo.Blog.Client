@@ -44,21 +44,27 @@
 
     &-main {
         min-height: 500px;
-        padding: 40px;
+        padding: 20px;
         border-radius: 20px;
         background-color: rgb(var(--semi-grey-0));
         display: flex;
+        // 绘制背景方格
+        background-image: var(--md-grig-bg);
+        background-size: 20px 20px;
 
         &-content {
             width: 400px;
             flex-shrink: 1;
             flex-grow: 1;
-            padding: 0em 3em 0em 0em;
+            padding: 0 20px 0 0;
         }
 
         &-nav {
             width: 280px;
             border-radius: 5px;
+        }
+        .md-editor-preview-wrapper {
+            padding: 7px;
         }
     }
 
@@ -113,7 +119,7 @@
                 display: none;
             }
             .md-editor-preview-wrapper {
-                padding: 14px 7px;
+                padding: 10px;
             }
         }
         &-bottom {
